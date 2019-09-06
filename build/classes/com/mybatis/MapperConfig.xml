@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration     PUBLIC "-//mybatis.org//DTD Config 3.0//EN"     "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<environments default="development">
+		<!-- <environment id="development2">
+			<transactionManager type="JDBC" />
+			<dataSource type="POOLED">
+				<property name="driver" value="oracle.jdbc.driver.OracleDriver" />
+				<property name="url" value="jdbc:oracle:thin:@192.168.0.242:1521:orcl11" />
+				<property name="username" value="scott" />
+				<property name="password" value="tiger" />
+			</dataSource>
+		</environment> -->
+		<environment id="development">
+<!--
+	트랜잭션 Manager에서 모드 설정을 어떻게 가져가는가에 따라 결과에 영향이 있으므로 옵션 별 차이를 확인해 둘 것.
+	트랜잭션 대상이 되는 DML문은 세가지 이다.(insert, delete, update)
+	JDBC모드로 설정해야 자동 트랜잭션 처리를 지원 받게 되ㅐㅁ.
+	MANAGED모드에서는 롤백이 일어나지 않음.
+	sqlSessionFactory.openSession();
+	sqlSessionFactory.openSession(boolean autocommit)
+	입력 수정 삭제 전에 auto commit모드를 끄고 나서 각 업무별 처리를 한 후 
+	모든 업무에 대한 처리가 성공일 대 커밋 처리함.
+	여러 업무 중 한 개라도 SQLException을 일으키는 경우는 롤백 처리해야 함.
+-->
+ 			<!-- <transactionManager type="MANAGED" /> --> 
+			<transactionManager type="JDBC" /><!-- 트렌잭션처리 할 때 개발자가 직접관리 -->
+			<dataSource type="JNDI">
+				<property name="data_source" value="java:comp/env/c" />
+			</dataSource>
+		</environment>
+	</environments>
+	<mappers>
+		<mapper resource="com/mybatis/mapper/owner.xml" />
+		<mapper resource="com/mybatis/mapper/staff.xml" />
+		<mapper resource="com/mybatis/mapper/both.xml" />
+	</mappers>
+</configuration> 
