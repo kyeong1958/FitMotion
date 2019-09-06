@@ -12,5 +12,10 @@
 </head>
 <body>
 project test!!!
+<%=test %>
+<%=test %>
+<%=test %>
+<%=test %>
+<%=test %>
 </body>
 </html>
