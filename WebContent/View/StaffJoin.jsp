@@ -4,6 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<%@ include file="/common/JEasyUiCommon.jsp"%>
 <title>Join(직원용)</title>
 </head>
 <style type="text/css">
@@ -81,10 +82,10 @@
                      id="name" name="name" 
                      required="" aria-required="true" >
                </div>
-	         <div class="ui-field" style="background-color: white;">
-	            <a class="ui fluid gradation button" type="button"
-	               style="cursor: pointer">가입하기</a>
-	         </div>
+            <div class="ui-field" style="background-color: white;">
+               <a class="ui fluid gradation button" type="button"
+                  style="cursor: pointer">가입하기</a>
+            </div>
          </form>
       </div>
    </div>
