@@ -1,0 +1,34 @@
+@charset "UTF-8";
+.list {
+   margin-top: 33px;
+    margin-bottom: 30px;
+}
+
+#label {
+    height: 150px;
+    border: 1px solid #dddae0;
+    width: 100%;
+    background: linear-gradient(90deg, #8662cd,#6274cd);
+	margin-right: 5%;
+}
+
+#menubar{
+	width: 100%;
+	border: 1px solid #dddae0;
+	padding-bottom: 20%;
+}
+#menubar .menuheader{
+	font-size: 180%;
+	margin-top:6%;
+    margin-bottom: 3%;
+    margin-left:10%;
+}
+.menuitem{
+	font-size: 130%;
+	margin-left:20%;
+    margin-bottom: 3%;
+    color:black;
+}
+.sidebar{
+	border:2px solid;
+}

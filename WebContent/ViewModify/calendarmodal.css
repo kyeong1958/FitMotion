@@ -1,0 +1,31 @@
+@charset "UTF-8";
+/* 달력 */
+
+element.style {
+    position: absolute;
+    top: 500px;
+    left: 10px;
+    z-index: 1;
+    display: block;
+}
+#calendarheader {
+	margin-bottom: 20px;
+}
+#dalendarmodal{
+    border: 1px solid #c5c5c5;
+}
+#dalendarmodal {
+    border-bottom-right-radius: 3px;
+}
+
+#dalendarmodal {
+    width: 17em;
+    padding: .2em .2em 0;
+    display: none;
+}
+
+#dalendarmodal #calendarheader {
+    position: relative;
+    padding: .30em 0;
+}
+/* 달력 */

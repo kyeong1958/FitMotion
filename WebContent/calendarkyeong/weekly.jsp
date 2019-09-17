@@ -1,3 +1,5 @@
+<%@page import="java.text.DecimalFormat"%>
+<%@page import="java.util.Calendar"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
    pageEncoding="UTF-8"%>
 <!-- ================== [[ 메인화면 ]] ================== -->
@@ -34,7 +36,7 @@
 <body>
 <!--////////////////////////////////////nav//////////////////////////////////  -->
    <div class="row-i">
-   <%@ include file="./nav.jsp" %>
+<%--    <%@ include file="./nav.jsp" %> --%>
    </div>
 <!--////////////////////////////////////nav//////////////////////////////////  -->
    
@@ -63,7 +65,7 @@
                <ul  class="list" id="mainlist"  >
                   <a id="menu">직원관리</a>
                   <li><a href="javascript:ajax('Staff.jsp')">직원등록/목록</a></li>
-                  <li><a href="#" onclick="">근무일지</a></li>
+                  <li><a href="javascript:ajax('monthly.jsp')">근무일지</a></li>
                   <li><a href="javascript:ajax('StaffSalary.jsp')">직원급여 </a></li>
                </ul>
                <ul  class="list" id="mainlist"  >
@@ -78,6 +80,7 @@
 <!--//////////////////////////화면 전환////////////////////////////////////  -->
          <div class="col-sm-10" style="border: 1px solid;">
          <div id="changedisplay">
+
          </div>
       </div>
 <!--//////////////////////////화면 전환////////////////////////////////////  -->

@@ -1,5 +1,5 @@
-<style>
-.card-plus-wrap .tit-area i {
+﻿<style>
+.G-card-plus-wrap .tit-area i {
    float: left;
    font-style: normal;
    display: block;
@@ -7,53 +7,70 @@
    margin: -3px 15px 0 0;
 }
 
-
-.card-plus-wrap .tit-area {
-   position: absolute;
-   
-   padding-left: 26px;
-   padding-top: 51px;
-}
-
-.card-plus-wrap .tit-area span {
-   float: left;
+#bi{
+float: left;
    display: block;
    font-size: 24px;
    line-height: 44px;
    width: 70px;
+
 }
 
 
-.card-plus-wrap .input-wrap {
+#G-li {
+    float: right;
+    margin-top: -44px;
+    margin-right: 31px;
+}
+
+#G-update{
+    padding-left: 48px;
+    padding-top: 25px;
+
+
+}
+.G-info-area ul li {
+    display: inline-grid;
+    position: relative;
+    padding: 0px 39px;
+    border-right: 1px solid#d9e6e8;
+    /* margin-left: 19px; */
+    /* float: none; */
+}
+
+.checkbox, .radio {
+    position: relative;
+    display: block;
+    margin-top: 27px;
+    margin-bottom: -27px;
+}
+
+
+.G-card-plus-wrap .G-input-wrap {
    width: 100%;
    float: left;
    margin-left: -16px;
    display: inline-block;
    border: 1px solid #e7e7e7;
+   margin-top: -103px;
+  
 
 }
 
-.card-plus-wrap .input-wrap ul {
+.G-card-plus-wrap .G-input-wrap ul {
    width: 100%;
    display: inline-block;
    margin-left: 213px;
    margin-top: 20px;
 }
-/* ///////////////////////////////////////////// */
-ul, ol {
-   margin: 0;
-   padding: 0;
-   list-style: none;
-}
-/* /////////////////////////////////////////////////// */
 
-.card-plus-wrap .input-wrap ul li {
+.G-card-plus-wrap .G-input-wrap ul li {
    position: relative;
    display: inline-block;
    padding-left: 7px;
 }
 
-.card-plus-wrap .input-wrap ul li input[type="text"] {
+.G-card-plus-wrap .G-input-wrap ul li input[type="text"] {
    width: 100%;
    border: none;
    background: none;
@@ -62,7 +79,7 @@ ul, ol {
    height: 36px;
 }
 
-.card-plus-wrap .input-wrap ul li.name {
+.G-card-plus-wrap .G-input-wrap ul li.name {
    width: 150px;
    margin: 0 20px 20px 0;
 }
@@ -72,16 +89,16 @@ ul, ol {
    margin: 0 20px 20px 0;
 }
 
-.card-plus-wrap .input-wrap ul li.manager {
+.G-card-plus-wrap .G-input-wrap ul li.manager {
    width: 150px;
    margin: 0 20px 20px 0;
 }
 
-.card-plus-wrap .input-wrap ul li.birthday {
+.G-card-plus-wrap .G-input-wrap ul li.birthday {
    margin: 0 20px 20px 0;
 }
 
-.card-plus-wrap .input-wrap ul li span.tit {
+.G-card-plus-wrap .G-input-wrap ul li span.tit {
    display: block;
    float: left;
    font-size: 13px;
@@ -90,130 +107,73 @@ ul, ol {
    margin-right: 10px;
 }
 
-.card-plus-wrap .btn-area button {
+.G-card-plus-wrap .G-btn-area button {
    width: 75px;
    height: 100%;
-   background: #37454a;
+/*    background: #37454a; */
+   background: #606f3d;
    border: none;
    text-align: center;
    color: #fff;
    cursor: pointer;
 }
 
-form {
+#GoodsForm {
    display: block;
    margin-top: 0em;
 }
 
-.fa-search:before {
-   content: "\f002";
-}
+
 /* 비품 상세 */
-.card-wide-wrap {
+.G-card-wide-wrap {
     width: 100%;
-    margin-top: 10px;
+    margin-top: 49px;
+    border: 1px solid;
+    padding-bottom: 25px;
 }
-card-wide-list{
+
+.G-card-wide-list{
 
 	width:100%;
-	
 	margin-bottom:10px;
-	
 	cursor:pointer;
+    padding-left: 13px;
 }
-.cardWide-wrap{
 
-	width:100%;
-	
-	background:#fff;
-	
-	background-image:none;
-	
-	background-attachment:scroll;
-	
-	background-repeat:repeat;
-	
-	background-position-x:0%;
-	
-	background-position-y:0%;
-	
-	background-size:auto;
-	
-	background-origin:padding-box;
-	
-	background-clip:border-box;
-	
-	background-color:#fff;
-	
-	border:1px solid #d9e6e8;
-	
-	border-top-width:1px;
-	
-	border-right-width:1px;
-	
-	border-bottom-width:1px;
-	
-	border-left-width:1px;
-	
-	border-top-style:solid;
-	
-	border-right-style:solid;
-	
-	border-bottom-style:solid;
-	
-	border-left-style:solid;
-	
-	border-top-color:#d9e6e8;
-	
-	border-right-color:#d9e6e8;
-	
-	border-bottom-color:#d9e6e8;
-	
-	border-left-color:#d9e6e8;
-	
-	position:relative;
-	
-	padding:30px;
-	
-	padding-top:30px;
-	
-	padding-right:30px;
-	
-	padding-bottom:30px;
-	
-	padding-left:30px;
+#G-insert{
+	padding-left: 26px;
+    padding-top: 52px;
+
 }
+
 
 /*////////////////////////////////////////////////////////////////  */
-.cardWide-wrap{
-    width: 100%;
-    margin-right: 35px; 
-    padding-right: 369px;
-    margin-top: 35px;
-    margin-left: 84px;
-}
 
 
-.cardWide-wrap .date-area {
-    position: absolute;
+.G-date-area {
+  
     top: 20px;
     right: 20px;
 }
 
-.cardWide-wrap .info-area ul li {
+.G-info-area ul li {
     display: table-cell;
     position: relative;
-    padding: 0 25px;
+    padding: 0 39px;
     border-right: 1px solid#d9e6e8;
 }
-.cardWide-wrap .info-area dd {
+
+
+
+
+.G-info-area dd {
     text-align: left;
     margin: 0;
     display: block;
     width: 100%;
     float: left;
 }
-.cardWide-wrap .info-area dd span {
+.G-info-area dd span {
     font-size: 15px;
     float: left;
     display: inline-block;
@@ -221,26 +181,13 @@ card-wide-list{
     vertical-align: top;
 }
 
-.fl{
-	float:left;
+.G-fl{
+
+float:left;
 }
 
-.row {
-    display: -ms-flexbox;
-    display: flex;
-    -ms-flex-wrap: wrap;
-    flex-wrap: wrap;
-    margin-left: -90px;
-}
-.cardWide-wrap {
-    width: 100%;
-     margin-right: 35px; 
-    padding-right: 45px;
-    margin-top: 50px;
-    margin-left: 0px;
-}
 
-.cardWide-wrap .num-area {
+.G-num-area {
     float: left;
     font-size: 18px; 
     color: #37454a;
@@ -248,13 +195,25 @@ card-wide-list{
     color: #718c96;
 }
 
-.cardWide-wrap .tit-area {
+
+
+
+
+.G-tit-area {
     width: 100%;
-    display: inline-block;
+    margin-left:32px;
     margin-bottom: 15px;
 }
 
-.period-wrap {
+
+
+
+
+
+
+
+
+.G-period-wrap {
     display: inline-block;
     width: 100%;
     margin-top: 17px;
@@ -262,12 +221,17 @@ card-wide-list{
     margin-bottom: -29px;
 }
 
-.checkbox .radio {
+.checkbox, .radio {
+   
     border: none;
+    
 }
 
-.fr {
-    float: right;
+.checkbox input[type=checkbox]{
+
+	margin-left: -20px;
 }
+
+
 
 </style>

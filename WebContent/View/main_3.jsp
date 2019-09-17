@@ -13,7 +13,7 @@
 </style>
 
 <title>FitMotion</title>
-<%@ include file="/common/JEasyUiCommon.jsp"%>
+<%@ include file="/common/JEasyUICommon.jsp"%>
 <%@ include file="/CSS/maincss.jsp"%>
 <%-- <%@ include file="/CSS/Goodscss.jsp"%>
 <%@ include file="/CSS/Staffmodal.jsp"%> --%>

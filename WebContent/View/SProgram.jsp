@@ -5,7 +5,7 @@
 <head>
 <meta charset="UTF-8">
 
-<%@ include file="/common/JEasyUiCommon.jsp"%>
+<%@ include file="/common/JEasyUICommon.jsp"%>
 <title>프로그램</title>
 </head>
 
