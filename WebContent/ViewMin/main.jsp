@@ -10,6 +10,7 @@
    margin-top: 33px;
     margin-bottom: 30px;
 }
+
 </style>
 
 <title>FitMotion</title>

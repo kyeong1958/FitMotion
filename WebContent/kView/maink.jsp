@@ -24,15 +24,50 @@
 		});
 	}
 </script>
+<style type="text/css">
+.list {
+   margin-top: 33px;
+    margin-bottom: 30px;
+}
+ 
+#label {
+    width: 100%;
+/*     height: 150px;
+    border: 1px solid #dddae0;
+    background: linear-gradient(90deg, #8662cd,#6274cd);
+	margin-right: 5%; */
+}
+
+/* #menubar{
+	width: 118%;
+	border: 1px solid #dddae0;
+	padding-bottom: 20%;
+}  */
+.menuheader{
+	font-size: 180%;
+	margin-top:6%;
+    margin-bottom: 3%;
+    padding-left:10%;
+}
+.menuitem{
+	font-size: 130%;
+	padding-left:20%;
+    margin-bottom: 3%;
+    color:black;
+}
+.sidebar{
+	border:2px solid;
+}
+</style>
 <body>
 <!--////////////////////////////////////nav//////////////////////////////////  -->
    <%@ include file="./nav.jsp" %>
 <!--////////////////////////////////////nav//////////////////////////////////  -->
 <!--////////////////////////////////////메뉴바//////////////////////////////////  -->
 <div class="container-fluid">
-	<div class="col-sm-2"></div>
-	<div class="col-sm-8">
-		<div class="col-sm-2 sidebar">
+	<div class="col-sm-2 col-lg-2"></div>
+	<div class="col-sm-8 col-lg-8">
+		<div class="col-sm-2 col-lg-2 sidebar">
 			<div class="row" id="label">FITMOION</div>
 			<div class="row" id="menubar">
 				<div class="row menuheader">매출관리</div>
@@ -54,7 +89,7 @@
 				<div class="row"><a class="menuitem" href="javascript:ajax('./MemberShip.jsp')">구매등록</a></div>
 			</div>
 		</div>
-		<div class="col-sm-10">
+		<div class="col-sm-10 col-lg-10">
 <!-- /////////////////////////////// [[화면전환 시작]] ////////////////////////////////////////////////////// -->
 		<div id="changedisplay">
 		</div>
@@ -63,11 +98,11 @@
 
          
 
-      <div class="col-sm-2">&nbsp;</div>
+      <div class="col-sm-2 col-lg-2">&nbsp;</div>
 		
 		</div>
 	</div>
-	<div class="col-sm-2"></div>	
+	<div class="col-sm-2 col-lg-2"></div>	
 
 
 
