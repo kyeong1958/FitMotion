@@ -11,7 +11,6 @@
 <link rel="stylesheet" type="text/css" href="../kcss/insert.css">
 <style type="text/css">
 swich test
-
 </style>
 <script type="text/javascript">
 	function programINS() {
