@@ -179,7 +179,7 @@ input[type="radio" i] {
 	position: relative;
 	cursor: pointer;
 }
-
+                                                             56
 .fa {
 	display: inline-block;
 	font: normal normal normal 14px/1 FontAwesome;
@@ -411,64 +411,12 @@ button {
 
 /* ============================================== 2번째 차트 페이지 css 끝 ================================================ */
 </style>
-<script type="text/javascript"
-	src="https://www.gstatic.com/charts/loader.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+
+
+	
+	
 <script type="text/javascript">
-	google.charts.load("current", {
-		packages : [ "corechart" ]
-	});
-	google.charts.setOnLoadCallback(drawChart);
-
-	function drawChart() {
-		//pie차트
-		/* var data = google.visualization.arrayToDataTable([
-				[ 'Task', 'Hours per Day' ], [ 'Work', 11 ], [ 'Eat', 2 ],
-				[ 'Commute', 2 ], [ 'Watch TV', 2 ], [ 'Sleep', 7 ] ]);
-
-		var options = {
-			title : '경예'
-		};
-		var data2 = google.visualization.arrayToDataTable([
-				[ 'Task2', 'Hours per Day' ], [ 'Work2', 11 ], [ 'Eat2', 2 ],
-				[ 'Commute2', 2 ], [ 'Watch TV2', 2 ], [ 'Sleep2', 7 ] ]);
-
-		var options2 = {
-			title : '광여이'
-		};
-
-		var chart = new google.visualization.PieChart(document
-				.getElementById('piechart'));
-		chart.draw(data, options);
-		var chart = new google.visualization.PieChart(document
-				.getElementById('piechart2'));
-		chart.draw(data2, options2); */
-
-		var data = google.visualization.arrayToDataTable([
-				[ 'Task', 'Hours per Day' ], [ 'Work', 11 ], [ 'Eat', 2 ],
-				[ 'Commute', 2 ], [ 'Watch TV', 2 ], [ 'Sleep', 7 ] ]);
-
-		var data2 = google.visualization.arrayToDataTable([
-				[ 'Task', 'Hours per Day' ], [ 'Work', 11 ], [ 'Eat', 2 ],
-				[ 'Commute', 2 ], [ 'Watch TV', 2 ], [ 'Sleep', 7 ] ]);
-
-		var options = {
-			title : '경예',
-			pieHole : 0.4,
-		};
-		var options2 = {
-			title : '광여이',
-			pieHole : 0.4,
-		};
-
-		var chart = new google.visualization.PieChart(document
-				.getElementById('donutchart'));
-		chart.draw(data, options);
-
-		var chart = new google.visualization.PieChart(document
-				.getElementById('donutchart2'));
-		chart.draw(data2, options2);
-	}
-
 	function getDummy() {
 		var date = new Date();
 		return date.getTime();
@@ -485,6 +433,7 @@ button {
 		});
 	}
 </script>
+
 <body>
 
 <div class="content">
@@ -498,9 +447,9 @@ button {
 							<div class="sub-page-header-wrap">
 								<ul class="sub-page-header">
 								
-									<li class="active item"><a href="./chart_a.html" target="ifrm_content">오늘매출</a></li>
-									<li class="item"><a href="./chart_b.html" target="ifrm_content">매출 리포트</a></li>
-									<li class="item"><a href="./chart_c.html" target="ifrm_content">월간 리포트</a></li>
+									<li class="active item"><a href="./chart_a.jsp" target="ifrm_content">오늘매출</a></li>
+									<li class="item"><a href="./chart_b.jsp" target="ifrm_content">매출 리포트</a></li>
+									<li class="item"><a href="./chart_c.jsp" target="ifrm_content">월간 리포트</a></li>
 								</ul>
 							</div>
 							<div class="today">
@@ -584,16 +533,24 @@ button {
 								</div>
 								<div class="row">
 									<div class="graph-wrap">
-										<a id="donutchart"
-											style="width: 600px; height: 300px; float: left;"></a> <a
-											id="donutchart2"
-											style="width: 600px; height: 300px; float: right;"></a>
+										<!-- <a id="myChart" style="width: 500px; height: 300px; float: left;"></a> 
+										
+										 <a id="myChart2" style="width: 500px; height: 300px; float: right;"></a> -->
+
+										<a style="width: 430px; height: 250px; float: left"><canvas id="myChart"></canvas></a>
+										
+										<a style="width: 430px; height: 250px; float: right"><canvas id="myChart2" ></canvas></a>
+										
+<!-- 										<a style="width: 55%; height: 50%; float: left"><canvas id="myChart"></canvas></a>
+										
+										<a style="width: 55%; height: 50%; float: right"><canvas id="myChart2" ></canvas></a> -->
+										
+										 <!-- 
+										<a style="float: left"><canvas id="myChart" style="width: 200px; height: 200px "></canvas></a>
+										
+										<a style="float: right"><canvas id="myChart2" style="width: 200px; height: 200px "></canvas></a> --> 
 									</div>
-
-									<!-- <canvas width="400" height="200"></canvas> -->
-
-									<!-- <canvas width="400" height="200"></canvas> -->
-								</div>
+								</div> 
 								<div class="table-wrap-tit">매출합계</div>
 								<div class="table-wrap list normal top-border-point">
 									<table class="outside">
@@ -686,8 +643,71 @@ button {
 								</div>
 							</div>
 						</div>
-				</div>
-		</div>
-						
+		<script>
+		//And for a doughnut chart
+
+		var ctx = document.getElementById('myChart');
+
+		var myDoughnutChart = new Chart(ctx, {
+			type : 'doughnut',
+			data : data = {
+				datasets : [ {
+					data : [ 10, 20, 30 ],
+					backgroundColor : [ 'rgba(255, 99, 132, 0.2)',
+							'rgba(255, 206, 86, 0.2)',
+							'rgba(54, 162, 235, 0.2)' ],
+					borderColor : [ 'rgba(255, 99, 132, 1)',
+							'rgba(255, 206, 86, 1)', 'rgba(54, 162, 235, 1)' ]
+				} ],
+
+				// These labels appear in the legend and in the tooltips when hovering different arcs
+				labels : [ 'Red', 'Yellow', 'Blue' ],
+			
+				weight : 1,
+				borderWidth : 10
+			},
+			options : {
+				layout : {
+					padding : {
+						left : 50,
+						right : 0,
+						top : 0,
+						bottom : 0
+					}
+				}
+			}
+		});
+		var ctx2 = document.getElementById('myChart2');
+
+		var myDoughnutChart2 = new Chart(ctx2, {
+			type : 'doughnut',
+			data : data = {
+				datasets : [ {
+					data : [ 10, 20, 30 ],
+					backgroundColor : [ 'rgba(255, 99, 132, 0.2)',
+							'rgba(155, 156, 100, 0.2)',
+							'rgba(54, 162, 235, 0.2)' ],
+					borderColor : [ 'rgba(255, 99, 132, 1)',
+							'rgba(155, 156, 100, 1)', 'rgba(54, 162, 235, 1)' ]
+				} ],
+
+				// These labels appear in the legend and in the tooltips when hovering different arcs
+				labels : [ 'Red', 'Yellow', 'Blue' ],
+
+				weight : 1,
+				borderWidth : 10
+			},
+			options : {
+				layout : {
+					padding : {
+						left : 50,
+						right : 0,
+						top : 0,
+						bottom : 0
+					}
+				}
+			}
+		});
+	</script>
 </body>
 </html>
