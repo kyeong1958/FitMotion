@@ -8,6 +8,7 @@
 	margin-bottom:35px;
 	border: 1px solid #dddae0;
 	padding: 3% 5% 3% 3%;
+	background-color: white;
 }
 .title_insert{
 	font-size:20px;
@@ -50,6 +51,7 @@
 	margin-bottom:25px;
 	border: 1px solid #dddae0;
 	padding: 3% 3% 3% 3%;
+	background-color: white;
 }
 .meminfo-top{
 	height: 40%;
@@ -68,4 +70,37 @@
 	font-weight:bold;
 	text-align:center;
     border-right: 1px solid #dddae0;
+}
+/* modal */
+.btn{
+    background-color: #8662cd;
+    color:white;
+}
+.textinsert{
+	border:none;
+	background:none;
+	font-size:16px;
+	border-bottom:1px solid #dddae0;
+	width: 100%;
+}
+.line{
+	padding-right: 16%;
+}
+.r_modal{
+    margin-bottom: 2%;
+    margin-left: 12%;
+    font-size: 16px;
+    font-weight: bold;
+}
+.namespace{
+	font-size:18px;
+	text-align: left;
+}
+.modal-header{
+	font-size:25px;
+    background-color: #8662cd;
+    color: white;
+    height: 55px;
+    padding-left: 15px;
+    padding-top: 10px; 
 }

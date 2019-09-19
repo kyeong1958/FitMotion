@@ -14,8 +14,10 @@ import com.gate.ModelAndView;
 public class BothController implements Controller {
 	Logger logger = Logger.getLogger(BothController.class);
 	String crud = null;
+	BothLogic bothLogic = null;
 	public BothController(String crud) {
 		this.crud = crud;
+		bothLogic = new BothLogic();
 	}
 	
 	@Override
@@ -34,6 +36,11 @@ public class BothController implements Controller {
 			mav.addObject("제발", "잘됨??");
 		}
 		return mav;
+	}
+
+	@Override
+	public String jsonexecute(HttpServletRequest req, HttpServletResponse res) throws Exception {
+		return null;
 	}
 
 

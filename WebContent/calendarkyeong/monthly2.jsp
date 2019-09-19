@@ -3,41 +3,31 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ include file="../common/JEasyUICommon.jsp"%>
-<script type="text/javascript">
-	$.fn.datebox.defaults.formatter = function(date){
-		var y = date.getFullYear();
-		var m = date.getMonth()+1;
-		var d = date.getDate();
-		return y+'-'+(m<10 ? "0"+m:m)+'-'+(d<10 ? "0"+d:d);
-	}
-	//날짜 포멧을 적용
-	$.fn.datebox.defaults.parser = function(s){
-		var t = Date.parse(s);
-		if (!isNaN(t)){
-			return new Date(t);
-		} else {
-			return new Date();
-		}
-	}
-/*///////////////////////////////////////////////////////////////  */
-	$("#insertsche").modal({
-		backdrop:false
-	});
-	var startday;
-	var endday;
-	function ok(){
-		startday = $("#startday").val();
-		endday = $("#endday").val();
-		alert(startday+","+endday);
-	}
-	var startday;
-	var endday;
-	function close(){
-		startday = $("#startday").val();
-		endday = $("#endday").val();
-		alert(startday+","+endday);
-		$("#insertsche").dialog('close');
-	}
+ <link rel="stylesheet" type="text/css" href="../themes/default/easyui.css">
+<link rel="stylesheet" type="text/css" href="../themes/icon.css">
+<link rel="stylesheet" type="text/css" href="../demo/demo.css">
+<script type="text/javascript" src="../js/jquery.min.js"></script>
+<script type="text/javascript" src="../js/jquery.easyui.min.js"></script> -->
+<style type="text/css">
+   .dragitem{
+        border:1px solid #ccc;
+        width:50px;
+        height:50px;
+        margin-bottom:10px;
+    } 
+    .targetarea{
+        border:1px solid;
+        height:150px;
+    } 
+  .proxy{
+            border:1px solid #ccc;
+            width:80px;
+            background:#fafafa;
+    }
+   
+</style>
+<script>
+	
 	//월,주,일별 달력이동
 	function ajax(url){
 		alert("ajax==> "+url)
@@ -97,10 +87,31 @@
 		  
 	    }); 
 	}
+	
+	$(function(){
+	    $('.dragitem').draggable({
+	        revert:true,
+	        deltaX:10,
+	        deltaY:10,
+	        proxy:function(source){
+	            var n = $('<div class="proxy"></div>');
+	            n.html($(source).html()).appendTo('body');
+	            return n;
+	        }
+	    });
+	});
+
 </script>
 <span id="new">
+<div class="row">
+	<div id="sche" class="easyui-textbox" style="width: 50px;height: 30px"></div>
+	<input class="easyui-datebox" id="StartDate" style="width:100px;">
+	<input class="easyui-datebox" id="endDate" style="width:100px;">
+	 <a href="javascript:input()" class="easyui-linkbutton">확인</a>
+</div>
+<div class="dragitem"><div class="row" style="width: 100%;height: 100%;background-color: pink">123</div></div>
+
 <%
-int a = 10;
 	Calendar cal = Calendar.getInstance();
 	int day[][][] = new int[12][6][7];
 
@@ -175,11 +186,19 @@ int a = 10;
 			out.print("<tr>");
 				for(int j=0;j<7;j++){
 					if(day[month][i][j] != 0){
-						if(day[month][i][j]==a){
-							out.print("<td height='100' align='left' valign='top'  style='background-color: #8662cd'><a href='#'><font size='5px' color=white>"+day[month][i][j]+"</font></a></td>");
-						}else{	
-							out.print("<td height='100' align='left' valign='top'><a href='#'><font size='5px' color='black'>"+day[month][i][j]+"</font></a></td>");
-						}
+						int theday = day[month][i][j];
+%>
+
+						<td height='100' align='left' valign='top'><a href='#' style="color: black;font-size: 20px;">
+						<div class="easyui-droppable targetarea" data-options="
+																                    accept: '.dragitem',
+																                    onDrop: function(e,source){
+																                        $(this).html($(source).html());
+																                    }">
+					<%=day[month][i][j]%> 
+				        </div>
+						</a></td>
+<%
 					}else{
 					out.print("<td>&nbsp&nbsp</td>");
 					}
@@ -212,7 +231,6 @@ int a = 10;
 	     	 </div>
 	    </div>
 </div>
-
 
 
 
