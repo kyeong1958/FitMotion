@@ -1,0 +1,126 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+   pageEncoding="UTF-8"%>
+<!-- ================== [[ 메인화면 ]] ================== -->
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<style>
+.list {
+   margin-top: 33px;
+    margin-bottom: 30px;
+}
+</style>
+
+<title>FitMotion</title>
+<%@ include file="/common/JEasyUICommon.jsp"%>
+<%@ include file="/CSS/maincss.jsp"%>
+<%@ include file="/CSS/Searchheader.jsp"%>
+<%@ include file="/CSS/footer.jsp"%>
+
+
+</head>
+<!--============================ [[ script ]] ==============================================  -->
+<script type="text/javascript">
+	function ajax(url){
+		alert("ajax==> "+url)
+		$.ajax({
+			method:'get'
+		   ,url:url
+		   ,success:function(data){
+			   $("#changedisplay").html(data);
+		   }
+		});
+	}
+</script>
+
+<!--============================ [[ script ]] ==============================================  -->
+<body>
+<!--////////////////////////////////////nav//////////////////////////////////  -->
+   <div class="row-i">
+   <%@ include file="./nav.jsp" %>
+   </div>
+<!--////////////////////////////////////nav//////////////////////////////////  -->
+   
+   
+<!-- ////////////////////////////메뉴바/////////////////////////////////  -->
+   <div class="container-fluid">
+      <div class="col-sm-2" >&nbsp;</div>
+      <div class="col-sm-8" >
+         <div class="col-sm-2">
+            <div class="row" id="label">GYMOION</div>
+                <div class="container" id="container" >
+               <ul class="list" >
+                  <a id="menubar">매출관리</a>
+                 	 <li id="menusideli">
+                 		 <a id="menuside" href="#" onclick="">전체 매출 </a></li>
+                 	 <li id="menusideli">
+                 		 <a id="menuside" href="#" onclick="">직원별 매출 </a></li>
+                 	 <li id="menusideli">
+                 		 <a id="menuside" href="#" onclick="">종목별 매출 </a></li>
+                 	 <li id="menusideli">
+                 		 <a id="menuside" href="#" onclick="">고객별 매출 </a></li>
+               </ul>
+               <ul  class="list" >
+                  <a id="menubar">헬스장관리 </a>
+                 	 <li id="menusideli" >
+                  		<a id="menuside" href="javascript:ajax('SProgram.jsp')">프로그램 </a></li>
+                 	 <li id="menusideli" >
+                 		 <a id="menuside" href="#" onclick="">프로모션 </a></li>
+                 	 <li id="menusideli">
+                 		 <a id="menuside" href="javascript:ajax('Equipment.jsp')">기구관리 </a></li>
+                 	 <li id="menusideli">
+                		  <a id="menuside" href="javascript:ajax('Goods.jsp')">비품관리 </a></li>
+               </ul>
+               <ul  class="list" >
+                  <a id="menubar">직원관리</a>
+                  	<li id="menusideli" >
+                 		 <a id="menuside" href="javascript:ajax('Staff.jsp')">직원등록/목록</a></li>
+                 	 <li id="menusideli">
+                 		 <a id="menuside" href="#" onclick="">근무일지</a></li>
+                 	 <li id="menusideli">
+                 		 <a id="menuside" href="javascript:ajax('StaffSalary.jsp')">직원급여 </a></li>
+               </ul>
+               <ul  class="list" >
+                  <a id="menubar">회원관리</a>
+                 	 <li id="menusideli">
+                  		<a id="menuside" href="javascript:ajax('Member.jsp')">회원등록/목록 </a></li>
+                 	 <li id="menusideli">
+                  		<a id="menuside" href="javascript:ajax('MemberBuy.jsp')">구매등록</a></li>
+               </ul>
+            </div>
+         </div>
+<!-- ////////////////////////////메뉴바/////////////////////////////////  -->
+         
+<!--//////////////////////////화면 전환////////////////////////////////////  -->
+         
+         <div class="col-sm-10" style="border: 1px solid;">
+         
+         <div id="changedisplay">
+         	
+         </div>
+      </div>
+<!--//////////////////////////화면 전환////////////////////////////////////  -->
+         
+
+   </div>
+      <div class="col-sm-2">&nbsp;</div>
+      </div>
+    <div class=container-fluid2>
+    <div id="footer" align="center">
+    <p class="footer-p"><a href="#">About FitMotion</a>
+      &nbsp;  &nbsp;
+    <a>경애</a>
+      &nbsp;  &nbsp;
+    <a>수근</a>
+      &nbsp;  &nbsp;
+    <a>민지</a>
+      &nbsp;  &nbsp;
+    <a>정은</a>
+      &nbsp;  &nbsp;
+    <a>광다니엘</a>
+      &nbsp;  &nbsp;
+    <a>준호</a></p>
+    <p>©2019 FitMotion Data based on KOSMO. </p>
+  </div>
+    </div>
