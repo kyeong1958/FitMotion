@@ -15,8 +15,10 @@ import com.gate.ModelAndView;
 public class OwnerController implements Controller {
 	Logger logger = Logger.getLogger(OwnerController.class);
 	String crud = null;
+	OwnerLogic ownerLogic = null;
 	public OwnerController(String crud) {
 		this.crud = crud;
+		ownerLogic = new OwnerLogic();
 	}
 
 	@Override
@@ -35,6 +37,12 @@ public class OwnerController implements Controller {
 			mav.addObject("제발", "잘됨??");
 		}
 		return mav;
+	}
+
+	@Override
+	public String jsonexecute(HttpServletRequest req, HttpServletResponse res) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

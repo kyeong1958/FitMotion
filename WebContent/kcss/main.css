@@ -1,4 +1,5 @@
 @charset "UTF-8";
+
 body {
     font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
     font-size: 14px;
@@ -9,9 +10,6 @@ body {
 .mainborder {
     background-color: #ececec;
     padding-bottom: 2%;
-}
-*{
-	#e9e1f5;
 }
 .list {
    margin-top: 33px;
@@ -45,7 +43,9 @@ body {
 }
 .menuitem{
 	font-size: 130%;
-	padding-left:20%;
+
+	padding-left:10%;
     margin-bottom: 3%;
     color:black;
+
 }

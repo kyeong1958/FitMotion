@@ -1,3 +1,4 @@
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -11,39 +12,39 @@
 <script type="text/javascript" src="../js/jquery.min.js"></script>
 <script type="text/javascript" src="../js/jquery.easyui.min.js"></script>
 <style type="text/css">
-    .dragitem{
-        border:1px solid #ccc;
-        width:50px;
-        height:50px;
-        margin-bottom:10px;
-    } 
-    .targetarea{
-        border:1px solid red;
-        height:150px;
-    } 
-   .proxy{
-            border:1px solid #ccc;
-            width:80px;
-            background:#fafafa;
-    }
-   .drag{
-           width:100px;
-           height:50px;
-           padding:10px;
-           margin:5px;
-           border:1px solid #ccc;
-           background:#AACCFF;
-       }
-       .dp{
-           opacity:0.5;
-           filter:alpha(opacity=50);
-       }
-       .over{
-           background:#FBEC88;
-       }
-    
+.dragitem{
+    border:1px solid #ccc;
+    width:50px;
+    height:50px;
+    margin-bottom:10px;
+} 
+.targetarea{
+    border:1px solid red;
+    height:100%;
+    width: 100%;
+}
+  
+.proxy{
+         border:1px solid #ccc;
+         width:80px;
+         background:#fafafa;
+ }
+.drag{
+    width:100px;
+    height:50px;
+    padding:10px;
+    margin:5px;
+    border:1px solid #ccc;
+    background:#AACCFF;
+}
+.dp{
+    opacity:0.5;
+    filter:alpha(opacity=50);
+}
+.over{
+    background:#FBEC88;
+}
 </style>
-
 <script>
 	  $(function(){
            $('.dragitem').draggable({
@@ -111,6 +112,17 @@
 		<td>3</td>
 	</tr>
 	<tr>
+		<div id="target" class="easyui-droppable targetarea2"data-options="
+						                    accept: '.dragitem',
+						                    onDragEnter:function(e,source){
+						                        $(this).html('enter');
+						                    },
+						                    onDragLeave: function(e,source){
+						                        $(this).html('leave');
+						                    },
+						                    onDrop: function(e,source){
+						                        $(this).html($(source).html());
+						                    }">
 		<td style="width: 500px;height: 300px;">1
 			<div id="target" class="easyui-droppable targetarea"data-options="
                     accept: '.dragitem',
@@ -124,12 +136,11 @@
                         $(this).html($(source).html());
                     }">
         </div>
+        
 		</td>
-		
-		
-		
 		<td style="width: 500px;height: 300px;">
 		</td>
+		</div>
 		<td style="width: 500px;height: 300px;"></td>
 	</tr>
 

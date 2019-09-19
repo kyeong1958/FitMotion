@@ -94,20 +94,17 @@
 		<div id="changedisplay">
 		</div>
 <!-- /////////////////////////////// [[화면전환 끝]] ////////////////////////////////////////////////////// -->
-</div>
 
-         
-
-      <div class="col-sm-2 col-lg-2">&nbsp;</div>
 		
 		</div>
 	</div>
-	<div class="col-sm-2 col-lg-2"></div>	
 
 
 
-
-
-
+</div>
+<div class="col-sm-2"></div>	
+<div class="row">
+	   <%@ include file="./footer.jsp" %>
+</div>
 </body>
 </html>

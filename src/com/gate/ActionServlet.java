@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.log4j.Logger;
 
 import com.both.BothController;
+import com.both.RestController;
 import com.owner.OwnerController;
 import com.staff.StaffController;
 
@@ -91,8 +92,17 @@ public class ActionServlet extends HttpServlet {
 				e.printStackTrace();
 			}
 		}
+		if(controller instanceof RestController) {
+			try {
+				String json = controller.jsonexecute(req, res);
+				req.setAttribute("json", json);
+				RequestDispatcher view = req.getRequestDispatcher("/json/toJsonPrinter.jsp");//
+				view.forward(req, res);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 	}
-	
+}
 	
 	public void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException,IOException {
 		doService(req,res);
