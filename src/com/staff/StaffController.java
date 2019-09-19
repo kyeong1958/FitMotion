@@ -17,4 +17,10 @@ public class StaffController implements Controller {
 		ModelAndView mav = new ModelAndView();
 		return mav;
 	}
+
+	@Override
+	public String jsonexecute(HttpServletRequest req, HttpServletResponse res) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }
