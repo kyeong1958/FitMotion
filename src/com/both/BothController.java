@@ -1,7 +1,9 @@
 package com.both;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -10,12 +12,17 @@ import org.apache.log4j.Logger;
 
 import com.gate.Controller;
 import com.gate.ModelAndView;
+import com.util.HashMapBinder;
+import com.vo.EquipmentVO;
 
 public class BothController implements Controller {
 	Logger logger = Logger.getLogger(BothController.class);
 	String crud = null;
+	BothLogic bothLogic = null;
 	public BothController(String crud) {
+		logger.info("bothcontroller");
 		this.crud = crud;
+		bothLogic = new BothLogic();
 	}
 	
 	@Override
@@ -33,6 +40,48 @@ public class BothController implements Controller {
 			mav.setViewName("/both/example");
 			mav.addObject("제발", "잘됨??");
 		}
+		else if("eqINS".equals(crud)) {
+			logger.info("기구관리입력");
+			int result = 0;
+			Map<String,Object> pMap = new HashMap<>();
+			HashMapBinder hmb = new HashMapBinder(req);
+			hmb.bindPost(pMap);
+			logger.info(pMap);
+			logger.info("기구이름:"+pMap.get("se_name"));
+			result = bothLogic.eqIns(pMap);
+			logger.info(result);
+			mav.pageMove("redirect");
+			mav.setViewName("/both/eqSEL.fm");
+		}
+		
+		else if("eqSEL".equals(crud)) {
+			logger.info("기구관리조회");
+			List<Map<String,Object>> eqSelList = null;
+			
+			/*
+			 * int pageNumber = 0; int pageSize = 0; if(pMap.containsKey("pageNumber")) {
+			 * pageNumber = Integer.parseInt(pMap.get("pageNumber").toString()); }
+			 * if(pMap.containsKey("pageSize")) { pageSize =
+			 * Integer.parseInt(pMap.get("pageSize").toString()); }
+			 */
+			eqSelList = bothLogic.eqSEL();
+			req.setAttribute("eqSelList", eqSelList);
+			mav.pageMove("forward");
+			mav.setViewName("/owner/eqbox");				
+		}
+		else if("eqDTL".equals(crud)) {
+			logger.info("기구 상세조회 ");
+			List<Map<String,Object>> eqDtlList = null;
+			Map<String,Object> pMap = null;
+			pMap.put("se_code", Integer.parseInt(req.getParameter("se_code")));
+			eqDtlList = bothLogic.eqDTL(pMap);
+			
+			
+			mav.pageMove("forward");
+			//mav.setViewName("모달창부분");
+		}
+		
+		
 		return mav;
 	}
 

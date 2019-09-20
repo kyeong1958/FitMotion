@@ -3,18 +3,16 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
+<meta charset="UTF-8" >
 <title>FitMotion</title>
-<%@ include file="/common/JEasyUICommon.jsp"%>
-<%@ include file="/CSS/Searchheader.jsp"%>
+<%@ include file="../common/JEasyUICommon.jsp"%>
+<%@ include file="../CSS/Searchheader.jsp"%>
 <link rel="stylesheet" type="text/css" href="../kcss/main.css">
 <script type="text/javascript">
-	function fontcolorchange(){
 
-	}
 	function ajax(url){
 		
-		alert("ajax==> "+url);
+		//alert("ajax==> "+url);
 		$.ajax({
 			method:'get'
 		   ,url:url
@@ -24,7 +22,7 @@
 		});
 	}
 </script>
-<body>
+<body onLoad="javascript:ajax('../owner/Equipment.jsp')">
 <!--////////////////////////////////////nav//////////////////////////////////  -->
    <%@ include file="./nav.jsp" %>
 <!--////////////////////////////////////nav//////////////////////////////////  -->
@@ -43,7 +41,7 @@
 				<div class="row menuheader" style="border-top:1px solid #dddae0">헬스장관리</div>
 				<div class="row"><a class="menuitem" href="#">프로그램</a></div>
 				<div class="row"><a class="menuitem" href="#">프로모션</a></div>
-				<div class="row"><a class="menuitem" href="javascript:ajax('./Equipment.jsp')">기구관리</a></div>
+				<div class="row"><a class="menuitem" href="javascript:ajax('../owner/Equipment.jsp')">기구관리</a></div>
 				<div class="row"><a class="menuitem" href="javascript:ajax('./Goods.jsp')">비품관리</a></div>
 				<div class="row menuheader" style="border-top:1px solid #dddae0">직원관리</div>
 				<div class="row"><a class="menuitem" href="#">직원등록/목록</a></div>

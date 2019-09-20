@@ -15,8 +15,10 @@ import com.gate.ModelAndView;
 public class OwnerController implements Controller {
 	Logger logger = Logger.getLogger(OwnerController.class);
 	String crud = null;
+	OwnerLogic ownerLogic = null;
 	public OwnerController(String crud) {
 		this.crud = crud;
+		ownerLogic = new OwnerLogic();
 	}
 
 	@Override
@@ -30,6 +32,7 @@ public class OwnerController implements Controller {
 			mav.addObject("test", "test");
 		}
 		else if("test".equals(crud)) {
+			String result = ownerLogic.test();
 			mav.pageMove("forward");
 			mav.setViewName("/owner/example");
 			mav.addObject("제발", "잘됨??");

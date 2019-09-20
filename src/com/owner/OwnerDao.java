@@ -13,4 +13,15 @@ public class OwnerDao {
 	public OwnerDao() {
 		sqlSessionFactory = MyBatisCommonFactory.getSqlSessionFactory();
 	}
+	public String test() {
+		logger.info("Dao");
+		String result = null;
+		try {
+			sqlSession = sqlSessionFactory.openSession();
+			result = sqlSession.selectOne("test2");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
 }
