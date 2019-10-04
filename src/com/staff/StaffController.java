@@ -15,12 +15,12 @@ public class StaffController implements Controller {
 	}
 
 	@Override
-	public ModelAndView execute(HttpServletRequest req, HttpServletResponse res) throws Exception {
+	public ModelAndView execute() throws Exception {
 		ModelAndView mav = new ModelAndView();
 		return mav;
 	}
 	@Override
-	public String jsonexecute(HttpServletRequest req, HttpServletResponse res) throws Exception {
+	public String jsonexecute() throws Exception {
 		return null;
 	}
 }

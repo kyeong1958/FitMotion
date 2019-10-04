@@ -23,6 +23,14 @@
 	font-size:16px;
 	border-bottom:1px solid #dddae0;
 }
+#datebox{
+	margin-left:2%;
+	padding-left:2%;
+	border:none;
+	background:none;
+	font-size:16px;
+	border-bottom:1px solid #dddae0;
+}
 .btn_registration button{
 	margin-top:15%;
 	float: right;
@@ -62,13 +70,15 @@
 	vertical-align: center;
 }
 .meminfo-table-body{
-	text-align:center;
+	text-align: left;
+    padding-left: 2%;
     border-right: 1px solid #dddae0;
 }
 .meminfo-table-header{
 	font-size:15px;
 	font-weight:bold;
-	text-align:center;
+	text-align: left;
+    padding-left: 2%;
     border-right: 1px solid #dddae0;
 }
 /* modal */
