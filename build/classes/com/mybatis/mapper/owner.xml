@@ -4,5 +4,14 @@
 	<select id="test2">
 		SELECT 1 FROM dual
 	</select>
+	
+	<select id="allsales" parameterType="map" resultType="map">
+		select ms.ms_category as 목록 , sum(ms.ms_price) as 매출합계
+		from payment pm ,member mb, membership ms
+		where pm.mem_id = mb.mem_id and pm.ms_code = ms.ms_code
+		group by ms_category
+	</select>
+	
+	
 </mapper> 
  

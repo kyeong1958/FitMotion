@@ -7,5 +7,4 @@ public interface Controller {
 	public ModelAndView execute(HttpServletRequest req, HttpServletResponse res) throws Exception;
 
 	public String jsonexecute(HttpServletRequest req, HttpServletResponse res) throws Exception;
-	
 }

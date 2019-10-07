@@ -26,13 +26,13 @@
  			<!-- <transactionManager type="MANAGED" /> --> 
 			<transactionManager type="JDBC" /><!-- 트렌잭션처리 할 때 개발자가 직접관리 -->
 			<dataSource type="JNDI">
-				<property name="data_source" value="java:comp/env/c" />
+				<property name="data_source" value="java:comp/env/jdbc/dbPool" />
 			</dataSource>
 		</environment>
 	</environments>
 	<mappers>
 		<mapper resource="com/mybatis/mapper/owner.xml" />
-		<mapper resource="com/mybatis/mapper/staff.xml" />
-		<mapper resource="com/mybatis/mapper/both.xml" />
+		<mapper resource="com/mybatis/mapper/Staff.xml" />
+		<mapper resource="com/mybatis/mapper/Both.xml" />
 	</mappers>
 </configuration> 

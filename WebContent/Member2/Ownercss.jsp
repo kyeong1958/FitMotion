@@ -1,0 +1,434 @@
+<style>
+/* 홈바  시작 */
+.bar_area {
+	padding: 10px 66px;
+	height: 54px;
+	background-color: #fff;
+	box-shadow: 1px 1px 4px #BABBC2;
+	position: relative;
+	z-index: 1;
+	
+}
+
+.homefl a{
+	float: left;
+	display: inline-block;
+	font-size: 16px;
+	color: #9fa0aa;
+	line-height: 32px;
+}
+
+
+
+
+
+#management:last-child{
+	font-weight: 500;
+	color: #42485A;
+	cursor: default;
+	text-decoration: none;
+	
+
+}
+
+.bar_area .homefl #home+#management{
+	padding-left: 37px;
+	background: url(../img/location_arrow.png) no-repeat left 50%;
+	
+}
+
+.homefr{
+	float: right;
+	font-size: 0;
+	
+}
+
+.btn.dark {
+	background-color: #42485A;
+}
+
+#MIns-B {
+	display: inline-block;
+	margin: 0;
+	padding: 0 10px;
+	min-width: 95px;
+	height: 34px;
+	font-size: 13px;
+	font-weight: 500;
+	color: #fff;
+	text-align: center;
+	line-height: 32px;
+	border: 0; 
+	border-radius: 5px;
+	cursor: pointer;
+
+}
+
+
+/* 홈바 끝 */
+
+/* 등록 부분과 나오는데 부분 면적  */
+#content-area{
+	margin: 0 auto;
+	padding: 30px 66px;
+	max-width: 100%;
+
+}
+
+
+/* 직급,팀 버튼 시작  */
+.tab_area{
+	border-bottom: 1px solid #BABBC2;
+
+}
+
+.tab_area:before{
+	content: "";
+	display: block;
+	height: 0;
+	clear: both;
+	overflow: hidden;
+
+}
+
+.tab_area ul{
+	display: inline-block;
+	position: relative;
+	bottom: -1px;
+
+}
+.tab_area ul{
+	list-style: none;
+	margin: 0;
+}
+
+.tab_area ul li{
+	display: inline-block;
+	min-width: 95px;
+	font-size: 13px;
+	overflow: hidden;
+
+}
+
+.tab_area ul li button.active{
+	color: #22B2FB;
+	border-bottom: 1px solid #fff;
+
+}
+
+.tab_area ul li button{
+	display: inline-block;
+	padding: 0 10px;
+	width: 100%;
+	min-height: 40px;
+	color: #6e7794;
+	line-height: 1.4;
+	background-color: #fff;
+	border: 1px solid #BABBC2;
+	border-radius: 5px 5px 0 0;
+
+}
+
+.tab_area ul li+li{
+	margin-left: -5px;
+}
+
+/* 직급,팀 버튼 끝  */
+
+/* 메뉴 부분 시작  */
+
+.bb{
+	list-style: none;
+	margin-left: -41px;
+
+}	
+
+ul.bb > li {
+	margin-top: 1rem;
+
+}
+
+ul.bb > li > button > span.btn-label {
+
+	flex: 1 1 auto;
+ 
+}
+
+
+.btn.gray{
+	display: inline-block;
+	margin: 0;
+	padding: 0 10px;
+	min-width: 95px;
+	height: 34px;
+	font-size: 13px;
+	font-weight: 500;
+ 	color: #fff; 
+	text-align: center;
+	line-height: 32px;
+	border: 0; 
+	border-radius: 5px;
+	cursor: pointer;
+
+}
+.btn.blue{
+	background-color: #2196F3;
+
+}
+
+.btn.active, .btn:active{
+	background-image: none;
+	box-shadow: inset 0 3px rgba(0,0,0,.125);
+
+}
+
+ul.bb > li > button {
+	display: flex;
+
+}
+/* 메뉴 부분 끝 */
+/* 메뉴 추가하기 부분 시작  */
+.btn.blue{
+	background-color: #2196F3;
+
+}
+
+#buttonadd{
+	display: inline-block;
+	margin: 0;
+	padding: 0 10px;
+	min-width: 95px;
+	height: 34px;
+	font-size: 13px;
+	font-weight: 500;
+ 	color: #fff; 
+	text-align: center;
+	line-height: 32px;
+	border: 0; 
+	border-radius: 5px;
+	cursor: pointer;
+	
+
+}
+#addspan{
+	list-style: none;
+	display: contents;
+}
+
+
+/* 메뉴 추가하기 부분 끝  */
+/*  검색부분 시작  */
+
+.search_box{
+
+	float: right;
+
+}
+
+.search_box input[type="text"]{
+	width: 250px;
+	height: 26px;
+	border-right: 0;
+	border-radius: 5px 0 0 5px;
+
+}
+
+#legend{
+	display: none;
+}
+.search_box .search {
+    width: 26px;
+    height: 26px;
+    background: url(../img/sear.png) no-repeat center 50% #22B2FB;
+    background-size: 14px;
+    border-radius: 0 5px 5px 0;
+    text-indent: -99999px;
+    border: 0;
+}
+
+/*  검색부분 끝 */
+
+/* 직원 부분 시작  */
+
+
+
+.grid_list{
+	clear: both;
+}
+
+.grid_list ul {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: flex-start;
+    margin-left: -20px;
+}
+
+.grid_list ul li {
+    flex: 0 1 auto;
+    margin: 0 0 10px 10px;
+    padding: 20px 10px;
+    width: calc((100% - 50px) / 6);
+    color: #42485A;
+    background-color: #FFF;
+    border: 1px solid #BABBC2;
+    border-radius: 5px;
+    position: relative;
+    overflow: hidden;
+}
+
+.grid_list ul li:before {
+    content: "";
+    width: 0;
+    height: 100%;
+    float: left;
+    overflow: hidden;
+}
+
+.grid_list ul li .pic {
+    width: 42px;
+    height: 42px;
+}
+.grid_list ul li>* {
+    display: inline-block;
+    vertical-align: middle;
+    position: static;
+    z-index: 1;
+}
+.pic {
+    text-align: center;
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+.pic img {
+    min-height: 100%;
+    max-width: 100%;
+}
+
+.grid_list ul li .name_tag {
+    margin-left: 10px;
+}
+
+.grid_list ul li .function_btn {
+    padding-top: 3rem;
+}
+
+.grid_list ul li .function_btn:before {
+    display: inline-block;
+    margin-right: -0.25em;
+    width: 0;
+    height: 100%;
+    vertical-align: middle;
+}
+
+:after, :before {
+    box-sizing: border-box;
+}
+
+.grid_list ul li .function_btn>* {
+    opacity: 0;
+    position: relative;
+    z-index: 1;
+}
+.btn.red {
+    background-color: #FF5722;
+}
+.btn.small {
+    min-width: 43px;
+    padding: 0 10px;
+    height: 26px;
+    line-height: 24px;
+}
+.btn {
+    display: inline-block;
+    margin: 0;
+    padding: 0 10px;
+    min-width: 95px;
+    height: 34px;
+    font-size: 13px;
+    font-weight: 500;
+    color: #FFF;
+    text-align: center;
+    line-height: 32px;
+    border: 0;
+    border-radius: 5px;
+    cursor: pointer;
+    overflow: hidden;
+}
+
+.grid_list ul li .name_tag p+p {
+    margin-top: 5px;
+    font-size: 16px;
+}
+
+
+
+.grid_list ul li .function_btn>.btn+.btn {
+    margin-left: 10px;
+}
+
+
+
+
+
+
+
+.grid_list ul li:hover .function_btn>*, .grid_list ul li:hover .function_btn:after {
+    opacity: 1;
+}
+.grid_list ul li .function_btn:after {
+    opacity: 0;
+}
+.grid_list ul li .function_btn:after {
+    width: 100%;
+ 	 height: 100%; 
+    background-color: rgba(66,72,90,0.8);
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 0;
+    vertical-align: middle;
+    
+}
+.grid_list ul li .function_btn:before, .grid_list ul li .function_btn:after {
+    content: "";
+}
+.grid_list ul li .function_btn {
+    width: 100%;
+    height: 100%;
+    font-size: 0;
+    text-align: center;
+    position: absolute;
+    left: 0;
+    top: 0;
+   
+}
+.grid_list ul li .function_btn>.btn.delete:before{
+	background: url(../img/delect.png) no-repeat center 50%;
+}
+.grid_list ul li .function_btn>.btn.view:before {
+    background: url(../img/sear.png) no-repeat center 50%;
+}
+
+.grid_list ul li .function_btn>.btn:before {
+    content: "";
+    display: inline-block;
+    margin: 0 auto;
+    width: 100%;
+    height: 30px;
+    position: absolute;
+    left: 0;
+    top: -35px;
+    right: 0;
+}
+
+.grid_list ul li .function_btn>.btn {
+     margin-top: 79px; 
+    vertical-align: middle;
+    position: relative;
+    overflow: visible;
+}
+
+/* 직원 부분 끝  */
+
+</style>
