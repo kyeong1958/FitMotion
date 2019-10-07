@@ -40,9 +40,10 @@ public class ActionServlet extends HttpServlet {
 				logger.info(mav.viewName);
 				// select해온 값이나 넘겨야 할 값을 담음
 				Object obj = mav.obj;
+				String name = mav.name;
 				logger.info("pageMove"+mav.pageMove);
 				if("forward".equals(mav.pageMove)) {
-					req.setAttribute("OwnerObject", obj);
+					req.setAttribute(name, obj);
 					logger.info(req.getAttribute("OwnerObject"));
 					RequestDispatcher view = req.getRequestDispatcher(viewName+".jsp");
 					view.forward(req, res);
@@ -61,8 +62,9 @@ public class ActionServlet extends HttpServlet {
 				mav = controller.execute(req, res);
 				String viewName = mav.viewName;
 				Object obj = mav.obj;
+				String name = mav.name;
 				if("forward".equals(mav.pageMove)) {
-					req.setAttribute("StaffObject", obj);
+					req.setAttribute(name, obj);
 					RequestDispatcher view = req.getRequestDispatcher(viewName+".jsp");
 					view.forward(req, res);
 				}else {
@@ -79,8 +81,9 @@ public class ActionServlet extends HttpServlet {
 				mav = controller.execute(req, res);
 				String viewName = mav.viewName;
 				Object obj = mav.obj;
+				String name = mav.name;
 				if("forward".equals(mav.pageMove)) {
-					req.setAttribute("BothObject", obj);
+					req.setAttribute(name, obj);
 					RequestDispatcher view = req.getRequestDispatcher(viewName+".jsp");
 					view.forward(req, res);
 				}else {

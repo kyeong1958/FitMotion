@@ -77,6 +77,7 @@ public class HashMapBinder {
 	 */
 	public void bind(Map<String,Object> target) {
 		//파라미터로 넘어온 target안에 다른 정보가 담겨 있다면 제거
+		logger.info("너타냐냐냐냔냐냐냐");
 		target.clear();
 		Enumeration er = req.getParameterNames();
 		while(er.hasMoreElements()) {
@@ -94,7 +95,7 @@ public class HashMapBinder {
 			//key에는 name, address, pet이 와야함
 			//value에는 각 key가 가리키는 값이 오면 됨.
 			else {
-			target.put(name, req.getParameter(name));
+			target.put(name, HangulConversion.toUTF(req.getParameter(name)));
 			}
 		
 		}
@@ -105,7 +106,7 @@ public class HashMapBinder {
 		Enumeration er = req.getParameterNames();
 		while(er.hasMoreElements()) {
 			String name = (String)er.nextElement();
-			target.put(name, HangulConversion.toUTF(req.getParameter(name)));
+			target.put(name, req.getParameter(name));
 		}
 	}
 }

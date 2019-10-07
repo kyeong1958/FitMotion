@@ -1,8 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.mybatis.mapper.BothMapper">
-	<select id="test">
-		SELECT 1 FROM dual
+	<insert id="goINS" parameterType="map">
+	<!-- insert into Goods(go_date,go_name,go_price,go_code,go_type,go_stock,gym_code)
+              values('2019-09-20','수건','5000원',SEQ_goins.NEXTVAL,'소모품',10,'123')
+               -->
+              insert into Goods(go_date,go_name,go_price,go_code,go_type,gym_code)
+              values(#{go_date},#{go_name},#{go_price},SEQ_goins.NEXTVAL,#{go_type},#{gym_code})
+	</insert>
+	<select id="goSel" parameterType="map" resultType="map"> 
+	select go_code,go_date,go_name,go_price,go_type,go_stock,GOODS.gym_code
+	from GOODS,GYM
+	where GOODS.GYM_CODE = GYM.GYM_CODE    
 	</select>
+	<update id="goUpd" parameterType="map">
+<!-- UPDATE GOODS SET go_name = '농담곰', go_date = '2019-00-00', go_price = '9999원', go_type = '곰', go_stock = 1 WHERE go_code = '83' -->
+ 	UPDATE GOODS SET go_name = #{go_name}, go_date = #{go_date}, go_price = #{go_price}, go_type = #{go_type}, go_stock = #{go_stock} WHERE go_code = #{go_code}
+ 	</update>
+ 	<delete id="goDEL" parameterType="map">
+<!--  	delete from GOODS where go_code = '83' --> 	
+		delete from GOODS where go_code=#{go_code} 
+ 	</delete>
 </mapper> 
  

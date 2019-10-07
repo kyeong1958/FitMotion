@@ -15,6 +15,7 @@ public class ControllerMapping {
 		// owner
 		String work = commands[0];
 		logger.info(work);
+		logger.info(commands.length);
 		String requestName = commands[1];
 		// example
 		crud = requestName.substring(0,requestName.lastIndexOf("."));

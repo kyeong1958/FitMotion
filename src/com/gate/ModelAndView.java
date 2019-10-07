@@ -7,6 +7,7 @@ public class ModelAndView {
 	HttpServletRequest req = null;
 	HttpServletResponse res = null;
 	Object obj = null;
+	String name = null;
 	//응답이 나갈 페이지이름
 	String viewName = null;
 	String pageMove = null;
@@ -22,6 +23,7 @@ public class ModelAndView {
 		this.viewName = viewName;
 	}
 	public void addObject(String name, Object obj) {// select해온 값이나 넘겨야 할 값을 담음
+		this.name = name;
 		this.obj = obj;
 	}
 }
