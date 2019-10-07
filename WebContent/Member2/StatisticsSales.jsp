@@ -500,6 +500,7 @@ $(function () {
 			    	display: true,
 	                position: 'right', //차트 레이블 위치 조정 
 	                filter: function(legendItem, data) {
+	                	
 	                    return legendItem.index != 1;
 	                }
 				}
