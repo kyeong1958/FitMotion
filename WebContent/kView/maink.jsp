@@ -9,9 +9,6 @@
 <%@ include file="/CSS/Searchheader.jsp"%>
 <link rel="stylesheet" type="text/css" href="../kcss/main.css">
 <script type="text/javascript">
-	function fontcolorchange(){
-
-	}
 	function ajax(url){
 		
 		alert("ajax==> "+url);
@@ -23,6 +20,28 @@
 		   }
 		});
 	}
+	//데이트박스 
+	//datebox 날짜형식 YYYY-MM-DD로 설정
+/* 	 $.fn.datebox.defaults.formatter = function(date){
+	    var y = date.getFullYear();
+	    var m = date.getMonth()+1;
+	    var d = date.getDate();
+	    return y+'-'+(m<10 ? "0"+m:m)+'-'+(d<10 ? "0"+d:d);
+	} */
+	//datebox parser설정
+/* 	 $.fn.datebox.defaults.parser = function(s){
+	    var t = Date.parse(s);
+	    if (!isNaN(t)){
+	       return new Date(t);
+	    } else {
+	       return new Date();
+	    }
+	}  */
+	//datebox 한글화
+/*  	$.fn.datebox.defaults.currentText = '오늘'
+	$.fn.datebox.defaults.closeText = '닫기'
+	$.fn.calendar.defaults.weeks = ['일','월','화','수','목','금','토']
+	$.fn.calendar.defaults.months = ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'] */
 </script>
 <style type="text/css">
 .list {
@@ -60,6 +79,35 @@
 }
 </style>
 <body>
+	<!-- 커스텀 스크립트 -->
+<!-- 	<script type="text/javascript">
+	$(document).ready(function(){
+	   //선택가능날짜 범위 설정
+	   $('#datebox1').datebox().datebox('calendar').calendar({
+	       validator: function(date){
+	           var now = new Date();
+	           var d1 = new Date(now.getFullYear()-1, now.getMonth(), now.getDate());
+	           var d2 = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+	           return d1<=date && date<=d2;
+	       }
+	   });
+	   //datebox1 날짜 선택에 따라 datebox2의 선택가능날짜 설정
+	   $('#datebox1').datebox({
+	      onSelect: function(date){
+	         firstDate = date;
+	         $('#datebox2').datebox().datebox('calendar').calendar({
+	               validator: function(date){
+	                   var now = new Date();
+	                   var d1 = new Date(firstDate.getFullYear(), firstDate.getMonth(), firstDate.getDate());
+	                   var d2 = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+	                   return d1<=date && date<=d2;
+	               }
+	           });
+	      }
+	   });
+	});
+</script> -->
+
 <!--////////////////////////////////////nav//////////////////////////////////  -->
    <%@ include file="./nav.jsp" %>
 <!--////////////////////////////////////nav//////////////////////////////////  -->
@@ -94,20 +142,17 @@
 		<div id="changedisplay">
 		</div>
 <!-- /////////////////////////////// [[화면전환 끝]] ////////////////////////////////////////////////////// -->
-</div>
 
-         
-
-      <div class="col-sm-2 col-lg-2">&nbsp;</div>
 		
 		</div>
 	</div>
-	<div class="col-sm-2 col-lg-2"></div>	
 
 
 
-
-
-
+</div>
+<div class="col-sm-2"></div>	
+<div class="row">
+	   <%@ include file="./footer.jsp" %>
+</div>
 </body>
 </html>

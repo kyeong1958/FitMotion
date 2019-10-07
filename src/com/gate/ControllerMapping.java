@@ -2,8 +2,11 @@ package com.gate;
 
 import org.apache.log4j.Logger;
 
-import com.both.BothController;
-import com.owner.OwnerController;
+import com.account.AccountController;
+import com.member.MemberController;
+import com.program.ProgramController;
+import com.schedule.ScheduleController;
+import com.shop.ShopController;
 import com.staff.StaffController;
 
 public class ControllerMapping {
@@ -20,14 +23,18 @@ public class ControllerMapping {
 		// example
 		crud = requestName.substring(0,requestName.lastIndexOf("."));
 		logger.info(crud);
-		if("owner".equals(work)) {
-			controller = new OwnerController(crud);
-		}
-		else if("staff".equals(work)) {
+		if("member".equals(work)) {
+			controller = new MemberController(crud);
+		}else if("staff".equals(work)) {
 			controller = new StaffController(crud);
-		}
-		else if("both".equals(work)) {
-			controller = new BothController(crud);
+		}else if("program".equals(work)) {
+			controller = new ProgramController(crud);
+		}else if("account".equals(work)) {
+			controller = new AccountController(crud);
+		}else if("shop".equals(work)) {
+			controller = new ShopController(crud);
+		}else if("schedule".equals(work)) {
+			controller = new ScheduleController(crud);
 		}
 		return controller;
 	}

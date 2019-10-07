@@ -168,7 +168,7 @@ int a = 10;
 <tr>
 <%
 			for(int i=0;i<week.length;i++){
-				out.print("<td width='200' height='100' align='center'><font size='5mm'>"+week[i]+"</font></td>");
+				out.print("<td width='200' height='100' align='center' style='border-bottom:2px solid'><font size='5mm'>"+week[i]+"</font></td>");
 			}
 			out.print("</tr>");
 			for(int i=0;i<cal.get(Calendar.WEEK_OF_MONTH);i++){
