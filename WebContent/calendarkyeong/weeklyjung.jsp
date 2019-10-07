@@ -27,11 +27,12 @@
    ArrayList<String> day = new ArrayList<String>();
    
    int dayOfWeek = cal.get(Calendar.DAY_OF_WEEK);
+   out.print(dayOfWeek);
    cal.add(Calendar.DAY_OF_MONTH, (-(dayOfWeek - 1)));
 
    for ( int j = 0; j < 7; j++ ) {      
-      day.add(sdf.format(cal.getTime()));
-      cal.add(Calendar.DAY_OF_MONTH, 1);
+		day.add(sdf.format(cal.getTime()));
+		cal.add(Calendar.DAY_OF_MONTH, 1);
    }
    Iterator<String> it = day.iterator();
    String cmonth = df.format(cal.get(Calendar.MONTH)+1);

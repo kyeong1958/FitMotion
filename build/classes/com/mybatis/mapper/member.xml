@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mapper namespace="com.mybatis.mapper.MemberMapper">
+	<select id="test2">
+		SELECT 1 FROM dual
+	</select>
+</mapper> 
+ 

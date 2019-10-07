@@ -1,11 +1,33 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
    pageEncoding="UTF-8"%>
+<%@ include file="/common/JEasyUICommon.jsp"%>
 <link rel="stylesheet" type="text/css" href="../kcss/insert.css">
 <!-- ================== [[ 메인화면 ]] ================== -->
 
 <!--============================ [[ script ]] ==============================================  -->
 <script type="text/javascript">
-
+//데이트박스 
+//datebox 날짜형식 YYYY-MM-DD로 설정
+	$.fn.datebox.defaults.formatter = function(date){
+	var y = date.getFullYear();
+	var m = date.getMonth()+1;
+	var d = date.getDate(); 
+	return y+'-'+(m<10 ? "0"+m:m)+'-'+(d<10 ? "0"+d:d);
+}
+//datebox parser설정
+	$.fn.datebox.defaults.parser = function(s){
+    var t = Date.parse(s);
+    if (!isNaN(t)){
+       return new Date(t);
+    } else {
+       return new Date();
+    }
+}
+//datebox 한글화
+	$.fn.datebox.defaults.currentText = '오늘'
+$.fn.datebox.defaults.closeText = '닫기'
+$.fn.calendar.defaults.weeks = ['일','월','화','수','목','금','토']
+$.fn.calendar.defaults.months = ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월']
 </script>
 
 <!--============================ [[ script ]] ==============================================  -->
@@ -43,7 +65,7 @@
 							<span>●&nbsp;개수<input class="textbox" type="text" style="width:70%;margin-left:7%"></span>
 							</div>
 					<div class="row" style="margin-top:20%">
-							<span>●&nbsp;구매일<input class="textbox" type="text" style="width:60%;margin-left:10%"></span>
+							<span>●&nbsp;구매일&nbsp;&nbsp;</span><input class="easyui-datebox" id="datebox" style="width:65%;margin-left:10%">
 					</div>
 					</div>
 					<div class="col-sm-6 col-lg-6">
