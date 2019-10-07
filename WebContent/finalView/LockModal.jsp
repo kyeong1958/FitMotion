@@ -47,7 +47,7 @@ body{
 		      <h3 style="border-top: 1px solid #BABBC2; padding-top: 11px;">등록 회원 배정</h3>
 		      <!-- 회원 검색 -->
 		      <div class="search" id="L-search">
-		        <fieldset>
+		        <fieldset> 
 		          <p>
 		            <input type="text"placeholder="회원 검색">
 		            <button type="button" class="icon small search_d"></button>

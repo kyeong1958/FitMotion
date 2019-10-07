@@ -6,7 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>FitMotion</title>
-<%@ include file="/common/JEasyUICommon.jsp"%>
+<%@ include file="../common/JEasyUICommon.jsp"%>
 <link rel="stylesheet" type="text/css" href="../NewCSS/main.css">
 <style type="text/css">
 body{

@@ -11,9 +11,13 @@
 <%@ include file="/common/JEasyUICommon.jsp"%>
 <link rel="stylesheet" type="text/css" href="../NewCSS/main.css">
 <link rel="stylesheet" type="text/css" href="../NewCSS/schedule.css">
+<link rel="stylesheet" type="text/css" href="../NewCSS/scheduleModal.css">
 <style type="text/css">
 	body{
 		padding:0%;
+	}
+	*{
+		font-family: Sans-serif;
 	}
 </style>
 </head>
@@ -77,7 +81,7 @@
 		</div>
 	</div>
 	<div id="mainboard">
-
+<div>
 	<!-- ============================ [[ 화면전환 ]] ======================================== -->
 
 <%
@@ -152,13 +156,7 @@
 %>
 
 						<td height='100' align='left' valign='top'><a href='#' style="color: black;font-size: 20px;">
-						<div class="easyui-droppable targetarea" data-options="
-																                    accept: '.dragitem',
-																                    onDrop: function(e,source){
-																                        $(this).html($(source).html());
-																                    }">
-					<%=day[month][i][j]%> 
-				        </div>
+										<%=day[month][i][j]%> 
 						</a></td>
 <%
 					}else{
@@ -169,22 +167,133 @@
 			}////////////// end of outter for [월별 일자]
 %>
 </table>
-</span>
+</div>
 <%
 		}///////////end of if[이번달 정보만 출력하기]
 	}
 %>
 	
-	
-	
-	
-	
-	
-	
-	
-	
+<div type="button" data-toggle="modal" data-target="#scheduleModal">모달열기</div>
 	<!-- ============================ [[ 화면전환 ]] ======================================== -->
 	</div>
 </div>
 </body>
 </html>
+
+
+<!-- 
+ <h2>Small Modal</h2>
+  Button to Open the Modal
+  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
+    Open modal
+  </button> -->
+
+  <!-- The Modal -->
+  <div class="modal fade" id="scheduleModal">
+    <div class="modal-dialog modal-sm-6">
+      <div class="modal-content">
+      
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h4 class="modal-title">수업 등록하기</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        
+        <!-- Modal body -->
+        <div class="modal-body" style="padding-left: 5%;">
+			<div style="padding:0 0 5px">
+				<label class="spend-box-right-column">회원명</label>
+				<span>
+					<input type="text" class="spending-text" style="width:260px;">
+				</span>
+				<span>
+					<button type="button" class="btn-schedule-memsearch">회원검색</button>
+				</span>
+			</div>
+			<div style="padding:0 0 5px">
+				<label class="spend-box-right-column">강사명</label>
+				<span>
+					<select class="spend-combobox" style="width: 170px;text-align-last:center">
+						<option value="">이경애</option>
+						<option value="">이경애</option>
+						<option value="">이경애</option>
+						<option value="">이경애</option>
+					</select>
+				</span>
+			</div>
+			<div style="padding:0 0 5px">
+				<label class="spend-box-right-column">수업장소</label>
+				<span>
+					<select class="spend-combobox" style="width: 170px;text-align-last:center">
+						<option value="">그룹PT1룸</option>
+						<option value="">그룹PT2룸</option>
+						<option value="">개인PT1룸</option>
+						<option value="">개인PT2룸</option>
+						<option value="">요가</option>
+						<option value="">스피닝</option>
+					</select>
+				</span>
+			</div>
+		<div style="padding:0 0 5px">
+			<label class="spend-box-right-column">수업일자</label>
+			<span>
+				<span class="easyui-datebox" id="datebox1"></span>
+			</span>
+			<span>~</span>
+			<span>
+				<span class="easyui-datebox" id="datebox2"></span>
+			</span>
+		</div>
+		<div style="padding:0 0 5px">
+				<label class="spend-box-right-column">수업시간</label>
+				<span>
+					<select class="spend-combobox schedule-combobox-time">
+<%	for(int i=8;i<23;i++){	%>
+						<option value="<%=i%>"><%=df.format(i) %></option>
+<%	}	%>
+					</select>
+				</span>
+			
+				<span>
+					<select class="spend-combobox schedule-combobox-time">
+<%	for(int i=0;i<60;i+=5){	%>
+						<option value="<%=i%>"><%=df.format(i) %></option>
+<%	}	%>
+					</select>
+				</span>
+				<span>&nbsp;&nbsp;~&nbsp;&nbsp;</span>
+				<span>
+					<select class="spend-combobox schedule-combobox-time">
+<%	for(int i=8;i<23;i++){	%>
+						<option value="<%=i%>"><%=df.format(i) %></option>
+<%	}	%>
+					</select>
+				</span>
+			
+				<span>
+					<select class="spend-combobox schedule-combobox-time">
+<%	for(int i=0;i<60;i+=5){	%>
+						<option value="<%=i%>"><%=df.format(i) %></option>
+<%	}	%>
+					</select>
+				</span>
+			</div>
+	<!-- BODY -->
+        </div>
+        
+        <!-- Modal footer -->
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
+        
+      </div>
+    </div>
+  </div>
+  
+
+
+
+
+
+
+
