@@ -46,10 +46,13 @@ public class BothDao {
 			
 			sqlSession = sqlSessionFactory.openSession();
 			eqSelList = sqlSession.selectList("eqSel");
-			Map<String,Object> rMap = eqSelList.get(0);
-			
-			logger.info(eqSelList.size());
-			logger.info(rMap.get("SE_NAME"));
+			/*
+			 * Map<String,Object> rMap = eqSelList.get(0);
+			 */
+			/*
+			 * logger.info(eqSelList.size()); 
+			 * logger.info(rMap.get("SE_NAME"));
+			 */
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -60,21 +63,38 @@ public class BothDao {
 		}
 		return eqSelList;
 	}
-	public List<Map<String, Object>> eqDTL(Map<String, Object> pMap) {
-		logger.info("기구상세조회 Dao상세조회 ");
-		List<Map<String, Object>> eqSelList = new ArrayList<>();
+
+	public int eqUPD(Map<String, Object> pMap) {
+		int result = 0;
 		try {
 			sqlSession = sqlSessionFactory.openSession();
-			eqSelList = sqlSession.selectList("eqSel",pMap);
-			logger.info(pMap.get("RNO"));
+			result = sqlSession.update("eqUpd", pMap);
+			sqlSession.commit();
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
-			if(sqlSession!=null){
+			if(sqlSession!=null) {
 				sqlSession.close();
-				}
 			}
-		
-		return eqSelList;
+		}
+
+		return result;
+	}
+	public int eqDEL(Map<String, Object> pMap) {
+		logger.info("eqDEL Dao 호출성공");
+		int result = 0;
+		try {
+			sqlSession = sqlSessionFactory.openSession();
+			result = sqlSession.delete("eqDEL", pMap);
+			logger.info(pMap.get("se_code"));
+			sqlSession.commit();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			if(sqlSession!=null) {
+				sqlSession.close();
+			}
+		}
+		return result;
 	}
 }

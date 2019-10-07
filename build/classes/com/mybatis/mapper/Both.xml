@@ -42,6 +42,21 @@
                     order by rno asc
    </select>
 	
+	<update id="eqUpd" parameterType="map">
+      UPDATE SPORTS_EQUIPMENT
+         SET se_name = #{se_name},
+             se_repair_count = #{se_repair_count},
+             se_repair_detail = #{se_repair_detail},
+           	 se_buy_price =#{se_buy_price},
+             se_operating_mode = #{se_operating_mode},
+             se_buy_date = #{se_buy_date}
+       WHERE se_code = #{se_code}      
+   </update>
+	
+	<delete id="eqDEL" parameterType="map">
+      delete from SPORTS_EQUIPMENT where se_code=#{se_code}
+   </delete>
+	
 	
 </mapper> 
  

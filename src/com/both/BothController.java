@@ -65,20 +65,31 @@ public class BothController implements Controller {
 			 * Integer.parseInt(pMap.get("pageSize").toString()); }
 			 */
 			eqSelList = bothLogic.eqSEL();
-			req.setAttribute("eqSelList", eqSelList);
+			mav.addObject("eqSelList", eqSelList);
 			mav.pageMove("forward");
 			mav.setViewName("/owner/eqbox");				
 		}
-		else if("eqDTL".equals(crud)) {
-			logger.info("기구 상세조회 ");
-			List<Map<String,Object>> eqDtlList = null;
-			Map<String,Object> pMap = null;
-			pMap.put("se_code", Integer.parseInt(req.getParameter("se_code")));
-			eqDtlList = bothLogic.eqDTL(pMap);
-			
-			
-			mav.pageMove("forward");
-			//mav.setViewName("모달창부분");
+		else if("eqUPD".equals(crud)) {
+			logger.info("기구관리수정");
+			int result =0;
+			Map<String,Object> pMap = new HashMap<>();
+			HashMapBinder hmb = new HashMapBinder(req);
+			hmb.bindPost(pMap);
+			result = bothLogic.eqUPD(pMap);
+			logger.info(result);
+			//mav.setViewName("/both/cccc");
+			mav.pageMove("redirect");
+			mav.setViewName("/both/eqSEL.fm");
+		}
+		else if("eqDEL".equals(crud)) {
+			logger.info("기구관리 삭제 ");
+			int result = 0;
+			Map<String,Object> pMap = new HashMap<>();
+			HashMapBinder hmb = new HashMapBinder(req);
+			hmb.bindPost(pMap);
+			result = bothLogic.eqDEL(pMap);
+			mav.pageMove("redirect");
+			mav.setViewName("/both/eqSEL.fm");
 		}
 		
 		

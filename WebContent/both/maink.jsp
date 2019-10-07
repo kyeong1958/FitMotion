@@ -11,6 +11,7 @@
 <script type="text/javascript">
 
 	function ajax(url){
+				var formData = $("#eqIns").serialize();
 		
 		//alert("ajax==> "+url);
 		$.ajax({
@@ -18,6 +19,14 @@
 		   ,url:url
 		   ,success:function(data){
 			   $("#changedisplay").html(data);
+			   $.ajax({
+				  method:"POST"
+				  ,data:formData
+				  ,url:"/both/eqSEL.fm"
+				  ,success:function(data){
+					  $("#eqbox").html(data);
+				  }
+			   });
 		   }
 		});
 	}
@@ -58,8 +67,6 @@
 		</div>
 <!-- /////////////////////////////// [[화면전환 끝]] ////////////////////////////////////////////////////// -->
 </div>
-
-         
 
       <div class="col-sm-2">&nbsp;</div>
 		

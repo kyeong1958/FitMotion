@@ -1,9 +1,28 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%
+		
 
+
+%>
 <script  type="text/javascript">
 		function eqUpd(){
+			var formData = $("#f_eqDtl").serialize();
 			alert("수정완료버튼");
+			location.href="/both/eqUPD.fm";
+			/*
+			$.ajax({
+				method:"POST"
+				,data:formData
+				,url:"/both/eqUPD.fm"
+				,success:function(data){
+					//$('#myModal').modal("hide"); 
+				    //$("#myModal").modal({backdrop: false});
+					$("#eqbox").html(data);
+					
+				}
+			});
+		*/
 		}
 
 </script>
@@ -64,17 +83,18 @@
 			        
 			        <!-- Modal body -->
 			        <div class="modal-body">
-			        	<div class="form-group">
+			        	<form class="form-group" id="f_eqDtl">
+			        		<input type="hidden" id="mse_code" name="se_code" >
 									<div>
 										<label>기구명 
-										<input type="text">
+										<input type="text" id="mse_name" name="se_name" value="">
 										</label>
 									</div>
 									
 									<div>
 								        <label>작동여부</label>
 								        	<span class="operation">
-												<select class="valid" aria-invalid="false" id="se_operating_mode" name="se_operating_mode" onchange="mode_Select()">
+												<select class="valid" aria-invalid="false" id="mse_operating_mode" name="se_operating_mode" onchange="mode_Select()">
 													<option value="operate" selected>작동</option>
 													<option value="broken">고장</option>
 												</select>
@@ -83,27 +103,27 @@
 								   	 
 								    <div>
 								       	 <label>가격
-								       		 <input type="text">
+								       		 <input type="text" id="mse_buy_price" name="se_buy_price" value="" >
 								   		 </label>
 								    </div>
 								    <div>
 								     	<label>수리횟수
-								        	<input type="text">
+								        	<input type="text"  id="mse_repair_count" name="se_repair_count" value="">
 								     	</label>
 								    <div>
 								        <label>고장내역
-								        	<input type="text">
+								        	<input type="text"  id="mse_repair_detail" name="se_repair_detail" value="">
 								        </lable>
 								    </div>
 								    
 								    <div>
 								        <label>구매일
-								        	<input type="text">
+								        	<input type="text" id="mse_buy_date" name="se_buy_date" value="">
 								        </label>
 									</div>
 								    
 								    
-						</div>
+						</form>
 			        </div>
 			        <!-- Modal footer -->
 			        <div class="modal-footer">

@@ -34,12 +34,20 @@ public class BothLogic {
 		return eqSelList;
 	}
 
-	public List<Map<String, Object>> eqDTL(Map<String, Object> pMap) {
-		logger.info("기구관리 상세조회 Loigc 호출성공");
-		 List<Map<String, Object>> eqDtlList = null;
-		 eqDtlList = bothDao.eqDTL(pMap);
-		 
-		return eqDtlList;
+
+
+	public int eqUPD(Map<String, Object> pMap) {
+		logger.info("기구관리 업데이트 Logic호출성공");
+		int result = 0;
+		result = bothDao.eqUPD(pMap);
+		return result;
+	}
+
+	public int eqDEL(Map<String, Object> pMap) {
+		logger.info("eqDEL Logic 호출성공");
+		int result = 0;
+		result = bothDao.eqDEL(pMap);
+		return result;
 	}
 
 	

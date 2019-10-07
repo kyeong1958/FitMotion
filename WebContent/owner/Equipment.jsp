@@ -40,7 +40,45 @@
 				}); 
 			}		
 		
-				
+		
+		$(document).ready(function(){
+		    //최상단 체크박스 클릭
+		    $("#checkall").click(function(){
+		    	alert("체크박스눌림");
+		        //클릭되었으면
+		         if($("#checkall").prop("checked")){
+		            //input태그의 name이 chk인 태그들을 찾아서 checked옵션을 true로 정의
+		            $("input[name=check]").prop("checked",true);
+		            alert("전체가 다눌린다");
+		            //클릭이 안되있으면
+		        }else{
+		            //input태그의 name이 chk인 태그들을 찾아서 checked옵션을 false로 정의
+		            $("input[name=check]").prop("checked",false);
+		        } 
+		    })
+		});
+		
+		
+		function eqDel(){
+			alert("삭제버튼눌림");
+			var se_code = null;
+	/* 		if(function eqCh(se_code) ) */
+			se_code = $("#checkbox_id").val();
+				var formData = $("#eqIns").serialize();
+				alert("등록버튼 눌림?");
+				 $.ajax({
+					method:"POST"
+					,data:formData
+					,url:"/both/eqDEL.fm?se_code="+se_code
+					,success:function(data){
+						$("#eqbox").html(data);
+					}
+				}); 
+	
+		}
+
+
+	
 </script>
 
 <!--============================ [[ script ]] ==============================================  -->
@@ -63,7 +101,7 @@
 <!-- //////////////////////////////////////////////////////////////////////////////// -->
 			<div class="row" id="management">
 		<form id="eqIns" method="post">
-			<input type="hidden"  value="10" id="se_code" name="se_code">
+			<input type="hidden"  value="11" id="se_code" name="se_code">
 			<input type="hidden"  value="12" id="gym_code" name="gym_code" >
 					<div class="col-sm-2 col-lg-2">
 						<div class="title_insert">
@@ -129,11 +167,12 @@
 <!-- /////////////////////////////// [[등록박스 끝]] ////////////////////////////////////////////////////// -->
 			<div class="row checknbtn" style="margin-bottom:20px">
 				<div class="col-sm-3 col-lg-3 allcheck">
-					<input type="checkbox"/><span>&nbsp;전체선택</span>
+					<input type="checkbox" id="checkall"/><span>&nbsp;전체선택</span>
 				</div>
 				<div class="col-sm-6 col-lg-6">&nbsp;</div>
 				<div class="col-sm-3 col-lg-3">
 					<div  class="btn3" style="text-align: -webkit-right">
+						<button onclick="eqDel()">삭제</button>
 						<button>정렬</button>
 						<button>번호</button>
 						<button>등록일</button>
