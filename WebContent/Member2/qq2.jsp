@@ -27,7 +27,8 @@
 </script>
 <div class="pdiv">
 	<div class="cdiv">
-		<div id="cdiv1"><a href="javascript:a(1)">aaa</a></div>
+		<div id="cdiv1">
+			<a href="javascript:a(1)">aaa</a></div>
 	 </div>
 </div>
 <input type="button" value="추가" onClick="add()">
