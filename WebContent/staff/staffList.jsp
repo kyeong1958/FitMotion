@@ -159,4 +159,4 @@ body{
 <!-- ================================= [[ 화면전환 ]] =================================================== -->
 </div>
 
-<%@ include file="/finalView/staffListModal.jsp"%>
+<%@ include file="/staff/staffListModal.jsp"%>

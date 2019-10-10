@@ -10,7 +10,7 @@ body{
 	padding:0;
 }
 </style>
-<%@ include file="/finalView/SearchMember.jsp"%>
+<%@ include file="/account/SearchMember.jsp"%>
 <script type="text/javascript">
 	//데이트박스 
 	//datebox 날짜형식 YYYY-MM-DD로 설정

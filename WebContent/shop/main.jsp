@@ -48,7 +48,7 @@ body{
       </div>
    </div>
       <div class="col-lg-1" id="sidebar">
-         <div class="row sidemenutitle" onClick="menu('')">스케줄</div>
+         <div class="row sidemenutitle" onClick="menu(''),pagemove('../schedule/scheduleweekly.jsp')">스케줄</div>
          <div class="row sidemenutitle" onClick="menu(''),pagemove('../account/profit.jsp')">매출등록</div>
          <div class="row sidemenutitle" onClick="menu(''),pagemove('../account/spending.jsp')">지출등록</div>
          <div class="row sidemenutitle" onClick="menu(''),pagemove('../member/memberList.jsp')">회원목록</div>

@@ -10,10 +10,12 @@ import org.apache.log4j.Logger;
 
 import com.gate.Controller;
 import com.gate.ModelAndView;
+import com.google.gson.Gson;
 
 public class AccountController implements Controller {
 	Logger logger = Logger.getLogger(AccountController.class);
 	String crud = null;
+	Gson gson = null;
 	AccountLogic accountLogic = null;
 	public AccountController(String crud) {
 		this.crud = crud;
@@ -21,7 +23,7 @@ public class AccountController implements Controller {
 	}
 	
 	@Override
-	public ModelAndView execute() throws Exception {
+	public ModelAndView execute(HttpServletRequest req, HttpServletResponse res) throws Exception {
 		ModelAndView mav = new ModelAndView();
 		if("example".equals(crud)) {
 			logger.info("OwnerController 입장함");
@@ -39,8 +41,9 @@ public class AccountController implements Controller {
 	}
 
 	@Override
-	public String jsonexecute() throws Exception {
-		return null;
+	public String jsonexecute(HttpServletRequest req, HttpServletResponse res) throws Exception {
+		String json = null;
+		return json;
 	}
 
 

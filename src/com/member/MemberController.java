@@ -2,6 +2,10 @@ package com.member;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.apache.log4j.Logger;
 
@@ -21,7 +25,7 @@ public class MemberController implements Controller {
 	}
 
 	@Override
-	public ModelAndView execute() throws Exception {
+	public ModelAndView execute(HttpServletRequest req, HttpServletResponse res) throws Exception {
 		ModelAndView mav = new ModelAndView();
 		if("example".equals(crud)) {
 			logger.info("OwnerController 입장함");
@@ -35,11 +39,24 @@ public class MemberController implements Controller {
 			mav.setViewName("/owner/example");
 			mav.addObject("제발", "잘됨??");
 		}
+	/////////////////////////////// [[ 경애  ]] /////////////////////////////////////
+		//예약관리의 회원검색모달창
+		else if("memInfoList".equals(crud)) {
+			logger.info("memberSearch 호출성공");
+			String mem_name = req.getParameter("mem_name");
+			logger.info(mem_name);
+			List<Map<String,Object>> memInfoList = null;
+			memInfoList = memberLogic.memInfoList(mem_name);
+			mav.pageMove("forward");
+			mav.setViewName("/schedule/memberSearchTable.jsp");
+			mav.addObject("memInfoList", memInfoList);
+		}
+	/////////////////////////////// [[ 경애  ]] /////////////////////////////////////
 		return mav;
 	}
 
 	@Override
-	public String jsonexecute() throws Exception {
+	public String jsonexecute(HttpServletRequest req, HttpServletResponse res) throws Exception {
 		String json = null;
 		
 		return json;
