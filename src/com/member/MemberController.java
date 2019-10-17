@@ -51,6 +51,17 @@ public class MemberController implements Controller {
 			mav.setViewName("/schedule/memberSearchTable.jsp");
 			mav.addObject("memInfoList", memInfoList);
 		}
+		//락커관리의 락커배정모달창
+		else if("lockmemSearch".equals(crud)) {
+			logger.info("lockmemSearch 호출성공");
+			String mem_name = req.getParameter("mem_name");
+			logger.info(mem_name);
+			List<Map<String,Object>> memInfoList = null;
+			memInfoList = memberLogic.memInfoList(mem_name);
+			mav.pageMove("forward");
+			mav.setViewName("/shop/lockMemSearchTable.jsp");
+			mav.addObject("memInfoList", memInfoList);
+		}
 	/////////////////////////////// [[ 경애  ]] /////////////////////////////////////
 		return mav;
 	}

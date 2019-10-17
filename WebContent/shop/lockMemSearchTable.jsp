@@ -10,18 +10,11 @@
 	}
 %>
 <script type="text/javascript">
-	function memInfoDetail(mem_name,mem_num){
-		alert("memDeatil"+mem_name+"memnum"+mem_num);	
-		$("#search_member").modal("hide");
-		$("#sm_memname").val(mem_name);
-		$("#sm_mem_num").val(mem_num);
-		$.ajax({
-			method:'get'
-			,url:'/schedule/scheduleModal.fm?sm_memname='+mem_name
-			,success:function(data){
-				$("#sm_combobox").html(data);
-			}
-		});
+	function memInfoDetail(mem_num,mem_name,mem_hp){
+		alert("memDeatil"+mem_name+"memnum"+mem_hp);	
+		$("#lm_memnum").val(mem_num);
+		$("#lm_memname").val(mem_name);
+		$("#lm_memhp").val(mem_hp);
 	}
 </script>
 	<table id="tb_membersearch" class="table table-bordered  table-striped" style="text-align:center">
@@ -33,7 +26,7 @@
 <% for(int i=0;i<size;i++){ 
 		Map<String, Object> memInfoMap = memInfoList.get(i);
 %>
-		<tr onClick="memInfoDetail('<%= memInfoMap.get("MEM_NAME")%>' , '<%=memInfoMap.get("MEM_NUM") %>')">
+		<tr onClick="memInfoDetail('<%= memInfoMap.get("MEM_NUM")%>','<%= memInfoMap.get("MEM_NAME")%>' , '<%=memInfoMap.get("MEM_HP") %>')">
 			<td><%= memInfoMap.get("MEM_NAME") %></td>
 			<td><%= memInfoMap.get("MEM_BIRTH") %></td>
 			<td><%= memInfoMap.get("MEM_HP") %></td>

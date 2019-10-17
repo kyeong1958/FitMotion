@@ -42,11 +42,12 @@ public class ActionServlet extends HttpServlet {
 				if("forward".equals(pageMove)) {
 					req.setAttribute(name, obj);
 					RequestDispatcher view = req.getRequestDispatcher(viewName);
+					logger.info("action view");
 					view.forward(req, res);
+					logger.info("action forward");
 				}else if("redirect".equals(pageMove)) {
 					res.sendRedirect(viewName);
 				}
-				
 			}else if(json != null) {
 				logger.info("json");
 				req.setAttribute("json", json);

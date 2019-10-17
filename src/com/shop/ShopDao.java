@@ -1,5 +1,8 @@
 package com.shop;
 
+import java.util.List;
+import java.util.Map;
+
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.log4j.Logger;
@@ -14,4 +17,100 @@ public class ShopDao {
 	public ShopDao() {
 		sqlSessionFactory = MyBatisCommonFactory.getSqlSessionFactory();
 	}
+//////////////////////////////////[[ 경애시작 ]] /////////////////////////////////////////////	
+	public List<Map<String, Object>> lockerList() {
+		List<Map<String, Object>> lockerList = null;
+		try {
+			sqlSession = sqlSessionFactory.openSession();
+			lockerList = sqlSession.selectList("lockerList");
+			logger.info(lockerList);
+			logger.info(lockerList.size());
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if(sqlSession != null) {
+				sqlSession.close();
+			}
+		}
+		return lockerList;
+	}
+	public int lockUPD(Map<String, Object> pMap) {
+		int result = 0;
+		try {
+			sqlSession = sqlSessionFactory.openSession();
+			logger.info(pMap);
+			result = sqlSession.update("lockUPD",pMap);
+			logger.info(result);
+			if(result == 1) {
+				sqlSession.commit();
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if(sqlSession != null) {
+				sqlSession.close();
+			}
+		}
+		return result;
+	}
+	public int lockStatusUPD(Map<String, Object> pMap) {
+		int result = 0;
+		try {
+			sqlSession = sqlSessionFactory.openSession();
+			logger.info(pMap);
+			result = sqlSession.update("lockStatusUPD",pMap);
+			logger.info(result);
+			if(result == 1) {
+				sqlSession.commit();
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if(sqlSession != null) {
+				sqlSession.close();
+			}
+		}
+		return result;
+	}
+	public int lockINS(Map<String, Object> pMap) {
+		int result = 0;
+		try {
+			sqlSession = sqlSessionFactory.openSession();
+			logger.info(pMap);
+			result = sqlSession.update("lockINS",pMap);
+			logger.info(result);
+			if(result == 1) {
+				sqlSession.commit();
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if(sqlSession != null) {
+				sqlSession.close();
+			}
+		}
+		return result;
+	}
+	public int lockChange(String lockNum) {
+		int result = 0;
+		try {
+			sqlSession = sqlSessionFactory.openSession();
+			logger.info(lockNum);
+			result = sqlSession.update("lockChange",lockNum);
+			logger.info(result);
+			if(result == 1) {
+				sqlSession.commit();
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if(sqlSession != null) {
+				sqlSession.close();
+			}
+		}
+		return result;
+	}
+	
+	
+//////////////////////////////////[[ 경애끝 ]] /////////////////////////////////////////////	
 }

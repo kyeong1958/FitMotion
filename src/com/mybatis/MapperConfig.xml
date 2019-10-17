@@ -2,7 +2,7 @@
 <!DOCTYPE configuration     PUBLIC "-//mybatis.org//DTD Config 3.0//EN"     "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
    <environments default="development">
-      <environment id="development">
+   	 <environment id="development">
          <transactionManager type="JDBC" />
          <dataSource type="POOLED">
             <property name="driver" value="oracle.jdbc.driver.OracleDriver" />
@@ -10,8 +10,8 @@
             <property name="username" value="FM" />
             <property name="password" value="fitmotion" />
          </dataSource>
-      </environment> 
-<!--       <environment id="development"> -->
+      </environment>
+ 
 <!--
    트랜잭션 Manager에서 모드 설정을 어떻게 가져가는가에 따라 결과에 영향이 있으므로 옵션 별 차이를 확인해 둘 것.
    트랜잭션 대상이 되는 DML문은 세가지 이다.(insert, delete, update)
@@ -24,12 +24,13 @@
    여러 업무 중 한 개라도 SQLException을 일으키는 경우는 롤백 처리해야 함.
 -->
           <!-- <transactionManager type="MANAGED" /> --> 
-  <!--        <transactionManager type="JDBC" />트렌잭션처리 할 때 개발자가 직접관리
-         <dataSource type="JNDI">
-            <property name="data_source" value="java:comp/env/jdbc/dbPool" />
-         </dataSource>
-      </environment> -->
-   </environments>
+	 	<!-- <environment id="development">
+  			<transactionManager type="JDBC" />트렌잭션처리 할 때 개발자가 직접관리
+      		<dataSource type="JNDI">
+         		<property name="data_source" value="java:comp/env/jdbc/dbPool" />
+      		</dataSource>
+   		</environment>  -->
+	</environments>
    <mappers>
       <mapper resource="com/mybatis/mapper/account.xml" />
       <mapper resource="com/mybatis/mapper/member.xml" />

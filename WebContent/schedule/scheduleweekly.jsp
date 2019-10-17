@@ -1,7 +1,7 @@
 <%@page import="java.text.DecimalFormat"%>
 <%@page import="java.util.Calendar"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" %>
+    pageEncoding="UTF-8" trimDirectiveWhitespaces="true"%>
 <!-- ============================ [[ 스케줄러 ]] ======================================== -->
 <!-- ============================ [[ 주간달력날짜추출 ]] ======================================== -->
 
@@ -69,26 +69,56 @@
 		$(".member").hide();
 		$(".analysis").hide();
 		$(".service").hide();
-		
-		
-	});
-</script>
-
-<script type="text/javascript">
-	function scheduleModal(){
 		/* scheduleModal combobox */
 		$.ajax({
 			method:'get'
 			,url:'/schedule/scheduleModal.fm'
 			,success:function(data){
-				alert("여기");
+				$("#sm_combobox").html(data);
 			}
+		}); 
+		$.ajax({
+			url:"/schedule/scheduleList.fm"
+		   ,success:function(data){
+			   $("#schedule_week").html(data);
+		   }
+			
 		});
+/* DateBox */		
+		//선택가능날짜 범위 설정
+      /*   $('#datebox1').datebox().datebox('calendar').calendar({
+            validator: function(date){
+                var now = new Date();
+                var d1 = new Date(now.getFullYear()-1, now.getMonth(), now.getDate());
+                var d2 = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+                return d1<=date && date<=d2;
+            }
+        }); */
+      //datebox1 날짜 선택에 따라 datebox2의 선택가능날짜 설정
+    /*     $('#datebox1').datebox({
+           onSelect: function(date){
+              firstDate = date;
+              $('#datebox2').datebox().datebox('calendar').calendar({
+                    validator: function(date){
+                        var now = new Date();
+                        var d1 = new Date(firstDate.getFullYear(), firstDate.getMonth(), firstDate.getDate());
+                        var d2 = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+                        return d1<=date && date<=d2;
+                    }
+                });
+           }
+        });	 */
+/* DateBox */		
+	});
+</script>
+
+<script type="text/javascript">
+	function scheduleModal(){
 		$("#scheduleModal").modal();
 	}
+/* 회원검색모달창 */
 	 function memberSearch(){
 			var d_memname = $("#d_memname").val();
-			alert(d_memname);
 			$.ajax({
 				url:"/member/memInfoList.fm?mem_name="+d_memname
 			   ,success:function(data){
@@ -97,7 +127,55 @@
 				
 			});
    } 
-
+/* 회원검색모달창 */
+/* 데이트 박스 */
+	//datebox 날짜형식 YYYY-MM-DD로 설정
+	 $.fn.datebox.defaults.formatter = function(date){
+	     var y = date.getFullYear();
+	     var m = date.getMonth()+1;
+	     var d = date.getDate();
+	     return y+'/'+(m<10 ? "0"+m:m)+'/'+(d<10 ? "0"+d:d);
+	 }  
+	 //datebox parser설정
+	 $.fn.datebox.defaults.parser = function(s){
+	     var t = Date.parse(s);
+	     if (!isNaN(t)){
+	        return new Date(t);
+	     } else {
+	        return new Date();
+	     }
+	 }
+	 //datebox 한글화
+	 $.fn.datebox.defaults.currentText = '오늘'
+	 $.fn.datebox.defaults.closeText = '닫기'
+	 $.fn.calendar.defaults.weeks = ['일','월','화','수','목','금','토']
+	 $.fn.calendar.defaults.months = ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월']
+/* 데이트 박스 */
+/* 수업 예약모달창 */
+	function smreservation(){
+		 var formData = $("#f_sm").serialize();
+		 alert("form전성");
+	/* 	 $("#f_sm").attr('get');
+		 $("#f_sm").attr('action','/schedule/scheduleReservation.fm');
+		 $("#f_sm").submit(); */
+		 $.ajax({
+			 method:'get'
+			 ,url:'/schedule/scheduleReservation.fm'
+			 ,data:formData
+			 ,success:function(data){
+				 alert("성공");
+				 alert("|"+data+"|");
+				 if(data == '예약불가'){
+					alert('예약된 수업이 존재합니다.');	 
+				 }else{
+					 $("#scheduleModal").modal({backdrop: false});
+					 $("#scheduleModal").modal('hide');
+					 $("#schedule_week").html(data);
+			 	 }
+			 }
+		 });
+	 }
+/* 수업 예약모달창 */
 </script>
 <div>
 	<!-- ============================ [[ 화면전환 ]] ======================================== -->
@@ -109,19 +187,19 @@
 		</div>
 	<!-- ============================ [[ 홈 ]] ======================================== -->
 		<div class="calendar-header">
-			<span style="margin-right: 16%;">
+			<span style="margin-right: 31%;">
 				<span id="kyear"><font size="5px" color="#454544"><%=icyear%></font></span>
 		        <span><font size="5px" color="#454544">.</font></span>
 		        <span id="kmonth"><font size="5px" color="#454544"><%=icmonth+1%></font></span>
 			</span>
 			<span><input class="easyui-datebox"/></span>
-			<select class="schedule-combobox" style="text-align-last: center;width:9%">
+		<!-- 	<select class="schedule-combobox" style="text-align-last: center;width:9%">
 				<option>개인레슨 1룸</option>
 				<option>개인레슨 2룸</option>
 				<option>그룹레슨 룸</option>
 				<option>스피닝</option>
 				<option>GX</option>
-			</select>
+			</select> -->
 			<select class="schedule-combobox" style="text-align-last: center;width:9%">
 				<option>강사명</option>
 				<option>이경애</option>
@@ -131,6 +209,7 @@
 			</select>
 		</div>
 	<!-- ============================ [[ 캘린더 테이블 ]] ======================================== -->
+<div id="schedule_week">
 <div style="padding:0px 30px">
 <%
 	
@@ -179,9 +258,8 @@
 		}///////////end of if[이번달 정보만 출력하기]
 	}
 %>
-
+</div>
 <!-- ============================ [[ 화면전환 ]] ======================================== -->
-
 <!--================================ [[ 수업등록 모달 ]] ====================================== -->
   <!-- The Modal -->
   <div class="modal fade" id="scheduleModal">
@@ -190,101 +268,99 @@
       
         <!-- Modal Header -->
         <div class="modal-header">
-          <span class="modal-title">수업 등록하기</span>
+          <span class="modal-title">수업 예약</span>
           <button type="button" class="close" data-dismiss="modal">&times;</button>
         </div>
         
         <!-- Modal body -->
+       <form id="f_sm">
         <div class="modal-body" style="padding-left: 5%;">
 			<div style="padding:0 0 5px">
 				<label class="spend-box-right-column">회원명</label>
 				<span>
-					<input type="text" class="spending-text" id="sm_memname" style="width:260px;">
+					<input type='hidden' name='sm_mem_num' id="sm_mem_num" />
+					<input type="text" class="spending-text" id="sm_memname" name="sm_memname" style="width:260px;">
 				</span>
 				<span>
 					<button type="button" class="btn-schedule-memsearch" data-toggle="modal" data-target="#search_member">회원검색</button>
 				</span>
 			</div>
-			<div style="padding:0 0 5px">
-				<label class="spend-box-right-column">강사명</label>
-				<span>
-					<select class="spend-combobox" style="width: 170px;text-align-last:center">
-						<option value="">이경애</option>
-						<option value="">이경애</option>
-						<option value="">이경애</option>
-						<option value="">이경애</option>
-					</select>
-				</span>
-			</div>
-			<div style="padding:0 0 5px">
-				<label class="spend-box-right-column">수업장소</label>
-				<span>
-					<select class="spend-combobox" style="width: 170px;text-align-last:center">
-						<option value="">그룹PT1룸</option>
-						<option value="">그룹PT2룸</option>
-						<option value="">개인PT1룸</option>
-						<option value="">개인PT2룸</option>
-						<option value="">요가</option>
-						<option value="">스피닝</option>
-					</select>
-				</span>
+			<div id="sm_combobox">
+				<!-- <div style="padding:0 0 5px">
+					<label class="spend-box-right-column">이용권</label>
+					<span>
+						<select class="spend-combobox" name="sm_staff_name" style="width: 170px;text-align-last:center">
+						</select>
+					</span>
+				</div>
+				<div style="padding:0 0 5px">
+					<label class="spend-box-right-column">강사명</label>
+					<span>
+						<select class="spend-combobox" name="sm_staff_name" style="width: 170px;text-align-last:center">
+						</select>
+					</span>
+				</div>
+				<div style="padding:0 0 5px">
+					<label class="spend-box-right-column" >수업장소</label>
+					<span>
+						<select class="spend-combobox" name="sm_ep_name" style="width: 170px;text-align-last:center">
+						</select>
+					</span>
+				</div> -->
 			</div>
 		<div style="padding:0 0 5px">
 			<label class="spend-box-right-column">수업일자</label>
 			<span>
-				<span class="easyui-datebox" id="datebox1"></span>
-			</span>
-			<span>~</span>
-			<span>
-				<span class="easyui-datebox" id="datebox2"></span>
+				<span class="easyui-datebox" name="appli_date" id="datebox1"></span>
 			</span>
 		</div>
 		<div style="padding:0 0 5px">
 				<label class="spend-box-right-column">수업시간</label>
 				<span>
-					<select class="spend-combobox schedule-combobox-time">
+					<select name="appli_start_hour" class="spend-combobox schedule-combobox-time">
 <%	for(int i=8;i<23;i++){	%>
-						<option value="<%=i%>"><%=df.format(i) %></option>
+						<option value="<%=df.format(i) %>"><%=df.format(i) %></option>
 <%	}	%>
 					</select>
 				</span>
 			
 				<span>
-					<select class="spend-combobox schedule-combobox-time">
+					<select name="appli_start_min" class="spend-combobox schedule-combobox-time">
 <%	for(int i=0;i<60;i+=5){	%>
-						<option value="<%=i%>"><%=df.format(i) %></option>
+						<option value="<%=df.format(i) %>"><%=df.format(i) %></option>
 <%	}	%>
 					</select>
 				</span>
 				<span>&nbsp;&nbsp;~&nbsp;&nbsp;</span>
 				<span>
-					<select class="spend-combobox schedule-combobox-time">
+					<select name="appli_end_hour" class="spend-combobox schedule-combobox-time">
 <%	for(int i=8;i<23;i++){	%>
-						<option value="<%=i%>"><%=df.format(i) %></option>
+						<option value="<%=df.format(i) %>"><%=df.format(i) %></option>
 <%	}	%>
 					</select>
 				</span>
 			
 				<span>
-					<select class="spend-combobox schedule-combobox-time">
+					<select name="appli_end_min" class="spend-combobox schedule-combobox-time">
 <%	for(int i=0;i<60;i+=5){	%>
-						<option value="<%=i%>"><%=df.format(i) %></option>
+						<option value="<%=df.format(i) %>"><%=df.format(i) %></option>
 <%	}	%>
 					</select>
 				</span>
 			</div>
 	<!-- BODY -->
         </div>
-        
+        </form>
         <!-- Modal footer -->
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-secondary" onClick="smreservation()">등록</button>
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
         </div>
-        
       </div>
     </div>
   </div>
 <!--================================ [[ 수업등록 모달 ]] ====================================== -->  
+
 
 <!--================================ [[ 회원검색 모달 ]] ====================================== -->
 
@@ -321,7 +397,6 @@
 			</div>
 <!-- BODY -->
         </div>
-        
 <!-- Modal footer -->
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

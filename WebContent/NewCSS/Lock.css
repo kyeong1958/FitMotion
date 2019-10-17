@@ -127,11 +127,11 @@
 	background-color: #8AC97B;
 
 }
-
-#lock_select #lockerStatusP p.before_expiration:before{
+#lock_select #lockerStatusP p.approachingExpire:before{
 	background-color: #E0DC9A;
-}
 
+}
+ 
 #lock_select #lockerStatusP p.expiration:before{
 	background-color: #F1656A;
 

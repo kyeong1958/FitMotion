@@ -3,9 +3,9 @@
 <mapper namespace="com.mybatis.mapper.MemberMapper">
 
 	<select id="memInfoList" parameterType="java.lang.String" resultType="map">
-		SELECT mem_name, mem_birth, mem_hp
+		SELECT mem_name, mem_birth, mem_hp, mem_num
 		  FROM member
-		 WHERE mem_name = #{mem_name}
+		 WHERE mem_name  Like '%'||#{mem_name}||'%'
 	</select>
 </mapper> 
  

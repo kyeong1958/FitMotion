@@ -6,11 +6,38 @@
 	</select>
 <!-- ======================================= [[ 경애  ]] ====================================== -->
 <!-- 예약관리에서 콤보박스에 해당하는 값 가져오기 -->
-	<resultMap id="sm_map" type="hashmap"/>
+	<resultMap id="staff_map" type="map"/>
+	<resultMap id="place_map" type="map"/>
+	<resultMap id="ticket_map" type="map"/>
 	<select id="scheduleModal" parameterType="map" statementType="CALLABLE">
-		{call proc_schedulemodal(#{staffList, mode=OUT, jdbcType=CURSOR, javaType=java.sql.ResultSet, resultMap=sm_map}
-				       , #{places, mode=OUT, jdbcType=CURSOR, javaType=java.sql.ResultSet, resultMap=sm_map}
+		{call proc_schedulemodal(
+						 #{mem_name, mode=IN, jdbcType=VARCHAR, javaType=java.lang.String}
+				       , #{staffList, mode=OUT, jdbcType=CURSOR, javaType=java.sql.ResultSet, resultMap=staff_map}
+				       , #{placeList, mode=OUT, jdbcType=CURSOR, javaType=java.sql.ResultSet, resultMap=place_map}
+					   , #{ticketList, mode=OUT, jdbcType=CURSOR, javaType=java.sql.ResultSet, resultMap=ticket_map}
+				      
 		)}
+	</select>
+	<select id="reservationINS" parameterType="map" statementType="CALLABLE">
+<!-- 수업 예약했을 시 insert -->
+		{call proc_class_applicationINS(
+						 #{sm_staffid, mode=IN, jdbcType=VARCHAR, javaType=java.lang.String}
+						 ,#{appli_start_time, mode=IN, jdbcType=VARCHAR, javaType=java.lang.String}
+						 ,#{appli_end_time, mode=IN, jdbcType=VARCHAR, javaType=java.lang.String}
+						 ,#{sm_mem_num, mode=IN, jdbcType=VARCHAR, javaType=java.lang.String}
+						 ,#{ep_name, mode=IN, jdbcType=VARCHAR, javaType=java.lang.String}
+						 ,#{appli_date, mode=IN, jdbcType=VARCHAR, javaType=java.lang.String}
+					   , #{result, mode=OUT, jdbcType=VARCHAR, javaType=java.lang.String}
+				      
+		)}
+	</select>
+<!-- 스케줄내역 -->
+	<select id="scheduleList" resultType="map">
+		SELECT appli_start_time, appli_end_time, appli_date, pro_place, att_num, mem_name, staff_name
+		  FROM class_application, staff, member
+		 WHERE class_application.mem_num = member.mem_num
+		   AND class_application.staff_id = staff.staff_id
+		   
 	</select>
 <!-- ======================================= [[ 경애  ]] ====================================== -->
 	
