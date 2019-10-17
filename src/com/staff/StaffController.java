@@ -23,4 +23,10 @@ public class StaffController implements Controller {
 	public String jsonexecute() throws Exception {
 		return null;
 	}
+
+	@Override
+	public ModelAndView execute(HttpServletRequest req, HttpServletResponse res) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

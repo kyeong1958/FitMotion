@@ -19,7 +19,6 @@ public class AccountController implements Controller {
 		this.crud = crud;
 		accountLogic = new AccountLogic();
 	}
-	
 	@Override
 	public ModelAndView execute() throws Exception {
 		ModelAndView mav = new ModelAndView();
@@ -40,6 +39,11 @@ public class AccountController implements Controller {
 
 	@Override
 	public String jsonexecute() throws Exception {
+		return null;
+	}
+	@Override
+	public ModelAndView execute(HttpServletRequest req, HttpServletResponse res) throws Exception {
+		// TODO Auto-generated method stub
 		return null;
 	}
 

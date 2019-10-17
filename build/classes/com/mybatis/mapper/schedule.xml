@@ -1,7 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<mapper namespace="com.mybatis.mapper.ScheduleMapper">
-	<select id="test4">
-		SELECT 1 FROM dual
+<!DOCTYPE mapper     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mybatis.mapper.schedule">
+<!-- ======================= [[광현시작]] ============================== -->
+	<select id="Schselect"  resultType="map" parameterType="map">
+		SELECT ca.appli_date,ca.appli_start_time, mem.mem_name,mem.mem_hp, s.staff_name, p.pro_name,t.ticket_name, a.att_check
+		  FROM CLASS_APPLICATION ca,MEMBER mem,STAFF s,PROGRAM p,TICKET t, TIC_PURCHASE tp ,ATTENDANCE a   
+		 WHERE ca.staff_id = s.staff_id
+		   AND ca.mem_num = mem.mem_num
+		   AND ca.att_num = a.att_num
+		   AND mem.mem_num = tp.mem_num
+		   AND p.staff_id = s.staff_id
+		   AND tp.ticket_num = T.TICKET_NUM
+		   AND t.ticket_num = p.ticket_num
+		   ORDER BY ca.appli_date,ca.appli_start_time
 	</select>
+<!-- ======================= [[광현끝]] ============================== -->
 </mapper> 
  

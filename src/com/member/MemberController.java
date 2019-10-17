@@ -3,6 +3,9 @@ package com.member;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.apache.log4j.Logger;
 
 import com.gate.Controller;
@@ -43,6 +46,12 @@ public class MemberController implements Controller {
 		String json = null;
 		
 		return json;
+	}
+
+	@Override
+	public ModelAndView execute(HttpServletRequest req, HttpServletResponse res) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

@@ -43,5 +43,11 @@ public class ShopController implements Controller {
 		return null;
 	}
 
+	@Override
+	public ModelAndView execute(HttpServletRequest req, HttpServletResponse res) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 
 }

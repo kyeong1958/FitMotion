@@ -6,4 +6,5 @@ import javax.servlet.http.HttpServletResponse;
 public interface Controller {
 	public ModelAndView execute() throws Exception;
 	public String jsonexecute() throws Exception;
+	ModelAndView execute(HttpServletRequest req, HttpServletResponse res) throws Exception;
 }
