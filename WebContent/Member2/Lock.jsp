@@ -5,8 +5,8 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-    <%@ include file="/Member2/LockModal.jsp" %>
-<%@ include file="/Member/Lockcss.jsp"%>
+<%--     <%@ include file="/Member2/LockModal.jsp" %>
+<%@ include file="/Member/Lockcss.jsp"%> --%>
 <%@ include file="/common/JEasyUICommon.jsp"%>
 <link rel="stylesheet" type="text/css" href="../NewCSS/main.css">
 <style type="text/css">

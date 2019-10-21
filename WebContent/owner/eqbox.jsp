@@ -107,7 +107,7 @@
 									</tr>
 
 						
-	
+		
 									<tr>
 										<td class="meminfo-table-body"><%=rMap.get("SE_NAME") %></td>
 										<td class="meminfo-table-body"> <%=rMap.get("SE_OPERATING_MODE") %> </td>

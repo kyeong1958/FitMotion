@@ -1,5 +1,5 @@
 
-<styl
+<style>
 @charset "UTF-8";
 .bar_area {
     padding: 10px 66px;

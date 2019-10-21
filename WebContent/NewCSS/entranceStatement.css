@@ -1,0 +1,141 @@
+@charset "UTF-8";
+.bar_area {
+    padding: 10px 66px;
+    height: 54px;
+    background-color: #FFF;
+    box-shadow: 1px 1px 4px #BABBC2;
+    position: relative;
+    z-index: 1;
+}
+.bar_menu{
+    display: inline-block;
+    font-size: 16px;
+    color: #9fa0aa;
+    line-height: 32px;
+}
+/* .top_bar{
+	color:#6e7794;
+	font:13px;
+	background:#f0f0f2;
+	margin:0px 0px 20px;
+	padding:19px;
+	border:1px solid #9fa0aa;
+    border-radius: 4px;
+}
+.top_bar_label{
+    margin-bottom: 0;
+    vertical-align: middle;
+    margin-right: 10px;
+}
+.date{
+	width: 110px !important;
+    color: #000000!important;
+    background: #ffffff no-repeat 95% 50%
+} */
+.section{
+    margin: 0 auto;
+    padding: 30px 66px;
+    max-width: 100%;
+}
+/* .btn_search{
+	color: #fff;
+    background-color: #647ac1;
+    border-color: #647ac1;
+    display: inline-block;
+    margin: 0;
+    padding: 0 10px;
+    min-width: 95px;
+    height: 34px;
+    font-size: 13px;
+    font-weight: 500;
+    text-align: center;
+    line-height: 32px;
+    border: 0;
+    border-radius: 5px;
+    cursor: pointer;
+    overflow: hidden;
+} */
+.tab-area{
+	background-color: #f0f0f2;
+    border-bottom: 1px solid #BABBC2;
+    max-width: 100%;
+    padding: 30px 66px;
+}
+#period_btns{
+    margin: 0 auto;
+    max-width: 100%;
+}
+.btn{
+	background-color: #2196F3;
+	color:#fff;
+    min-width: 43px;
+    padding: 0 10px;
+    height: 26px;
+    line-height: 24px;
+    font-size: 13px;
+	font-weight: 500;
+	text-align: center;
+   	display: inline-block;
+    margin: 0;
+    border: 0;
+    border-radius: 5px;
+    cursor: pointer;
+    overflow: hidden;
+}
+.historydatebox{
+	width: 110px !important;
+	color: #000000!important;
+	background: #ffffff;
+	padding-left: 10px;
+	font-size: 13px;
+	border: 1px solid #BABBC2;
+	border-radius: 5px;
+}
+.combobox-area{
+    width: 100%;
+    margin: 10px 0 20px 0px !important;
+    float: left;
+    padding-bottom: 1%;
+    border-bottom: 1px solid #BABBC2;
+}
+.accounting-combobox{
+	min-width: 120px;
+    max-width: 120px;
+    height: 26px;
+    line-height: 24px;
+    border-radius: 5px;
+    padding-left: 1%;
+}
+.time-combobox{
+	min-width: 50px;
+    max-width: 120px;
+    height: 26px;
+    line-height: 24px;
+    border-radius: 5px;
+    padding-left: 1%;
+}
+.reservation_searchbox{
+	width: 20%;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

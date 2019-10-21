@@ -301,80 +301,56 @@ body{
 	
 	$(function () {
 
-	/*     $(".search_bar .search_add").hide();
-	    $(".search_bar .search_add").show(); */
+	
 
 	    $(".tab_area #tabul li button").click(function () {
 	        $(".tab_area #tabul li button").removeClass("active").css("color", "#333");
-	        //$(this).addClass("active").css({"color": "darkred","font-weight": "bolder"});
 	         $(this).addClass("active").css("color", "#22B2FB",
 	        								 "border-bottom","1px solid #fff");
-	   /*      $(".search_bar .search_add").hide(); */
-	    /*     var activeTab = $(this).attr("rel");
-	        $("#" + activeTab).fadeIn()
-	var tabList = document.querySelectorAll('.tab_area #tabul li button') */
-		/* 
-		Array.prototype.forEach.call(tabList, function(list) {
-		list.children[0].addEventListener('click', function(e) {
-		e.preventDefault();
-				
-		
-		var tabContent = document.querySelectorAll('.section')
-		var tabNum = this.parentElement.getAttribute('data-tabnum')
-
-		Array.prototype.forEach.call(tabContent, function(cont, i) {
-				cont.style.display = 'none'
-					tabList[i].className = 'tabList'
-						})
-							tabContent[tabNum].style.display = 'block'
-								if(list.className.indexOf('tabList') == -1) {
-							list.className = 'tabList'
-						}
-					})
-				}) */
-				
-				 /*  var test = {};
-			       test.id = $(this)[0].id;
-			        
-			       console.log(test);
-			        $.ajax({
-						 type:"POST",
-			                dataType:"json",
-			                
-			                url:"../js/main2.js",	               
-			                contentType: "application/json",
-			                accept:"application/json",
-
-			                success:function (data){  
-			               			console.log(data);
-			               			
-			                },error:function(){
-			                	console.log("error");
-
-			                }
-			        }); */
-				
-				
-				
-
+	
 	    });
 	});
 	
 	
 	
 	
-
-			
+	function memInsert(){
+		//$("#MIns").modal("hide");
+		//alert("눌림?");
+		var formData = $("#f_insert").serialize();
+		//alert("등록버튼 눌림?");
+		 $.ajax({
+			method:"POST"
+			,data:formData
+			,url:"/member/BHINS.fm"
+			,success:function(data){
+				alert("성공");
+				$("#in_card").html(data);
+			}
+		}); 
+	}
 	
 				
-/* 				function test(){
+	
+	
+	
+	
+	
+	function mode_Select(){
 		
-				alert("눌림")
-		
-	}
-				 */
-				
-				
+	    //alert("selectText:" + selectText);
+	 var modeSelect = document.getElementById("MI-select");
+     
+	    // select element에서 선택된 option의 value가 저장된다.
+	    /* var value = modeSelect.options[document.getElementById("se_operation_mode").selectedIndex].value; */
+	 
+	     // select element에서 선택된 option의 text가 저장된다.
+	    var text = modeSelect.options[document.getElementById("MI-select").selectedIndex].text;
+	   alert("text:" + text);
+ 
+
+}
+	
 </script>
 
 
@@ -556,7 +532,7 @@ body{
                     <select class="selectBox" >
                         <option value="">담당강사</option>
                         
-                            <option value="5849">강민호 강사</option>
+                            <option value="강민호강사">강민호 강사</option>
                         
                             <option value="4435">기본 관리자</option>
                         
@@ -618,53 +594,10 @@ body{
 	
 	<!--==================================[[멤버 리스트 부분 시작 ]]===============================  -->
 			<div class="grid_list" id="card">
-          <ul>
-              <!-- Loop -->     
-              
-           <% 
-           
-           
-           for(int i=0; i<20; i++) {
-        	   
-          
-           
-           %>   
-                         
-              <li >
-                  <div class="profile">
-                      <p class="pic" id="pic">
-                      <img src="../img/smile.png"></p>
-                      <p class="name" id="name">헬스맨7</p>
-                      <p class="info">1세 / 남 / 001-2448-1277</p>
-                  </div>
-                  <div class="card_itm" id="card_itm">
-                      <p class="unit">
-								<label>최근 결제 상품</label>				
-                              <span class="letter_crap wd_add">락카 12개월</span>
-				               <i class="expired">만료일 : 2020-09-25</i>  
-                      </p>
-                      
-                  </div>
-                  
-                  <div class="function_btn" >
-                      <input type="checkbox"  checked="checked" name="check" class="checkBox"  data-sms-agree="Y" >
-                      		<label for="member_1">회원 선택</label>	  
-						  <a  class="btn green small cart">상품판매</a>
-					  
-                      <a  class="btn blue small view" >상세보기</a>
-                  </div>
-              </li>
-              
-              
-        <%
-        
-        }
-        
-        %>          
-
-              
-              <!-- //Loop  -->
-          </ul>
+			
+                    <div id="in_card">
+         
+                    </div>     
       </div>
 	
 	

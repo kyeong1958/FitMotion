@@ -1,4 +1,7 @@
 @charset "UTF-8";
+body{
+	padding:0;
+}
 .bar_area {
     padding: 10px 66px;
     height: 54px;

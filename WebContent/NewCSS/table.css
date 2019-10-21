@@ -1,0 +1,91 @@
+@charset "UTF-8";
+/* middle */
+#reservationlabel{
+		margin:0;
+	    padding: 0;
+	    font-family: inherit;
+	    font-size: 100%;
+	    box-sizing: border-box;
+	    vertical-align: middle;
+	    outline: none;
+	    display: inline-block;
+	    font-weight: normal;
+	    max-width: none;
+	}
+#pagetotal{
+	height: 30px;
+	display: inline-block;
+   	width: auto;
+   	vertical-align: middle;
+       padding: 5px 10px;
+   	font-size: 12px;
+    border-radius: 3px;
+}
+.reservation_searchbox{
+	display: inline-block;
+    vertical-align: middle;
+    -webkit-appearance: none;
+    box-sizing: border-box;
+    height: 30px;
+    padding: 5px 10px;
+    font-size: 12px;
+    line-height: 1.5;
+    border-radius: 3px;
+    color: #555;
+    background-color: #fff;
+    background-image: none;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+    box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+    -webkit-transition: border-color ease-in-out .15s,-webkit-box-shadow ease-in-out .15s;
+    -o-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+    transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+}
+.reservation_middle{
+	margin: 0px 0px 20px;
+}
+.middle{
+	margin-left:1%;
+}
+/* middle */
+/* table */
+#table{
+	border-spacing: 0;
+	border: 1px solid #9fa0aa !important;
+	text-align: center;
+    vertical-align: middle;
+}
+.tableheader{
+    background-color: #686D7B;
+    height: 45px;
+    font-weight: normal;
+    color: #FFF;
+    text-align: center;
+    vertical-align:middle;
+}
+.header-bottom{
+    background-color: #9fa0aa !important;
+    padding: 10px;
+    height: 45px;
+    font-weight: normal;
+    color: #FFF;
+    text-align: center;
+}
+.table-striped>tbody>tr:nth-child(odd)>td{
+	background-color: #f0f0f2;
+	color:#9fa0aa;
+} 
+.table-striped>tbody>tr:nth-child(even)>td {
+	background-color: #fff;
+	color:#9fa0aa;
+ }
+.pagination{
+	padding-left:1%;
+	margin-top:0px;
+}
+.pagination_top{
+	color: #6e7794;
+    font-weight: normal;
+    line-height: 1;
+}

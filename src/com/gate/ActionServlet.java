@@ -10,8 +10,9 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.log4j.Logger;
 
-import com.both.BothController;
-import com.owner.OwnerController;
+import com.member.MemberController;
+import com.program.ProgramController;
+import com.program.RestController;
 import com.staff.StaffController;
 
 public class ActionServlet extends HttpServlet {
@@ -19,6 +20,7 @@ public class ActionServlet extends HttpServlet {
 	private void doService(HttpServletRequest req, HttpServletResponse res)
 			throws ServletException,IOException {
 		ModelAndView mav = null;
+		String json = null;
 		String rev = null;
 		String requestURI = req.getRequestURI();
 		String contextPath = req.getContextPath();
@@ -28,74 +30,35 @@ public class ActionServlet extends HttpServlet {
 		Controller controller = null;
 		try {
 			controller = ControllerMapping.getController(command);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+		 
 /************************************* 응답 페이지 ***********************************/
-		if(controller instanceof OwnerController) {
-			logger.info("ActionServlet OwnerController 호출 성공");
-			try {
-				mav = controller.execute(req, res);
-				String viewName = mav.viewName;
-				logger.info(mav.viewName);
-				// select해온 값이나 넘겨야 할 값을 담음
-				Object obj = mav.obj;
-				String name = mav.name;
-				logger.info("pageMove"+mav.pageMove);
-				if("forward".equals(mav.pageMove)) {
+		mav = controller.execute(req, res);
+		json = controller.jsonexecute(req,res);
+		logger.info(mav+" , "+json);
+		String pageMove = mav.pageMove;
+		String viewName = mav.viewName;
+		Object obj = mav.obj;
+		String name = mav.name;
+		logger.info(pageMove);
+			if(pageMove != null && json == null) {
+				if("forward".equals(pageMove)) {
 					req.setAttribute(name, obj);
-					logger.info(req.getAttribute("OwnerObject"));
-					RequestDispatcher view = req.getRequestDispatcher(viewName+".jsp");
+					RequestDispatcher view = req.getRequestDispatcher(viewName);
 					view.forward(req, res);
-				}else {
-					logger.info(viewName);
+				}else if("redirect".equals(pageMove)) {
 					res.sendRedirect(viewName);
 				}
 				
-			} catch (Exception e) {
-				e.printStackTrace();
+			}else if(json != null) {
+				req.setAttribute("json", json);
+				RequestDispatcher view = req.getRequestDispatcher("/both/JsonTest.jsp");
+				view.forward(req, res);
 			}
-		}
-		if(controller instanceof StaffController) {
-			logger.info("ActionServlet StaffController 호출 성공");
-			try {
-				mav = controller.execute(req, res);
-				String viewName = mav.viewName;
-				Object obj = mav.obj;
-				String name = mav.name;
-				if("forward".equals(mav.pageMove)) {
-					req.setAttribute(name, obj);
-					RequestDispatcher view = req.getRequestDispatcher(viewName+".jsp");
-					view.forward(req, res);
-				}else {
-					res.sendRedirect(viewName);
-				}
-				
-			} catch (Exception e) {
-				e.printStackTrace();
-			}		
-		}
-		if(controller instanceof BothController) {
-			logger.info("ActionServlet BothController 호출 성공");
-			try {
-				mav = controller.execute(req, res);
-				String viewName = mav.viewName;
-				Object obj = mav.obj;
-				String name = mav.name;
-				if("forward".equals(mav.pageMove)) {
-					req.setAttribute(name, obj);
-					RequestDispatcher view = req.getRequestDispatcher(viewName+".jsp");
-					view.forward(req, res);
-				}else {
-					res.sendRedirect(viewName);
-				}
-				
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-		}
-	}
-	
+		}catch (Exception e) {
+			e.printStackTrace();
+		}		
+		
+}
 	
 	public void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException,IOException {
 		doService(req,res);
