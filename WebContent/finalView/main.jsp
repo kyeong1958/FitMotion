@@ -6,13 +6,16 @@
 <head>
 <meta charset="UTF-8">
 <title>FitMotion</title>
+
 <%@ include file="/common/JEasyUICommon.jsp"%>
 <link rel="stylesheet" type="text/css" href="../NewCSS/main.css">
+
 <style type="text/css">
 body{
 	padding:0%;
 }
 </style>
+
 </head>
 <script type="text/javascript">
 /* 페이지이동  */
@@ -61,7 +64,7 @@ body{
             <div class="row sidemenu" id="allsalesmanagement" onClick="pagemove('./entranceStatement.jsp')">입장내역</div>
             <div class="row sidemenu" id="allsalesmanagement" onClick="pagemove('./BillingHistoryList.jsp')">회원결제내역</div>
          </div>
-         <div class="row sidemenutitle" onClick="menu(''),pagemove('./SalesStatistics.jsp')">통계분석</div>
+         <div class="row sidemenutitle" onClick="menu(''),pagemove('../account/StatisticsSales.jsp')">통계분석</div>
          <div class="row sidemenutitle" onClick="menu('.account'),pagemove('./salesStatement.jsp')">회계관리</div>
          <div class="row account">
             <div class="row sidemenu" id="allsalesmanagement" onClick="pagemove('./salesStatement.jsp')">매출내역</div>

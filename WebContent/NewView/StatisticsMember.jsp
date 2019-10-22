@@ -6,8 +6,8 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <%@ include file="/common/JEasyUICommon.jsp"%>
+<%@ include file="/Member2/StatisticscssSales.jsp"%>
 <link rel="stylesheet" type="text/css" href="../NewCSS/main.css">
-<link rel="stylesheet" type="text/css" href="../NewCSS/SalesStatistics.css">
 <style type="text/css">
 body{
    padding:0%;
@@ -324,51 +324,73 @@ $(function () {
  			<div class="chart_area">
  			
  			<!-- 회원 일반 현황  시작  -->
- 					<div class="itm" style="width:100%">
-          <h3>회원 일반 현황</h3>
-          
-          <!-- 그래프 넣을 자리  -->
-          
-          <!-- 여기안에게 넣어주세요 수근 씨  -->
-          
-          <!-- 그래프 넣을 자리  -->
-        </div>
-        
- 			<!-- 회원 일반 현황  끝-->		
-        <!-- 이용회원 연령비율 시작   -->
-        
-        
-        
-        
-        <!-- 이용회원 연령비율 끝   -->
-        <div class="itm">
-          <h3>이용회원 연령비율</h3>
-          <!-- 그래프 영역 -->
-          
-          
-          
-          
-          
-          <!-- // 그래프 영역 -->
-        </div>
+ 				<div class="itm" style="width:100%; height:400px">
+ 				
+		          <h3>회원 일반 현황</h3>
+		          
+		          <!-- 그래프 넣을 자리  -->
+		          
+		          <!-- 여기안에게 넣어주세요 수근 씨  -->
+		          <!-- <canvas id="stackChart2" style="width: 50%; height: 70%; max-width: 700px"></canvas> -->
+		          
+		          <a style="width: 550px; height: 275px; float: left; margin-left:5%; margin-right:15%"><canvas id="stackChart"></canvas></a>
+		          <a style="width: 550px; height: 275px; float: left; " ><canvas id="stackChart2"></canvas></a>
+		           
+		          <!-- 그래프 넣을 자리  -->
+		        </div>
+		        
+		 			<!-- 회원 일반 현황  끝-->		
+		        <!-- 이용회원 연령비율 시작   -->
         
         
-        <!-- 누적회원 연령비율 시작   -->
-        <div class="itm">
-          <h3>누적회원 연령비율</h3>
-          <!-- 그래프 영역 -->
-          
-          
-          
-          
-          
-          <!-- // 그래프 영역 -->
-        </div>
         
-        <!-- 누적회원 연령비율 끝   -->
-        
-        
-        <!--전체 감싸는 div  -->
+		        <div class="itm" style="width:100%; height:400px">
+		          <h3>이용회원 연령비율</h3>
+		          <!-- 그래프 영역 -->
+		          
+		          
+		          <a style="width: 550px; height: 250px; float: left; margin-left:2%; margin-right:15%"><canvas id="doughnutChart" ></canvas></a> 
+		          <a style="width: 550px; height: 250px; float: left"><canvas id="doughnutChart2"></canvas></a>
+		          
+		          
+		          
+		          <!-- // 그래프 영역 -->
+		        </div>
+		        
+		       
+		        
+		        <!-- 이용회원 연령비율 끝   -->
+		        <div class="itm" style="height:400px">
+		          <h3>매출 현황</h3>
+		          <!-- 그래프 영역 -->
+		          
+		          
+		          <a style="width: 600px; height: 270px; float: left; margin-left:5%"><canvas id="barchart"></canvas></a> 
+		          
+		          
+		          
+		          <!-- // 그래프 영역 -->
+		        </div>
+		        
+		        
+		        <!-- 누적회원 연령비율 시작   -->
+		        <div class="itm">
+		          <h3>결제 건 수 현황</h3>
+		          <!-- 그래프 영역 -->
+		          
+		          
+		          
+		          <a style="width: 600px; height: 270px; float: left; margin-left:5%"><canvas id="barchart2"></canvas></a>
+		          
+		          
+		          <!-- // 그래프 영역 -->
+		        </div>
+		        
+		        <!-- 누적회원 연령비율 끝   -->
+	        
+	        
+	        
+	        <!--전체 감싸는 div  -->
  			</div>
  		</div>
  	</div>
@@ -387,5 +409,253 @@ $(function () {
       
       </div>
 </div>
+	<script>
+		//And for a doughnut chart
+
+		var doughnutChart = document.getElementById('doughnutChart');
+
+		var myDoughnutChart = new Chart(doughnutChart, {
+			type : 'doughnut',
+			data : data = {
+				datasets : [ {
+					data : [ 10, 20, 30 ],
+					backgroundColor : [ 'rgba(255, 99, 132, 0.6)',
+							'rgba(255, 206, 86, 0.6)',
+							'rgba(54, 162, 235, 0.6)' ],
+					borderColor : [ 'rgba(255, 99, 132, 1)',
+							'rgba(255, 206, 86, 1)', 'rgba(54, 162, 235, 1)' ]
+				} ],
+
+				// These labels appear in the legend and in the tooltips when hovering different arcs
+				labels : [ 'Red', 'Yellow', 'Blue' ],
+
+				weight : 1,
+				borderWidth : 10
+			},
+			options : {
+				layout : {
+					padding : {
+						left : 50,
+						right : 0,
+						top : 0,
+						bottom : 0
+					}
+				},
+				legend: {
+			    	display: true,
+	                position: 'right' //차트 레이블 위치 조정 
+			 }
+			}
+		});
+		var doughnutChart2 = document.getElementById('doughnutChart2');
+
+		var myDoughnutChart2 = new Chart(doughnutChart2, {
+			type : 'doughnut',
+			data : data = {
+				datasets : [ {
+					data : [ 10, 20, 30 ],
+					backgroundColor : [ 'rgba(255, 99, 132, 0.5)',
+							'rgba(155, 156, 100, 0.5)',
+							'rgba(54, 162, 235, 0.5)' ],
+					borderColor : [ 'rgba(255, 99, 132, 1)',
+							'rgba(155, 156, 100, 1)', 'rgba(54, 162, 235, 1)' ]
+				} ],
+
+				// These labels appear in the legend and in the tooltips when hovering different arcs
+				labels : [ 'Red', 'Yellow', 'Blue' ],
+
+				weight : 1,
+				borderWidth : 10
+			},
+			options : {
+				layout : {
+					padding : {
+						left : 50,
+						right : 0,
+						top : 0,
+						bottom : 0
+					}
+				},
+				legend: {
+			    	display: true,
+	                position: 'right' //차트 레이블 위치 조정 
+			 }
+			}
+		});
+		
+		var barChartData = {
+				labels : [ 'January', 'February', 'March', 'April', 'May', 'June',
+						'July' ],
+				datasets : [ {
+					label : 'Dataset 1',
+					backgroundColor : 'rgba(255, 0, 0, 0.6)',
+					data : [ 10, 20, 30, 40, 50, 60, 70 ]
+				}, {
+					label : 'Dataset 2',
+					backgroundColor : 'rgba(0, 255, 0, 0.6)',
+					data : [ 33, 55, 11, 33, 44, 77, 108 ]
+				}, {
+					label : 'Dataset 3',
+					backgroundColor : 'rgba(0, 0, 255, 0.6)',
+					data : [ 21, 25, 40, 44, 53, 57, 62 ]
+			
+				} ]
+
+			};
+			var stackChart = document.getElementById('stackChart').getContext('2d');
+			window.myBar = new Chart(stackChart, {
+				type : 'bar',
+				data : barChartData,
+				options : {
+					title : {
+						display : true,
+						text : 'Chart.js Bar Chart - Stacked'
+					},
+					tooltips : {
+						mode : 'index',
+						intersect : false
+					},
+					responsive : true,
+					scales : {
+						xAxes : [ {
+							stacked : true,
+						} ],
+						yAxes : [ {
+							stacked : true
+						} ]
+					},
+					legend: {
+				    	display: true,
+		                position: 'right' //차트 레이블 위치 조정 
+				 }
+				}
+			});
+			var stackChart2 = document.getElementById('stackChart2').getContext('2d');
+			window.myBar = new Chart(stackChart2, {
+				type : 'bar',
+				data : barChartData,
+				options : {
+					title : {
+						display : true,
+						text : 'Chart.js Bar Chart - Stacked'
+					},
+					tooltips : {
+						mode : 'index',
+						intersect : false
+					},
+					responsive : true,
+					scales : {
+						xAxes : [ {
+							stacked : true,
+						} ],
+						yAxes : [ {
+							stacked : true
+						} ]
+					},
+					legend: {
+				    	display: true,
+		                position: 'right' //차트 레이블 위치 조정 
+				 }
+				}
+			});
+			
+			var barchart = document.getElementById('barchart');
+
+			var barchart = new Chart(barchart, {
+				type : 'bar',
+				data : {
+					labels : [ 'January', 'February', 'March', 'April', 'May',
+							'June', 'July' ],
+					datasets : [ {
+						label : 'My First Dataset',
+						data : [ 65, 59, 80, 81, 56, 55, 40 ],
+						fill : false,
+						backgroundColor : [ 'rgba(201, 203, 207, 0.6)',
+								'rgba(153, 102, 255, 0.6)',
+								'rgba(54, 162, 235, 0.6)',
+								'rgba(135, 112, 192, 0.6)',
+								'rgba(255, 205, 86, 0.6)',
+								'rgba(255, 159, 64, 0.6)',
+								'rgba(255, 99, 132, 0.6)'],
+					
+						borderColor : [ 'rgb(255, 99, 132)',
+								'rgb(255, 159, 64)', 'rgb(255, 205, 86)',
+								'rgb(75, 192, 192)', 'rgb(54, 162, 235)',
+								'rgb(153, 102, 255)', 'rgb(201, 203, 207)' ],
+						borderWidth : 1
+					},{
+				        label: 'My Second Dataset',
+				        data: [ 35, 49, 50, 100, 70, 85, 70 ],
+				        type: 'bar',
+						fill : false,
+						backgroundColor : [ 'rgba(255, 99, 132, 0.6)',
+								'rgba(255, 159, 64, 0.6)',
+								'rgba(255, 205, 86, 0.6)',
+								'rgba(75, 192, 192, 0.6)',
+								'rgba(54, 162, 235, 0.6)',
+								'rgba(153, 102, 255, 0.6)',
+								'rgba(201, 203, 207, 0.6)' ],
+						borderColor : [ 'rgb(255, 99, 132)',
+								'rgb(255, 159, 64)', 'rgb(255, 205, 86)',
+								'rgb(75, 192, 192)', 'rgb(54, 162, 235)',
+								'rgb(153, 102, 255)', 'rgb(201, 203, 207)' ],
+						borderWidth : 1
+					}]
+				},
+				options : {
+					scales : {
+						yAxes : [ {
+							ticks : {
+								beginAtZero : true
+							}
+						} ]
+					},
+					legend: {
+				    	display: true,
+		                position: 'right' //차트 레이블 위치 조정 
+				 }
+				}
+			});
+			
+			var barchart2 = document.getElementById('barchart2');
+
+			var barchart2 = new Chart(barchart2, {
+				type : 'bar',
+				data : {
+					labels : [ 'January', 'February', 'March', 'April', 'May',
+							'June', 'July' ],
+					datasets : [ {
+						label : 'My First Dataset',
+						data : [ 65, 59, 80, 81, 56, 55, 40 ],
+						fill : false,
+						backgroundColor : [ 'rgba(255, 99, 132, 0.6)',
+								'rgba(255, 159, 64, 0.6)',
+								'rgba(255, 205, 86, 0.6)',
+								'rgba(75, 192, 192, 0.6)',
+								'rgba(54, 162, 235, 0.6)',
+								'rgba(153, 102, 255, 0.6)',
+								'rgba(201, 203, 207, 0.6)' ],
+						borderColor : [ 'rgb(255, 99, 132)',
+								'rgb(255, 159, 64)', 'rgb(255, 205, 86)',
+								'rgb(75, 192, 192)', 'rgb(54, 162, 235)',
+								'rgb(153, 102, 255)', 'rgb(201, 203, 207)' ],
+						borderWidth : 1
+					}]
+				},
+				options : {
+					scales : {
+						yAxes : [ {
+							ticks : {
+								beginAtZero : true
+							}
+						} ]
+					},
+					legend: {
+				    	display: true,
+		                position: 'right' //차트 레이블 위치 조정 
+				 }
+				}
+			});
+	</script>
 </body>
 </html>

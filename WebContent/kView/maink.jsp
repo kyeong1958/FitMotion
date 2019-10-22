@@ -13,18 +13,16 @@
 <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
 
 <script type="text/javascript">
-<<<<<<< HEAD
 	function fontcolorchange() {
 
 	}
 	function ajax(url) {
 
 		alert("ajax==> " + url);
-=======
+	}
 	function ajax(url){
 		
 		alert("ajax==> "+url);
->>>>>>> branch 'master' of https://github.com/kyeong1958/FitMotion
 		$.ajax({
 			method : 'get',
 			url : url,

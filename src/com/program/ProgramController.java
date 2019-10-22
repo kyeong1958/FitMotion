@@ -3,6 +3,9 @@ package com.program;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.apache.log4j.Logger;
 
 import com.gate.Controller;
@@ -20,7 +23,7 @@ public class ProgramController implements Controller {
 	}
 	
 	@Override
-	public ModelAndView execute() throws Exception {
+	public ModelAndView execute(HttpServletRequest req, HttpServletResponse res) throws Exception {
 		ModelAndView mav = new ModelAndView();
 		if("example".equals(crud)) {
 			logger.info("OwnerController 입장함");
@@ -38,7 +41,7 @@ public class ProgramController implements Controller {
 	}
 
 	@Override
-	public String jsonexecute() throws Exception {
+	public String jsonexecute(HttpServletRequest req, HttpServletResponse res) throws Exception {
 		String json = null;
 		List<String> list = new ArrayList<String>();
 		list.add("test1");

@@ -20,7 +20,7 @@ public class RestController implements Controller {
 	}
 
 	@Override
-	public String jsonexecute() throws Exception {
+	public String jsonexecute(HttpServletRequest req, HttpServletResponse res) throws Exception {
 		String json = null;
 		Gson gson = null;
 		if("example".equals(crud)) {
@@ -32,7 +32,7 @@ public class RestController implements Controller {
 
 
 	@Override
-	public ModelAndView execute() throws Exception {
+	public ModelAndView execute(HttpServletRequest req, HttpServletResponse res) throws Exception {
 		return null;
 	}
 }

@@ -15,19 +15,14 @@ public class StaffController implements Controller {
 	}
 
 	@Override
-	public ModelAndView execute() throws Exception {
+	public ModelAndView execute(HttpServletRequest req, HttpServletResponse res) throws Exception {
 		ModelAndView mav = new ModelAndView();
 		return mav;
 	}
-<<<<<<< HEAD
 
 	@Override
 	public String jsonexecute(HttpServletRequest req, HttpServletResponse res) throws Exception {
+		return crud;
 		// TODO Auto-generated method stub
-=======
-	@Override
-	public String jsonexecute() throws Exception {
->>>>>>> branch 'master' of https://github.com/kyeong1958/FitMotion
-		return null;
 	}
 }

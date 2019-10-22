@@ -1,12 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ include file="../common/JEasyUICommon.jsp"%>
+
     <!-- ============================ [[ 메인폼 ]] ======================================== -->
-<!DOCTYPE html>
+
 <html>
 <head>
 <meta charset="UTF-8">
 <title>FitMotion</title>
-<%@ include file="../common/JEasyUICommon.jsp"%>
+
 <link rel="stylesheet" type="text/css" href="../NewCSS/main.css">
 <style type="text/css">
 body{
@@ -61,7 +63,8 @@ body{
             <div class="row sidemenu" id="allsalesmanagement" onClick="pagemove('../member/entranceStatement.jsp')">입장내역</div>
             <div class="row sidemenu" id="allsalesmanagement" onClick="pagemove('../account/BillingHistoryList.jsp')">회원결제내역</div>
          </div>
-         <div class="row sidemenutitle" onClick="menu(''),pagemove('../account/SalesStatistics.jsp')">통계분석</div>
+         <div class="row sidemenutitle" onClick="menu(''),pagemove('../account/StatisticsSales2.jsp')">통계분석</div>
+<!--          <div class="row sidemenutitle" onClick="menu(''),pagemove('/account/allsales.fm')">통계분석</div> -->
          <div class="row sidemenutitle" onClick="menu('.account'),pagemove('../account/salesStatement.jsp')">회계관리</div>
          <div class="row account">
             <div class="row sidemenu" id="allsalesmanagement" onClick="pagemove('../account/salesStatement.jsp')">매출내역</div>
@@ -85,7 +88,6 @@ body{
       
       
 <!-- ================================= [[ 화면전환 ]] =================================================== -->
-      
       </div>
 </div>
 </body>

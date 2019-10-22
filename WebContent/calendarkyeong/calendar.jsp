@@ -45,8 +45,7 @@
 			 ,url:'calendar.jsp?cyear='+kyear+'&cmonth='+kkmonth
 			 ,success:function(data){
 				 $("#new").html(data);
-			 }
-		  
+			 }		  
 	    }); 
 	}
 	//콤보박스로 년도 변경할 시 이동
