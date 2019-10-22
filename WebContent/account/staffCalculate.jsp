@@ -1,3 +1,5 @@
+<%@page import="java.text.DecimalFormat"%>
+<%@page import="java.util.Calendar"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <!-- ============================ [[ 회계관리 ]] ======================================== -->
@@ -11,6 +13,38 @@ body{
 	padding:0%;
 }
 </style>
+<%
+	Calendar cal = Calendar.getInstance();
+	DecimalFormat df = new DecimalFormat("00");
+	String y = df.format(cal.get(Calendar.YEAR));
+	int year = Integer.parseInt(y);
+	String m = df.format(cal.get(Calendar.MONTH));
+	int month = Integer.parseInt(m);
+%>
+<script type="text/javascript">
+/* 날짜이동 */
+function prev(year,month){
+	alert(year+", "+month);
+	$.ajax({
+		url:"/account/staffCalculate.fm?year="+year+"&month="+month+"&move=prev"
+	   ,success:function(data){
+		   alert("성공");
+		  // $("#schedule_week").html(data);
+	   }
+	});
+}
+function next(year,month){
+	alert(year+", "+month);
+	$.ajax({
+		url:"/account/staffCalculate.fm?year="+year+"&month="+month+"&move=next"
+	   ,success:function(data){
+		   alert("성공");
+		 //  $("#schedule_week").html(data);
+	   }
+	});
+}
+/* 날짜이동 */
+</script>
 <!-- ================================= [[ 화면전환 ]] =================================================== -->
 		<div class="bar_area">
 			<a class="bar_menu" href="#">홈</a>
@@ -22,22 +56,13 @@ body{
 <!-- ================================= [[ 홈^ ]] =================================================== -->
 		<div class="tab-area" align="center">
 			<div>
-				<a class="staff-prev-next"><img src="../images/previous.png"></a>
-				<select class="sc-combobox">
-					<option value="">2019</option>
-					<option value="">2018</option>
-					<option value="">2017</option>
-					<option value="">2016</option>
-				</select>
-				<span>년</span>
-				<select class="sc-combobox">
-					<option value="">09</option>
-					<option value="">08</option>
-					<option value="">07</option>
-					<option value="">06</option>
-				</select>
-				<span>년</span>
-				<a class="staff-prev-next" style="margin-left:15px"><img src="../images/next.png"></a>
+				<span>
+				<a class="staff-prev-next" style="margin-right: 15px;" href="javascript:prev('<%=year%>','<%=month+1%>')"><img src="../images/previous.png"></a>
+					<span id="kyear"><font size="5px" style="vertical-align: bottom;" color="#454544"><%=year%></font></span>
+			        <span><font size="5px" color="#454544">.</font></span>
+			        <span id="kmonth"><font size="5px" style="vertical-align: bottom;" color="#454544"><%=month+1%></font></span>
+				<a class="staff-prev-next" style="margin-left:15px"href="javascript:next('<%=year%>','<%=month+1%>')"><img src="../images/next.png"></a>
+			</span>
 			</div>
 			<div>
 <!-- ================================= [[ 상위 테이블  ]] =================================================== -->

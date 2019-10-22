@@ -1,57 +1,11 @@
 <%@page import="java.util.Calendar"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-	<!-- ============================ [[ 회계관리 ]] ======================================== -->
-	<!-- ============================ [[ 센터정산 ]] ======================================== -->
 <%
 	Calendar cal = Calendar.getInstance();
 	int year = cal.get(Calendar.YEAR);
 	int month = cal.get(Calendar.MONTH);
 %>
-<%@ include file="/common/JEasyUICommon.jsp"%>
-<link rel="stylesheet" type="text/css" href="../NewCSS/main.css">
-<link rel="stylesheet" type="text/css" href="../NewCSS/centerCalculate.css">
-<style type="text/css">
-body{
-	padding:0%;
-}
-</style>
-<script>
-	function center(btn){
-		$(".tabBtn").css("border-bottom","1px solid #BABBC2");
-		$(btn).css("border-bottom","1px solid white");
-	}
-	/* 페이지이동  */
-	function tabmove(url){
-			$.ajax({
-				method:'get'
-			   ,url:url
-			   ,success:function(data){
-				   $("#tabmove").html(data);
-			   }
-			});
-		}
-</script>
-<!-- ================================= [[ 화면전환 ]] =================================================== -->
-		<div class="bar_area">
-			<a class="bar_menu" href="#">홈</a>
-			<img src="../images/location_arrow.png">
-			<a class="bar_menu" href="#">회계 관리</a>
-			<img src="../images/location_arrow.png">	
-			<a class="bar_menu" href="#">센터 정산</a>
-		</div>
-<!-- ================================= [[ 홈 ]] =================================================== -->
-		<div class="tab-area">
-			<div class="tab-session">
-				<button class="tabBtn" id="btn_center" onClick="center('#btn_center'),tabmove('/account/centerCal.jsp')">센터정산</button>
-				<button class="tabBtn" id="btn_payment_method" onClick="center('#btn_payment_method'),tabmove('/account/paymentMethod.jsp')">결제수단 별 조회</button>
-				<button class="tabBtn" id="btn_payment_sort" onClick="center('#btn_payment_sort'),tabmove('/account/paymentSort.jsp')">결제분류 별 조회</button>
-			<!-- 	<button class="tabBtn" id="btn_center" onClick="center('#btn_center')">이용권상품 별 조회</button> -->
-				<button class="tabBtn" id="btn_general" onClick="center('#btn_general'),tabmove('/account/generalProduct.jsp')">일반상품 별 조회</button>
-				<button class="tabBtn" id="btn_expense_sort" onClick="center('#btn_expense_sort'),tabmove('/account/expenseSort.jsp')">지출 별 조회</button>
-			</div>
-		</div> 
-		<div id="tabmove">
 		<div class="section">
 			<div class="row">
 				<div class="col-lg-6  sales-calculation-section" style="padding-top: 30px">
@@ -98,9 +52,9 @@ body{
 					</div>
 					<div>
 						<div class="sales-calculation-standby title">
-							<span>미지급 잔액 </span>
+							<span>미수 잔액 </span>
 						</div>
-						<div class="sales-calculation-standby number" style="width: 18%;">
+						<div class="sales-calculation-standby number">
 							<span style="display:inline-block">0건</span>
 						</div>
 						<div class="sales-calculation-standby sum">
@@ -230,8 +184,3 @@ body{
 				</div>
 			</div>
 		</div>
-		</div>
-
-
-
-<!-- ================================= [[ 화면전환 ]] =================================================== -->

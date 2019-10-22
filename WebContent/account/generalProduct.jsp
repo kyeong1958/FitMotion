@@ -22,7 +22,7 @@ body{
 			<div class="section">
 				<div class="row">
 					<div class="col-lg-6  sales-calculation-section" style="padding-top: 30px">
-						<div class="col-lg-3 sales-calculation" style="margin-left: -35px;">
+						<div class="col-lg-3" style="margin-left: -35px;">
 							<div>
 								<div class="center-calculation-year"><%=year %>년</div>
 								<div>

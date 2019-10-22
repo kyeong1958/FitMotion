@@ -38,6 +38,22 @@ public class ScheduleLogic {
 		scheduleList = scheduleDao.scheduleList();
 		return scheduleList;
 	}
+	public int caUPD(Map<String,Object> attendMap ) {
+		int result = 0;
+		result = scheduleDao.caUPD(attendMap);
+		return result;
+	}
+	public String reservationUPD(Map<String, Object> pMap) {
+		String result = null;
+		String starttime = pMap.get("appli_start_hour")+":"+pMap.get("appli_start_min");
+		String endtime = pMap.get("appli_end_hour")+":"+pMap.get("appli_end_min");
+		logger.info(starttime);
+		logger.info(endtime);
+		pMap.put("appli_start_time",starttime);
+		pMap.put("appli_end_time",endtime);
+		result = scheduleDao.reservationUPD(pMap);
+		return result;
+	}
 
 
 	

@@ -27,18 +27,34 @@
 						 ,#{sm_mem_num, mode=IN, jdbcType=VARCHAR, javaType=java.lang.String}
 						 ,#{ep_name, mode=IN, jdbcType=VARCHAR, javaType=java.lang.String}
 						 ,#{appli_date, mode=IN, jdbcType=VARCHAR, javaType=java.lang.String}
-					   , #{result, mode=OUT, jdbcType=VARCHAR, javaType=java.lang.String}
-				      
+					     ,#{result, mode=OUT, jdbcType=VARCHAR, javaType=java.lang.String}
+		)}
+	</select>
+	<select id="reservationUPD" parameterType="map" statementType="CALLABLE">
+<!-- 예약 변경했을 시 UPDATE -->
+		{call proc_class_applicationUPD(
+						 #{sm_staffid, mode=IN, jdbcType=VARCHAR, javaType=java.lang.String}
+						 ,#{appli_start_time, mode=IN, jdbcType=VARCHAR, javaType=java.lang.String}
+						 ,#{appli_end_time, mode=IN, jdbcType=VARCHAR, javaType=java.lang.String}
+						 ,#{sm_mem_num, mode=IN, jdbcType=VARCHAR, javaType=java.lang.String}
+						 ,#{ep_name, mode=IN, jdbcType=VARCHAR, javaType=java.lang.String}
+						 ,#{appli_date, mode=IN, jdbcType=VARCHAR, javaType=java.lang.String}
+						 ,#{appli_num, mode=IN, jdbcType=VARCHAR, javaType=java.lang.String}
+					     ,#{result, mode=OUT, jdbcType=VARCHAR, javaType=java.lang.String}
 		)}
 	</select>
 <!-- 스케줄내역 -->
 	<select id="scheduleList" resultType="map">
-		SELECT appli_start_time, appli_end_time, appli_date, pro_place, att_num, mem_name, staff_name
+		SELECT appli_start_time, appli_end_time, appli_date, pro_place, att_num, mem_name, member.mem_num, staff_name, staff.staff_id, appli_num
 		  FROM class_application, staff, member
 		 WHERE class_application.mem_num = member.mem_num
 		   AND class_application.staff_id = staff.staff_id
-		   
 	</select>
+	<update id="caUPD">
+		UPDATE class_application
+		   SET att_num = #{att_num}
+		 WHERE appli_num = #{appli_num}
+	</update>
 <!-- ======================================= [[ 경애  ]] ====================================== -->
 	
 </mapper> 

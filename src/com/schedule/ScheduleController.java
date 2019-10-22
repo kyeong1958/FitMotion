@@ -72,12 +72,60 @@ public class ScheduleController implements Controller {
 				mav.pageMove("redirect");
 				mav.setViewName("/schedule/scheduleList.fm");
 			}
-		}else if("scheduleList".equals(crud)) {
+		}
+		//예약변경 시 UPDATE
+		else if("scheduleReservationUPD".equals(crud)) {
+			Map<String,Object> pMap = new HashMap<>();
+			HashMapBinder hmb = new HashMapBinder(req);
+			hmb.bind(pMap);
+			String result = scheduleLogic.reservationUPD(pMap);
+			logger.info(result);
+			if("예약불가".equals(result)) {
+				mav.pageMove("forward");
+				mav.addObject("result", result);
+				mav.setViewName("/schedule/schedule_week.jsp");
+			}
+			else if("예약가능".equals(result)) {
+				mav.pageMove("redirect");
+				mav.setViewName("/schedule/scheduleList.fm");
+			}
+		}
+		//예약목록가져오기
+		else if("scheduleList".equals(crud)) {
 			List<Map<String,Object>> scheduleList = new ArrayList<Map<String,Object>>();
+			Map<String,Object> pMap = new HashMap<String, Object>();
 			scheduleList = scheduleLogic.scheduleList();
+			if(req.getParameter("year") != null) {
+				logger.info(req.getParameter("year"));
+				logger.info(req.getParameter("month"));
+				logger.info(req.getParameter("week"));
+				HashMapBinder hmb = new HashMapBinder(req);
+				hmb.bind(pMap);
+				scheduleList.add(pMap);
+				logger.info(pMap);
+			}
+			logger.info(scheduleList);
 			mav.pageMove("forward");
 			mav.setViewName("/schedule/schedule_week.jsp");
 			mav.addObject("scheduleList", scheduleList);
+		}
+		//수업출결사항변경
+		else if("caUPD".equals(crud)) {
+			int result = 0;
+			int appli_num = 0;
+			int att_num = 0;
+			Map<String,Object> attendMap = new HashMap<String, Object>();
+			if(req.getParameter("appli_num") != null && req.getParameter("att_num") != null) {
+				appli_num = Integer.parseInt(req.getParameter("appli_num").toString());
+				att_num = Integer.parseInt(req.getParameter("att_num").toString());
+				attendMap.put("appli_num",appli_num);
+				attendMap.put("att_num",att_num);
+			}
+			result = scheduleLogic.caUPD(attendMap);
+			if(result == 1) {
+				mav.pageMove("redirect");
+				mav.setViewName("/schedule/scheduleList.fm");
+			}
 		}
 /////////////////////////////// [[ 경애 끝 ]] /////////////////////////////////////
 		return mav;

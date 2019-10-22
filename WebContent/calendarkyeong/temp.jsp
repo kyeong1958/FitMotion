@@ -8,23 +8,24 @@
 </head>
 <body>
 
-<table border="1" width="200">
+<table border="1 solid" width="600">
 	<tr>
-		<td></td>
-		<td></td>
-		<td></td>
-		<td></td>
+		<td>1</td>
+		<td>2</td>
+		<td>3</td>
+		<td>4</td>
 	</tr>
 	<tr>
-		<td rowspan="2"></td>
-		<td></td>
-		<td></td>
-		<td></td>
+		<td>1</td>
+		<td>2</td>
+		<td rowspan="2">3</td>
+		<td>4</td>
 	</tr>
 	<tr>
-		<td></td>
-		<td></td>
-		<td></td>
+		<td>1</td>
+		<td>2</td>
+		<td>3</td>
+		<!-- <td>4</td> -->
 	</tr>
 </table>
 </body>

@@ -1,3 +1,5 @@
+<%@page import="java.text.DecimalFormat"%>
+<%@page import="java.util.Calendar"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 	<!-- ============================ [[ 회계관리 ]] ======================================== -->
@@ -11,6 +13,42 @@ body{
 	padding:0%;
 }
 </style>
+<%
+	Calendar cal = Calendar.getInstance();
+	DecimalFormat df = new DecimalFormat("00");
+	int year = cal.get(Calendar.YEAR);
+	String mon = df.format(cal.get(Calendar.MONTH));
+	int month = Integer.parseInt(mon);
+	int quarter = 0;
+	if(month >= 0 && month < 3) quarter = 1;
+	if(month >= 3 && month < 6) quarter = 2;
+	if(month >= 6 && month < 9) quarter = 3;
+	if(month >= 9 && month < 12) quarter = 4;
+%>
+<script type="text/javascript">
+$(document).ready(function(){
+ 	$.ajax({
+		url:'/account/expenseStatement.fm?month=<%=month%>'
+		,success:function(data){
+			$("#statement").html(data);
+		}
+	}); 
+	 //datebox1 날짜 선택에 따라 datebox2의 선택가능날짜 설정
+	   $('#datebox1').datebox({
+	      onSelect: function(date){
+	         firstDate = date;
+	         $('#datebox2').datebox().datebox('calendar').calendar({
+	               validator: function(date){
+		                   var d1 = new Date(firstDate.getFullYear(), firstDate.getMonth(), firstDate.getDate());
+	                   return d1<=date;
+	               }
+	           });
+	      }
+	   });
+
+});
+
+</script>
 <script type="text/javascript">
 /*///////////////// [[ 데이트박스 ]] ///////////////////////////////  */
 //datebox 날짜형식 YYYY-MM-DD로 설정
@@ -18,7 +56,7 @@ body{
 	    var y = date.getFullYear();
 	    var m = date.getMonth()+1;
 	    var d = date.getDate();
-	    return y+'-'+(m<10 ? "0"+m:m)+'-'+(d<10 ? "0"+d:d);
+	    return y+'/'+(m<10 ? "0"+m:m)+'/'+(d<10 ? "0"+d:d);
 	}
 //datebox parser설정
  	 $.fn.datebox.defaults.parser = function(s){
@@ -36,38 +74,49 @@ body{
 	$.fn.calendar.defaults.months = ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월']
 
 /*///////////////// [[ 데이트박스 ]] ///////////////////////////////  */
-</script>
-<script type="text/javascript">
-	$(document).ready(function(){
-		$(".sales").hide();
-		$(".member").hide();
-		$(".analysis").hide();
-		$(".service").hide();
+	function thisyear(){
+		$.ajax({
+			url:'/account/expenseStatement.fm?year=<%=year%>'
+			,success:function(data){
+				alert("성공");
+				$("#statement").html(data);
+			}
+		});
+	}
+	function quarter(){
+		$.ajax({
+			url:'/account/expenseStatement.fm?quarter=<%=quarter%>'
+			,success:function(data){
+				alert("성공");
+				$("#statement").html(data);
+			}
+		});
+	}
+	function thismonth(){
+		$.ajax({
+			url:'/account/expenseStatement.fm?month=<%=month%>'
+			,success:function(data){
+				alert("성공");
+				$("#statement").html(data);
+			}
+		});
+	}
+	function dateSEL(){
+		var startDay = $('#datebox1').datebox('getValue');
+		var endDay = $('#datebox2').datebox('getValue');
+		alert(startDay+", "+endDay);
+		if(startDay != '' && endDay != ''){
+			alert("ajax");
+			$.ajax({
+				url:'/account/expenseStatement.fm?startDay='+startDay+'&endDay='+endDay
+				,success:function(data){
+					alert("성공");
+					$("#statement").html(data);
+				}
+			});
+		}
 		
-	 //선택가능날짜 범위 설정
-	   $('#datebox1').datebox().datebox('calendar').calendar({
-	       validator: function(date){
-	           var now = new Date();
-	           var d1 = new Date(now.getFullYear()-1, now.getMonth(), now.getDate());
-	           var d2 = new Date(now.getFullYear(), now.getMonth(), now.getDate());
-	           return d1<=date && date<=d2;
-	       }
-	   });
-	 //datebox1 날짜 선택에 따라 datebox2의 선택가능날짜 설정
-	   $('#datebox1').datebox({
-	      onSelect: function(date){
-	         firstDate = date;
-	         $('#datebox2').datebox().datebox('calendar').calendar({
-	               validator: function(date){
-	                   var now = new Date();
-	                   var d1 = new Date(firstDate.getFullYear(), firstDate.getMonth(), firstDate.getDate());
-	                   var d2 = new Date(now.getFullYear(), now.getMonth(), now.getDate());
-	                   return d1<=date && date<=d2;
-	               }
-	           });
-	      }
-	   });
-	});
+	}
 </script>
 <!-- ================================= [[ 화면전환 ]] =================================================== -->
 		<div class="bar_area">
@@ -78,61 +127,22 @@ body{
 			<a class="bar_menu" href="#">지출 내역</a>
 		</div>
 <!-- ================================= [[ 홈 ]] =================================================== -->
-		<!-- <div class="tab-area">
-			<div class="tab-session">
-				<button class="tabBtn">이용권 상품 매출</button>
-				<button class="tabBtn">일반 상품 매출</button>
-			</div>
-		</div> --> 
 		<div class="section">
 			<div id="period_btns">
-				<button class="btn blue small">당해</button>
-				<button class="btn blue small">당월</button>
-				<button class="btn blue small">전월</button>
-				<button class="btn blue small">오늘</button>
-				<button class="btn blue small">어제</button>
-				<button class="btn blue small">3일간</button>
-				<button class="btn blue small">7일간</button>
-				<button class="btn blue small">10일간</button>
-				<button class="btn blue small">20일간</button>
-				<button class="btn blue small">30일간</button>
+				<button class="btn blue small" onClick="thisyear()">당 해</button>
+				<button class="btn blue small" onClick="quarter()">당 분기</button>
+				<button class="btn blue small" onClick="thismonth()">당 월</button>
 				<span style="margin-left: 1%">
-					<input class="easyui-datebox historydatebox" id="datebox1"/>
+					<input class="easyui-datebox" id="datebox1"/>
 					<span>~</span>
-					<input class="easyui-datebox historydatebox" id="datebox2"/>
-					<button class="btn blue small">조회</button>
+					<input class="easyui-datebox" id="datebox2"/>
+					<button class="btn blue small" onClick="dateSEL()">조회</button>
 				</span>
 			</div>
-<!-- ================================= [[ combobox ]] =================================================== -->
-			<div class="combobox-area">
-				<select class="accounting-combobox">
-					<option value="">지출 분류</option>
-					<option value="">매입 지출</option>
-					<option value="">인건비 지출</option>
-					<option value="">일반 지출</option>
-					<option value="">센터 특별 지출</option>
-					<option value="">기타 지출</option>
-				</select>
-				<select class="accounting-combobox">
-					<option value="">담당자</option>
-					<option value="">0000</option>
-					<option value="">이경애</option>
-					<option value="">이경애</option>
-					<option value="">이경애</option>
-					<option value="">이경애</option>
-					<option value="">이경애</option>
-					<option value="">이경애</option>
-				</select>
-				<select class="accounting-combobox">
-					<option value="">결제형태</option>
-					<option value="">카드</option>
-					<option value="">이체</option>
-					<option value="">현금</option>
-				</select>
-			</div>
 		</div>
-<!-- ================================= [[ combobox end ]] =================================================== -->
-		<div class="section">
+<!-- ================================= [[ 홈 ]] =================================================== -->
+<div id="statement">
+	<!-- 	<div class="section">
 			<div class="row">
 				<div class="col-lg-6  sales-calculation-section" style="padding-top: 30px">
 					<div>
@@ -153,7 +163,7 @@ body{
 					</div>
 				</div>
 			</div>
-<!-- ================================= [[ table left ]] =================================================== -->
+================================= [[ table left ]] ===================================================
 			<div class="row">
 				<div class="col-lg-6" style="padding:0;padding-right: 20px;">
 					<h3 class="sales-calculation-table-title">결제수단</h3>
@@ -183,7 +193,7 @@ body{
 						</tbody>
 					</table>
 				</div>
-<!-- ================================= [[ table right ]] =================================================== -->
+================================= [[ table right ]] ===================================================
 				<div class="col-lg-6" style="padding:0;padding-left: 20px;">
 					<h3 class="sales-calculation-table-title">상품분류</h3>
 					<table class="sales-calculation-table">
@@ -212,8 +222,9 @@ body{
 						</tbody>
 					</table>
 				</div>
-			</div>
-		</div>
+			</div>-->
+		 
+</div>
 <!-- ================================= [[ TABLE BOTTOM ]] =================================================== -->
 		<div class="section">
 					<div class="row">

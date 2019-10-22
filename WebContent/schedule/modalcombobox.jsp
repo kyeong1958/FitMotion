@@ -4,7 +4,11 @@
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
+<style type="text/css">
+	body{
+		padding:0%;
+	}
+</style>
 <%
 	Map<String,Object> scheduleModal = (Map<String,Object>)request.getAttribute("scheduleModal");
 	Object keys[] = scheduleModal.keySet().toArray();
@@ -43,7 +47,7 @@
 
 	<label class="spend-box-right-column">이용권</label>
 	<span>
-		<select class="spend-combobox" name="sm_ticket_name" style="width: 170px;text-align-last:center">
+		<select class="spend-combobox" name="sm_ticket_name" id="sm_ticket_name" style="width: 170px;text-align-last:center">
 <%	for(int i=0;i<tsize;i++){ 
 	Map<String,Object> ticketMap = ticketList.get(i); %>
 			<option value="<%= ticketMap.get("PRO_NAME")%>"><%= ticketMap.get("PRO_NAME")%></option>
@@ -65,7 +69,7 @@
 <div style="padding:0 0 5px">
 	<label class="spend-box-right-column">수업장소</label>
 	<span>
-		<select class="spend-combobox" name="ep_name" style="width: 170px;text-align-last:center">
+		<select class="spend-combobox" name="ep_name" id="ep_name" style="width: 170px;text-align-last:center">
 <%	for(int i=0;i<psize;i++){ 
 	Map<String,Object> placeMap = placeList.get(i); %>
 			<option value="<%= placeMap.get("EP_NAME")%>"><%= placeMap.get("EP_NAME")%></option>

@@ -64,13 +64,56 @@ public class ScheduleDao {
 		try {
 			sqlSession = sqlSessionFactory.openSession();
 			scheduleList = sqlSession.selectList("scheduleList");
-			for(int i=0; i<scheduleList.size();i++) {
-				logger.info(scheduleList.get(i));
+//			for(int i=0; i<scheduleList.size();i++) {
+//				logger.info(scheduleList.get(i));
+//			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if(sqlSession != null) {
+				sqlSession.close();
+			}
+		}
+		return scheduleList;
+	}
+	public int caUPD(Map<String, Object> attendMap) {
+		int result = 0;
+		try {
+			sqlSession = sqlSessionFactory.openSession();
+			result = sqlSession.update("caUPD",attendMap);
+			if(result == 1) {
+				sqlSession.commit();
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
+		} finally {
+			if(sqlSession != null) {
+				sqlSession.close();
+			}
 		}
-		return scheduleList;
+		return result;
+	}
+	public String reservationUPD(Map<String, Object> pMap) {
+		String result = null;
+		try {
+			Object keys[] = pMap.keySet().toArray();
+			for(int i=0;i<pMap.keySet().toArray().length;i++) {
+				logger.info(keys[i]+"==>"+pMap.get(keys[i]));
+			}
+			pMap.put("ep_name","그룹1실");
+			sqlSession = sqlSessionFactory.openSession();
+			logger.info(pMap);
+//			sqlSession.update("reservationUPD",pMap);
+//			result = (String)pMap.get("result");
+			sqlSession.commit();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if(sqlSession != null) {
+				sqlSession.close();
+			}
+		}
+		return result;
 	}
 	
 	/////////////////////////////// [[ 경애  ]] /////////////////////////////////////

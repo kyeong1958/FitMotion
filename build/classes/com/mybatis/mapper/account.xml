@@ -3,7 +3,121 @@
 <mapper namespace="com.mybatis.mapper.AccountMapper">
 	<select id="test1">
 		SELECT 1 FROM dual
+	</select> 
+<!-- //////////////////////////////////[[ 경애 시작 ]] ///////////////////////////////////////////////////////////////////-->
+	<resultMap type="map" id="ssm_map"/>
+	<select id="salesStatementMap" parameterType="map" resultMap="ssm_map">
+		SELECT NVL(( SUM (gs_pay_amount) - SUM (GS_REF_AMOUNT)),0) as "netprofit"
+		      ,NVL(SUM (gs_pay_amount),0) as "sales"
+		      ,NVL(SUM (GS_REF_AMOUNT),0) as "refund"
+		      ,NVL(SUM (gs_account_due),0)  as "receivable"
+		      ,NVL(COUNT(DECODE(gs_pay_method,'카드',gs_pay_amount)),0)  as "cardsalescnt"
+		      ,NVL(SUM(DECODE(gs_pay_method,'카드',gs_pay_amount)),0)  as "cardsales"
+		      ,NVL(COUNT(DECODE(gs_pay_method,'현금',gs_pay_amount)),0)  as "cashsalescnt" 
+		      ,NVL(SUM(DECODE(gs_pay_method,'현금',gs_pay_amount)),0)  as "cashsales"
+		      ,NVL(COUNT(DECODE(gs_pay_method,'이체',gs_pay_amount)),0)  as "transsalescnt"
+		      ,NVL(SUM(DECODE(gs_pay_method,'이체',gs_pay_amount)),0)  as "transsales"
+		      ,NVL(COUNT(DECODE(gs_newandrepay,'1',gs_newandrepay)),0)  as "newsalescnt"
+		      ,NVL(SUM(DECODE(gs_newandrepay,'1',gs_pay_amount)),0)  as "newsales"
+		      ,NVL(COUNT(DECODE(gs_newandrepay,'2',gs_newandrepay)),0)  as "resalescnt"
+		      ,NVL(SUM(DECODE(gs_newandrepay,'2',gs_pay_amount)),0)  as "resales"
+		      ,NVL(COUNT(DECODE(gs_pay_method,'카드',gs_ref_amount)),0)  as "refundcardcnt"
+		      ,NVL(SUM(DECODE(gs_pay_method,'카드',gs_ref_amount)),0)  as "refundcard"
+		      ,NVL(COUNT(DECODE(gs_pay_method,'현금',gs_ref_amount)),0)  as "refundcashcnt"
+		      ,NVL(SUM(DECODE(gs_pay_method,'현금',gs_ref_amount)),0)  as "refundcash"
+		      ,NVL(COUNT(DECODE(gs_pay_method,'이체',gs_ref_amount)),0)  as "refundtranscnt"
+		      ,NVL(SUM(DECODE(gs_pay_method,'이체',gs_ref_amount)),0)  as "refundtrans"
+      FROM gym_sales
+     WHERE 1=1
+     <if test="month != null">
+	 AND SUBSTR (gs_dep_date, 0, 7) = #{month}
+     </if>
+     <if test="year != null">
+	 AND SUBSTR (gs_dep_date, 0, 4) = #{year}
+     </if> 
+      <if test="quarter != null and quarter == 1">
+<![CDATA[ AND SUBSTR (gs_dep_date, INSTR (gs_dep_date, '-', 1) + 1, 2) >= '01'
+	 	  AND SUBSTR (gs_dep_date, INSTR (gs_dep_date, '-', 1) + 1, 2) <= '03' ]]>
+     </if> 
+     <if test="quarter != null and quarter == 2">
+<![CDATA[ AND SUBSTR (gs_dep_date, INSTR (gs_dep_date, '-', 1) + 1, 2) >= '04'
+	 	  AND SUBSTR (gs_dep_date, INSTR (gs_dep_date, '-', 1) + 1, 2) <= '06' ]]>
+     </if> 
+     <if test="quarter != null and quarter == 3">
+<![CDATA[ AND SUBSTR (gs_dep_date, INSTR (gs_dep_date, '-', 1) + 1, 2) >= '07'
+	 	  AND SUBSTR (gs_dep_date, INSTR (gs_dep_date, '-', 1) + 1, 2) <= '09' ]]>
+     </if> 
+     <if test="quarter != null and quarter == 4">
+<![CDATA[ AND SUBSTR (gs_dep_date, INSTR (gs_dep_date, '-', 1) + 1, 2) >= '10'
+	 	  AND SUBSTR (gs_dep_date, INSTR (gs_dep_date, '-', 1) + 1, 2) <= '12' ]]>
+     </if> 
+      <if test="startDay != null">
+<![CDATA[ AND to_date(gs_dep_date) >= to_date(#{startDay}) ]]>
+     </if> 
+      <if test="endDay != null">
+<![CDATA[ AND to_date(gs_dep_date) <= to_date(#{endDay}) ]]>
+     </if> 
 	</select>
+	
+	
+	
+	<select id="ssTableList" parameterType="java.lang.Integer">
+	
+	</select>
+	<select id="expenseStatementMap" parameterType="map" resultMap="ssm_map">
+		SELECT NVL(( SUM (gs_pay_amount) - SUM (GS_REF_AMOUNT)),0) as "netprofit"
+		      ,NVL(SUM (gs_pay_amount),0) as "sales"
+		      ,NVL(SUM (GS_REF_AMOUNT),0) as "refund"
+		      ,NVL(SUM (gs_account_due),0)  as "receivable"
+		      ,NVL(COUNT(DECODE(gs_pay_method,'카드',gs_pay_amount)),0)  as "cardsalescnt"
+		      ,NVL(SUM(DECODE(gs_pay_method,'카드',gs_pay_amount)),0)  as "cardsales"
+		      ,NVL(COUNT(DECODE(gs_pay_method,'현금',gs_pay_amount)),0)  as "cashsalescnt" 
+		      ,NVL(SUM(DECODE(gs_pay_method,'현금',gs_pay_amount)),0)  as "cashsales"
+		      ,NVL(COUNT(DECODE(gs_pay_method,'이체',gs_pay_amount)),0)  as "transsalescnt"
+		      ,NVL(SUM(DECODE(gs_pay_method,'이체',gs_pay_amount)),0)  as "transsales"
+		      ,NVL(COUNT(DECODE(gs_newandrepay,'1',gs_newandrepay)),0)  as "newsalescnt"
+		      ,NVL(SUM(DECODE(gs_newandrepay,'1',gs_pay_amount)),0)  as "newsales"
+		      ,NVL(COUNT(DECODE(gs_newandrepay,'2',gs_newandrepay)),0)  as "resalescnt"
+		      ,NVL(SUM(DECODE(gs_newandrepay,'2',gs_pay_amount)),0)  as "resales"
+		      ,NVL(COUNT(DECODE(gs_pay_method,'카드',gs_ref_amount)),0)  as "refundcardcnt"
+		      ,NVL(SUM(DECODE(gs_pay_method,'카드',gs_ref_amount)),0)  as "refundcard"
+		      ,NVL(COUNT(DECODE(gs_pay_method,'현금',gs_ref_amount)),0)  as "refundcashcnt"
+		      ,NVL(SUM(DECODE(gs_pay_method,'현금',gs_ref_amount)),0)  as "refundcash"
+		      ,NVL(COUNT(DECODE(gs_pay_method,'이체',gs_ref_amount)),0)  as "refundtranscnt"
+		      ,NVL(SUM(DECODE(gs_pay_method,'이체',gs_ref_amount)),0)  as "refundtrans"
+      FROM gym_sales
+     WHERE 1=1
+     <if test="month != null">
+	 AND SUBSTR (gs_dep_date, 0, 7) = #{month}
+     </if>
+     <if test="year != null">
+	 AND SUBSTR (gs_dep_date, 0, 4) = #{year}
+     </if> 
+      <if test="quarter != null and quarter == 1">
+<![CDATA[ AND SUBSTR (gs_dep_date, INSTR (gs_dep_date, '-', 1) + 1, 2) >= '01'
+	 	  AND SUBSTR (gs_dep_date, INSTR (gs_dep_date, '-', 1) + 1, 2) <= '03' ]]>
+     </if> 
+     <if test="quarter != null and quarter == 2">
+<![CDATA[ AND SUBSTR (gs_dep_date, INSTR (gs_dep_date, '-', 1) + 1, 2) >= '04'
+	 	  AND SUBSTR (gs_dep_date, INSTR (gs_dep_date, '-', 1) + 1, 2) <= '06' ]]>
+     </if> 
+     <if test="quarter != null and quarter == 3">
+<![CDATA[ AND SUBSTR (gs_dep_date, INSTR (gs_dep_date, '-', 1) + 1, 2) >= '07'
+	 	  AND SUBSTR (gs_dep_date, INSTR (gs_dep_date, '-', 1) + 1, 2) <= '09' ]]>
+     </if> 
+     <if test="quarter != null and quarter == 4">
+<![CDATA[ AND SUBSTR (gs_dep_date, INSTR (gs_dep_date, '-', 1) + 1, 2) >= '10'
+	 	  AND SUBSTR (gs_dep_date, INSTR (gs_dep_date, '-', 1) + 1, 2) <= '12' ]]>
+     </if> 
+      <if test="startDay != null">
+<![CDATA[ AND to_date(gs_dep_date) >= to_date(#{startDay}) ]]>
+     </if> 
+      <if test="endDay != null">
+<![CDATA[ AND to_date(gs_dep_date) <= to_date(#{endDay}) ]]>
+     </if> 
+	</select>
+<!-- //////////////////////////////////[[ 경애 끝 ]] ///////////////////////////////////////////////////////////////////-->
+	
 </mapper> 
  
  

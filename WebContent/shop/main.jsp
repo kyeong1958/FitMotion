@@ -9,9 +9,12 @@
 <%@ include file="../common/JEasyUICommon.jsp"%>
 <link rel="stylesheet" type="text/css" href="../NewCSS/main.css">
 <style type="text/css">
-body{
-	padding:0%;
-}
+	body{
+		padding:0%;
+	}
+	.container-fluid{
+		padding:0%;
+	}
 </style>
 </head>
 <script type="text/javascript">
