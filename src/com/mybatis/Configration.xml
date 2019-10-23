@@ -23,6 +23,7 @@
 			</dataSource>
 		</environment> -->
 	</environments>
+
 	<mappers>
 		<mapper resource="com/mybatis/mapper/account.xml" />
 		<mapper resource="com/mybatis/mapper/member.xml" />
@@ -32,3 +33,5 @@
 		<mapper resource="com/mybatis/mapper/staff.xml" />
 	</mappers>
 </configuration> 
+
+	

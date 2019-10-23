@@ -13,6 +13,7 @@ import org.apache.log4j.Logger;
 import com.gate.Controller;
 import com.gate.ModelAndView;
 import com.google.gson.Gson;
+import com.util.HashMapBinder;
 
 public class AccountController implements Controller {
 	Logger logger = Logger.getLogger(AccountController.class);
@@ -131,6 +132,52 @@ public class AccountController implements Controller {
 			mav.addObject("expenseStatement", expenseStatement);
 		}
 ////////////////////////////////// [[ 경애 끝 ]] ///////////////////////////////////////////////////////////////////
+		/*
+		 * =============================[[민지 시작 ]]==============================================================
+		 */
+		else if ("pfINS".equals(crud)) {
+			logger.info("매출등록 controller");
+			int result = 0;
+			Map<String, Object> pMap = new HashMap<>();
+			HashMapBinder hmb = new HashMapBinder(req);
+			hmb.bindPost(pMap);
+			logger.info(pMap);
+			logger.info(result);
+			result = accountLogic.pfIns(pMap);
+			mav.pageMove("redirect");
+			mav.setViewName("/account/profit.jsp");
+		} else if ("PROSEL".equals(crud)) {
+			logger.info("프로모션 선택시 뿌려주는것컨트롤");
+			Map<String, Object> proSel = new HashMap<String, Object>();
+			proSel = accountLogic.prosel();
+			mav.addObject("proSel", proSel);
+			logger.info(proSel);
+			mav.pageMove("forward");
+			mav.setViewName("/account/selectpro.jsp");
+
+		} else if ("PROSEL2".equals(crud)) {
+			logger.info("프로모션 선택시 뿌려주는것컨트롤");
+			Map<String, Object> proSel = new HashMap<String, Object>();
+			proSel = accountLogic.prosel();
+			mav.addObject("proSel", proSel);
+			//logger.info(proSel);
+			mav.pageMove("forward");
+			mav.setViewName("/account/selectstaff.jsp");
+
+		} 
+		/*회원 결제 내역*/
+		else if("probuySel".equals(crud)) {
+			List<Map<String,Object>> ProbuySel = new ArrayList<Map<String,Object>>();
+			ProbuySel = accountLogic.probuySel();
+			mav.addObject("ProbuySel", ProbuySel);
+			//logger.info(ProbuySel);
+			mav.pageMove("forward");
+			mav.setViewName("/account/BillingHistoryList_card.jsp");
+		}
+
+		/*
+		 * =============================[[민지 끝]]==============================================================
+		 */
 		return mav;
 	}
 

@@ -23,6 +23,7 @@
 			</dataSource>
 		</environment> -->
 	</environments>
+<<<<<<< HEAD
 	<mappers>
 		<mapper resource="com/mybatis/mapper/account.xml" />
 		<mapper resource="com/mybatis/mapper/member.xml" />
@@ -32,3 +33,8 @@
 		<mapper resource="com/mybatis/mapper/staff.xml" />
 	</mappers>
 </configuration> 
+=======
+	
+</configuration> 
+
+>>>>>>> refs/heads/k_min

@@ -23,7 +23,7 @@
     height: 34px;
     border: 1px solid #BABBC2;
     border-radius: 5px;
-    width: 17%;
+    width: 50%;
 
 
 }
@@ -153,7 +153,7 @@
  */
 
 /* 라디오 버튼 시작  */
-#MI-body {position: relative;}
+/* #MI-body {position: relative;}
 #MI-body input[type="radio"] {
   position: absolute;
   width: 1px;
@@ -205,10 +205,10 @@
 }
  
 
-/* 라디오 버튼 끝 */
-
+라디오 버튼 끝
+ */
 /* 체크박스시작  */
-
+/* 
 #MI-body input[type="checkbox"] + label:before {
   position: absolute;
   left: 0;
@@ -220,7 +220,7 @@
   -webkit-transition: all .12s, border-color .08s;
   transition: all .12s, border-color .08s;
 }
-#MI-body input[type="checkbox"] {  /* 실제 체크박스는 화면에서 숨김 */
+#MI-body input[type="checkbox"] {  실제 체크박스는 화면에서 숨김
   position: absolute;
   width: 1px;
   height: 1px;
@@ -234,7 +234,7 @@
 #MI-body input[type="checkbox"] + label {
   padding-left: 30px;
 }
-/* 체크박스 위치  */
+체크박스 위치 
 
 
 #MI-body input[type="checkbox"] + label {
@@ -248,12 +248,12 @@
 
 
 
-#MI-body input[type="checkbox"] + label:before {  /* 가짜 체크박스 */
+#MI-body input[type="checkbox"] + label:before {  가짜 체크박스
   content: ' ';
   display: inline-block;
-  width: 21px;  /* 체크박스의 너비를 지정 */
-  height: 21px;  /* 체크박스의 높이를 지정 */
-  line-height: 21px; /* 세로정렬을 위해 높이값과 일치 */
+  width: 21px;  체크박스의 너비를 지정
+  height: 21px;  체크박스의 높이를 지정
+  line-height: 21px; 세로정렬을 위해 높이값과 일치
   margin: -2px 8px 0 0;
   text-align: center; 
   vertical-align: middle;
@@ -262,7 +262,7 @@
   border-radius : 3px;
   box-shadow: 0px 1px 2px rgba(0,0,0,0.05), inset 0px -15px 10px -12px rgba(0,0,0,0.05);
 }
-
+ */
 /* 체크박스끝 */
 
 #MI-footer .pop_btn{

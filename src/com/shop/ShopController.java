@@ -98,6 +98,51 @@ public class ShopController implements Controller {
 			}
 		}
 ////////////////////////////////// [[ 경애끝 ]] /////////////////////////////////////////////	
+/*================================[[민지 시작 ]]======================================================*/
+		else if("GoodINS".equals(crud)) {
+			logger.info("비품관리입력");
+			int result = 0;
+			Map<String,Object> pMap = new HashMap<>();
+			HashMapBinder hmb = new HashMapBinder(req);
+			hmb.bindPost(pMap);
+			logger.info(pMap);
+			result = shopLogic.GoodIns(pMap);
+			logger.info(result);
+			mav.pageMove("redirect");
+			mav.setViewName("/shop/GoodSEL.fm");
+		}
+		
+		else if("GoodSEL".equals(crud)) {
+			logger.info("비품관리조회");
+			List<Map<String,Object>> gdSelList = new ArrayList<Map<String,Object>>();
+			gdSelList = shopLogic.GoodSEL();
+			mav.addObject("gdSelList", gdSelList);
+			mav.pageMove("forward");
+			mav.setViewName("/shop/GoodAjax.jsp");				
+		}
+		else if("GoodUPD".equals(crud)) {
+			logger.info("비품관리수정");
+			int result =0;
+			Map<String,Object> pMap = new HashMap<>();
+			HashMapBinder hmb = new HashMapBinder(req);
+			hmb.bindPost(pMap);
+			result = shopLogic.GoodUPD(pMap);
+			logger.info(result);
+			mav.pageMove("redirect");
+			mav.setViewName("/shop/GoodSEL.fm");
+		}
+		else if("GoodDEL".equals(crud)) {
+			logger.info("비품관리 삭제 ");
+			int result = 0;
+			Map<String,Object> pMap = new HashMap<>();
+			HashMapBinder hmb = new HashMapBinder(req);
+			hmb.bindPost(pMap);
+			result = shopLogic.GoodDEL(pMap);
+			mav.pageMove("redirect");
+			mav.setViewName("/shop/GoodSEL.fm");
+		}
+/*================================[[민지 끝]]======================================================*/
+
 		return mav;
 	}
 

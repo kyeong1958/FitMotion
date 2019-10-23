@@ -20,7 +20,10 @@ body{
 	function center(btn){
 		$(".tabBtn").css("border-bottom","1px solid #BABBC2");
 		$(btn).css("border-bottom","1px solid white");
-	}
+	} 
+
+	
+	
 	/* 페이지이동  */
 	function tabmove(url){
 			$.ajax({

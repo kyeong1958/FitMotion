@@ -23,6 +23,7 @@
    모든 업무에 대한 처리가 성공일 대 커밋 처리함.
    여러 업무 중 한 개라도 SQLException을 일으키는 경우는 롤백 처리해야 함.
 -->
+
           <!-- <transactionManager type="MANAGED" /> --> 
 	 	<!-- <environment id="development">
   			<transactionManager type="JDBC" />트렌잭션처리 할 때 개발자가 직접관리
@@ -30,7 +31,10 @@
          		<property name="data_source" value="java:comp/env/jdbc/dbPool" />
       		</dataSource>
    		</environment>  -->
+
+ 	
 	</environments>
+
    <mappers>
       <mapper resource="com/mybatis/mapper/account.xml" />
       <mapper resource="com/mybatis/mapper/member.xml" />
@@ -39,4 +43,6 @@
       <mapper resource="com/mybatis/mapper/shop.xml" />
       <mapper resource="com/mybatis/mapper/staff.xml" />
    </mappers>
+
+	
 </configuration> 

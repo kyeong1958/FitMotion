@@ -25,5 +25,6 @@ public class ModelAndView {
 	public void addObject(String name, Object obj) {// select해온 값이나 넘겨야 할 값을 담음
 		this.name = name;
 		this.obj = obj;
+		this.name = name;
 	}
 }

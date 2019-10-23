@@ -57,5 +57,34 @@
 		 WHERE locker_num = #{lockNum}
 	</update>
 <!--========================== [[ 경애끝 ]] ========================================-->
+	
+<!--==========================[[민지 시작 ]]=======================================================================  -->
+	
+	<select id="gdSel" resultType="map" parameterType="map">
+	SELECT go_num,go_type,go_name,go_stock,purchase_date,purchase_price FROM Goods
+	</select>
+	
+	
+	<insert id="gdIns" parameterType="map">
+	INSERT INTO Goods(go_num,go_type,go_name,go_stock,purchase_date,purchase_price,gym_num)
+				values(gd_Ins.NEXTVAL,#{go_type},#{go_name},#{go_stock},#{purchase_date},#{purchase_price},'1') 
+	</insert>
+
+<!-- <delete id="gdDel" parameterMap="map">
+	DELETE FROM Goods WHERE go_num=#{go_num} 
+</delete>
+
+<update id="gdUpd" parameterType="map">
+	UPDATE Goods
+			SET go_type = #{go_type},
+			go_name = #{go_name},
+			go_stock = #{go_stock},
+			purchase_date = #{purchase_date},
+			purchase_price = #{purchase_price}
+			WHERE go_num =#{go_num} 
+</update> -->
+
+<!--==========================[[민지 끝 ]]=======================================================================  -->
+
 </mapper> 
  

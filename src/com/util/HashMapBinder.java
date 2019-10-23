@@ -81,21 +81,23 @@ public class HashMapBinder {
 		Enumeration er = req.getParameterNames();
 		while(er.hasMoreElements()) {
 			String name = (String)er.nextElement();//name,address,pet
-			if("pet".equals(name)) {
+			/*
+			if("se_name".equals(name)) {
 				String values[] = req.getParameterValues(name);
 				String myPet = "";
 				if(values!=null) {
 					for(int i=0;i<values.length;i++){
 						myPet += values[i]+"  ";
 					}
-					target.put("pet", myPet);
+					target.put("se_name", myPet);
 				}
 			}
+			*/
 			//key에는 name, address, pet이 와야함
 			//value에는 각 key가 가리키는 값이 오면 됨.
-			else {
-			target.put(name, req.getParameter(name));
-			}
+			//else {
+			target.put(name, HangulConversion.toUTF(req.getParameter(name)));
+			//}
 		
 		}
 	}
@@ -105,7 +107,7 @@ public class HashMapBinder {
 		Enumeration er = req.getParameterNames();
 		while(er.hasMoreElements()) {
 			String name = (String)er.nextElement();
-			target.put(name, HangulConversion.toUTF(req.getParameter(name)));
+			target.put(name, req.getParameter(name));
 		}
 	}
 }

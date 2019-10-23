@@ -1,12 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<link rel="stylesheet" type="text/css" href="../NewCSS/BillingHistoryList.css">
     <!-- ============================ [[ 회원결제내역 ]] ======================================== -->
 
-<%@ include file="/common/JEasyUICommon.jsp"%>
-<link rel="stylesheet" type="text/css" href="../NewCSS/main.css">
-<link rel="stylesheet" type="text/css" href="../NewCSS/BillingHistoryList.css">
-<link rel="stylesheet" type="text/css" href="../NewCSS/BillingHistoryList.css">
+
 <style type="text/css">
+
 body{
    padding:0%;
 }
@@ -72,120 +71,7 @@ body{
 
  <!--=============================[[카드 부분 시작 ]]====================================================  -->
  		<div class="grid_list" id="BHLgrid" >
-                <ul>
-                    <!-- Loop -->
-                    <!-- 상품 별 디자인 클래스가 다르게 적용되어 있습니다. -->
-                    
-                        <li>
-                            <div class="service_itm" >
-                                <p>
-                                    <span>서비스</span>
-                                    <i>개인레슨 10회 + 그룹레슨 48회</i>
-                                    <strong class="cost">
-                                                1,200,000 원
-                                    </strong>
-                                </p>
-                            </div>
-                            <div class="card_point_txt">
-                                        <p class="use_service">이용중</p>
-                            </div>
-
-                            <div class="service_detail" >
-                                <div class="use_service">
-                                            <div class="passInfo">
-                                                <input class="passName" type="hidden" value="개인레슨">
-                                                <input class="seqPartnerProductUsage" type="hidden" value="451622">
-                                                <input class="seqPartnerPayment" type="hidden" value="477963">
-                                                <input class="seqPartnerProduct" type="hidden" value="21787">
-                                                <input class="seqPartnerProductPass" type="hidden" value="25513">
-                                                <input class="seqPartnerPaymentPass" type="hidden" value="448793">
-                                                
-                                                <input class="useNumberType" type="hidden" value="I">
-                                                <input class="useNumber" type="hidden" value="10">
-                                                <input class="usedNumber" type="hidden" value="0">
-                                                <input class="useStartDt" type="hidden" value="2019-08-28">
-                                                <input class="useEndDt" type="hidden" value="2020-01-06">
-                                                <input class="originUseEndDt" type="hidden" value="2020-01-06">
-                                                <input class="limitNumber" type="hidden" value="10회">
-                                                <input class="passUseNumber" type="hidden" value="10">
-                                                <input class="passState" type="hidden" value="R">
-                                                <input class="seqMember" type="hidden" value="716053">
-                                                <input class="name" type="hidden" value="이혜원 회원 (테스트)">
-                                            </div>
-                                            
-                                            <p class="pr_pt ">
-                                                <span>개인레슨</span>
-                                                <i>2019-08-28 - 2020-01-06</i>
-                                                <span class="day_data">
-                                                    
-                                                        
-                                                        
-                                                            <span>이용횟수 <strong class="c_red">0회</strong></span>
-                                                            
-                                                                
-                                                                
-                                                                    
-                                                                
-                                                            
-                                                            <span>남은횟수 <strong class="c_green">10회</strong></span>
-                                                        
-                                                    
-												</span>
-                                                <strong class="use_tool">
-                                                    
-														<!-- 
-															<a >
-                                                                이용권 기간 수정
-                                                            </a>
-														 -->
-                                                    
-                                                </strong>                                                                                    
-                                            </p>
-                                        
-       
-                                </div>
-
-                                <div class="use_itm">
-                                    <p>
-                                        <span>상품금액</span>
-                                        <i>1,200,000 원</i>
-                                    </p>
-                                    <p>
-                                        <span>결제금액</span>
-                                        <i>          
-                                                    1,200,000 원 
-                                        </i>
-                                    </p>          
-                                        <p>
-                                            <span>결제담당</span>
-                                            <i>기본 관리자</i>
-                                        </p>
-                                        <p>
-                                            <span>결제일자</span>
-                                            <i>2019-08-28</i>
-                                        </p>
-                                </div>
-
-                                <div class="service_price btn_add">
-                                    <p>
-                                    <span class="memo pos_add">메모
-                                        <!-- <span class="tooltip_box">
-                                            <span class="txt_box">
-                                                    190828 여름 할인 이벤트
-                                            </span>
-                                        </span> -->
-                                    </span>
-									<span class="fr btn_line_add">
-													<a class="btn red"  data-toggle="modal" data-target="#ST-Modal">중지</a>
-													<a class="btn red"  data-toggle="modal" data-target="#YD-Modal" > 양도</a>
-                                                    <a type="button" class="btn red">환불</a>
-                                    </span>
-                                    </p>
-                                </div>
-                            </div>
-                        </li>
-                    
-                </ul>
+               
              <!--    <form id="paymentFrom" method="post" action="/manager/member/editPaymentReceivables">
                     <input type="hidden" name="seqMember">
                     <input type="hidden" name="seqPartnerProduct">

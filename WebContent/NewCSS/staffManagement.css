@@ -1,4 +1,8 @@
 @charset "UTF-8";
+
+
+
+
 .bar_area {
     padding: 10px 66px;
     height: 54px;
@@ -215,7 +219,33 @@
 }
 
 
+/* 정보수정 버튼 부분  */
+.homefr{
+	float: right;
+	font-size: 0;
+	
+}
 
+.btn.dark {
+	background-color: #42485A;
+}
+
+#MIns-B {
+	display: inline-block;
+	margin: 0;
+	padding: 0 10px;
+	min-width: 95px;
+	height: 34px;
+	font-size: 13px;
+	font-weight: 500;
+	color: #fff;
+	text-align: center;
+	line-height: 32px;
+	border: 0; 
+	border-radius: 5px;
+	cursor: pointer;
+
+}
 
 
 

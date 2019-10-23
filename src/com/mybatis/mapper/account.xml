@@ -59,6 +59,7 @@
 <![CDATA[ AND to_date(gs_dep_date) <= to_date(#{endDay}) ]]>
      </if> 
 	</select>
+<<<<<<< HEAD
 	<select id="ssTableList" parameterType="java.lang.Integer">
 	
 	</select>
@@ -286,3 +287,46 @@
 </mapper> 
  
  
+=======
+	<!--==========================================================[[민지 시작 ]]===========================================================  -->
+	<insert id="pfIns" parameterType="map">
+	INSERT INTO TIC_PURCHASE(TICP_NUM,
+	TICP_REG_DATE,TICKET_NUM,PROM_NUM,MEM_NUM
+	,TICP_STATE,TICP_PAY_PERIOD,TICP_PAYMENT,TICP_NEWANDREPAY)
+	values(TIC_PURCHASEIns.NEXTVAL,#{ticp_reg_date},#{ticket_num},'3','11','이용중',#{ticp_pay_period},#{ticp_payment},'1')
+															
+	</insert>
+	
+	
+	<resultMap type="map" id="staffmap"/>
+	<resultMap type="map" id="promap"/>
+	<resultMap type="map" id="ticketmap"/>
+	<select id="promotionSEL" parameterType="map"  statementType="CALLABLE">
+			{call pro_protion(
+						#{stafflist, jdbcType=CURSOR, mode=OUT, javaType=java.sql.ResultSet, resultMap=staffmap}
+						,#{promotionlist, jdbcType=CURSOR, mode=OUT, javaType=java.sql.ResultSet, resultMap=promap}
+						,#{ticketlist, jdbcType=CURSOR, mode=OUT, javaType=java.sql.ResultSet, resultMap=ticketmap}
+					)}
+  	</select>
+  	
+ <select id="promobuysel" parameterType="map" resultType="map">
+		select  PROMOTION .PROM_NAME, PROMOTION .PROM_NUM, PROMOTION .PROM_DIS_PRICE,
+                 PROMOTION .PROM_START_DATE, PROMOTION .PROM_END_DATE,TIC_PURCHASE.TICP_REG_DATE,TIC_PURCHASE.TICP_PAYMENT
+                 ,MEMBER.MEM_NAME,MEMBER.MEM_NUM
+                from PROMOTION ,TIC_PURCHASE,MEMBER
+                where   TIC_PURCHASE.mem_num = MEMBER.mem_num
+                and  TIC_PURCHASE.PROM_NUM = PROMOTION.PROM_NUM 
+
+ </select>
+  	
+  	
+  	
+	<!--==========================================================[[민지 끝 ]]===========================================================  -->
+   
+  	
+</mapper>
+
+ 
+ 
+ 
+>>>>>>> refs/heads/k_min

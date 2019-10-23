@@ -1,5 +1,8 @@
 package com.shop;
 
+package com.shop;
+
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -36,7 +39,32 @@ public class ShopLogic {
 		result = shopDao.lockChange(lockNum);
 		return result;
 	}
-	
-	
+
 //////////////////////////////////[[ 경애끝 ]] /////////////////////////////////////////////	
+//////////////////////////////////[[ 민지시작 ]] /////////////////////////////////////////////
+	public int GoodIns(Map<String, Object> pMap) {
+		int result = 0;
+		result = shopDao.GoodIns(pMap);
+		return result;
+	}
+	public List<Map<String, Object>> GoodSEL() {
+		List<Map<String,Object>> gdSelList = new ArrayList<Map<String,Object>>();
+		gdSelList = shopDao.GoodSEL();
+		return gdSelList;
+	}
+	public int GoodUPD(Map<String, Object> pMap) {
+		int result = 0;
+		result = shopDao.GoodUPD(pMap);
+		return result;
+	}
+	public int GoodDEL(Map<String, Object> pMap) {
+		int result = 0;
+		result = shopDao.GoodDEL(pMap);
+		return result;
+	}
+	
+//////////////////////////////////[[ 민지 끝  ]] /////////////////////////////////////////////	
+
+
+
 }

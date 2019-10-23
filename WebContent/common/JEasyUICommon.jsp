@@ -20,8 +20,5 @@
 
 <script src="https://unpkg.com/bootstrap-table@1.15.4/dist/bootstrap-table.min.js"></script>
  -->
-<!-- 
-<link href="https://fonts.googleapis.com/css?family=Do Hyeon:400,700,800,900,1000&amp;subset=korean" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css?family=Noto Sans KR:400,700,800,900,1000&amp;subset=korean" rel="stylesheet">
- -->  
+
  
