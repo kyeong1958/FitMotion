@@ -1,19 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ include file="/common/JEasyUICommon.jsp"%>
-<link rel="stylesheet" type="text/css" href="../NewCSS/main.css">
-<link rel="stylesheet" type="text/css" href="../NewCSS/Main3Modal.css">
 
+
+<link rel="stylesheet" type="text/css" href="../NewCSS/Main3Modal.css">
+<!-- 주노랑 이관 완료  -->
 <style type="text/css">
 body{
    padding:0%;
 }
 </style>
- <!-- 확인용 버튼 -->
-<!--  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#OI-modal">
-  Open modal
-</button>
- -->
 <!--===========================[[ 직급명칭 등록 모달 시작 ]]================================ -->
 <!-- The Modal -->
 <div class="modal" id="OI-modal">

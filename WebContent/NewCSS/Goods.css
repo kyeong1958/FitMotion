@@ -1,0 +1,301 @@
+<style>
+/* 홈바  시작 */
+.bar_area {
+   padding: 10px 66px;
+   height: 54px;
+   background-color: #fff;
+   box-shadow: 1px 1px 4px #BABBC2;
+   position: relative;
+   z-index: 1;
+   
+}
+
+.homefl a{
+   float: left;
+   display: inline-block;
+   font-size: 16px;
+   color: #9fa0aa;
+   line-height: 32px;
+}
+
+
+
+
+
+#management:last-child{
+   font-weight: 500;
+   color: #42485A;
+   cursor: default;
+   text-decoration: none;
+   
+
+}
+
+.bar_area .homefl #home+#management{
+   padding-left: 37px;
+   background: url(../img/location_arrow.png) no-repeat left 50%;
+   
+}
+
+.homefr{
+   float: right;
+   
+   
+}
+
+.btn.dark {
+   background-color: #FF5722;
+}
+
+#MIns-B {
+   display: inline-block;
+   margin: 0;
+   padding: 0 10px;
+   min-width: 95px;
+   height: 34px;
+   font-size: 13px;
+   font-weight: 900;
+   color: #fff;
+   text-align: center;
+   line-height: 32px;
+   border: 0; 
+   border-radius: 5px;
+   cursor: pointer;
+
+}
+
+
+/* 홈바 끝 */
+/* 메뉴바 시작  */
+
+.tab_area{
+   background-color: #f0f0f2;
+   border-bottom: 1px solid #BABBC2;
+
+
+}
+
+.tab_area #sec{
+
+   padding-bottom: 43px;
+
+
+}
+
+#sec{
+   margin: 0 auto;
+   padding: 30px 66px;
+   max-width: 100%;
+
+}
+
+.Menufl{
+   float: left;
+
+}
+
+#tabul{
+   display: inline-block;
+   font-size: 0;
+   position: relative;
+   bottom: -2px;
+   margin: 0;
+   list-style: nonel;
+}
+
+.tab_area #tabul li {
+   display: inline-block;
+   font-size: 13px;
+   overflow: hidden;
+    min-width: 85px;
+}
+
+.tab_area #tabul li button.active{
+   color: #22B2FB;
+   border-bottom: 1px solid #fff;
+   outline: none;
+
+
+}
+
+ .tab_area #tabul li button{
+   display: inline-block;
+   padding: 0 10px;
+   width: 100%;
+   min-height: 40px;
+   color: #6e7794;
+   line-height: 1.4;
+   background-color: #fff;
+   border: 1px solid #BABBC2;
+   border-radius: 5px 5px 0 0;   
+}
+ 
+.tab_area #tabul li button>span{
+   display: block;
+   margin-bottom: 5px;
+   color: #6e7794;
+
+}
+
+
+
+/* 메뉴바 끝*/
+
+/* 검색 조회 부분 시작  */
+ 
+ .search_bar{
+      margin: -30px -66px 0;
+      padding: 20px 0;
+      
+      text-align: center;
+      border-bottom: 1px solid #BABBC2; 
+   }   
+   
+   .search_bar #S_fieldset{
+   padding: 0 66px;
+   text-align: left;
+
+
+}  
+  #S_fieldset legend{
+   display: none;
+
+}   
+    #S_fieldset form>p{
+   
+   line-height: 34px;
+}   
+   
+  .search_bar #S_fieldset select{
+   /* margin: 0;
+   padding-top: 0;
+   padding-right: 31px; */
+   min-width: 82px;
+    max-width: 126px;
+   height: 26px;
+   line-height: 24px;
+   margin-left: 8px;
+   padding: 0 20px 0 10px;
+   color: #000000!important;
+   border: 1px solid #BABBC2;
+   border-radius: 5px;
+   -webkit-appearance: none;
+   background: url(../img/select_arrow.png) no-repeat
+      right 10px top 50% #fff !important;
+   
+   
+} 
+
+select option{
+   padding: 0 10px;
+
+}
+ 
+ #seicon{
+   width: 26px;
+   height: 26px;
+   background: url(../img/btn_view.png)  no-repeat center 50% #22B2FB;
+   background-size: 14px;
+   border-radius: 0 5px 5px 0;
+   float: right;
+   border: 0;
+   cursor: pointer;
+
+
+} 
+
+
+/* 검색 조회 부 분 끝  */
+/* 버튼부분 시작  */
+
+
+#selectoption{
+   text-align: center;
+   overflow: hidden;
+   margin-top: 20px;
+}
+
+#selectoption+*{
+   margin-top: 20px;
+
+}
+
+
+.B_fr{
+   float: right;
+    margin-right: 53px;
+
+}
+
+/* input[type="checkbox"]{
+   display: none !important;   
+
+} */
+
+input[type="checkbox"]+.all{
+   display: inline-block;
+   position: relative;
+   
+
+}
+
+.btn.blue{
+   background-color: #2196F3;
+   color: #fff;
+   font-weight: 500;
+   font-size: 13px;
+   
+
+}
+.btn.small{
+   min-width: 43px;
+   padding: 0 10px;
+   height: 26px;
+   line-height: 24px;
+   margin-left: 5px;
+   
+}
+.btn.red{
+   background-color: #ff5722;
+   color: #fff;
+   font-weight: 500;
+   font-size: 13px;
+
+}
+
+/* 버튼부분 끝  */
+/* 등록된 카드 시작  */
+#meminfo{
+
+    width: 90%;
+    margin-top: 35px;
+    margin-left: 4%;
+    margin-bottom: 25px;
+    border: 1px solid #dddae0;
+    padding: 3% 3% 3% 3%;
+}
+.meminfo-top{
+   height: 40%;
+}
+.meminfo-table{
+   width:100%;
+   margin-top:3%;
+   vertical-align: center;
+}
+.meminfo-table-body{
+   text-align:center;
+    border-right: 1px solid #dddae0;
+}
+.meminfo-table-header{
+   font-size:15px;
+   font-weight:bold;
+   text-align:center;
+    border-right: 1px solid #dddae0;
+}
+
+
+
+/* 등록된 카드 끝 */
+
+
+</style>

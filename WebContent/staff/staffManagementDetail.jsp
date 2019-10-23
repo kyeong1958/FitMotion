@@ -1,27 +1,34 @@
+<%@page import="java.util.HashMap"%>
 <%@page import="java.util.List"%>
 <%@page import="java.util.Map"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
+<!-- 주노랑 이관 완료  -->
 <!-- ============================ [[ 직원관리상세 ]] ======================================== -->
-<%@ include file="/common/JEasyUICommon.jsp"%>
-<link rel="stylesheet" type="text/css" href="../NewCSS/main.css">
+
+
 <link rel="stylesheet" type="text/css" href="../NewCSS/staffManagement.css">
 <link rel="stylesheet" type="text/css" href="../NewCSS/Main3Modal.css">
+<%--  <%
+	Map<String,Object> sfDTList = (Map<String,Object>)request.getAttribute("sfDTList");
+	List<Map<String,Object>> list = (List<Map<String,Object>>)sfDTList.get("key");
+	 Map<String,Object> rMap = list.iterator().next();
+		int size=0;
+		if(list!=null && list.size()>0){
+		}
+%>  --%>
+
 
  <%
 
 
-
-
-	Map<String,Object> sfDTList = (Map<String,Object>)request.getAttribute("sfDTList");
-	List<Map<String,Object>> list = (List<Map<String,Object>>)sfDTList.get("key");
-	 Map<String,Object> rMap = list.iterator().next();
-		
-		int size=0;
-		if(list!=null && list.size()>0){
+			 Map<String,Object> rMap = new HashMap<>();
+			if(request.getAttribute("sfDTList") != null){
+			Map<String,Object> sfDTList = (Map<String,Object>)request.getAttribute("sfDTList");
+			List<Map<String,Object>> list = (List<Map<String,Object>>)sfDTList.get("key");
+			 rMap = list.get(0);
+			}	
 			
-		}
 
 %> 
 
@@ -30,10 +37,6 @@
 	body{
 	   padding:0%;
 	}
-	
-
-	
-	
 </style>
 <script type="text/javascript">
 	function staffpage(url){
@@ -70,15 +73,10 @@
 		    	} */
 		    });
 	});
-	
-	
 	function sfUPD(staff_id,staff_name,staff_hp,staff_gender,staff_introduce,staff_birth
 					,pi_base_pay,pi_join_day,rank_num,pi_private_pay,pi_group_pay	
 	){
-		alert(staff_id);
-		
 		$("#sfupdate").modal();
-
 		$("#mstaff_id").val(staff_id);
 		$("#coachName").val(staff_name);
 		$("#mobileNo").val(staff_hp);
@@ -90,15 +88,20 @@
 		$("#position").val(rank_num);
 		$("#persona").val(pi_private_pay);
 		$("#group").val(pi_group_pay);
-		
-		
 	}
-	
 	function staffupd(){
 		alert("수정버튼 ");
+		var formData = $("#add_coach_form2").serialize();
+		 $.ajax({
+			method:"POST"
+			,data:formData
+			,url:"/staff/SFUPD.fm"
+			,success:function(data){ 
+				alert(data);
+				$("#stupdate").html(data);
+			}
+		}); 
 	}
-	
-	
 
 </script>
 	<!-- ================================= [[ 화면전환 ]] =================================================== -->
@@ -108,18 +111,13 @@
 			<a class="bar_menu" href="#">직원관리</a>
 			<img src="../images/location_arrow.png">
 			<a class="bar_menu" href="#">직원상세</a>
-			
 		<div class="homefr" style="padding-right:10px;">
            <a href="#" class="btn dark" id="MIns-B" data-toggle="modal" onclick="sfUPD('<%=rMap.get("STAFF_ID") %>',
            '<%=rMap.get("STAFF_NAME") %>','<%=rMap.get("STAFF_HP") %>','<%=rMap.get("STAFF_GENDER") %>','<%=rMap.get("STAFF_INTRODUCE") %>'
            ,'<%=rMap.get("STAFF_BIRTH") %>','<%=rMap.get("PI_BASE_PAY") %>','<%=rMap.get("PI_JOIN_DAY") %>',
            '<%=rMap.get("RANK_NUM") %>','<%=rMap.get("PI_PRIVATE_PAY") %>','<%=rMap.get("PI_GROUP_PAY") %>')" >정보수정</a>
        </div>
-			
-			
 		</div>
-		
-
 	<!-- ================================= [[ 개인정보 ]] =================================================== -->
 		<div class="row profile">
 			<div class="row">

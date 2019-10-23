@@ -1,5 +1,6 @@
 package com.staff;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -12,11 +13,12 @@ import org.apache.log4j.Logger;
 import com.gate.Controller;
 import com.gate.ModelAndView;
 import com.util.HashMapBinder;
-
+//주노꺼랑 이관완료
 public class StaffController implements Controller {
    Logger logger = Logger.getLogger(StaffController.class);
    String crud = null;
    StaffLogic staffLogic = null;
+
    public StaffController(String crud) {
       this.crud = crud;
       staffLogic = new StaffLogic();
@@ -39,11 +41,12 @@ public class StaffController implements Controller {
       }
       else if("SFSEL".equals(crud)) {
          logger.info("회원조회 창 ");
-        Map<String,Object> pMap = null;
-         //Map<String,Object> rMap = null;
-        pMap = staffLogic.sfsel();
-         logger.info(pMap.size());
-         mav.addObject("sfSelList", pMap);
+         String keyword = req.getParameter("keyword");
+        Map<String,String> pMap = new HashMap<String, String>();
+        pMap.put("keyword", keyword);
+        List<HashMap> sfSelList = staffLogic.sfsel(pMap); 
+        logger.info(keyword);
+         mav.addObject("sfSelList", sfSelList);
          mav.pageMove("forward");
          mav.setViewName("/staff/staff_card.jsp");
       }
@@ -56,7 +59,6 @@ public class StaffController implements Controller {
     	  mav.addObject("sfDTList",map);
     	  mav.pageMove("forward");
     	  mav.setViewName("/staff/staffManagementDetail.jsp");
-    	  
       }
       else if("RNNAMEINS".equals(crud)) {
     	  logger.info("rank_ins controller 호출성공");
@@ -69,7 +71,6 @@ public class StaffController implements Controller {
     	  logger.info("pMap:"+pMap);
     	  mav.pageMove("redirect");
     	  mav.setViewName("/staff/RankSEL.fm");
-    	  
       }
       else if("RankSEL".equals(crud)) {
     	  List<Map<String,Object>> rankList = null;
@@ -78,7 +79,7 @@ public class StaffController implements Controller {
     	  mav.pageMove("forward");
     	  mav.setViewName("/staff/rankNameAdd.jsp");
       }
-      else if("SFUPD".contentEquals(crud)) {
+      else if("SFUPD".equals(crud)) {
     	  logger.info("직원관리수정");
     	  int result = 0;
     	  Map<String,Object> pMap = new HashMap<>();
@@ -88,10 +89,7 @@ public class StaffController implements Controller {
     	  logger.info(result);
     	  mav.pageMove("redirect");
     	  mav.setViewName("/staff/staffManagementDetail.jsp");
-    	  
       }
-
-      
        //=============================[[민지 끝 ]]============================================
        return mav;
    }

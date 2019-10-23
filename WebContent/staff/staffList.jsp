@@ -3,11 +3,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
    <!-- ============================ [[ 강사목록 ]] ======================================== -->
+<!-- 주노랑 이관 완료  -->
 
-<%@ include file="/common/JEasyUICommon.jsp"%>
-<link rel="stylesheet" type="text/css" href="../NewCSS/main.css">
 <link rel="stylesheet" type="text/css" href="../NewCSS/Owner.css">
-<%@ include file="../common/JEasyUICommon.jsp"%>
+
+
 
 <style type="text/css">
 body{
@@ -18,33 +18,42 @@ body{
     width: 32%;
     margin-right: 16px;
 }
-
 </style>
-<script type="text/javascript">
-   function staffpage(url){
-      $.ajax({
-         method:'get'
-         ,url:url
-         ,success:function(data){
-            $("#staffList").html(data);
-         }
-      });
-   }
-</script>
 <!-- ================================= [[ 화면전환 ]] =================================================== -->
     <!--===============================[[스크립트 ]]===========================================  -->
     
       <script type="text/javascript">
-      $(document).ready(function(){
-          $('ul.tabs li').click(function(){
-             var tab_id = $(this).attr('data-tab');
-             $('ul.tabs li').removeClass('current');
-             $('.tab-content').removeClass('current');
-             $(this).addClass('current');
-             $("#"+tab_id).addClass('current');
-          })
-       })
-       
+      
+      
+      function a(){
+    	  $.ajax({
+       		  method:"POST"
+				,url:"/staff/SFSEL.fm?keyword="+$("#keyword").val()
+				,success:function(data){
+					$("#staff_card").html(data);
+     			}
+       	  	});
+    	  
+      }
+      
+     /*  $(document).ready(function(){
+	      $("#keyword").keydown(function(e){
+		         //if(e.keyCode == 13){
+		        	 alert("엔턴눌림?");
+		        	 $("#staff_card").html("1111111");
+		        	 /*
+		        	 $.ajax({
+		       		  method:"POST"
+	    				,url:"/staff/SFSEL.fm?keyword="+$("#keyword").val()
+	    				,success:function(data){
+	    					alert("성공"+data);
+	    					$("#staff_card").html(data);
+		     			}
+		       	  	});
+		        	 
+		         //}
+		  });
+      }) */
        
   /* 임직원 등록   */    
        function staffInser(){
@@ -55,10 +64,9 @@ body{
   				,data:formData
   				,url:"/staff/SFINS.fm"
   				,success:function(data){
-  					alert("성공");
   					$("#staff_card").html(data);
-  			}
-    	  });
+  				}
+    	 	 });
          }
        /* 직급 등록  */
        function rakIns(){
@@ -68,7 +76,6 @@ body{
   				,data:formData
   				,url:"/staff/RNNAMEINS.fm"
   				,success:function(data){
-  					alert("성공");
   					$("#rankNameAdd").html(data);
   				}
     	  });
@@ -89,13 +96,10 @@ body{
   			}
     	  });
 		}
-	
-	
-/* 	,staff_gender,staff_hp,staff_introduce,staff_birth
-	,pi_base_buy,pi_join_day,rank_num,pi_private_pay,pi_group_pay */
-	
+	   //$(document).ready(function (){
+	/* =========== [[textbox 엔터 이벤트 처리]] ============*/   
 
-	
+	   //});//////////////////end of ready(DOM 구성이 끝났을 때-브라우저가)   
 	
 	
       </script>
@@ -151,8 +155,8 @@ body{
             <legend id="legend">검색</legend>
             <span class="search_box">
                <form name="searchFrm">
-                  <input type="text" name="keyword">
-                  <button type="button" class="search">검색</button>
+                  <input type="text" name="keyword" id="keyword">
+                  <button type="button"  class="search" onclick="a()">검색</button>
                </form>
             </span>
          </fieldset> 
@@ -162,8 +166,7 @@ body{
        
             <div class="grid_list">
             	<div id="staff_card">
-             
-         
+         123
             	</div>
             </div>
          

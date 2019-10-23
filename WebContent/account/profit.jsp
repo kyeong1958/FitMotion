@@ -4,8 +4,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!-- ============================ [[ 매출등록   ]] ======================================== -->
-<%@ include file="/common/JEasyUICommon.jsp"%>
-<link rel="stylesheet" type="text/css" href="../NewCSS/main.css">
 <link rel="stylesheet" type="text/css" href="../NewCSS/profit.css">
 <link rel="stylesheet" type="text/css" href="../NewCSS/MemberSearch.css">
 
@@ -15,7 +13,6 @@ body{
 	padding:0;
 }
 </style>
-<%-- <%@ include file="/Member/SearchMember.jsp"%> --%>
 <script type="text/javascript">
 	$(document).ready(function(){
 	 //데이트박스 
@@ -137,7 +134,6 @@ function removeComma(str)
  		 var ctext = $("#t_card").text().substr(0, $("#t_card").text().length -1); 
 		 var resultCard = Number(removeComma(ctext))+  
 		 				  Number(removeComma($("#etextname").val()));
-			alert(resultCard);
 			$("#t_card").html(commatogeter(resultCard)+"원");
 		 
 		 
@@ -147,7 +143,6 @@ function removeComma(str)
 			
 			 $("#total_buy").html(commatogeter(Card)+"원");
 			 
-			 alert(Number(Card+g_Money));
 			 
 			//alert(commatogeter(Card));
 			
@@ -219,7 +214,6 @@ function fund(){
  
 
  function pfIns_buy(){
-	 alert("결제버튼 눌림?");
 		var formData = $("#ftable").serialize();
 		alert(formData);
 		 $.ajax({
@@ -227,7 +221,6 @@ function fund(){
 			,data:formData
 			,url:"/account/pfINS.fm"
 			,success:function(data){
-				alert("성공");
 				//$("#eqbox").html(data);
 			}
 		}); 
@@ -338,10 +331,9 @@ function fund(){
                   <div style="padding:0 0 5px">
                      <label class="spend-box-right-column">결제일</label>
                     
-                      
-                     <input  id="datebox" name="ticp_reg_date" class="easyui-datebox">
+                     <input  id="datebox"  name="ticp_reg_date" class="easyui-datebox">
                   </div>
-                  <div style="padding:0 0 5px"  >
+                  <div style="padding:0 0 5px" >
                  
                      <label class="spend-box-right-column"></label>
                      <span>
@@ -372,12 +364,13 @@ function fund(){
                   %>
                         <button type="button" onclick="number(value)"  value=<%=count %>  class="spend-button"><%=count %></button>
                   <%   
-                  		count = "0"+count;   }/// end of elsse
-                           }/// end of inner for
+                  		count = "0"+count;  
+                  			}/// end of elsse
+                       }/// end of inner for
                   %>
                      </div>
                   <%   }   %>
-                  </div>
+                 </div>
                   <div>
                      <h4 class="spending-box-payment-title">결제 수단 선택</h4>
                      <button class="spending-payment-method card"  name="ticp_pay_period" value="card" onclick="card()">카드</button>
@@ -414,7 +407,6 @@ function fund(){
 					,data:formData
 					,url:"/member/BHMSEL.fm"
 					,success:function(data){
-						alert("성공");
 						$("#memsearch").html(data);
 					}
 				}); 

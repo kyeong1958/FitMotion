@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <!-- ============================ [[ 메인폼 ]] ======================================== -->
+     <!-- 주노꺼랑 이관 완료 -->
 <!DOCTYPE html>
 <html>
 <head>
@@ -37,14 +38,16 @@ body{
 								$("#in_005fcard").html(data);
 							}
 						}); 
-				   }else if(url=="../staff/staffList.jsp") {
+				 	  }
+				/* url=="../member/memberList.jsp" 끝 */    
+				    else if(url=="../staff/staffList.jsp") {
 					   var formData = $("#add_coach_form").serialize();
 				    	  $.ajax({
 				    		  method:"POST"
 				  				,data:formData
 				  				,url:"/staff/SFSEL.fm"
 				  				,success:function(data){
-				  					$("#staff_card").html(data);
+				  					$("#staff_card").html(data); 
 					  				var formData = $("#F_rank").serialize();
 					  			    	  $.ajax({
 					  			    		  method:"POST"
@@ -55,9 +58,10 @@ body{
 					  			  					$("#rankNameAdd").html(data);
 					  			  				}
 					  			    	  }); 
-						  				}
-						    	 	});
-						  		 }	
+						  		}//end of 전체조회 
+						  });
+				   }//end of 직원관리 	
+				    /* url=="../staff/staffList.jsp" 끝 */
 				   else if(url=="../account/profit.jsp"){
 					   $.ajax({
 	  			    		  method:"POST"
@@ -73,18 +77,45 @@ body{
 			  		  			  				,success:function(data){
 			  		  			  					//alert("성공");
 			  		  			  					$("#selectpro2").html(data);
-			  		  			  				}
+			  		  			  			}
 			  		  			    	  }); 
-	  			  				}
-	  			    	  }); 
-					   
-					   
-					   
-					   
-					   
-				   }
-					   
-				   
+	  			  						}
+	  			    			     }); 
+				  				 }
+			/*  url=="../account/profit.jsp" 끝*/
+					else if(url=="../shop/Good.jsp"){
+						 $.ajax({
+								method:"POST"
+								,url:"/shop/GoodSEL.fm"
+								,success:function(data){
+									alert("성공");
+									$("#gdSel").html(data);
+								}
+							}); 
+					} 
+				    /* url=="../shop/Good.jsp"끝 */
+				    else if(url=="../program/TicketMain.jsp"){
+					    	var formData = $("#f_insert").serialize();
+							$.ajax({
+								method : "POST",
+								data : formData,
+								url : "/program/taSEL.fm",
+								success : function(data) {
+									$("#tasel").html(data);
+								}
+							});
+				    }
+				    /* url=="../program/TicketMain.jsp"끝 */
+				    else if(url=="../account/BillingHistoryList.jsp"){
+						$.ajax({
+							method : "POST",
+							url : "/account/probuySel.fm",
+							success : function(data) {
+								$("#BHLgrid").html(data);
+							}
+						});
+			   		 }
+				    /*url=="../account/BillingHistoryList.jsp" 끝*/
 			  }
 		   });
 		}
@@ -96,6 +127,7 @@ body{
 		$(menu).show();
 	}
 </script>
+
 <body>
 <script type="text/javascript">
     $(document).ready(function(){
@@ -118,13 +150,15 @@ body{
          <div class="row sidemenutitle" onClick="menu(''),pagemove('../staff/staffList.jsp')">직원관리</div>
          <div class="row sidemenutitle" onClick="menu(''),pagemove('../program/TicketMain.jsp')">이용권관리</div>
          <div class="row sidemenutitle" onClick="menu(''),pagemove('../shop/Lock.jsp')">락커관리</div>
+      	 <div class="row sidemenutitle" onClick="menu(''),pagemove('../shop/Good.jsp')">비품관리</div>
+         <div class="row sidemenutitle" onClick="menu(''),pagemove('../shop/Lock.jsp')">기구관리</div> 
          <div class="row sidemenutitle" onClick="menu('.history'),pagemove('../schedule/reservation.jsp')">내역관리</div>
          <div class="row history">
             <div class="row sidemenu" id="allsalesmanagement" onClick="pagemove('../schedule/reservation.jsp')">예약내역</div>
             <div class="row sidemenu" id="allsalesmanagement" onClick="pagemove('../member/entranceStatement.jsp')">입장내역</div>
             <div class="row sidemenu" id="allsalesmanagement" onClick="pagemove('../account/BillingHistoryList.jsp')">회원결제내역</div>
          </div>
-         <div class="row sidemenutitle" onClick="menu(''),pagemove('../account/SalesStatistics.jsp')">통계분석</div>
+         <div class="row sidemenutitle" onClick="menu(''),pagemove('../account/StatisticsSales2.jsp')">통계분석</div>
          <div class="row sidemenutitle" onClick="menu('.account'),pagemove('../account/salesStatement.jsp')">회계관리</div>
          <div class="row account">
             <div class="row sidemenu" id="allsalesmanagement" onClick="pagemove('../account/salesStatement.jsp')">매출내역</div>

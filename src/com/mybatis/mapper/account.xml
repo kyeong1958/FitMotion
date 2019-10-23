@@ -4,7 +4,7 @@
 	<select id="test1">
 		SELECT 1 FROM dual
 	</select>
-	
+	<!--==========================================================[[민지 시작 ]]===========================================================  -->
 	<insert id="pfIns" parameterType="map">
 	INSERT INTO TIC_PURCHASE(TICP_NUM,
 	TICP_REG_DATE,TICKET_NUM,PROM_NUM,MEM_NUM
@@ -25,10 +25,20 @@
 					)}
   	</select>
   	
-  	
-  	
+ <select id="promobuysel" parameterType="map" resultType="map">
+		select  PROMOTION .PROM_NAME, PROMOTION .PROM_NUM, PROMOTION .PROM_DIS_PRICE,
+                 PROMOTION .PROM_START_DATE, PROMOTION .PROM_END_DATE,TIC_PURCHASE.TICP_REG_DATE,TIC_PURCHASE.TICP_PAYMENT
+                 ,MEMBER.MEM_NAME,MEMBER.MEM_NUM
+                from PROMOTION ,TIC_PURCHASE,MEMBER
+                where   TIC_PURCHASE.mem_num = MEMBER.mem_num
+                and  TIC_PURCHASE.PROM_NUM = PROMOTION.PROM_NUM 
 
+ </select>
   	
+  	
+  	
+	<!--==========================================================[[민지 끝 ]]===========================================================  -->
+   
   	
 </mapper>
 

@@ -1,10 +1,11 @@
 package com.member;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import org.apache.log4j.Logger;
-
+//주노꺼랑 이관완료
 public class MemberLogic {
 	Logger logger = Logger.getLogger(MemberLogic.class);
 	MemberDao memberDao = null;
@@ -38,20 +39,15 @@ public class MemberLogic {
 	      result = memberDao.bhDEL(pMap);
 	      return result;
 	   }
-	public int getTot(List<Map<String, Object>> pMap) {
-		total = 0;
-		total = memberDao.getTotal(pMap);
-		return total;
-	}
-	public List<Map<String, Object>> bhGen() {
-		
-		return null;
-	}
+
+
 	/*============================[[민지 끝 ]]====================================================*/
-	public List<Map<String, Object>> bhDET() {
-		logger.info("회원등록상세보기로직");
-		List<Map<String,Object>> bhDetList = null;
-		bhDetList = memberDao.bhDET();
-		return bhDetList;
-	}
+	/*==================================[[주노 시작 ]]=================================================*/
+	 public Map<String, Object> bhDET(Map<String, Object> pMap) {
+	      logger.info("회원등록상세보기로직");
+	      Map<String, Object> rMap = new HashMap<>();
+	      rMap = memberDao.bhDET(pMap);
+	      return rMap;
+	   }
+	 /*==================================[[주노끝 ]]=================================================*/
 }

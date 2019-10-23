@@ -1,6 +1,7 @@
 package com.member;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -9,7 +10,7 @@ import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.log4j.Logger;
 
 import com.util.MyBatisCommonFactory;
-
+//주노꺼랑 이관완료
 public class MemberDao {
 	Logger logger = Logger.getLogger(MemberDao.class);
 	SqlSessionFactory sqlSessionFactory = null;
@@ -65,7 +66,7 @@ public class MemberDao {
 	      int result = 0;
 	      try {
 	         sqlSession = sqlSessionFactory.openSession();
-	         result = sqlSession.update("MemUpd", pMap);
+	         result = sqlSession.update("memUPD", pMap);
 	         sqlSession.commit();
 	      } catch (Exception e) {
 	         e.printStackTrace();
@@ -80,10 +81,18 @@ public class MemberDao {
 	   public int bhDEL(Map<String, Object> pMap) {
 	      logger.info("bhDEL Dao 호출성공");
 	      int result = 0;
+	      logger.info(pMap);
+	      logger.info(pMap);
+	      logger.info(pMap);
+	      logger.info(pMap);
 	      try {
 	         sqlSession = sqlSessionFactory.openSession();
 	         result = sqlSession.delete("MemDEL", pMap);
-	         //logger.info(pMap.get("se_code"));
+	         logger.info(pMap);
+	         logger.info(pMap);
+	         logger.info(pMap);
+	         logger.info(result);
+	         logger.info(result);
 	         sqlSession.commit();
 	      } catch (Exception e) {
 	         e.printStackTrace();
@@ -94,38 +103,27 @@ public class MemberDao {
 	      }
 	      return result;
 	   }
-	public int getTotal(List<Map<String, Object>> pMap) {
-		int tot = 0;
-		try {
-			sqlSession = sqlSessionFactory.openSession();
-			tot = sqlSession.selectOne("MemSearch",pMap);
-			//selectOne : 한개만 출력한다.  =  검색하는부분 
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			if(sqlSession!=null) {
-				sqlSession.close();
-			}
-		}	
-		return tot;
-	}
+
 	/*===============================[[민지 끝 ]]===========================================*/
-	public List<Map<String, Object>> bhDET() {
-		logger.info("회원목록상세조회다오");
-		List<Map<String,Object>> bhDetList = new ArrayList<>();
-	try {
-			sqlSession = sqlSessionFactory.openSession();
-			bhDetList = sqlSession.selectList("MemDET");
-			 Map<String,Object> rMap = bhDetList.get(0);
-			 logger.info(bhDetList.size()); 
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			if(sqlSession!=null) {
-				sqlSession.close(); 
-			}
-			
-		}
-		return bhDetList;
+	/*===============================[[주노시작]]================================================*/
+	public Map<String, Object> bhDET(Map<String, Object> pMap) {
+	      logger.info("회원목록상세조회다오");
+	      Map<String,Object> rMap = new HashMap<>();
+	   try {
+	         sqlSession = sqlSessionFactory.openSession();
+	          rMap = sqlSession.selectOne("memDET",pMap);
+	          logger.info("너타냐1212");
+	          logger.info(rMap);
+	          logger.info(rMap.size()); 
+	      } catch (Exception e) {
+	         e.printStackTrace();
+	      } finally {
+	         if(sqlSession!=null) {
+	            sqlSession.close(); 
+	         }
+	         
+	      }
+	      return rMap;
 	}
+	/*===============================[[주노끝]]================================================*/
 }

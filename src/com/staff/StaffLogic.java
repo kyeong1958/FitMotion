@@ -1,11 +1,12 @@
 package com.staff;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import org.apache.log4j.Logger;
-
+//주노꺼랑 이관완료
 public class StaffLogic {
    Logger logger = Logger.getLogger(StaffLogic.class);
    StaffDao staffDao = null;
@@ -24,12 +25,13 @@ public class StaffLogic {
       }
       return result;
    }
-   public Map<String, Object> sfsel() {
-      logger.info("멤버등록조회로직");
-      Map<String,Object> pMap =null;
-      pMap = staffDao.sfSel();
-      return pMap;
+   public List<HashMap> sfsel(Map<String, String> pMap) {
+	   logger.info("멤버등록조회로직");
+	   List<HashMap> sfSelList  = staffDao.sfSel(pMap);
+	
+	   return sfSelList;
    }
+ 
    public int rkins(Map<String, Object> pMap) {
 	  logger.info("rinkname logic 호출성공");
 	  int result =0;
@@ -56,6 +58,7 @@ public int SFUPD(Map<String, Object> pMap) {
       }
       return result;
 }
+
 
    
    //===================================[[민지 Logic 끝]]=====================================

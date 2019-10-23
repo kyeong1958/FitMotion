@@ -42,17 +42,24 @@ public class ActionServlet extends HttpServlet {
 		logger.info(pageMove);
 			if(pageMove != null && json == null) {
 				if("forward".equals(pageMove)) {
+					logger.info("ghost"+pageMove);
+					logger.info("ghost"+viewName);
 					req.setAttribute(name, obj);
 					RequestDispatcher view = req.getRequestDispatcher(viewName);
 					view.forward(req, res);
+					
+					
 				}else if("redirect".equals(pageMove)) {
 					res.sendRedirect(viewName);
+					
 				}
 				
 			}else if(json != null) {
 				req.setAttribute("json", json);
 				RequestDispatcher view = req.getRequestDispatcher("/both/JsonTest.jsp");
 				view.forward(req, res);
+				
+				
 			}
 		}catch (Exception e) {
 			e.printStackTrace();

@@ -2,12 +2,8 @@
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    
-    
 
-    
-     <%@ include file="../common/JEasyUICommon.jsp"%>
-    
+    <!-- 주노꺼랑 이관 완료 -->
    <style type="text/css">
 body{
    padding:0%;
@@ -17,11 +13,28 @@ body{
 	padding:0%;
 
 }
-</style> 
-    
-    
-    
-    
+</style>
+<script>
+
+
+
+	/* 	  function memberdetail(mem_num){
+				alert(mem_num);
+		 		var formData = $("#MDetail").serialize();
+				 $.ajax({
+					method:"POST"
+					,data:formData
+					,url:"/member/bhDET.fm?mem_num="+mem_num
+					,success:function(data){
+						alert("성공");
+						$("#memList").html(data);
+					}
+				}); 
+		     }
+		    */
+	
+</script> 
+	<form id="MDetail">
  <ul>
               <!-- Loop -->     
     <%
@@ -30,21 +43,12 @@ body{
     	if(bhSelList!=null){
     		size = bhSelList.size();
     	}
-    	
-    	
-    
-    
     %>          
     
-    
     <%
-    
     	for(int i=0; i<size; i++){
     		Map<String,Object> rMap = bhSelList.get(i);
-    	
-    
     %>
- 
               <li >
                   <div class="profile">
                       <p class="pic" id="pic">
@@ -59,15 +63,14 @@ body{
                               <span class="letter_crap wd_add">락카 12개월</span>
 				               <i class="expired">만료일 : 2020-09-25</i>  
                       </p>
-                      
                   </div>
                   
                   <div class="function_btn" >
-                      <input type="checkbox" id="check" onclick="eqch('<%=rMap.get("MEM_NUM") %>')"  name="check" class="checkBox"  data-sms-agree="Y" >
+                      <input type="checkBox" id="check_mem_num" value="<%=rMap.get("MEM_NUM") %>" onclick="eqch('<%=rMap.get("MEM_NUM") %>')" name="check" >
                       		<label for="member_1">회원 선택</label>	  
 						  <a  class="btn green small cart">상품판매</a>
 					  
-                      <a href="/member/memberManagementDetail.jsp" class="btn blue small view" >상세보기</a>
+                      <a onclick="memberdetail('<%=rMap.get("MEM_NUM") %>')" class="btn blue small view" >상세보기</a>
                   </div>
               </li>
               <%
@@ -75,3 +78,4 @@ body{
               %>
               <!-- //Loop  -->
           </ul>
+      </form>   

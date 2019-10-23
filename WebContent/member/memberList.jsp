@@ -2,16 +2,13 @@
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    
-    
+     <!-- 주노꺼랑 이관 완료 -->
  <%
 	List<Map<String,Object>> bhSelList = (List<Map<String,Object>>)request.getAttribute("bhSelList");
 	int size=0;
 	if(bhSelList!=null){
 		size = bhSelList.size();
 	}
- 
- 
  %>
 <!-- ============================ [[ 회원목록  ]] ======================================== -->
 <%@ include file="../common/JEasyUICommon.jsp"%>
@@ -36,16 +33,6 @@ body{
 		   ,url:url
 		   ,success:function(data){
 			   $("#memList").html(data);
-			   /* 
-			     $.ajax({
-					method:"POST"
-					,data:formData
-					,url:"/member/BHSEL.fm"
-					,success:function(data){
-						//alert("성공");
-						$("#in_005fcard").html(data);
-					}
-				});    */
 		   }
 		});
 	}
@@ -78,20 +65,12 @@ body{
 	    })
 	});
 	
-	function extension(){
-		alert("일괄 기간연장창 열림");
-			$("#M_extension").modal();
-	}
-	
-	function Group(){
-		alert("그룹 추가창 열림 ");
-		 $("#M_group").modal();
-	}
 	
 	var reportSeqArr = "";
 	function M_del(){
 			 	var mem_num = null;
-			 	mem_num = $("#check").val();
+			 	mem_num = $("#check_mem_num").val();
+			 	alert(mem_num);
 					var formData = $("#f_insert").serialize();
 					 $.ajax({
 						method:"POST"
@@ -106,7 +85,6 @@ body{
 	function eqch(mem_num){
 	 $("#check").val(mem_num);
 	}
-
 	$(function () {
 	    $(".tab_area #tabul li button").click(function () {
 	        $(".tab_area #tabul li button").removeClass("active").css("color", "#333");
@@ -114,59 +92,17 @@ body{
 	        								 "border-bottom","1px solid #fff");
 	    });
 	})
-	    
 	    function memInsert(){
-			//$("#MIns").modal("hide");
-			//alert("눌림?");
 			var formData = $("#f_insert").serialize();
-			//alert("등록버튼 눌림?");
 			 $.ajax({
 				method:"POST"
 				,data:formData
 				,url:"/member/BHINS.fm"
 				,success:function(data){
-					alert("성공");
 					$("#in_005fcard").html(data);
 				}
 			}); 
 		}
-	
-	
-	
-	    
-	    $("#selectBox option:checked").text(){
-	    	alert("값");
-	    	
-	    }
-	    
-	    
-	    function action (val){
-	    	alert(val);
-	    }
-	    
-	    
-	    
-	    
-	    $(document).ready(function (){
-	    	/* =========== [[combobox 이벤트 처리]] ============*/      
-	    	      $("#genderSearch").combobox({
-	    	         onChange:function(){
-	    	            user_combo = $(this).combobox('getValue');
-	    	         }
-	    	      });
-	    	/* =========== [[textbox 엔터 이벤트 처리]] ============*/   
-	    	      $("#keyword").textbox('textbox').bind('keydown',function(e){
-	    	         if(e.keyCode == 13){
-	    	            //alert("엔터 쳤을 때");
-	    	            $("#divSearch").datagrid({
-	    	               url:"test.mo?crud=boardList&cb_search="
-	    	                         +user_combo+"&keyword="+$("#keyword").val()
-	    	            });             
-	    	         }
-	    	      });
-	    	   });//////////////////end of ready(DOM 구성이 끝났을 때-브라우저가)   
-	    
-	    
 	    
 	    
 </script>
@@ -195,7 +131,7 @@ body{
 					</button>
 				</li>
 				<li>
-					<button type="button" class=" tabBtn" id="nonPaymentMember" value="nonPaymentMember"  rel="1" href="#">미결제 회원
+					<button type="button" class=" tabBtn" id="nonPaymentMember" value="nonPaymentMember"  rel="1" href="#">환불 회원
 						<span>6</span>
 					</button>
 				</li>
@@ -208,14 +144,6 @@ body{
 						<span>184</span></button>
 				</li>
 				<li>
-					<button type="button" data-expire-gubun="3" id="EXPIRED_3" class=" tabBtn" value="EXPIRED_3" data-gubun="3" href="#"  rel="3">만료 3일 전
-						<span>0</span></button>
-				</li>
-				<li>
-					<button type="button" data-expire-gubun="7" id="EXPIRED_15" class=" tabBtn" value="EXPIRED_15" data-gubun="7" href="#" rel="4">만료 15일 전
-						<span>0</span></button>
-				</li>
-				<li>
 					<button type="button" class=" tabBtn" id="ReceivablesMember" value="ReceivablesMember"  href="#" rel="5">미납 회원
 						<span>16</span></button>
 				</li>
@@ -223,13 +151,10 @@ body{
 					<button type="button" class=" tabBtn" id="refunds" value="refunds" href="#"  rel="6">환불
 						<span>21</span></button>
 				</li>
-				<li>
-					<button type="button" class=" tabBtn" id="StopMember" value="StopMember" href="#" rel="7">중지 회원
-						<span>1</span></button>
-				</li>
+				
 			</ul>
         </div>
-        <div class="Menufr">
+     <!--    <div class="Menufr">
             
             <select class="select_month">
 	            <option value="201909">2019년 11월</option>
@@ -245,14 +170,7 @@ body{
 	            <option value="201811">2019년 01월</option>
 	            <option value="201810">2018년 12월</option>
         	</select>
-       
-                
-            <ul id="tabul">
-                <li><button type="button" class=" tabBtn" value="ReceivablesMemberMonth">미납 회원 <span><i>4</i></span></button></li>
-                <li><button type="button" class=" tabBtn" value="refundsMonth">환불 <span><i>1</i></span></button></li>
-            </ul>
-            
-        </div>
+        </div> -->
     </div>
 </div>
 
@@ -277,7 +195,7 @@ body{
               
               
                   
-                    <select  class="selectBox"  >
+                  <!--   <select  class="selectBox"  >
                         <option value="">연령대</option>
                         <option value="10">10대</option>
                         <option value="20">20대</option>
@@ -286,7 +204,7 @@ body{
                         <option value="50">50대</option>
                         <option value="60">60대</option>
                         <option value="70">70대 이상</option>
-                    </select> 
+                    </select>  -->
                     
                 	<select  class="selectBox" id="genderSearch" name="genderSearch" >
                         <option value="">성별</option>
@@ -294,7 +212,7 @@ body{
                         <option value="여성">여</option>
                     </select>
                  
-                    <select  class="selectBox" >
+                    <!-- <select  class="selectBox" >
                         <option value="">상품 목록</option>
                         
                             <option value="19906">0000</option>
@@ -308,9 +226,9 @@ body{
                             <option value="18973">1:1 TEST 20회 3개월</option>
                         
                             <option value="20117">1:1 TEST 무제한 1개월</option>                 
-                    </select>
+                    </select> -->
                     
-                    <select  class="selectBox" >
+                   <!--  <select  class="selectBox" >
                         <option value="">서비스 목록</option>
                         
                             <option value="364"></option>
@@ -322,7 +240,7 @@ body{
                             <option value="1156">4:1 그룹레슨 (기구필라테스)</option>
                         
                             <option value="1232">5:1 그룹수업</option>   
-                    </select>
+                    </select> -->
                     
                     <select  class="selectBox" >
                         <option value="">라커 사용여부</option>
@@ -369,8 +287,6 @@ body{
         <div class="B_fr">
             <input type="checkbox" id="checkall">
             <label class="all">전체 선택</label>	
-            <a  class="btn blue small"  data-toggle="modal" data-target="#M_extension" id="extension">일괄 기간연장</a>
-            <a  class="btn blue small" data-toggle="modal" data-target="#M_group" id="Group">그룹 추가</a>
             	<a  class="btn red small" onclick="M_del()">회원 삭제</a>
         </div>
     </div>

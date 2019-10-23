@@ -12,14 +12,8 @@ body{
 
 }
 </style>
-<!--  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#MIns">
-  Open modal
-</button> -->
-
+ <!-- 주노꺼랑 이관 완료 -->
 <!--==================================[[회원 등록 모달창 시작]]=================================================  -->
-
-	
-	
 				<!-- The Modal -->
 				<div class="modal" id="MIns">
 				  <div class="modal-dialog">
@@ -156,118 +150,4 @@ body{
 
 
 
-<!--==================================[[기간 연장 모달 부분 시작 ]]==================================  -->
-
-
-		<div class="modal" id="M_extension" >
-		  <div class="modal-dialog" style="display: block;">
-		    <div class="modal-content"  style="height: 393px; max-height: 858px;">
-		
-		      <!-- Modal Header -->
-		      <div class="modal-header" id="E_header">
-		        <h2 class="modal-title" id="E_title">이용권 기간 연장</h2>
-		      </div>
-		
-		      <!-- Modal body -->
-		      <div class="modal-body" id="E_body">
-		      	<div class="modal-br">
-		           		 센터의 공사 등의 사유로 휴무 시 모든 이용회원들의<br> 
-		           		 전체 이용권 이용기간을 연장할 수 있습니다.<br>
-      					  <em class="c_red">
-			      					  현재 이용 중인 모든 회원의 전체 이용권이 일괄 연장되오니 유의하시기 바랍니다.</em>
-		      	</div>
-					      <fieldset class="mt_20">
-						        <p>
-						          <span>
-						            <label for="extension_day" style="width:150px;">전체 이용권 기간 연장</label>
-						            <input type="number" id="extension_day" name="extensionDay">
-						            <span>일</span>
-						          </span>
-						        </p>
-						        <p>
-						          <label style="width:150px;">이용회원</label>
-						          <span style="font-size:20px;" class="c_blue">총 153명</span>
-						        </p>
-			     		 </fieldset>
-					     
-		     
-		     
-		      </div>
-		
-		      <!-- Modal footer -->
-		      <div class="modal-footer" id="E-footer">
-     			 <button type="button" class="btn red" >기간 연장</button>
-		        <button type="button" class="btn btn-danger" data-dismiss="modal" style="background-color: #9fa0aa;">취소</button>
-		      </div>
-		
-		    </div>
-		  </div>
-		</div>
-
-
-
-<!--==================================[[기간 연장 모달 부분 끝]]==================================  -->
-
-<!--===================================[[그룹 추가 모달 부분 시작 ]]==================================  -->
-		<!-- The Modal -->
-				<div class="modal" id="M_group">
-				  <div class="modal-dialog"  style="display: block;">
-				    <div class="modal-content" style="height: 377px; max-height: 907px;">
-				
-				      <!-- Modal Header -->
-				      <div class="modal-header" id="G-header">
-				        <h2 class="modal-title" id="G-title">그룹 추가</h2>
-				      </div>
-				
-				      <!-- Modal body -->
-				      <div class="modal-body" id="G-body">
-				      	<!-- 검색하는 text 박스부분  -->
-				        	<div class="search" id="G-search">
-						        <fieldset>
-				                    <p>
-				                        <input name="groupSearchWord" type="text" value="" placeholder="그룹 검색" style="width: 100%">
-				                        <button id="btnGroupSearch" type="button" class="icon small search_d" ></button>
-				                    </p>
-				                </fieldset>
-		           			 </div>
-		           			 
-		           			  <!-- //회원 검색 -->
-						            <div id="divSearchResult" class="grid_list latest" style="height:150px; overflow-y: auto; ">
-						           	   <ul>
-						           		 <li style="width: 100%">
-						          	 		 <input type="checkbox"  id="g_0" style="display: none !important"  >
-						          	  			<label for="g_0" >선택하기</label> 
-						            				 <div class="card_itm">  
-						               						<p class="title" id="test">테스트</p>  
-												                 <p class="unit">
-												                 <strong>기간</strong> 
-												                	<span>2019.6.1 - 2019.7.31</span>
-											                 </p>    
-						                					 <p class="unit">
-						                						 <strong>인원</strong>
-						                  						<span>7</span>
-						                 					 </p>      
-										                	 <div class="info" style="float: right;">    
-												         		     <p class="pic">
-												                     			<img src="../images/smile.png"></p>
-												                       <p class="name"><span></span> 홍준선 강사</p> 
-										                       </div> 
-														</div> 
-													 <a  class="view" target="_blank">상세보기</a>
-												</li>
-											</ul>
-										</div>
-						        </div>
-				    
-				      <!-- Modal footer -->
-				      <div class="modal-footer" id="G-footer" style="text-align: center;">
-				      	<button id="btnAddGroup" type="button" class="btn dark">확인</button>
-				        <button type="button" class="btn btn-danger" data-dismiss="modal">취소</button>
-				      </div>
-				
-				    </div>
-				  </div>
-				</div>
-
-<!--===================================[[그룹 추가 모달 부분 끝 ]]==================================  -->
 
