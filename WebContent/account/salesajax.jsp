@@ -1,6 +1,8 @@
 <%@page import="java.util.Map"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <!-- ============================ [[ 회계관리 ]] ======================================== -->
+	<!-- ============================ [[ 매출내역 ajax ]] ======================================== -->
 <%
 	Map<String,Object> salesStatement = (Map<String,Object>)request.getAttribute("salesStatement");
 	Map<String,Object> up = (Map<String,Object>)salesStatement.get("up");

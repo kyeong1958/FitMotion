@@ -1,3 +1,4 @@
+<%@page import="java.util.Map"%>
 <%@page import="java.text.DecimalFormat"%>
 <%@page import="java.util.Calendar"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -13,7 +14,10 @@ body{
 	padding:0%;
 }
 </style>
-<%
+<%	
+	if(request.getAttribute("expenseStatement") != null){
+		Map<String,Object> rMap = (Map<String,Object>)request.getAttribute("expenseStatement");
+	}
 	Calendar cal = Calendar.getInstance();
 	DecimalFormat df = new DecimalFormat("00");
 	int year = cal.get(Calendar.YEAR);

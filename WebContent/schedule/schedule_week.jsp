@@ -11,6 +11,9 @@
 	body{
 		padding:0%;
 	}
+	.container-fluid{
+		padding:0%;
+	}
 </style>
 <%
 	if(request.getAttribute("result") != null){
@@ -57,7 +60,7 @@
 				if(toweek < cal2.getActualMaximum(Calendar.WEEK_OF_MONTH)){
 					toweek += 1;
 				}else{
-					toweek = 1;
+					toweek = 2;
 					if(tomonth <12){
 						tomonth += 1;
 					}else{
@@ -67,7 +70,6 @@
 					
 				}
 			}
-			out.print(toyear+", "+tomonth+", "+toweek);
 		}
 	}
 

@@ -21,6 +21,32 @@ body{
 				$("#locker_list").html(data);
 			}
 		});
+/* 데이트 박스 */		
+	 //datebox1 날짜 선택에 따라 datebox2의 선택가능날짜 설정
+	   $('#datebox1').datebox({
+	      onSelect: function(date){
+	         firstDate = date;
+	         $('#datebox2').datebox().datebox('calendar').calendar({
+	               validator: function(date){
+	                   var d1 = new Date(firstDate.getFullYear(), firstDate.getMonth(), firstDate.getDate());
+	                   return d1<=date;
+	               }
+	           });
+	      }
+	   });
+	 //datebox1 날짜 선택에 따라 datebox2의 선택가능날짜 설정
+	   $('#datebox1_lock').datebox({
+	      onSelect: function(date){
+	         firstDate = date;
+	         $('#datebox2_lock').datebox().datebox('calendar').calendar({
+	               validator: function(date){
+	                   var d1 = new Date(firstDate.getFullYear(), firstDate.getMonth(), firstDate.getDate());
+	                   return d1<=date;
+	               }
+	           });
+	      }
+	   });
+/* 데이트 박스 */
  	});
 </script> 
 <script type="text/javascript">
@@ -196,9 +222,9 @@ body{
 		         <div style="padding:0 0 5px">
 					<label class="spend-box-right-column">기간 설정</label>
 					<span>
-						<input class="easyui-datebox ld_start" name="lrent_start_day" id="datebox1_la"></input>
+						<input class="easyui-datebox ld_start" name="lrent_start_day" id="datebox1_lock"></input>
 						~
-						<input class="easyui-datebox ld_end" name="lrent_end_day" id="datebox2_la"></input>
+						<input class="easyui-datebox ld_end" name="lrent_end_day" id="datebox2_lock"></input>
 					</span>
 				</div>
 		      </fieldset>

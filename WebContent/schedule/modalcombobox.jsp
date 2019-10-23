@@ -8,6 +8,7 @@
 	body{
 		padding:0%;
 	}
+
 </style>
 <%
 	Map<String,Object> scheduleModal = (Map<String,Object>)request.getAttribute("scheduleModal");

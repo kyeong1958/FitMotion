@@ -92,7 +92,7 @@
 	} 
 
  	function schedulechangeModal(mem_name, mem_num, appli_date, shour, smin, ehour, emin, place, appli_num){
- 		alert(mem_name+", "+mem_num+", "+appli_date+", "+shour+", "+smin+", "+ehour+", "+emin+", "+place+", "+appli_num);
+ 	//	alert(mem_name+", "+mem_num+", "+appli_date+", "+shour+", "+smin+", "+ehour+", "+emin+", "+place+", "+appli_num);
  		mem_num,
  		$.ajax({
 			method:'get'
@@ -115,7 +115,7 @@
 /* 모달창 */
 /* 출결사항 */
 	function caUPD(appli_num,att_num){
-		alert(appli_num+", "+att_num);
+	//	alert(appli_num+", "+att_num);
 		$.ajax({
 			url:'/schedule/caUPD.fm?appli_num='+appli_num+'&att_num='+att_num
 			,success:function(data){
@@ -161,14 +161,12 @@
 /* 수업 예약모달창 */
 	function smreservation(){
 		 var formData = $("#f_sm").serialize();
-		 alert("form전성");
+	//	 alert("form전성");
 		 $.ajax({
 			 method:'get'
 			 ,url:'/schedule/scheduleReservation.fm'
 			 ,data:formData
 			 ,success:function(data){
-				 alert("성공");
-				 alert("|"+data+"|");
 				 if(data == '예약불가'){
 					alert('예약된 수업이 존재합니다.');	 
 				 }else{
@@ -183,14 +181,12 @@
 /* 예약변경 모달창 */
 	function smreservation(){
 		 var formData = $("#f_scm").serialize();
-		 alert("form전성");
+	//	 alert("form전성");
 		 $.ajax({
 			 method:'get'
 			 ,url:'/schedule/scheduleReservationUPD.fm'
 			 ,data:formData
 			 ,success:function(data){
-				 alert("성공");
-				 alert("|"+data+"|");
 				 if(data == '변경불가'){
 					alert('예약된 수업이 존재합니다.');	 
 				 }else{
@@ -204,7 +200,7 @@
 /* 예약변경 모달창 */
 /* 날짜이동 */
 	function prev(year,month,week){
-		alert(year+", "+month+", "+week);
+	//	alert(year+", "+month+", "+week);
 		$.ajax({
 			url:"/schedule/scheduleList.fm?year="+year+"&month="+month+"&week="+week+"&move=prev"
 		   ,success:function(data){
@@ -214,7 +210,7 @@
 		});
 	}
 	function next(year,month,week){
-		alert(year+", "+month+", "+week);
+	//	alert(year+", "+month+", "+week);
 		$.ajax({
 			url:"/schedule/scheduleList.fm?year="+year+"&month="+month+"&week="+week+"&move=next"
 		   ,success:function(data){

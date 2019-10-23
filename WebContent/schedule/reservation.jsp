@@ -6,9 +6,9 @@
 <link rel="stylesheet" type="text/css" href="../NewCSS/table.css">
 <link rel="stylesheet" type="text/css" href="../NewCSS/reservation.css">
 <style type="text/css">
-body{
-	padding:0%;
-}
+	body{
+		padding:0%;
+	}
 </style>
 <script type="text/javascript">
 	//데이트박스 
