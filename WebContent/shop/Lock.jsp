@@ -80,8 +80,8 @@ body{
 				 ,url:'/shop/lockUPD.fm'
 				 ,data:formData
 				 ,success:function(data){
-					 alert("성공");
-					 alert("|"+data+"|");
+					// alert("성공");
+					// alert("|"+data+"|");
 					 if(data == '0'){
 						alert('이용기간이 변경되지 않았습니다.');	 
 					 }else{
@@ -94,7 +94,7 @@ body{
 	 }
 /* 회원검색모달창 */
 	 function lockmemberSearch(){
-			alert("회원검색");
+			//alert("회원검색");
 			var l_memname = $("#lock_memname").val();
 			$.ajax({
 				url:"/member/lockmemSearch.fm?mem_name="+l_memname
@@ -107,17 +107,17 @@ body{
 /* 회원검색모달창 */
 /* 락커배정 */
 	function lockSetUPD(){
-			alert("등록버튼");
+		//	alert("등록버튼");
 		if(document.getElementById("lockradio1").checked){
-			alert("라디오1선택"+document.getElementById("lockradio1").value);
+		//	alert("라디오1선택"+document.getElementById("lockradio1").value);
 			var formData = $("#f_lockset").serialize();
 			 $.ajax({
 				 method:'get'
 				 ,url:'/shop/lockINS.fm'
 				 ,data:formData
 				 ,success:function(data){
-					 alert("성공");
-					 alert("|"+data+"|");
+					// alert("성공");
+					// alert("|"+data+"|");
 					 $("#L_Assignment").modal({backdrop: false});
 					 $("#L_Assignment").modal('hide');
 					 $("#locker_list").html(data);
@@ -125,16 +125,16 @@ body{
 			 });
 			
 		}else if(document.getElementById("lockradio2").checked){
-			alert("1");
+		//	alert("1");
 			var lockStatus = document.getElementById("lockradio2").value;
-			alert("2");
+		//	alert("2");
 			var lockNum = $("#locknum").val();
-			alert(lockStatus+", "+lockNum);
+		//	alert(lockStatus+", "+lockNum);
 			 $.ajax({
 				 method:'get'
 				 ,url:'/shop/lockStatusUPD.fm?lockStatus='+lockStatus+'&lockNum='+lockNum
 				 ,success:function(data){
-					 alert(data);
+				//	 alert(data);
 					 $("#L_Assignment").modal({backdrop: false});
 					 $("#L_Assignment").modal('hide');
 					 $("#locker_list").html(data);
@@ -150,7 +150,7 @@ body{
 			 method:'get'
 			 ,url:'/shop/lockChange.fm?lockNum='+lockNum
 			 ,success:function(data){
-				 alert(data);
+				// alert(data);
 				 $("#lockDetail_b").modal({backdrop: false});
 				 $("#lockDetail_b").modal('hide');
 				 $("#locker_list").html(data);

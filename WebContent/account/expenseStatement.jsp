@@ -82,7 +82,7 @@ $(document).ready(function(){
 		$.ajax({
 			url:'/account/expenseStatement.fm?year=<%=year%>'
 			,success:function(data){
-				alert("성공");
+			//	alert("성공");
 				$("#statement").html(data);
 			}
 		});
@@ -91,7 +91,7 @@ $(document).ready(function(){
 		$.ajax({
 			url:'/account/expenseStatement.fm?quarter=<%=quarter%>'
 			,success:function(data){
-				alert("성공");
+			//	alert("성공");
 				$("#statement").html(data);
 			}
 		});
@@ -100,7 +100,7 @@ $(document).ready(function(){
 		$.ajax({
 			url:'/account/expenseStatement.fm?month=<%=month%>'
 			,success:function(data){
-				alert("성공");
+			// alert("성공");
 				$("#statement").html(data);
 			}
 		});
@@ -108,13 +108,13 @@ $(document).ready(function(){
 	function dateSEL(){
 		var startDay = $('#datebox1').datebox('getValue');
 		var endDay = $('#datebox2').datebox('getValue');
-		alert(startDay+", "+endDay);
+		//alert(startDay+", "+endDay);
 		if(startDay != '' && endDay != ''){
-			alert("ajax");
+		//	alert("ajax");
 			$.ajax({
 				url:'/account/expenseStatement.fm?startDay='+startDay+'&endDay='+endDay
 				,success:function(data){
-					alert("성공");
+				//	alert("성공");
 					$("#statement").html(data);
 				}
 			});

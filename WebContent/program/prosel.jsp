@@ -20,7 +20,7 @@ legend {
 
 <script>
 	function prodetail(ticket_num){
-		alert("상세눌림"+ticket_num);
+	//	alert("상세눌림"+ticket_num);
 		 $.ajax({
 				method:"get"
 				,url:"/program/taDTL.fm?ticket_num="+ticket_num

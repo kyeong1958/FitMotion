@@ -51,12 +51,12 @@ body{
 	$(document).ready(function(){
 	    //최상단 체크박스 클릭
 	    $("#checkall").click(function(){
-	    	alert("체크박스눌림");
+	    	//alert("체크박스눌림");
 	        //클릭되었으면
 	         if($("#checkall").prop("checked")){
 	            //input태그의 name이 chk인 태그들을 찾아서 checked옵션을 true로 정의
 	            $("input[name=check]").prop("checked",true);
-	            alert("전체가 다눌린다");
+	         // alert("전체가 다눌린다");
 	            //클릭이 안되있으면
 	        }else{
 	            //input태그의 name이 chk인 태그들을 찾아서 checked옵션을 false로 정의
@@ -70,7 +70,7 @@ body{
 	function M_del(){
 			 	var mem_num = null;
 			 	mem_num = $("#check_mem_num").val();
-			 	alert(mem_num);
+			 	//alert(mem_num);
 					var formData = $("#f_insert").serialize();
 					 $.ajax({
 						method:"POST"

@@ -35,10 +35,10 @@ body{
 
 
  function gdDel(){
-		alert("삭제버튼눌림");
+	//	alert("삭제버튼눌림");
 		var go_num = null;
 		go_num = $("#checkbox_id").val();
-		alert(go_num);
+	//	alert(go_num);
 			  $.ajax({
 				method:"POST"
 				,url:"/shop/GoodDEL.fm?go_num="+go_num
@@ -50,7 +50,7 @@ body{
 
 
  function gdIns(){
-  		alert("클릭?");
+  	//	alert("클릭?");
   		var formData = $("#gd_insert").serialize();
  		//alert("등록버튼 눌림?");
  		 $.ajax({
@@ -58,7 +58,7 @@ body{
  			,data:formData
  			,url:"/shop/GoodINS.fm"
  			,success:function(data){
- 				alert("성공");
+ 		//		alert("성공");
  				$("#gdSel").html(data);
  			}
  		}); 

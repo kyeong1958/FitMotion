@@ -2,7 +2,7 @@
 <%@page import="java.util.Calendar"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" trimDirectiveWhitespaces="true"%>
-    <%@ include file="/common/JEasyUICommon.jsp"%>
+<%--    <%@ include file="/common/JEasyUICommon.jsp"%>  --%>
 <link rel="stylesheet" type="text/css" href="../NewCSS/main.css?22">
 <link rel="stylesheet" type="text/css" href="../NewCSS/schedule.css?22">
 <link rel="stylesheet" type="text/css" href="../NewCSS/scheduleModal.css?22">
@@ -93,7 +93,6 @@
 
  	function schedulechangeModal(mem_name, mem_num, appli_date, shour, smin, ehour, emin, place, appli_num){
  	//	alert(mem_name+", "+mem_num+", "+appli_date+", "+shour+", "+smin+", "+ehour+", "+emin+", "+place+", "+appli_num);
- 		mem_num,
  		$.ajax({
 			method:'get'
 			,url:'/schedule/scheduleModal.fm'
@@ -204,7 +203,7 @@
 		$.ajax({
 			url:"/schedule/scheduleList.fm?year="+year+"&month="+month+"&week="+week+"&move=prev"
 		   ,success:function(data){
-			   alert("성공");
+			  // alert("성공");
 			   $("#schedule_week").html(data);
 		   }
 		});
@@ -214,7 +213,7 @@
 		$.ajax({
 			url:"/schedule/scheduleList.fm?year="+year+"&month="+month+"&week="+week+"&move=next"
 		   ,success:function(data){
-			   alert("성공");
+			  // alert("성공");
 			   $("#schedule_week").html(data);
 		   }
 		});
@@ -255,7 +254,7 @@
 					<input type="text" class="spending-text" id="sm_memname" name="sm_memname" style="width:260px;">
 				</span>
 				<span>
-					<button type="button" class="btn-schedule-memsearch" data-toggle="modal" data-target="#search_member">회원검색</button>
+					<button type="button" class="btn-schedule-memsearch" data-toggle="modal" data-target="#search_member2">회원검색</button>
 				</span>
 			</div>
 			<div id="sm_combobox">
@@ -318,7 +317,7 @@
 <!--================================ [[ 회원검색 모달 ]] ====================================== -->
 
 <!--   The Modal -->
-  <div class="modal fade" id="search_member">
+  <div class="modal fade" id="search_member2">
     <div class="modal-dialog modal-sm-6">
       <div class="modal-content">
       

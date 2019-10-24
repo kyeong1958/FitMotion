@@ -11,7 +11,7 @@
 %>
 <script type="text/javascript">
 	function memInfoDetail(mem_num,mem_name,mem_hp){
-		alert("memDeatil"+mem_name+"memnum"+mem_hp);	
+		//alert("memDeatil"+mem_name+"memnum"+mem_hp);	
 		$("#lm_memnum").val(mem_num);
 		$("#lm_memname").val(mem_name);
 		$("#lm_memhp").val(mem_hp);

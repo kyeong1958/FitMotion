@@ -4,28 +4,18 @@
     pageEncoding="UTF-8"%>
 <%
 		List<Map<String,Object>> ProbuySel = (List<Map<String,Object>>)request.getAttribute("ProbuySel");
-		
 		int size=0;
 		if(ProbuySel!=null){
 			size = ProbuySel.size();
 		}
-		
 %>    
-    
-    
-
-    
-    
-    
  <ul>
- 
  <%
  		for(int i=0; i<size; i++){
 				Map<String,Object> rMap = ProbuySel.get(i);
  %>
                     <!-- Loop -->
                     <!-- 상품 별 디자인 클래스가 다르게 적용되어 있습니다. -->
-                    
                         <li>
                             <div class="service_itm" >
                                 <p>
@@ -46,19 +36,9 @@
                                                 <span>개인레슨</span>
                                                 <i><%=rMap.get("PROM_START_DATE") %> - <%=rMap.get("PROM_END_DATE") %></i>
                                                 <strong class="use_tool">
-                                                    
-														<!-- 
-															<a >
-                                                                이용권 기간 수정
-                                                            </a>
-														 -->
-                                                    
                                                 </strong>                                                                                    
                                             </p>
-                                        
-       
                                 </div>
-
                                 <div class="use_itm">
                                     <p>
                                         <span>상품금액</span>
@@ -70,13 +50,11 @@
                                                     <%=rMap.get("TICP_PAYMENT") %> 원 
                                         </i>
                                     </p>          
-                                       
                                         <p>
                                             <span>결제일자</span>
                                             <i><%=rMap.get("TICP_REG_DATE") %></i>
                                         </p>
                                 </div>
-
                                 <div class="service_price btn_add">
                                     <p>
 									<span class="fr btn_line_add">
@@ -90,6 +68,5 @@
                         </li>
                     <%
  						}
-                    
                     %>
                 </ul>

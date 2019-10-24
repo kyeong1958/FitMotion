@@ -215,7 +215,7 @@ function fund(){
 
  function pfIns_buy(){
 		var formData = $("#ftable").serialize();
-		alert(formData);
+	//	alert(formData);
 		 $.ajax({
 			method:"POST"
 			,data:formData
@@ -399,9 +399,9 @@ function fund(){
 	
 	<script>
 			function memberSearch(){
-				alert("검색버튼 눌림?");
+			//	alert("검색버튼 눌림?");
 				var formData = $("#MemSearch").serialize();
-				alert(formData);
+			//	alert(formData);
 				 $.ajax({
 					method:"POST"
 					,data:formData

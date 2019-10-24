@@ -7,6 +7,7 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
 
@@ -14,6 +15,7 @@ import com.gate.Controller;
 import com.gate.ModelAndView;
 import com.google.gson.Gson;
 import com.util.HashMapBinder;
+import com.vo.SupervisorVO;
 
 public class ShopController implements Controller {
 	Logger logger = Logger.getLogger(ShopController.class);
@@ -142,6 +144,75 @@ public class ShopController implements Controller {
 			mav.setViewName("/shop/GoodSEL.fm");
 		}
 /*================================[[민지 끝]]======================================================*/
+/*================================[[정은 시작]]======================================================*/
+		else if("sINS".equals(crud)) {
+			logger.info("회원입력 : "+req.getParameter("sv_name"));
+			int result = 0;
+			Map<String,Object> pMap = new HashMap<>();
+			HashMapBinder hmb = new HashMapBinder(req);
+			hmb.bindPost(pMap);
+			logger.info(pMap);
+			logger.info("이름:"+pMap.get("sv_name"));
+			result = shopLogic.sINS(pMap);
+			logger.info(result);
+			mav.pageMove("redirect");
+//			mav.setViewName("/both/a.jsp");
+			mav.setViewName("/shop/join.fm");
+		}
+		else if("sSEL".equals(crud)) {
+			logger.info("회원관리조회");
+			List<Map<String,Object>> joinList = null;	
+			joinList = shopLogic.sSEL();
+			mav.addObject("joinList", joinList);
+			mav.pageMove("forward");
+			mav.setViewName("/shop/login");
+		}
+		else if("slogin".equals(crud)) {
+			logger.info("로그인호출 성공");
+			List<String> svlist = new ArrayList<>();
+			String sv_id = null;
+			SupervisorVO sVO = new SupervisorVO();			
+			sVO.setSv_id(req.getParameter("sv_id"));
+			sVO.setSv_pw(req.getParameter("sv_pw"));
+			sv_id = shopLogic.slogin(sVO);
+			SupervisorVO svVO = shopLogic.proc_login(sVO);
+			HttpSession session = req.getSession();
+			logger.info("이름 :"+svVO.getSv_id());
+			session.setAttribute("svVO", svVO);
+			mav.pageMove("redirect");
+			mav.setViewName("/shop/slogin.fm");
+		}
+		else if("sisId".equals(crud)) {
+		logger.info("로그인중복검사호출 성공");
+		List<String> svlist = new ArrayList<>();
+		Map<String,Object> pMap = new HashMap<>();
+		HashMapBinder hmb = new HashMapBinder(req);
+		hmb.bindPost(pMap);
+		String sv_id = null;
+		SupervisorVO sVO = new SupervisorVO();			
+		sVO.setSv_id(req.getParameter("sv_id"));
+		sv_id = shopLogic.sisId(sVO);
+		HttpSession session = req.getSession();
+		session.setAttribute("sVO", sVO);
+		mav.pageMove("redirect");
+		mav.setViewName("/shop/sINS.fm");
+	}
+		else if("slINS".equals(crud)) {
+			logger.info("회원입력 : "+req.getParameter("staff_name"));
+			int result = 0;
+			Map<String,Object> pMap = new HashMap<>();
+			HashMapBinder hmb = new HashMapBinder(req);
+			hmb.bindPost(pMap);
+			logger.info(pMap);
+			logger.info("이름:"+pMap.get("staff_name"));
+			result = shopLogic.slINS(pMap);
+			logger.info(result);
+			mav.pageMove("redirect");
+			mav.setViewName("/shop/join.fm");
+		}
+
+		
+/*================================[[정은 끝]]======================================================*/
 
 		return mav;
 	}

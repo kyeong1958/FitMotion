@@ -24,21 +24,21 @@ body{
 <script type="text/javascript">
 /* 날짜이동 */
 function prev(year,month){
-	alert(year+", "+month);
+	//alert(year+", "+month);
 	$.ajax({
 		url:"/account/staffCalculate.fm?year="+year+"&month="+month+"&move=prev"
 	   ,success:function(data){
-		   alert("성공");
+		  // alert("성공");
 		  // $("#schedule_week").html(data);
 	   }
 	});
 }
 function next(year,month){
-	alert(year+", "+month);
+	//alert(year+", "+month);
 	$.ajax({
 		url:"/account/staffCalculate.fm?year="+year+"&month="+month+"&move=next"
 	   ,success:function(data){
-		   alert("성공");
+		  // alert("성공");
 		 //  $("#schedule_week").html(data);
 	   }
 	});

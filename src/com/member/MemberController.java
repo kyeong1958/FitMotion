@@ -13,6 +13,7 @@ import org.apache.log4j.Logger;
 import com.gate.Controller;
 import com.gate.ModelAndView;
 import com.google.gson.Gson;
+import com.util.HashMapBinder;
 
 //주노꺼랑 이관완료
 public class MemberController implements Controller {
@@ -111,7 +112,7 @@ public class MemberController implements Controller {
 				bhSelList = memberLogic.bhsel();
 				mav.addObject("bhSelList", bhSelList);
 				mav.pageMove("forward");
-				mav.setViewName("/account/imsi_change.jsp");
+				mav.setViewName("/account/profitMemSearch.jsp");
 	      }
 		/*================================[[민지 Mcontroller 끝 ]]=======================================*/
 	      /*=====================================[[주노 시작 ]]====================================*/

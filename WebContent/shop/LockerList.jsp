@@ -24,7 +24,7 @@ body{
 <script type="text/javascript">
 /* 이용중 */
 	function detailModal(rentnum,name,hp,start,end){
-		alert(rentnum+", "+name+", "+hp+", "+start+", "+end);
+	//	alert(rentnum+", "+name+", "+hp+", "+start+", "+end);
 		$("#rent_num").val(rentnum);
 		$("#ld_name").text(name);
 		$("#ld_hp").text(hp);

@@ -7,25 +7,21 @@
 <head>
 <meta charset="UTF-8">
 <title>FitMotion</title>
-<%@ include file="../common/JEasyUICommon.jsp"%>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/paginationjs/2.1.4/pagination.css"/>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/paginationjs/2.1.4/pagination.min.js"></script>
+<script>
+	var jb = jQuery.noConflict();
+</script>
+ <%@ include file="../common/JEasyUICommon.jsp"%> 
 <link rel="stylesheet" type="text/css" href="../NewCSS/main.css">
 <style type="text/css">
-<<<<<<< HEAD
 	body{
 		padding:0%;
 	}
 	.container-fluid{
 		padding:0%;
 	}
-=======
-body{
-	padding:0%;
-}
-.container-fluid {
-	padding:0%;
-
-}
->>>>>>> refs/heads/k_min
 </style>
 </head>
 <script type="text/javascript">
@@ -35,7 +31,7 @@ body{
 				method:'get'
 			   ,url:url
 			   ,success:function(data){
-				   alert(url);
+				//   alert(url);
 				   $("#mainboard").html(data);
 				    if(url=="../member/memberList.jsp"){
 						var formData = $("#f_insert").serialize();
@@ -97,7 +93,7 @@ body{
 								method:"POST"
 								,url:"/shop/GoodSEL.fm"
 								,success:function(data){
-									alert("성공");
+									//alert("성공");
 									$("#gdSel").html(data);
 								}
 							}); 
@@ -160,7 +156,7 @@ body{
          <div class="row sidemenutitle" onClick="menu(''),pagemove('../program/TicketMain.jsp')">이용권관리</div>
          <div class="row sidemenutitle" onClick="menu(''),pagemove('../shop/Lock.jsp')">락커관리</div>
       	 <div class="row sidemenutitle" onClick="menu(''),pagemove('../shop/Good.jsp')">비품관리</div>
-         <div class="row sidemenutitle" onClick="menu(''),pagemove('../shop/Lock.jsp')">기구관리</div> 
+         <div class="row sidemenutitle" onClick="menu(''),pagemove('../shop/Good.jsp')">기구관리</div> 
          <div class="row sidemenutitle" onClick="menu('.history'),pagemove('../schedule/reservation.jsp')">내역관리</div>
          <div class="row history">
             <div class="row sidemenu" id="allsalesmanagement" onClick="pagemove('../schedule/reservation.jsp')">예약내역</div>
@@ -184,12 +180,6 @@ body{
       </div>
       <div id="mainboard">
 <!-- ================================= [[ 화면전환 ]] =================================================== -->
-      
-      
-      
-      
-      
-      
 <!-- ================================= [[ 화면전환 ]] =================================================== -->
       
       </div>

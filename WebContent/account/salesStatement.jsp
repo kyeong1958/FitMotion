@@ -80,7 +80,7 @@ body{
 		$.ajax({
 			url:'/account/salesStatement.fm?year=<%=year%>'
 			,success:function(data){
-				alert("성공");
+				//alert("성공");
 				$("#statement").html(data);
 			}
 		});
@@ -89,7 +89,7 @@ body{
 		$.ajax({
 			url:'/account/salesStatement.fm?quarter=<%=quarter%>'
 			,success:function(data){
-				alert("성공");
+				//alert("성공");
 				$("#statement").html(data);
 			}
 		});
@@ -98,7 +98,7 @@ body{
 		$.ajax({
 			url:'/account/salesStatement.fm?month=<%=y%>-<%=month+1%>'
 			,success:function(data){
-				alert("성공");
+				//alert("성공");
 				$("#statement").html(data);
 			}
 		});
@@ -106,13 +106,13 @@ body{
 	function dateSEL(){
 		var startDay = $('#datebox1').datebox('getValue');
 		var endDay = $('#datebox2').datebox('getValue');
-		alert(startDay+", "+endDay);
+		//alert(startDay+", "+endDay);
 		if(startDay != '' && endDay != ''){
-			alert("ajax");
+		//	alert("ajax");
 			$.ajax({
 				url:'/account/salesStatement.fm?startDay='+startDay+'&endDay='+endDay
 				,success:function(data){
-					alert("성공");
+					//alert("성공");
 					$("#statement").html(data);
 				}
 			});

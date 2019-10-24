@@ -132,9 +132,9 @@ public class AccountController implements Controller {
 			mav.addObject("expenseStatement", expenseStatement);
 		}
 ////////////////////////////////// [[ 경애 끝 ]] ///////////////////////////////////////////////////////////////////
-		/*
-		 * =============================[[민지 시작 ]]==============================================================
-		 */
+/*
+ * =============================[[민지 시작 ]]==============================================================
+ */
 		else if ("pfINS".equals(crud)) {
 			logger.info("매출등록 controller");
 			int result = 0;
@@ -175,9 +175,118 @@ public class AccountController implements Controller {
 			mav.setViewName("/account/BillingHistoryList_card.jsp");
 		}
 
+/*
+ * =============================[[민지 끝]]==============================================================
+ */
+/////////////////////////// 수근시작/////////////////////////////////
+		// 전체매출 통계
+		else if ("allsales".equals(crud)) {
+		logger.info("OwnerController-allsales 호출성공");
+		Map<String, List<Map<String, String>>> allsales = null;
+		String date = "";
+		String year = "";
+		String month = "";
+		
+		if(req.getParameter("date") != null) { 
+		date = req.getParameter("date");
+		if(date.length() == 6) {
+			year = date.substring(0,4); 
+			month =	date.substring(4); 
+		}else if(date.length() == 5) { 
+			year = date.substring(0,4); 
+			month = "0"+date.substring(4); 
+		}
+		date = year + month;
+		
+		logger.info("year = "+year);
+		logger.info("month = "+month);
+		}
+		allsales = accountLogic.allsales(date);
+		
+		mav.pageMove("forward");
+		
+		mav.setViewName("/account/StatisticsSales.jsp");
+		mav.addObject("allsales", allsales);
 		/*
-		 * =============================[[민지 끝]]==============================================================
-		 */
+		* mav.addObject("year", year); mav.addObject("month", month);
+		*/
+		}
+		// 회원 통계
+		else if ("memsales".equals(crud)) {
+		logger.info("OwnerController-memsales 호출성공");
+		Map<String, List<Map<String, String>>> memsales = null;
+		String date = "";
+		String year = "";
+		String month = "";
+		
+		if(req.getParameter("date") != null) { 
+		date = req.getParameter("date");
+		if(date.length() == 6) {
+			year = date.substring(0,4); 
+			month =	date.substring(4); 
+		}else if(date.length() == 5) { 
+			year = date.substring(0,4); 
+			month = "0"+date.substring(4); 
+		}
+		date = year + month;
+		
+		logger.info("year = "+year);
+		logger.info("month = "+month);
+		}
+		memsales = accountLogic.memsales(date);
+		
+		mav.pageMove("forward");
+		mav.setViewName("/account/StatisticsMember.jsp");
+		mav.addObject("memsales", memsales);
+		}
+		// 개인레슨 통계
+		// http://localhost:8000/account/privateProg.fm?startDate=20190701&endDate=20191001
+		else if ("privateProg".equals(crud)) {
+		logger.info("OwnerController-privateProg 호출성공");
+		Map<String, List<Map<String, String>>> privateProg = null;
+		
+		/*
+		* if(date.length() == 6) { year = date.substring(0,4); month =
+		* date.substring(4); }else if(date.length() == 5) { year = date.substring(0,4);
+		* month = "0"+date.substring(4); } date = year + month;
+		* logger.info("year = "+year); logger.info("month = "+month);
+		*/
+		String startDate = "";
+		String endDate = "";
+		
+		if(req.getParameter("startDate") != null) { 
+		startDate = req.getParameter("startDate");
+		}
+		if(req.getParameter("endDate") != null) { 
+		endDate = req.getParameter("endDate");
+		}
+		privateProg = accountLogic.privateProg(startDate, endDate);
+		
+		mav.pageMove("forward");
+		mav.setViewName("/account/StatisticsPrivateProg.jsp");
+		mav.addObject("privateProg", privateProg);
+		}
+		// 그룹수업 통계
+		else if ("publicProg".equals(crud)) {
+		logger.info("OwnerController-publicProg 호출성공");
+		Map<String, List<Map<String, String>>> publicProg = null;
+		
+		String startDate = "";
+		String endDate = "";
+		
+		if(req.getParameter("startDate") != null) { 
+		startDate = req.getParameter("startDate");
+		}
+		if(req.getParameter("endDate") != null) { 
+		endDate = req.getParameter("endDate");
+		}
+		publicProg = accountLogic.publicProg(startDate, endDate);
+		
+		mav.pageMove("forward");
+		mav.setViewName("/account/StatisticsPublicProg.jsp");
+		mav.addObject("publicProg", publicProg);
+		}
+/////////////////////////// 수근끝/////////////////////////////////
 		return mav;
 	}
 

@@ -23,27 +23,22 @@
    모든 업무에 대한 처리가 성공일 대 커밋 처리함.
    여러 업무 중 한 개라도 SQLException을 일으키는 경우는 롤백 처리해야 함.
 -->
-<<<<<<< HEAD
-          <!-- <transactionManager type="MANAGED" /> --> 
 	 	<!-- <environment id="development">
   			<transactionManager type="JDBC" />트렌잭션처리 할 때 개발자가 직접관리
       		<dataSource type="JNDI">
          		<property name="data_source" value="java:comp/env/jdbc/dbPool" />
       		</dataSource>
    		</environment>  -->
-=======
  			<!-- <transactionManager type="MANAGED" /> --> 
-			<transactionManager type="JDBC" /><!-- 트렌잭션처리 할 때 개발자가 직접관리 -->
+	<!-- 		<transactionManager type="JDBC" />트렌잭션처리 할 때 개발자가 직접관리
 			<dataSource type="JNDI">
 			<property name="data_source" value="java:comp/env/jdbc/dbPool" /> 
 
-		<!-- 		<property name="data_source" value="java:comp/env/c" /> -->
+				<property name="data_source" value="java:comp/env/c" />
 		 		<property name="data_source" value="java:comp/env/jdbc/dbPool" /> 
 			</dataSource>
-		</environment>
->>>>>>> refs/heads/k_min
+		</environment> -->
 	</environments>
-<<<<<<< HEAD
    <mappers>
       <mapper resource="com/mybatis/mapper/account.xml" />
       <mapper resource="com/mybatis/mapper/member.xml" />
@@ -52,17 +47,4 @@
       <mapper resource="com/mybatis/mapper/shop.xml" />
       <mapper resource="com/mybatis/mapper/staff.xml" />
    </mappers>
-=======
-	<mappers>
-	<!-- 	<mapper resource="com/mybatis/mapper/owner.xml" />
-		<mapper resource="com/mybatis/mapper/Staff.xml" />
-		<mapper resource="com/mybatis/mapper/Both.xml" /> -->
-		<mapper resource="com/mybatis/mapper/account.xml" />
-		 <mapper resource="com/mybatis/mapper/member.xml" /> 
-		 <mapper resource="com/mybatis/mapper/program.xml" />
-		<mapper resource="com/mybatis/mapper/schedule.xml" />
-	<mapper resource="com/mybatis/mapper/shop.xml" /> 
-		<mapper resource="com/mybatis/mapper/staff.xml" /> 
-	</mappers>
->>>>>>> refs/heads/k_min
 </configuration> 

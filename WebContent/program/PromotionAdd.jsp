@@ -104,9 +104,9 @@ body {
 		});
 	
 		function a() {
-			alert("너먹히니" + $('.proaddbox').length);//응																								
+			//alert("너먹히니" + $('.proaddbox').length);//응																								
 			$(".proaddbox").each(function(index, item) {
-				alert(index + ", " + item);
+			//	alert(index + ", " + item);
 			});
 
 		}
