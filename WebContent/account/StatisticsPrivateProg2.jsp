@@ -31,41 +31,31 @@
 		size = privateProg.size();
 	}
 %>
+<!-- 
+<div id="mainboard2">
 
-<script>
-
-	
-	
-	
-/* 	//(페이지네이션) 한화면에서 보여줄 컬럼숫자를 담는 변수
-	var pageNumm = 5;
-    
-	jb('#pagination1').pagination({
-        dataSource: testdata,
-        pageSize:pageNumm,
-        align:"center",
-        callback: function(data, pagination) {
-            // template method of yourself
-           
-            var datahtml = '<table id="table" class="table table-bordered  table-striped">';
-            	datahtml += '<thead><tr><th class="tableheader">주문번호</th><th class="tableheader">결제일시</th><th class="tableheader">구매회원</th><th class="tableheader">휴대폰 번호</th><th class="tableheader">결제내역</th><th class="tableheader">상태</th><th class="tableheader">결제금액</th><th class="tableheader">미수금</th><th class="tableheader">환불금액</th><th class="tableheader">결제방법</th><th class="tableheader">결제담당</th></tr></thead>';
-	         for (var i = 0, len = data.length; i < len; i++) {	        	
-	        	 datahtml += '<tbody><tr>';
- 	            for (var j = 0;j < 11; j++) {
-	            	datahtml += '<td>' +  data[i][j] + '</td>';
-	            }
-	             datahtml += '</tbody></tr>';    	
-	         } 
-            datahtml += '</table>';
-            jb("#data-container").html(datahtml);
-        }
-    }); */
-	</script>
-
+<form id="form"> -->
+<%
+   String startDate = "";
+   String endDate ="";
+   if(startDate == ""){
+	   startDate = "20190801";
+   }
+   if(endDate == ""){
+	   endDate = "20191101";
+   }
+   
+   if(request.getAttribute("startDate") != null && request.getAttribute("endDate") != null){   
+	   startDate = (String)request.getAttribute("startDate");
+	   endDate = (String)request.getAttribute("endDate");
+   }
+%>
 <!-- jstl을 사용하기 위해서 c:set으로 chart에 값을 담음. -->
 
 <c:set var="private_size" value="<%=size%>" />
 <c:set var="privatep" value="<%=privateProg%>" />
+<c:set var="startDate" value="<%=startDate %>" />
+<c:set var="endDate" value="<%=endDate %>" />
 <style type="text/css">
 body {
 	padding: 0%;
@@ -74,7 +64,14 @@ body {
 
 <script type="text/javascript">
 	$(document).ready(function(){
-
+		 $.ajax({
+			method : 'get',
+			url : '/account/privateProg.fm?startDate=20190701&endDate=20191001',
+			
+			success : function(data) {
+				$("#section").html(data);
+			}
+		}); 
 		$(".sales").hide();
 		$(".member").hide();
 		$(".analysis").hide();
@@ -91,7 +88,26 @@ body {
 	           return d1<=date && date<=d2;
 	       }
 	   }); 
-	   
+          //datebox1 날짜 선택에 따라 datebox2의 선택가능날짜 설정
+	   $('#datebox1').datebox({
+	      onSelect: function(date){
+	    	  startDate = date;
+	    	  alert("startDate" + startDate);
+	         $('#datebox2').datebox().datebox('calendar').calendar({
+	               validator: function(date){
+	                   var d1 = new Date(firstDate.getFullYear(), firstDate.getMonth(), firstDate.getDate());
+	                   return d1<=date;
+	               }
+	           });
+	      }
+	   });
+   
+	   $('#datebox2').datebox({
+		      onSelect: function(date){
+		    	  endDate = date;
+		    	  alert("endDate" + endDate);
+		      }
+	   });
 	   /* //datebox1 날짜 선택에 따라 datebox2의 선택가능날짜 설정
  	   $('#datebox1').datebox({
 	      onSelect: function(date){
@@ -105,22 +121,8 @@ body {
 	               }
 	           });
 	      }
-	   });  */ 
-/*  	   $(document).ready(function(){
-          //datebox1 날짜 선택에 따라 datebox2의 선택가능날짜 설정
-		   $('#datebox1').datebox({
-		      onSelect: function(date){
-		         firstDate = date;
-		         $('#datebox2').datebox().datebox('calendar').calendar({
-		               validator: function(date){
-		                    var d1 = new Date(firstDate.getFullYear(), firstDate.getMonth(), firstDate.getDate());
-		                   return d1<=date;
-		               }
-		           });
-		      }
-		   });
+	   });   */
 	
-		}); */
 	});
 	
 	var test1 = new Array();
@@ -167,7 +169,7 @@ body {
 		   </c:when>
 		</c:choose>
 	</c:if>
-</c:forEach>   
+</c:forEach>    
 </script>
 
 

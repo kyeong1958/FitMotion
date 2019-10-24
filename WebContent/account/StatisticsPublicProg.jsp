@@ -32,7 +32,6 @@ var jb = jQuery.noConflict();
 <!-- jstl을 사용하기 위해서 c:set으로 chart에 값을 담음. -->
 <c:set var="public_size"  value="<%=size%>"/>
 <c:set var="publicp" value="<%=publicProg %>" />
-
 <style type="text/css">
 
 body{
