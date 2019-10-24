@@ -1,0 +1,194 @@
+@charset "UTF-8";
+.bar_area {
+    padding: 10px 66px;
+    height: 54px;
+    background-color: #FFF;
+    box-shadow: 1px 1px 4px #BABBC2;
+    position: relative;
+    z-index: 1;
+}
+.bar_menu{
+    display: inline-block;
+    font-size: 16px;
+    color: #9fa0aa;
+    line-height: 32px;
+}
+.section{
+    margin: 0 auto;
+    padding: 30px 66px;
+    max-width: 100%;
+}
+.tab-area{
+	background-color: #f0f0f2;
+/*     border-bottom: 1px solid #BABBC2; */
+    max-width: 100%;
+    padding: 30px 66px;
+}
+#period_btns{
+    margin: 0 auto;
+    max-width: 100%;
+}
+.btn{
+	background-color: #2196F3;
+	color:#fff;
+    min-width: 43px;
+    padding: 0 10px;
+    height: 26px;
+    line-height: 24px;
+    font-size: 13px;
+	font-weight: 500;
+	text-align: center;
+   	display: inline-block;
+    margin: 0;
+    border: 0;
+    border-radius: 5px;
+    cursor: pointer;
+    overflow: hidden;
+}
+.historydatebox{
+	width: 110px !important;
+	color: #000000!important;
+	background: #ffffff;
+	padding-left: 10px;
+	font-size: 13px;
+	border: 1px solid #BABBC2;
+	border-radius: 5px;
+}
+.combobox-area{
+    width: 100%;
+    margin: 10px 0 20px 0px !important;
+    float: left;
+    padding-bottom: 1%;
+    border-bottom: 1px solid #BABBC2;
+}
+.sc-combobox{
+    min-width: 120px;
+    max-width: 120px;
+    height: 26px;
+    line-height: 24px;
+    background-color: transparent;
+    padding-left: 2%;
+    border: none;
+    font-size: 25px;
+}
+.time-combobox{
+	min-width: 50px;
+    max-width: 120px;
+    height: 26px;
+    line-height: 24px;
+    border-radius: 5px;
+    padding-left: 1%;
+}
+.reservation_searchbox{
+	width: 20%;
+}
+.staff-prev{
+	display: inline-block;
+    margin: auto 0;
+    width: 21px;
+    height: 21px;
+    text-indent: -9999em;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    overflow: hidden;
+    background: url(../images/triangle_left.png) no-repeat center 50%;
+    left: 0;
+}
+.staff-next{
+	display: inline-block;
+    margin: auto 0;
+    width: 21px;
+    height: 21px;
+    text-indent: -9999em;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    overflow: hidden;
+    background: url(../images/triangle_right.png) no-repeat center 50%;
+    left: 0;
+}
+.staff-calculate-sum{
+	padding: 0 10px;
+    text-align: center;
+    margin: 15px 0px 0 0px;
+    font-family: inherit;
+    font-size: 100%;
+    box-sizing: border-box;
+    vertical-align: top;
+    outline: none;
+    width: 90%;
+}
+.staff-calculate-sum-header{
+    text-align: center;
+    border-left: 1px solid #babbc2;
+	padding:0 10px 5px;
+}
+.staff-calculate-sum-bottom{
+    vertical-align: middle;
+    font-size: 16px;
+    font-weight: 600;
+    border-left: 1px solid #babbc2;
+}
+#staff-calculate-table{
+	width: 100%;
+    max-width: 100%;
+    margin-bottom: 20px;
+    text-align-last: center;
+}
+.staff-tableheader{
+	background-color: #686D7B;
+    padding: 11px;
+    height: 45px;
+    font-weight: normal;
+    color: #FFF;
+    text-align: center;
+}
+.staff-salary-detail-day{
+	text-align: center;
+    margin-top: 20px;
+}
+.salary-detail{
+	background-color: #42485A !important;
+}
+.staff-salary-detail-box{
+    width: calc(98%/5 - 7px);
+    background: aliceblue;
+    padding-top: 2em;
+    padding-bottom: 2em;
+    margin: 3rem 0.5rem 3rem 0.5rem;
+    display: inline-block !important;
+}
+.staff-salary-detail-box-header{
+	width: -webkit-fill-available;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    align-content: center;
+}
+.staff-salary-detail-box-body{
+	text-align: center;
+    align-content: center;
+    display: flex;
+    justify-content: center;
+    font-size: 32px;
+    font-weight: bold;
+    color: black;
+    margin: 8px;
+}
+.staff-salary-personal-lesson-sum{
+	border: 1px solid #ddd !important;
+    color: #5bc0de !important;
+}
+
+
+
+
+
+
+
+
+
+
+

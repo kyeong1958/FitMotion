@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mybatis.mapper.ProgramMapper">
+<!-- 주노랑 이관완료 -->
+	<select id="test3">
+		SELECT 1 FROM dual
+	</select>
+	<!--=====================================================[[주노시작]]======================================================  -->
+			<insert id="taINS" parameterType="map" >
+              insert into Ticket(ticket_modified_date,ticket_name,ticket_num,gym_num,ticket_class_time,ticket_price)
+              values(to_char(sysdate,'YYYY-MM-DD'),#{ticket_name},SEQ_TAINS.NEXTVAL,'1',#{ticket_class_time},#{ticket_price})
+	</insert>
+	<select id="taSel" parameterType="map" resultType="map"> 
+			select ticket_modified_date,ticket_name,ticket_num,ticket_class_time,ticket_price
+            from TICKET
+ㄴ	</select>
+	<update id="goUpd" parameterType="map">
+		 	UPDATE GOODS SET go_name = #{go_name}, 
+		 					go_date = #{go_date}, 
+		 					go_price = #{go_price}, 
+		 					go_type = #{go_type}, 
+		 					go_stock = #{go_stock} 
+		 			WHERE go_code = #{go_code}
+ 	</update>
+ 	<delete id="goDEL" parameterType="map">
+		delete from GOODS where go_code=#{go_code} 
+ 	</delete>
+ 	
+	<!--=====================================================[[주노끝]]======================================================  -->
+ 	<!--======================================================[[민지 시작 ]]======================================================  -->
+ 	<select id="taDTL" parameterType="map" resultType="map" >
+ 			select ticket_modified_date,ticket_name,ticket_num,ticket_class_time,ticket_price
+            from TICKET
+           where ticket_num = #{ticket_num}
+ 	
+ 	</select>
+ 	<!--======================================================[[민지 끝 ]]======================================================  -->
+ 	<select id="prosel" parameterType="map" resultType="map"> 
+		select prom_num,prom_name,prom_dis_price,prom_period_of_time from PROMOTION 
+	</select>
+	
+</mapper> 
+ 

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mybatis.mapper.BothMapper">
+	<select id="test">
+		SELECT 1 FROM dual
+	</select>
+	<insert id="eqINS" parameterType="map">
+				
+		insert into SPORTS_EQUIPMENT(se_code,se_buy_date,
+		 								se_name,se_repair_count,
+		 								se_repair_detail,se_buy_price
+                                             ,se_operating_mode,gym_code)
+                                                                           
+            values (#{se_code},#{se_buy_date},
+                            #{se_name},#{se_repair_count},#{se_repair_detail},
+                            #{se_buy_price},
+                            #{se_operating_mode},
+                            #{gym_code}) 	
+	<!-- 	insert into SPORTS_EQUIPMENT(se_code,se_buy_date,
+		 								se_name,se_repair_count,
+		 								se_repair_detail,se_buy_price
+                                             ,se_operating_mode,gym_code)
+                                                                           
+            values (seq_eqIns.NEXTVAL,'2',
+                           '런닝',9,'런닝머신신',
+                            '1000',
+                            '고장',
+                            '12')			 -->
+                            
+	</insert>
+	
+                  <!--  select gym_code from SPORTS_EQUIPMENT a , GYM b 
+                   where a.gym_code = b.gym_code
+		 -->
+	
+	<select id="eqSel" parameterType="map" resultType="map">
+   		select rownum rno,se_code,se_buy_date,se_name
+                       ,se_repair_count,se_repair_detail
+                               ,se_buy_price,se_operating_mode 
+                                           from SPORTS_EQUIPMENT ,GYM
+                    where SPORTS_EQUIPMENT.gym_code = GYM.GYM_CODE
+                    order by rno asc
+   </select>
+	
+	<update id="eqUpd" parameterType="map">
+      UPDATE SPORTS_EQUIPMENT
+         SET se_name = #{se_name},
+             se_repair_count = #{se_repair_count},
+             se_repair_detail = #{se_repair_detail},
+           	 se_buy_price =#{se_buy_price},
+             se_operating_mode = #{se_operating_mode},
+             se_buy_date = #{se_buy_date}
+       WHERE se_code = #{se_code}      
+   </update>
+	
+	<delete id="eqDEL" parameterType="map">
+      delete from SPORTS_EQUIPMENT where se_code=#{se_code}
+   </delete>
+	
+	
+</mapper> 
+ 
