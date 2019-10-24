@@ -91,7 +91,26 @@ body {
 	           return d1<=date && date<=d2;
 	       }
 	   }); 
-	   
+ 	  //datebox1 날짜 선택에 따라 datebox2의 선택가능날짜 설정
+	   $('#datebox1').datebox({
+	      onSelect: function(date){
+	    	  startDate = date;
+	    	  alert("startDate" + startDate);
+	         $('#datebox2').datebox().datebox('calendar').calendar({
+	               validator: function(date){
+	                   var d1 = new Date(firstDate.getFullYear(), firstDate.getMonth(), firstDate.getDate());
+	                   return d1<=date;
+	               }
+	           });
+	      }
+	   });
+   
+	   $('#datebox2').datebox({
+		      onSelect: function(date){
+		    	  endDate = date;
+		    	  alert("endDate" + endDate);
+		      }
+	   }); 
 	   /* //datebox1 날짜 선택에 따라 datebox2의 선택가능날짜 설정
  	   $('#datebox1').datebox({
 	      onSelect: function(date){
