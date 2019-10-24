@@ -29,7 +29,6 @@ public class StaffController implements Controller {
       ModelAndView mav = new ModelAndView();
       //===============================[[민지 시작 Controller]]=======================================
        if("SFINS".equals(crud)) {
-         logger.info("회원등록 모달창 등록");
          int result=0;
          Map<String,Object> pMap = new HashMap<>();
          HashMapBinder hmb = new HashMapBinder(req);
@@ -40,7 +39,6 @@ public class StaffController implements Controller {
          mav.setViewName("/staff/SFSEL.fm");
       }
       else if("SFSEL".equals(crud)) {
-         logger.info("회원조회 창 ");
          String keyword = req.getParameter("keyword");
         Map<String,String> pMap = new HashMap<String, String>();
         pMap.put("keyword", keyword);

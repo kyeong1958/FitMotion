@@ -57,14 +57,14 @@
 	 		pi_group_pay = #{pi_group_pay}
 	  where	pi_num = #{pi_num}
 	</update>
-		<select id="staffSerch" parameterType="map" resultType="map">  
+<!-- 		<select id="staffSerch" parameterType="map" resultType="map">  
        select staff_name,staff_hp,staff_birth
                         from staff
               where 1 =1 
               <if test="keyword!=null">
               AND staff_name LIKE '%'||#{keyword}||'%'
               </if>
-	</select>
+	</select> -->
    <!--========================================[[민지 xml 끝]]=========================================================  -->
 </mapper> 
  

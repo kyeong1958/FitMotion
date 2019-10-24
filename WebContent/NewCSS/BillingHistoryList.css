@@ -1,5 +1,7 @@
 @charset "UTF-8";
 
+
+
 /* 홈바  시작 */
 .bar_area {
 	padding: 10px 66px;
@@ -137,6 +139,10 @@
     margin-left: -20px;
     list-style: none; 
 }
+  
+           
+
+
 
 #BHLgrid ul li {
     flex: 0 1 auto;

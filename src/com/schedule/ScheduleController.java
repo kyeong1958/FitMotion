@@ -21,7 +21,7 @@ public class ScheduleController implements Controller {
 	}
 	
 	@Override
-	public ModelAndView execute() throws Exception {
+	public ModelAndView execute(HttpServletRequest req, HttpServletResponse res) throws Exception {
 		ModelAndView mav = new ModelAndView();
 		if("example".equals(crud)) {
 			logger.info("OwnerController 입장함");
@@ -39,7 +39,7 @@ public class ScheduleController implements Controller {
 	}
 
 	@Override
-	public String jsonexecute() throws Exception {
+	public String jsonexecute(HttpServletRequest req, HttpServletResponse res) throws Exception {
 		return null;
 	}
 

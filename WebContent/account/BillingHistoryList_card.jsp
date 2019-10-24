@@ -26,7 +26,7 @@
                     <!-- Loop -->
                     <!-- 상품 별 디자인 클래스가 다르게 적용되어 있습니다. -->
                     
-                        <li>
+                        <li style="  width: calc((100% - 50px) / 4);">
                             <div class="service_itm" >
                                 <p>
                                     <span><%=rMap.get("MEM_NAME") %></span>
@@ -40,7 +40,7 @@
                                         <p class="use_service">이용중</p>
                             </div>
 
-                            <div class="service_detail" >
+                            <div class="service_detail" style="background-color: white;" >
                                 <div class="use_service">
                                             <p class="pr_pt ">
                                                 <span>개인레슨</span>
@@ -92,4 +92,6 @@
  						}
                     
                     %>
+                    
+                  
                 </ul>

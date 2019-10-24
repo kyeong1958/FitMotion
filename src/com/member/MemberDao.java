@@ -36,31 +36,45 @@ public class MemberDao {
 		
 		return result;
 	}
-	public List<Map<String, Object>> bhSel() {
-		logger.info("회원목록 조회부분 Dao 호출성공");
-		List<Map<String,Object>> bhSelList = new ArrayList<>();
-	try {
+	/*
+	 * public List<Map<String, Object>> bhSel() { logger.info("회원목록 조회부분 Dao 호출성공");
+	 * List<Map<String,Object>> bhSelList = new ArrayList<>(); try {
+	 * 
+	 * sqlSession = sqlSessionFactory.openSession(); bhSelList =
+	 * sqlSession.selectList("MemSel");
+	 * 
+	 * Map<String,Object> rMap = bhSelList.get(0);
+	 * 
+	 * 
+	 * logger.info(bhSelList.size()); logger.info(rMap.get("MEM_NAME"));
+	 * 
+	 * } catch (Exception e) { e.printStackTrace(); } finally { if(sqlSession!=null)
+	 * { sqlSession.close(); }
+	 * 
+	 * }
+	 * 
+	 * return bhSelList; }
+	 */
+	
+	public List<HashMap> bhsel(Map<String, String> pMap) {
+		 List<HashMap> bhSelList = new ArrayList<>();
+	      try {
+	    	  sqlSession = sqlSessionFactory.openSession();
+	    	  bhSelList= sqlSession.selectList("MemSelkek",pMap);
+	    	  logger.info("sfSelList : "+bhSelList);
 			
-			sqlSession = sqlSessionFactory.openSession();
-			bhSelList = sqlSession.selectList("MemSel");
-			
-			 Map<String,Object> rMap = bhSelList.get(0);
-			 
-			
-			 logger.info(bhSelList.size()); 
-			 logger.info(rMap.get("MEM_NAME"));
-			 
 		} catch (Exception e) {
 			e.printStackTrace();
-		} finally {
+		}finally {
 			if(sqlSession!=null) {
-				sqlSession.close(); 
+				sqlSession.close();
 			}
-			
 		}
-		
-		return bhSelList;
+		return bhSelList; 
 	}
+	
+	
+	
 	public int bhUPD(Map<String, Object> pMap) {
 	      logger.info("bhUPD Dao 호출성공");
 	      int result = 0;
@@ -103,6 +117,28 @@ public class MemberDao {
 	      }
 	      return result;
 	   }
+		public List<Map<String, Object>> bhSel2() {
+			logger.info("회원목록 조회부분 Dao 호출성공");
+			List<Map<String,Object>> bhSelList = new ArrayList<>();
+		try {
+				
+				sqlSession = sqlSessionFactory.openSession();
+				bhSelList = sqlSession.selectList("MemSel");
+				 Map<String,Object> rMap = bhSelList.get(0);
+				 logger.info(bhSelList.size()); 
+				 logger.info(rMap.get("MEM_NAME"));
+				 
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				if(sqlSession!=null) {
+					sqlSession.close(); 
+				}
+				
+			}
+			
+			return bhSelList;
+		}
 
 	/*===============================[[민지 끝 ]]===========================================*/
 	/*===============================[[주노시작]]================================================*/
@@ -126,4 +162,6 @@ public class MemberDao {
 	      return rMap;
 	}
 	/*===============================[[주노끝]]================================================*/
+
+
 }

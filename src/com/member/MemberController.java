@@ -56,8 +56,10 @@ public class MemberController implements Controller {
 		}
 		else if("BHSEL".equals(crud)) {
 			logger.info("회원조회 창 ");
-			List<Map<String,Object>> bhSelList = null;
-			bhSelList = memberLogic.bhsel();
+			String keyword = req.getParameter("keyword");
+			Map<String,String> pMap = new HashMap<String, String>();
+			pMap.put("keyword", keyword);
+	        List<HashMap> bhSelList = memberLogic.bhsel(pMap); 
 			mav.addObject("bhSelList", bhSelList);
 			mav.pageMove("forward");
 			mav.setViewName("/member/in_005fcard.jsp");
@@ -86,11 +88,12 @@ public class MemberController implements Controller {
 	      else if("BHMSEL".equals(crud)) {
 				logger.info("회원조회 창 ");
 				List<Map<String,Object>> bhSelList = null;
-				bhSelList = memberLogic.bhsel();
+				bhSelList = memberLogic.bhsel2();
 				mav.addObject("bhSelList", bhSelList);
 				mav.pageMove("forward");
 				mav.setViewName("/account/imsi_change.jsp");
 	      }
+	     
 		/*================================[[민지 Mcontroller 끝 ]]=======================================*/
 	      /*=====================================[[주노 시작 ]]====================================*/
 	         else if("bhDET".equals(crud)) {

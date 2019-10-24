@@ -12,7 +12,29 @@
 body{
 	padding:0;
 }
+
+
+#ticketbuy_name input[type="text"]{
+    text-align: center;
+    height: 34px;
+    font-size: 13px;
+    border: 1px solid #BABBC2;
+    border-radius: 5px;
+}
+
 </style>
+
+
+<%
+		Map<String,Object> probuyList = (Map<String,Object>)request.getAttribute("probuylist");
+		int size = 0;//주의 로우의 수가 아니라 컬럼의 수
+		if(probuyList!=null && probuyList.size()>0){
+			probuyList.get("PROM_NUM");
+		}
+%>
+
+
+
 <script type="text/javascript">
 	$(document).ready(function(){
 	 //데이트박스 
@@ -214,12 +236,12 @@ function fund(){
  
 
  function pfIns_buy(){
-		var formData = $("#ftable").serialize();
+		var formData = $("#f_insert").serialize();
 		alert(formData);
 		 $.ajax({
 			method:"POST"
 			,data:formData
-			,url:"/account/pfINS.fm"
+			,url:"/program/probuy.fm"
 			,success:function(data){
 				//$("#eqbox").html(data);
 			}
@@ -248,35 +270,32 @@ function fund(){
                      <div style="padding:0 0 5px">
                         <label class="spend-box-left-column">회원명</label>
                         <span>
-                           <input type="text" id="sm_memname"  class="spending-text" style="width:260px;">
+                           <input type="text" id="sm_memname"  name="mem_num"  class="spending-text" style="width:260px;">
                         </span>
                         <span>
                            <button type="button" class="btn_cancle search_mem" style="margin-left:10px" data-toggle="modal" data-target="#search_member">회원찾기</button>
                         </span>
                      </div>
                      <div style="padding:0 0 5px">
-                        <label class="spend-box-left-column">최근 결제 이력</label>
+                        <label class="spend-box-left-column">상품정보</label>
                         <span>
-                           <label>패키지 레슨</label>
+                           <label ><%=probuyList.get("PROM_NAME") %></label>
                         </span>
                      </div>
                      <div align="right">
-                        <span style="color: #2196F3 !important;margin-right:20px;">2019-09-30</span>
-                        <span style="color: #2196F3 !important;">1,500,000원</span>
+                        <span style="color: #2196F3 !important;"><%=probuyList.get("PROM_DIS_PRICE") %></span>
                      </div>
                      <h4 class="spending-box-left" style="margin-top:10px;">결제 상품 정보</h4>
                      <div style="padding:0 0 5px">
                         <label class="spend-box-left-column">상품명</label>
-                        <span>
-                           <select class="spend-combobox" name="ticket_num"  id="selectpro" onchange="imsi_change(this.value)">
-                      		<!-- PROMOTION AJAX -->
-                           </select>
+                        <span id="ticketbuy_name">
+                          <input type="text" style="width: 50%" value="<%=probuyList.get("PROM_NAME") %>">
                         </span>
                      </div>
                      <div style="padding:0 0 5px">
                         <label class="spend-box-left-column">상품가격</label>
                         <span>
-                           <input type="text" id="imsi_ghost" class="spending-text" style="width:260px;" name="ticp_payment">
+                           <input type="text" id="imsi_ghost" value="<%=probuyList.get("PROM_DIS_PRICE") %>" class="spending-text" style="width:50%;" name="ticp_payment">
                         </span>
                      </div>
                      
@@ -302,7 +321,7 @@ function fund(){
                               <td class="spend-table-column">총 결제금액</td>
                               <td class="spend-table-content" style="color: #2196F3 !important;"> 
 	                              <div>
-	                              		<span name="prom_dis_price" id="total_buy">0원</span>
+	                              		<span name="proticp_payment" id="total_buy">0원</span>
 	                              	</div> 
                               </td>
                            </tr>
@@ -326,12 +345,12 @@ function fund(){
                   <div style="padding:0 0 5px">
                      <label class="spend-box-right-column">이용 시작일</label>
                 
-                     <input  id="datebox" class="easyui-datebox">
+                     <input  id="datebox" class="easyui-datebox" style="text-align: center; width: 25%;" value="<%=probuyList.get("PROM_START_DATE")%>~<%=probuyList.get("PROM_END_DATE")%>">
                   </div>
                   <div style="padding:0 0 5px">
                      <label class="spend-box-right-column">결제일</label>
                     
-                     <input  id="datebox"  name="ticp_reg_date" class="easyui-datebox">
+                     <input  id="datebox"  name="ticp_reg_date" class="easyui-datebox" style="width: 25%;">
                   </div>
                   <div style="padding:0 0 5px" >
                  
@@ -408,8 +427,6 @@ function fund(){
 					,url:"/member/BHMSEL.fm"
 					,success:function(data){
 						$("#memsearch").html(data);
-						
-						
 					}
 				}); 
 				

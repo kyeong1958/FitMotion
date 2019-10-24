@@ -9,6 +9,8 @@
 	if(bhSelList!=null){
 		size = bhSelList.size();
 	}
+	
+	
  %>
 <!-- ============================ [[ 회원목록  ]] ======================================== -->
 <%@ include file="../common/JEasyUICommon.jsp"%>
@@ -104,6 +106,16 @@ body{
 			}); 
 		}
 	    
+	
+	function memberKeyword(){
+		 $.ajax({
+      		  method:"POST"
+				,url:"/member/BHSEL.fm?keyword="+$("#keyword").val()
+				,success:function(data){
+					$("#in_005fcard").html(data);
+    			}
+      	  	});
+	}
 	    
 </script>
 <div id="memList">
@@ -261,8 +273,8 @@ body{
                     </span> -->
 	                    <span class="search_box" style="float: right;">
 						<form name="searchFrm" >
-							<input type="text"  placeholder="이름, 전화번호, 이메일, 메모"  id="keywork" name="keyword" style="width: 185px;">
-							<button type="button"   class="search">검색</button>
+							<input type="text"  placeholder="이름"  id="keyword" name="keyword" style="width: 185px;">
+							<button type="button" onclick="memberKeyword()"  class="search" >검색</button>
 						</form>
 					</span>
             

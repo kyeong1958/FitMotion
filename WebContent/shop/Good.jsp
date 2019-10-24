@@ -35,6 +35,7 @@ body{
 
 
  function gdDel(){
+			//번호를 안가꼬옴
 		alert("삭제버튼눌림");
 		var go_num = null;
 		go_num = $("#checkbox_id").val();

@@ -12,7 +12,29 @@
 body{
 	padding:0;
 }
+
+
+#ticketbuy_name input[type="text"]{
+    text-align: center;
+    height: 34px;
+    font-size: 13px;
+    border: 1px solid #BABBC2;
+    border-radius: 5px;
+}
+
 </style>
+
+
+<%
+		Map<String,Object> tadtlList = (Map<String,Object>)request.getAttribute("tadtlList");
+		int size = 0;//주의 로우의 수가 아니라 컬럼의 수
+		if(tadtlList!=null && tadtlList.size()>0){
+			tadtlList.get("TICKET_NUM");
+		}
+%>
+
+
+
 <script type="text/javascript">
 	$(document).ready(function(){
 	 //데이트박스 
@@ -255,28 +277,25 @@ function fund(){
                         </span>
                      </div>
                      <div style="padding:0 0 5px">
-                        <label class="spend-box-left-column">최근 결제 이력</label>
+                        <label class="spend-box-left-column">상품정보</label>
                         <span>
-                           <label>패키지 레슨</label>
+                           <label><%=tadtlList.get("TICKET_NAME") %></label>
                         </span>
                      </div>
                      <div align="right">
-                        <span style="color: #2196F3 !important;margin-right:20px;">2019-09-30</span>
-                        <span style="color: #2196F3 !important;">1,500,000원</span>
+                        <span style="color: #2196F3 !important;"><%=tadtlList.get("TICKET_PRICE") %></span>
                      </div>
                      <h4 class="spending-box-left" style="margin-top:10px;">결제 상품 정보</h4>
                      <div style="padding:0 0 5px">
                         <label class="spend-box-left-column">상품명</label>
-                        <span>
-                           <select class="spend-combobox" name="ticket_num"  id="selectpro" onchange="imsi_change(this.value)">
-                      		<!-- PROMOTION AJAX -->
-                           </select>
+                        <span id="ticketbuy_name">
+                          <input type="text" value="<%=tadtlList.get("TICKET_NAME") %>">
                         </span>
                      </div>
                      <div style="padding:0 0 5px">
                         <label class="spend-box-left-column">상품가격</label>
                         <span>
-                           <input type="text" id="imsi_ghost" class="spending-text" style="width:260px;" name="ticp_payment">
+                           <input type="text" id="imsi_ghost" value="<%=tadtlList.get("TICKET_PRICE") %>" class="spending-text" style="width:260px;" name="ticp_payment">
                         </span>
                      </div>
                      
@@ -408,8 +427,6 @@ function fund(){
 					,url:"/member/BHMSEL.fm"
 					,success:function(data){
 						$("#memsearch").html(data);
-						
-						
 					}
 				}); 
 				

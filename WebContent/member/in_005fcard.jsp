@@ -18,7 +18,7 @@ body{
 
 
 
-	/* 	  function memberdetail(mem_num){
+	  function memberdetail(mem_num){
 				alert(mem_num);
 		 		var formData = $("#MDetail").serialize();
 				 $.ajax({
@@ -31,7 +31,7 @@ body{
 					}
 				}); 
 		     }
-		    */
+		    
 	
 </script> 
 	<form id="MDetail">

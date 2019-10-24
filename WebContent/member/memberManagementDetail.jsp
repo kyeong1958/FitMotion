@@ -32,7 +32,7 @@
 	 $("#umem_hp").val(mem_hp);
  }
  function memUdate(){
-		/* var formData = $("#f_update").serialize();
+		 var formData = $("#f_update").serialize();
 		 $.ajax({
 			method:"POST"
 			,data:formData
@@ -41,7 +41,7 @@
 				alert("성공");
 				$("#memupdate").html(data);
 			}
-		});  */
+		});  
 	} 
   </script>
     

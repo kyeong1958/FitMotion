@@ -34,10 +34,43 @@
            where ticket_num = #{ticket_num}
  	
  	</select>
- 	<!--======================================================[[민지 끝 ]]======================================================  -->
+ 	
+ 	<insert id="proIns" parameterType="map">
+ 	insert into promotion(PROM_NUM,PROM_NAME,PROM_DIS_PRICE,GYM_NUM,PROM_START_DATE,PROM_END_DATE)
+                            values(SEQ_PROINS.NEXTVAL,#{prom_name},#{prom_dis_price},1,#{prom_start_date},#{prom_end_date})
+ 	</insert>
  	<select id="prosel" parameterType="map" resultType="map"> 
-		select prom_num,prom_name,prom_dis_price,prom_period_of_time from PROMOTION 
+		select PROM_NUM,PROM_NAME,PROM_DIS_PRICE,GYM_NUM,PROM_START_DATE,PROM_END_DATE from PROMOTION 
 	</select>
+	
+	<select id="probuydetail" parameterType="map" resultType="map">
+	select PROM_NUM,PROM_NAME,PROM_DIS_PRICE,GYM_NUM,PROM_START_DATE,PROM_END_DATE from PROMOTION
+    		WHERE PROM_NUM = #{prom_num}
+	
+	</select>
+	
+	<delete id="prodelete" parameterType="map">
+   		 delete from promotion
+    		where prom_num = #{prom_num}
+	</delete>
+	
+	
+	
+	<insert id="probuyinsert" parameterType="map" statementType="CALLABLE">
+			{call pro_buy(
+		 						 #{ticp_reg_date,mode=IN, jdbcType=VARCHAR, javaType=java.lang.String}
+		 						 ,#{ticket_num,jdbcType=NULL}
+		 						 ,#{prom_num,jdbcType=NULL}
+		 						 ,#{mem_num,jdbcType=NULL}
+		 						 ,#{ticp_pay_period,mode=IN, jdbcType=VARCHAR, javaType=java.lang.String}
+		 						 ,#{proticp_payment,mode=IN, jdbcType=VARCHAR, javaType=java.lang.String}
+								
+								)}
+			
+	</insert>
+	
+	
+ 	<!--======================================================[[민지 끝 ]]======================================================  -->
 	
 </mapper> 
  

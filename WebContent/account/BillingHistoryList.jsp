@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<link rel="stylesheet" type="text/css" href="../NewCSS/BillingHistoryList.css">
+<link rel="stylesheet" type="text/css" href="/NewCSS/BillingHistoryList.css">
     <!-- ============================ [[ 회원결제내역 ]] ======================================== -->
 
 
@@ -9,6 +9,14 @@
 body{
    padding:0%;
 }
+
+
+                  
+                 
+
+
+
+
 </style>
 <!-- ================================= [[ 화면전환 ]] =================================================== -->
             <!--=========================[[ 홈바 시작 ]]========================== -->

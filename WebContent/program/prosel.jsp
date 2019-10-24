@@ -19,16 +19,52 @@ legend {
 
 
 <script>
-	function prodetail(ticket_num){
-		alert("상세눌림"+ticket_num);
+	function prodelete(prom_num){
+		alert("삭제하기 쫌따하기"+prom_num);
 		 $.ajax({
 				method:"get"
-				,url:"/program/taDTL.fm?ticket_num="+ticket_num
+				,url:"/program/prodelete.fm?prom_num="+prom_num
 				,success:function(data){
 					$("#ticketmain").html(data);
+					$.ajax({
+						methid:'get'
+						,url:"/program/proSEL.fm"
+						,success:function(data){
+							$("#tasel").html(data);
+							$.ajax({
+								method : "POST",
+								url : "/program/prornk.fm",
+								success : function(data) {
+									$("#pro_rank").html(data);
+								}
+							});
+						}
+					});
 				}
 			}); 
 		}
+	
+	
+	function probuy(prom_num){
+		alert(prom_num);
+		 $.ajax({
+				method:"get"
+				,url:"/program/probuyDTL.fm?prom_num="+prom_num
+				,success:function(data){
+					$("#ticketmain").html(data);
+						 $.ajax({
+		  			    		  method:"POST"
+		  			  				,url:"/account/PROSEL2.fm"
+		  			  				,success:function(data){
+		  			  					//alert("성공");
+		  			  					$("#selectpro2").html(data);
+		  			  			}
+		  			    	  }); 
+				}
+			}); 
+		
+		
+	}
 
 
 </script>
@@ -56,7 +92,7 @@ legend {
                      <span class="purple c_purple">
 							<%=rMap.get("PROM_NAME")%>
                         <em class="fr">
-                        	<%=rMap.get("PROM_PERIOD_OF_TIME") %>
+                        	<%=rMap.get("PROM_START_DATE") %> <span>~</span> <%=rMap.get("PROM_END_DATE") %>
                         </em>
                      </span>
                      <i><%=rMap.get("PROM_NAME")%></i>
@@ -66,8 +102,8 @@ legend {
                   <div class="service_price">
                      <p><%=rMap.get("PROM_DIS_PRICE")%></p>
                      <p style="display: block;">
-                        <a  class="btn green" onclick="prodetail('<%=rMap.get("PROM_NUM") %>')">상세</a>
-                        <a  class="btn blue">결제하기</a>
+                        <a  class="btn green" onclick="prodelete('<%=rMap.get("PROM_NUM") %>')">삭제하기</a>
+                        <a  class="btn blue" onclick="probuy('<%=rMap.get("PROM_NUM") %>')">결제하기</a>
                      </p>
                   </div>
                </div>
