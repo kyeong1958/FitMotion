@@ -1,0 +1,193 @@
+@charset "UTF-8";
+.bar_area {
+    padding: 10px 66px;
+    height: 54px;
+    background-color: #FFF;
+    box-shadow: 1px 1px 4px #BABBC2;
+    position: relative;
+    z-index: 1;
+}
+.bar_menu{
+    display: inline-block;
+    font-size: 16px;
+    color: #9fa0aa;
+    line-height: 32px;
+}
+.tab-area{
+	background-color: #f0f0f2;
+    border-bottom: 1px solid #BABBC2;
+    padding-bottom: 0;
+    max-width: 100%;
+    padding-top: 30px;
+    padding-left: 20px;
+}
+.tab-session{
+	padding-left: 30px;
+	max-width: 100%;
+	background-color: #f0f0f2;
+}	
+.tabBtn{
+	display: inline-block;
+    padding: 0 10px;
+    min-height: 40px;
+    color: #6e7794;
+    background-color: #FFF;
+    border: 1px solid #BABBC2;
+    border-radius: 5px 5px 0 0;
+    min-width: 95px;
+    font-size: 13px;
+    overflow: hidden;
+    margin-right: -5px;
+    margin-bottom: -1px;
+    outline: none;
+}
+/* BODY */
+.section{
+    margin: 0 auto;
+    padding: 30px 66px;
+    max-width: 100%;
+}
+.center-calculation-year{
+	display: block;
+    font-size: 18px;
+    color: #6E6E6E;
+    font-weight: 500;
+    text-align: center;
+    padding-right: 12%;
+}
+.center-calculation-month-pre{
+	align-self: center;
+    display: inline-block;
+    height: 21px;
+    width: 15px;
+}
+.center-calculation-month-next{
+	align-self: center;
+    display: inline-block;
+    height: 21px;
+    width: 15px;
+}
+.center-calculation-month{
+    padding: 0 25px;
+    font-size: 40px;
+    vertical-align: middle;
+    margin-left:15px;
+}
+/* TABLE HEADER */
+.sales-calculation-section{
+	padding-top: 30px;
+    padding-left: 0px;
+    padding-right: 0px;
+}
+.sales-calculation{
+	border-right: 1px solid	#BABBC2;
+    padding-left: 0px;
+    padding-right: 0px;
+}
+.sales-calculation-title{			
+    margin-right: 30px;
+    font-size: 16px;
+    line-height: 16px;
+    color: #43A047;
+    font-weight: 500;
+}
+.sales-calculation-sum{
+    margin-top: 10px;
+    font-size: 25px;
+    color: #000000;
+    font-weight: 500;
+    padding-top:16px;
+}
+.sales-calculation-standby{
+    padding: 13px 11px;
+    float: left;
+    font-size: 16px;
+    line-height: 16px;
+    color: #000000;
+    font-weight: 500;
+    border: 1px solid #BDBDBD;
+    
+}
+.title{
+    margin-left: 40%;
+	border-right:none;
+}
+.number{
+    width: 20%;	
+	border-left:none;
+	border-right:none;
+}
+.sum{
+    width: 25%;	
+}
+/* TABLE */
+.sales-calculation-table-title{
+	margin-bottom: 16px;
+    padding: 0 0 11px 0;
+    font-size: 18px;
+    line-height: 18px;
+    color: #000000;
+    text-align: left;
+    border-bottom: 1px solid #DBDBDB !important;
+    font-weight: 500;
+}
+.sales-calculation-table{
+	border:1px solid #dbdbdb;
+	width: 100%;
+}
+.sales-calculation-table-header{
+	padding: 15px 20px;
+    font-size: 16px;
+    line-height: 16px;
+    color: #000000;
+    text-align: left;
+    font-weight: 500;
+    background: rgba(33,150,243,0.1);
+    border: 1px solid #DBDBDB !important;
+}
+.sales-calculation-table-header2{
+	padding: 15px 20px;
+    font-size: 16px;
+    line-height: 16px;
+    color: #000000;
+    text-align: left;
+    font-weight: 500;
+    background: rgba(255,87,34,0.10) !important;
+    border: 1px solid #DBDBDB !important;
+}
+.sales-calculation-table-column1{
+	width: 50%;
+	padding: 15px 20px;
+    font-size: 16px;
+    line-height: 16px;
+    color: #000000;
+    text-align: left;
+    font-weight: 500;
+    background: #ffffff;
+    border: 1px solid #DBDBDB !important;
+}
+.sales-calculation-table-column2{
+	width: 50%;
+	text-align: right;
+	padding: 15px 20px;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 16px;
+    color: #6E6E6E;
+    text-align: right;
+    background: #ffffff;
+    border: 1px solid #DBDBDB !important;
+}
+.sales-calculation-table-column3{
+	width: 50%;
+	text-align: right;
+}
+
+
+
+
+
+
+
+
+
