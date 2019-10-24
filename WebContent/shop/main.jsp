@@ -5,7 +5,7 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/paginationjs/2.1.4/pagination.css"/>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/paginationjs/2.1.4/pagination.min.js"></script>
 <script>
-var jb = jQuery.noConflict();
+	var jb = jQuery.noConflict();
 </script>
 <%@ include file="/common/JEasyUICommon.jsp"%>
 

@@ -105,7 +105,7 @@
 	</select>
 	<!--3page 개인레슨 통계 -->
 	<select id="privateProg" parameterType="String" resultType="map">             	
-         select gs_dep_num,gs_dep_date,gs_pay_amount,gs_account_due,gs_ref_amount, m.mem_name ,m.mem_hp,gs_dep_history,gs_state,gs_pay_method,gs_billing_person
+         select distinct gs_dep_num,gs_dep_date,gs_pay_amount,gs_account_due,gs_ref_amount, m.mem_name ,m.mem_hp,gs_dep_history,gs_state,gs_pay_method,gs_billing_person
          from GYM_SALES gs, member m, TIC_PURCHASE tp
          where GS.GS_DEP_MEM = M.mem_num and M.MEM_NUM = TP.MEM_NUM and gs.gs_public_private = 1
          and replace(GS.GS_DEP_DATE,'/','') between to_number(substr('20190701,20191001',1,8)) and to_number(substr('20190701,20191001',10,17))
@@ -146,7 +146,7 @@
 	</select>
 	<!--4page 그룹레슨 통계  -->
 	<select id="publicProg" parameterType="String" resultType="map">
-		select gs_dep_num,gs_dep_date,gs_dep_mem,m.mem_hp,gs_dep_history,gs_state
+		select distinct gs_dep_num,gs_dep_date,m.mem_name ,m.mem_hp,gs_dep_history,gs_state
 		      ,gs_pay_amount,gs_account_due,gs_ref_amount,gs_billing_person,gs_pay_method
         from GYM_SALES gs, member m, TIC_PURCHASE tp
         where GS.GS_DEP_MEM = M.mem_num and M.MEM_NUM = TP.MEM_NUM and gs.gs_public_private = 2 and GS.GS_STATE in ('이용중', '만료') 

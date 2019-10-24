@@ -138,7 +138,7 @@ body {
 					test1.push("${privat.MEM_HP}");  
 					test1.push("${privat.GS_DEP_HISTORY}");  
 					test1.push("${privat.GS_STATE}");  
-					test1.push("${privat.GS_PAY_AMOUNT}");  
+					test1.push("${privat.GS_PAY_AMOUNT}");  t
 					test1.push("${privat.GS_REF_AMOUNT}");  
 					test1.push("${privat.GS_ACCOUNT_DUE}");  
 					test1.push("${privat.GS_PAY_METHOD}");  	          

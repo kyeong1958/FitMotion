@@ -138,7 +138,7 @@ body{
 	       		<c:forEach var="privat" items="${map.value}" varStatus="status">
 	       			test1.push("${privat.GS_DEP_NUM}");
  	       			test1.push("${privat.GS_DEP_DATE}");  
-	       			test1.push("${privat.GS_DEP_MEM}");  
+	       			test1.push("${privat.MEM_NAME}");  
 	       			test1.push("${privat.MEM_HP}");  
 	       			test1.push("${privat.GS_DEP_HISTORY}");  
 	       			test1.push("${privat.GS_STATE}");  
@@ -152,7 +152,7 @@ body{
 		              <c:when test="${status.index == 0}">
 			              testdata[0].push("${privat.GS_DEP_NUM}");
 			              testdata[0].push("${privat.GS_DEP_DATE}");
-			              testdata[0].push("${privat.GS_DEP_MEM}");
+			              testdata[0].push("${privat.MEM_NAME}");
 			              testdata[0].push("${privat.MEM_HP}");
 			              testdata[0].push("${privat.GS_DEP_HISTORY}");  
 			              testdata[0].push("${privat.GS_STATE}");

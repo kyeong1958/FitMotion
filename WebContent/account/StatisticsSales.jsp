@@ -693,11 +693,11 @@ function ajax(url) {
 									if (!meta.hidden) {
 										 meta.data.forEach(function (bar, index) {
 
-						                        var data = dataset.data[index].toString();                            
-												var position = bar.tooltipPosition();
-						                        
-						                        ctx.fillText(data, position.x, position.y - 5);
-						                    });
+					                        var data = dataset.data[index].toString();                            
+											var position = bar.tooltipPosition();
+					                        
+					                        ctx.fillText(data, position.x, position.y - 5);
+					                    });
 									}
 					            });
 				            }
