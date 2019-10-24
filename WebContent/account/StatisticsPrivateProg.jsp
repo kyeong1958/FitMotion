@@ -2,8 +2,10 @@
 	pageEncoding="UTF-8"%>
 <%@ page import="java.util.*"%>
 <%@ include file="/NewCSS/StatisticscssSales.jsp"%>
-
-<%-- <%@ include file="/common/JEasyUICommon.jsp"%>  --%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<link rel="stylesheet" type="text/css" href="../NewCSS/main.css">
+<link rel="stylesheet" type="text/css" href="../NewCSS/table.css">
+<link rel="stylesheet" type="text/css" href="../NewCSS/StatisticsProg.css">
 
 <!-- 여기가 easyui 관련
 <link rel="stylesheet" type="text/css" href="../themes/default/easyui.css">
@@ -11,18 +13,14 @@
 <link rel="stylesheet" type="text/css" href="../demo/demo.css"> 
  <script type="text/javascript" src="../js/jquery.easyui.min.js"></script> 
 <script type="text/javascript" src="../js/commons.js"></script>
-<script type="text/javascript" src="../js/jquery.cookie.js"></script> -->
+<script type="text/javascript" src="../js/jquery.cookie.js"></script>  -->
 
-<!--  여기가 pagination.js 관련
+
+<!--   여기가 pagination.js 관련
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/paginationjs/2.1.4/pagination.min.js"></script>    
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/paginationjs/2.1.4/pagination.css"/>  -->
-
-<link rel="stylesheet" type="text/css" href="../NewCSS/main.css">
-<link rel="stylesheet" type="text/css" href="../NewCSS/table.css">
-<link rel="stylesheet" type="text/css" href="../NewCSS/StatisticsProg.css">
-
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ include file="/common/JEasyUICommon.jsp"%>   
 
 <%
 	int size = 0;
@@ -33,6 +31,39 @@
 		size = privateProg.size();
 	}
 %>
+
+
+
+<script>
+
+	
+	
+	
+/* 	//(페이지네이션) 한화면에서 보여줄 컬럼숫자를 담는 변수
+	var pageNumm = 5;
+    
+	jb('#pagination1').pagination({
+        dataSource: testdata,
+        pageSize:pageNumm,
+        align:"center",
+        callback: function(data, pagination) {
+            // template method of yourself
+           
+            var datahtml = '<table id="table" class="table table-bordered  table-striped">';
+            	datahtml += '<thead><tr><th class="tableheader">주문번호</th><th class="tableheader">결제일시</th><th class="tableheader">구매회원</th><th class="tableheader">휴대폰 번호</th><th class="tableheader">결제내역</th><th class="tableheader">상태</th><th class="tableheader">결제금액</th><th class="tableheader">미수금</th><th class="tableheader">환불금액</th><th class="tableheader">결제방법</th><th class="tableheader">결제담당</th></tr></thead>';
+	         for (var i = 0, len = data.length; i < len; i++) {	        	
+	        	 datahtml += '<tbody><tr>';
+ 	            for (var j = 0;j < 11; j++) {
+	            	datahtml += '<td>' +  data[i][j] + '</td>';
+	            }
+	             datahtml += '</tbody></tr>';    	
+	         } 
+            datahtml += '</table>';
+            jb("#data-container").html(datahtml);
+        }
+    }); */
+	</script>
+
 <!-- jstl을 사용하기 위해서 c:set으로 chart에 값을 담음. -->
 
 <c:set var="private_size" value="<%=size%>" />
@@ -53,7 +84,7 @@ body {
 
 	   $('.dataTables_length').addClass('bs-select');
 	    
-	   /* //선택가능날짜 범위 설정
+	   //선택가능날짜 범위 설정
  	   $('#datebox1').datebox().datebox('calendar').calendar({
 	       validator: function(date){
 	           var now = new Date();
@@ -76,94 +107,69 @@ body {
 	               }
 	           });
 	      }
-	   });  */
-	   
-	   
- 	  /* $(document).ready(function(){
+	   });  
+/*  	   $(document).ready(function(){
           //datebox1 날짜 선택에 따라 datebox2의 선택가능날짜 설정
-	   $('#datebox1').datebox({
-	      onSelect: function(date){
-	         firstDate = date;
-	         $('#datebox2').datebox().datebox('calendar').calendar({
-	               validator: function(date){
-	                    var d1 = new Date(firstDate.getFullYear(), firstDate.getMonth(), firstDate.getDate());
-	                   return d1<=date;
-	               }
-	           });
-	      }
-	   });
+		   $('#datebox1').datebox({
+		      onSelect: function(date){
+		         firstDate = date;
+		         $('#datebox2').datebox().datebox('calendar').calendar({
+		               validator: function(date){
+		                    var d1 = new Date(firstDate.getFullYear(), firstDate.getMonth(), firstDate.getDate());
+		                   return d1<=date;
+		               }
+		           });
+		      }
+		   });
 	
-	}); */
- 	  
- 	  
+		}); */
 	});
+	
 	var test1 = new Array();
 	var testdata = new Array(new Array());
 	<c:forEach items="${privatep}" var="map">
 		<c:if test = "${map.key == '개인강의매출'}">
 			<c:choose>
-		       <c:when test="${private_size>0}" >
-		   	<c:forEach var="privat" items="${map.value}" varStatus="status">
-   			test1.push("${privat.GS_DEP_NUM}");
-    			test1.push("${privat.GS_DEP_DATE}");  
-   			test1.push("${privat.GS_DEP_MEM}");  
-   			test1.push("${privat.MEM_HP}");  
-   			test1.push("${privat.GS_DEP_HISTORY}");  
-   			test1.push("${privat.GS_STATE}");  
-   			test1.push("${privat.GS_PAY_AMOUNT}");  
-   			test1.push("${privat.GS_REF_AMOUNT}");  
-   			test1.push("${privat.GS_ACCOUNT_DUE}");  
-              <c:choose>
-	              <c:when test="${privat.GS_NEWANDREPAY eq '1'}">
-	              	test1.push("현금");   
-	              </c:when>
-	              <c:when test="${privat.GS_NEWANDREPAY eq '2'}">
-	             	 test1.push("카드"); 
-	              </c:when>
-	              	<c:when test="${privat.GS_NEWANDREPAY eq '3'}">
-	            	  test1.push("계좌이체"); 
-	              </c:when>
-              </c:choose>
-	          test1.push("${privat.GS_BILLING_PERSON}");   
-              
-              <c:choose>
-              <c:when test="${status.index == 0}">
-	              testdata[0].push("${privat.GS_DEP_NUM}");
-	              testdata[0].push("${privat.GS_DEP_DATE}");
-	              testdata[0].push("${privat.GS_DEP_MEM}");
-	              testdata[0].push("${privat.MEM_HP}");
-	              testdata[0].push("${privat.GS_DEP_HISTORY}");  
-	              testdata[0].push("${privat.GS_STATE}");
-	              testdata[0].push("${privat.GS_PAY_AMOUNT}");  
-	              testdata[0].push("${privat.GS_REF_AMOUNT}");  
-	              testdata[0].push("${privat.GS_ACCOUNT_DUE}");
-	              <c:choose>
-		             <c:when test="${privat.GS_NEWANDREPAY eq '1'}">
-		       	    	testdata[0].push("현금");   
-		             </c:when>
-		             <c:when test="${privat.GS_NEWANDREPAY eq '2'}">
-		             	testdata[0].push("카드"); 
-		             </c:when>
-		              	<c:when test="${privat.GS_NEWANDREPAY eq '3'}">
-		              	testdata[0].push("계좌이체"); 
-		             </c:when>
-	             </c:choose>
-	             testdata[0].push("${privat.GS_BILLING_PERSON}");   
-	       	 </c:when>
-	       </c:choose>
-	       <c:if test="${status.index > 0}">
-   				testdata.push(test1);
- 		 </c:if>
-	       	   //testdata.push(test1);
-	       	
-			   test1 = new Array(); 
-	       	
-	     </c:forEach>
-       </c:when>
-    </c:choose>
-</c:if>
+		       <c:when test="${private_size>0}">
+			   	<c:forEach var="privat" items="${map.value}" varStatus="status">
+					test1.push("${privat.GS_DEP_NUM}");
+					test1.push("${privat.GS_DEP_DATE}");  
+					test1.push("${privat.MEM_NAME}");  
+					test1.push("${privat.MEM_HP}");  
+					test1.push("${privat.GS_DEP_HISTORY}");  
+					test1.push("${privat.GS_STATE}");  
+					test1.push("${privat.GS_PAY_AMOUNT}");  
+					test1.push("${privat.GS_REF_AMOUNT}");  
+					test1.push("${privat.GS_ACCOUNT_DUE}");  
+					test1.push("${privat.GS_PAY_METHOD}");  	          
+		            test1.push("${privat.GS_BILLING_PERSON}");   
+		          
+		          <c:choose>
+		          <c:when test="${status.index == 0}">
+		              testdata[0].push("${privat.GS_DEP_NUM}");
+		              testdata[0].push("${privat.GS_DEP_DATE}");
+		              testdata[0].push("${privat.MEM_NAME}");
+		              testdata[0].push("${privat.MEM_HP}");
+		              testdata[0].push("${privat.GS_DEP_HISTORY}");  
+		              testdata[0].push("${privat.GS_STATE}");
+		              testdata[0].push("${privat.GS_PAY_AMOUNT}");  
+		              testdata[0].push("${privat.GS_REF_AMOUNT}");  
+		              testdata[0].push("${privat.GS_ACCOUNT_DUE}");
+		              testdata[0].push("${privat.GS_PAY_METHOD}");
+		              testdata[0].push("${privat.GS_BILLING_PERSON}");   
+		       	 </c:when>
+		       </c:choose>
+		       
+		       <c:if test="${status.index > 0}">
+					testdata.push(test1);
+			   </c:if>
+		       	   //testdata.push(test1);
+				test1 = new Array(); 
+		     </c:forEach>
+		   </c:when>
+		</c:choose>
+	</c:if>
 </c:forEach>   
-
 </script>
 
 
@@ -179,7 +185,7 @@ body {
 				<li><a class="n_04" href="javascript:ajax('../account/StatisticsSales2.jsp')">매출통계</a></li>
 				<li><a class="n_05" href="javascript:ajax('../account/StatisticsMember2.jsp')">회원통계</a></li>	
 				<li><a class="n_01 active" href="javascript:ajax('/account/privateProg.fm?startDate=20190701&endDate=20191001')">개인레슨 통계</a></li>
-				<li><a class="n_03"	href="javascript:ajax('/account/publicProg.fm')">그룹수업 통계</a></li>
+				<li><a class="n_03"	href="javascript:ajax('/account/publicProg.fm?startDate=20190701&endDate=20191001')">그룹수업 통계</a></li>
 			</ul>
 		</div>
 	</div>
@@ -223,7 +229,7 @@ body {
 					</div>
 					<div class="staff-salary-detail-box">
 						<div class="staff-salary-detail-box-header">총 매출</div>
-						<div class="staff-salary-detail-box-body">${data.AMOUNT}건</div>
+						<div class="staff-salary-detail-box-body">${data.AMOUNT}원</div>
 					</div>
 					<div class="staff-salary-detail-box">
 						<div class="staff-salary-detail-box-header">총 회원수</div>
@@ -311,31 +317,31 @@ body {
 		</div>
 	</div>
 
-	<script>
-	//(페이지네이션) 한화면에서 보여줄 컬럼숫자를 담는 변수
-	var pageNumm = 3;
-    
-    $('#pagination1').pagination({
-        dataSource: testdata,
-        pageSize:3,
-        align:"center",
-        callback: function(data, pagination) {
-            // template method of yourself
-           
-            var datahtml = '<table id="table" class="table table-bordered  table-striped">';
-            	datahtml += '<thead><tr><th class="tableheader">주문번호</th><th class="tableheader">결제일시</th><th class="tableheader">구매회원</th><th class="tableheader">휴대폰 번호</th><th class="tableheader">결제내역</th><th class="tableheader">상태</th><th class="tableheader">결제금액</th><th class="tableheader">미수금</th><th class="tableheader">환불금액</th><th class="tableheader">결제방법</th><th class="tableheader">결제담당</th></tr></thead>';
-	         for (var i = 0, len = data.length; i < len; i++) {	        	
-	        	 datahtml += '<tbody><tr>';
- 	            for (var j = 0;j < 11; j++) {
-	            	datahtml += '<td>' +  data[i][j] + '</td>';
-	            }
-	             datahtml += '</tbody></tr>';    	
-	         } 
-            datahtml += '</table>';
-            $("#data-container").html(datahtml);
-        }
-    });
-	</script>
+	 	<script>
+		//(페이지네이션) 한화면에서 보여줄 컬럼숫자를 담는 변수
+		var pageNumm = 10;
+	    
+		jb('#pagination1').pagination({
+	        dataSource: testdata,
+	        pageSize:pageNumm,
+	        align:"center",
+	        callback: function(data, pagination) {
+	            // template method of yourself
+	           
+	            var datahtml = '<table id="table" class="table table-bordered  table-striped">';
+	            	datahtml += '<thead><tr><th class="tableheader">주문번호</th><th class="tableheader">결제일시</th><th class="tableheader">구매회원</th><th class="tableheader">휴대폰 번호</th><th class="tableheader">결제내역</th><th class="tableheader">상태</th><th class="tableheader">결제금액</th><th class="tableheader">미수금</th><th class="tableheader">환불금액</th><th class="tableheader">결제방법</th><th class="tableheader">결제담당</th></tr></thead>';
+		         for (var i = 0, len = data.length; i < len; i++) {	        	
+		        	 datahtml += '<tbody><tr>';
+	 	            for (var j = 0;j < 11; j++) {
+		            	datahtml += '<td>' +  data[i][j] + '</td>';
+		            }
+		             datahtml += '</tbody></tr>';    	
+		         } 
+	            datahtml += '</table>';
+	            jb("#data-container").html(datahtml);
+	        }
+	    });
+	</script>  
 
 	<!-- ================================= [[ TABLE BOTTOM ]] =================================================== -->
 	<div class="row pagination">

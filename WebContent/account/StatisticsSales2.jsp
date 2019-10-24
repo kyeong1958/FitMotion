@@ -1,16 +1,20 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="/NewCSS/StatisticscssSales.jsp"%> 
-<%-- <%@ include file="/common/JEasyUICommon.jsp"%> --%>
 <link rel="stylesheet" type="text/css" href="../NewCSS/main.css">
-
-
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/paginationjs/2.1.4/pagination.min.js"></script>
+<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/paginationjs/2.1.4/pagination.css"/>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/paginationjs/2.1.4/pagination.min.js"></script>
+<script>
+var $j = jQuery.noConflict();
+</script> -->
 
+<!-- <script>
+    $.ssupagination = $.pagination;
+    delete $.pagination;
+</script> -->
 <!-- jstl을 사용하기 위해서 c:set으로 chart에 값을 담음. -->
 
 <div id="mainboard2">
@@ -39,7 +43,7 @@
   $(document).ready(function() {
 		$.ajax({
 			method : 'get',
-			url : '/account/allsales.fm?date='+201910,
+			url : '/account/allsales.fm?date='+'201910',
 			success : function(data) {
 				$("#mainboard2").html(data);
 			}
@@ -127,7 +131,7 @@ function ajax(url) {
 					<li><a class="n_04 active" href="javascript:ajax('../account/StatisticsSales2.jsp')">매출통계</a></li>
 					<li><a class="n_05" href="javascript:ajax('../account/StatisticsMember2.jsp')">회원통계</a></li>		
 					<li><a class="n_01" href="javascript:ajax('/account/privateProg.fm?startDate=20190701&endDate=20191001')">개인레슨 통계</a></li>
-					<li><a class="n_03" href="javascript:ajax('/account/publicProg.fm')">그룹수업 통계</a></li>
+					<li><a class="n_03" href="javascript:ajax('/account/publicProg.fm?startDate=20190701&endDate=20191001')">그룹수업 통계</a></li>
 				</ul>
 			</div>
 		</div>

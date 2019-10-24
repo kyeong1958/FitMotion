@@ -256,7 +256,35 @@ function premonth2(){
 				legend: {
 			    	display: true,
 	                position: 'right' //차트 레이블 위치 조정 
-			 }
+			 	},
+			    
+			    "animation": {
+
+		            "duration": 0,
+
+		            "onComplete": function (chart) {
+
+		                var chartInstance = this.chart,
+
+		                ctx = chartInstance.ctx;
+		                ctx.fillStyle = 'rgb(0, 0, 0)';
+		                var fontSize = 16;
+		                ctx.font = Chart.helpers.fontString(fontSize, Chart.defaults.global.defaultFontStyle, Chart.defaults.global.defaultFontFamily);
+		                
+			            this.data.datasets.forEach(function (dataset, i) {
+					        var meta = chartInstance.controller.getDatasetMeta(i);
+							if (!meta.hidden) {
+								 meta.data.forEach(function (bar, index) {
+
+				                        var data = dataset.data[index].toString();                            
+										var position = bar.tooltipPosition();
+				                        
+				                        ctx.fillText(data, position.x, position.y - 5);
+				                    });
+							}
+			            });
+		            }
+		        }
 			}
 		});
 		var doughnutChart2 = document.getElementById('doughnutChart2');
@@ -292,7 +320,35 @@ function premonth2(){
 				legend: {
 			    	display: true,
 	                position: 'right' //차트 레이블 위치 조정 
-			 }
+				},
+			    
+			    "animation": {
+
+		            "duration": 0,
+
+		            "onComplete": function (chart) {
+
+		                var chartInstance = this.chart,
+
+		                ctx = chartInstance.ctx;
+		                ctx.fillStyle = 'rgb(0, 0, 0)';
+		                var fontSize = 16;
+		                ctx.font = Chart.helpers.fontString(fontSize, Chart.defaults.global.defaultFontStyle, Chart.defaults.global.defaultFontFamily);
+		                
+			            this.data.datasets.forEach(function (dataset, i) {
+					        var meta = chartInstance.controller.getDatasetMeta(i);
+							if (!meta.hidden) {
+								 meta.data.forEach(function (bar, index) {
+
+				                        var data = dataset.data[index].toString();                            
+										var position = bar.tooltipPosition();
+				                        
+				                        ctx.fillText(data, position.x, position.y - 5);
+				                    });
+							}
+			            });
+		            }
+		        }
 			}
 		});
 		

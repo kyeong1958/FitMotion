@@ -113,10 +113,12 @@ public class AccountDao {
 
 		List<Map<String, String>> dateList = new ArrayList<>();
 		Map<String,String> dateMap = new HashMap<String, String>();
+		String start = startDate;
+		String end = endDate;
 		String hap;
-		dateMap.put("start", startDate);
-		dateMap.put("end", endDate);
-		hap = startDate + "," + endDate;
+		dateMap.put("start", start);
+		dateMap.put("end", end);
+		hap = start + "," + end;
 		logger.info("hap : "+hap);
 		dateList.add(dateMap);
 		try {

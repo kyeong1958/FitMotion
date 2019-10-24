@@ -8,6 +8,17 @@
 <link rel="stylesheet" type="text/css" href="../NewCSS/table.css">
 <link rel="stylesheet" type="text/css" href="../NewCSS/StatisticsProg.css">
 
+<!-- 이건 서블릿 타서 이거만 열면됨. -->
+<!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/paginationjs/2.1.4/pagination.css"/>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/paginationjs/2.1.4/pagination.min.js"></script>
+<script>
+var jb = jQuery.noConflict();
+</script>
+ -->
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.bundle.js"></script> -->
+<%@ include file="/common/JEasyUICommon.jsp"%>   
+
 <%
    int size = 0;
    Map<String,List<Map<String,Object>>> publicProg = 
@@ -23,6 +34,7 @@
 <c:set var="publicp" value="<%=publicProg %>" />
 
 <style type="text/css">
+
 body{
 	padding:0%;
 }
@@ -133,18 +145,8 @@ body{
 	       			test1.push("${privat.GS_PAY_AMOUNT}");  
 	       			test1.push("${privat.GS_REF_AMOUNT}");  
 	       			test1.push("${privat.GS_ACCOUNT_DUE}");  
-		              <c:choose>
-			              <c:when test="${privat.GS_NEWANDREPAY eq '1'}">
-			              	test1.push("현금");   
-			              </c:when>
-			              <c:when test="${privat.GS_NEWANDREPAY eq '2'}">
-			             	 test1.push("카드"); 
-			              </c:when>
-			              	<c:when test="${privat.GS_NEWANDREPAY eq '3'}">
-			            	  test1.push("계좌이체"); 
-			              </c:when>
-		              </c:choose>
-			          test1.push("${privat.GS_BILLING_PERSON}");   
+	       			test1.push("${privat.GS_PAY_METHOD}");
+			        test1.push("${privat.GS_BILLING_PERSON}");   
 		              
 		              <c:choose>
 		              <c:when test="${status.index == 0}">
@@ -157,18 +159,8 @@ body{
 			              testdata[0].push("${privat.GS_PAY_AMOUNT}");  
 			              testdata[0].push("${privat.GS_REF_AMOUNT}");  
 			              testdata[0].push("${privat.GS_ACCOUNT_DUE}");
-			              <c:choose>
-				             <c:when test="${privat.GS_NEWANDREPAY eq '1'}">
-				       	    	testdata[0].push("현금");   
-				             </c:when>
-				             <c:when test="${privat.GS_NEWANDREPAY eq '2'}">
-				             	testdata[0].push("카드"); 
-				             </c:when>
-				              	<c:when test="${privat.GS_NEWANDREPAY eq '3'}">
-				              	testdata[0].push("계좌이체"); 
-				             </c:when>
-			             </c:choose>
-			             testdata[0].push("${privat.GS_BILLING_PERSON}");   
+			              testdata[0].push("${privat.GS_PAY_METHOD}");
+			              testdata[0].push("${privat.GS_BILLING_PERSON}");   
 			       	 </c:when>
 			       </c:choose>
 			       <c:if test="${status.index > 0}">
@@ -198,7 +190,7 @@ body{
 					<li><a class="n_04" href="javascript:ajax('../account/StatisticsSales2.jsp')">매출통계</a></li>
 					<li><a class="n_05" href="javascript:ajax('../account/StatisticsMember2.jsp')">회원통계</a></li>	
 					<li><a class="n_01" href="javascript:ajax('/account/privateProg.fm?startDate=20190701&endDate=20191001')">개인레슨 통계</a></li>
-					<li><a class="n_03 active" href="javascript:ajax('/account/publicProg.fm')">그룹수업 통계</a></li>
+					<li><a class="n_03 active" href="javascript:ajax('/account/publicProg.fm?startDate=20190701&endDate=20191001')">그룹수업 통계</a></li>
 				</ul>
 			</div>
 		</div>
@@ -317,11 +309,11 @@ body{
 	
 	<script>
 	//(페이지네이션) 한화면에서 보여줄 컬럼숫자를 담는 변수
-	var pageNumm = 3;
+	var pageNumm = 10;
     
-    $('#pagination').pagination({
+	jb('#pagination').pagination({
         dataSource: testdata,
-        pageSize:3,
+        pageSize:pageNumm,
         callback: function(data, pagination) {
             // template method of yourself
             var datahtml = '<table id="table" class="table table-bordered  table-striped">';
@@ -332,7 +324,7 @@ body{
 	            		            }
 	             datahtml += '</tbody></tr>';           	} 
             datahtml += '</table>';
-            $("#data-container").html(datahtml);
+            jb("#data-container").html(datahtml);
         }
     });
 	</script> 
