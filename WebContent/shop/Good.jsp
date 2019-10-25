@@ -47,6 +47,7 @@ body{
 				}
 			});  
 		 }
+	
 
 
  function gdIns(){
@@ -75,6 +76,39 @@ body{
 	 $("#mgo_stock").val(go_stock);
 	 
  }
+ 
+ 
+ function aa(go_type){
+	 alert(go_type);
+	 var formData = $("#gd_insert").serialize();
+		//alert("등록버튼 눌림?");
+		 $.ajax({
+			method:"POST"
+			,data:formData
+			,url:"/shop/officegdSEL.fm?go_type="+go_type
+			,success:function(data){
+		//		alert("성공");
+				$("#gdSel").html(data);
+			}
+		}); 
+ }
+ 
+ 
+ 
+ 
+	
+	function allgoods(){
+		alert("눌림ㅅ그?");
+		 $.ajax({
+				method:"POST"
+				,url:"/shop/GoodSEL.fm"
+				,success:function(data){
+					//alert("성공");
+					$("#gdSel").html(data);
+				}
+			});  
+
+	}
  
 </script>
 
@@ -105,22 +139,22 @@ body{
         <div class="Menufl">
          <ul id="tabul">
             <li>
-               <button type="button" class=" tabBtn" value="ALL" rel="0" href="#">전체
+               <button type="button" class=" tabBtn" onclick="allgoods()" >전체
                   <span>10</span>
                </button>
             </li>
             <li>
-               <button type="button" class=" tabBtn" value="nonPaymentMember"  rel="1" href="#">사무용품
+               <button type="button" class=" tabBtn" id="aaa"value="사무용품" onclick="aa($('#aaa').val())" >사무용품
                   <span>6</span>
                </button>
             </li>
             <li>
-               <button type="button" class=" active tabBtn" value="AVAILABLE"  rel="2" href="#">헬스장용품          
+               <button type="button" class=" active tabBtn" id="bbb" value="헬스장용품" onclick="aa($('#bbb').val())" >헬스장용품          
                   <span>6</span>
                </button>
             </li>
             <li>
-               <button type="button" class=" tabBtn" value="EXPIRED"  rel="0" href="#">소모품
+               <button type="button" class=" tabBtn" id="cccc" value="소모품" onclick="aa($('#cccc').val())" >소모품
                   <span>184</span></button>
             </li>
             

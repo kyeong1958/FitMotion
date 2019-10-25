@@ -213,6 +213,20 @@ public class ShopController implements Controller {
 
 		
 /*================================[[정은 끝]]======================================================*/
+/*<!--==========================[[민지 시작 ]]=======================================================================  -->*/
+		else if("officegdSEL".equals(crud)) {
+			logger.info("사무용품조회 Controller 호출 성공");
+			List<Map<String,Object>> rMap = null;
+			Map<String,Object> pMap = new HashMap<>();
+			pMap.put("go_type",req.getParameter("go_type"));
+			rMap = shopLogic.officegdSEL(pMap);
+			logger.info(rMap);
+			logger.info("controller"+pMap);
+			mav.addObject("gdSelList", rMap);
+			mav.pageMove("forward");
+			mav.setViewName("/shop/GoodAjax.jsp");
+		}
+/*<!--==========================[[민지 끝 ]]=======================================================================  -->*/
 
 		return mav;
 	}

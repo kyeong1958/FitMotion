@@ -1,6 +1,7 @@
 package com.shop;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -117,8 +118,19 @@ public class ShopLogic {
 		return result;
 	
 	}
-
 //////////////////////////////////[[ 정은 끝  ]] /////////////////////////////////////////////	
+	
+	/*<!--==========================[[민지 시작 ]]=======================================================================  -->*/
+
+	public List<Map<String,Object>> officegdSEL(Map<String, Object> pMap) {
+		logger.info("사무용품조회 Logic 호출 성공");
+		List<Map<String,Object>> rMap =new ArrayList<>();
+		rMap = shopDao.officegdSEL(pMap);
+		logger.info(pMap.size());
+		logger.info(rMap);
+		return rMap;
+	}
+	/*<!--==========================[[민지 끝 ]]=======================================================================  -->*/
 
 
 

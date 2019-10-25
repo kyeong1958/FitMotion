@@ -70,6 +70,15 @@
 				values(gd_Ins.NEXTVAL,#{go_type},#{go_name},#{go_stock},#{purchase_date},#{purchase_price},'1') 
 	</insert>
 
+<!--==========================[[민지 시작 ]]=======================================================================  -->
+	
+	<select id="officegdSEL" resultType="map" parameterType="map">
+		select go_num, go_type, go_name, go_stock, purchase_date, purchase_price
+		  from GOODS
+		 where go_type = #{go_type} 
+	</select>
+<!--==========================[[민지 끝 ]]=======================================================================  -->
+
 <!-- <delete id="gdDel" parameterMap="map">
 	DELETE FROM Goods WHERE go_num=#{go_num} 
 </delete>
