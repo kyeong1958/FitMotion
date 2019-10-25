@@ -18,7 +18,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/paginationjs/2.1.4/pagination.min.js"></script>    
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/paginationjs/2.1.4/pagination.css"/>  -->
 
-<%-- <%@ include file="/common/JEasyUICommon.jsp"%>    --%>
+<%-- <%@ include file="/common/JEasyUICommon.jsp"%>  --%>
 
 
 <div id="mainboard2">

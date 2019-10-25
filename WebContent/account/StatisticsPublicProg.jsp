@@ -4,7 +4,7 @@
 <%@ include file="/NewCSS/StatisticscssSales.jsp"%> 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-<link rel="stylesheet" type="text/css" href="../NewCSS/main.css">
+<!-- <link rel="stylesheet" type="text/css" href="../NewCSS/main.css"> -->
 <link rel="stylesheet" type="text/css" href="../NewCSS/table.css">
 <link rel="stylesheet" type="text/css" href="../NewCSS/StatisticsProg.css">
 

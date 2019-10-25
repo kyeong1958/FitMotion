@@ -2,17 +2,26 @@
 	pageEncoding="UTF-8"%>
 <%@ page import="java.util.*"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<link rel="stylesheet" type="text/css" href="../NewCSS/main.css">
+<!-- <link rel="stylesheet" type="text/css" href="../NewCSS/main.css"> -->
+
 <link rel="stylesheet" type="text/css" href="../NewCSS/table.css">
 <link rel="stylesheet" type="text/css" href="../NewCSS/StatisticsProg.css">
 
-<!-- 여기가 easyui 관련
-<link rel="stylesheet" type="text/css" href="../themes/default/easyui.css">
+<!-- 여기가 easyui 관련 -->
+<!-- <link rel="stylesheet" type="text/css" href="../themes/default/easyui.css">
 <link rel="stylesheet" type="text/css" href="../themes/icon.css">
 <link rel="stylesheet" type="text/css" href="../demo/demo.css"> 
- <script type="text/javascript" src="../js/jquery.easyui.min.js"></script> 
+<script type="text/javascript" src="../js/jquery.easyui.min.js"></script>
 <script type="text/javascript" src="../js/commons.js"></script>
-<script type="text/javascript" src="../js/jquery.cookie.js"></script>  -->
+<script type="text/javascript" src="../js/jquery.cookie.js"></script>
+<script type="text/javascript" src="http://code.jquery.com/jquery-3.2.1.min.js"></script> -->
+
+<!--  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/paginationjs/2.1.4/pagination.css"/>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/paginationjs/2.1.4/pagination.min.js"></script>
+<script>
+	var jb = jQuery.noConflict();
+</script> -->
 
 
 <!--   여기가 pagination.js 관련
@@ -20,7 +29,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/paginationjs/2.1.4/pagination.min.js"></script>    
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/paginationjs/2.1.4/pagination.css"/>  -->
 
-<%-- <%@ include file="/common/JEasyUICommon.jsp"%>  --%>  
+<%@ include file="/common/JEasyUICommon.jsp"%> 
 
 <%
 	int size = 0;
@@ -76,9 +85,27 @@ function myparser(s){
         return new Date();
     }
 }
+	var a,b;
+function dateClick(){
+	a = $('#datebox11').val();
+	b = $('#datebox22').val();
+/* 	b= $('#datebox11').datebox('getValue'); */
+	alert("a"+a);
+	alert("b"+b);
+	
+}
 
 	$(document).ready(function(){
-		alert("시작");
+		$('#datebox11').datebox('setValue', '6/1/2012');
+		
+/* 		$('#datebox11').datebox({
+			onSelect: function(date){
+				alert(date.getFullYear()+":"+(date.getMonth()+1)+":"+date.getDate());
+				a = date.getFullYear()+":"+(date.getMonth()+1)+":"+date.getDate();
+			}
+		}); */
+		
+/* 		alert("시작");
        $('#datebox11').datebox({
           onSelect: function(date){
         	 alert(date.getFullYear()+":"+(date.getMonth()+1)+":"+date.getDate());
@@ -90,7 +117,7 @@ function myparser(s){
                    }
                });
           }
-       });
+       }); */
 
 		$(".sales").hide();
 		$(".member").hide();
@@ -254,7 +281,7 @@ function myparser(s){
 		
 		<input class="easyui-datebox historydatebox" data-options="formatter:myformatter,parser:myparser" id="datebox11" type="text"/> <span>~</span>
 			<input class="easyui-datebox historydatebox" data-options="formatter:myformatter,parser:myparser" id="datebox22" type="text"/>
-			<button class="btn blue small">조회</button>
+			<button class="btn blue small" onclick="dateClick()">조회</button>
 		</span>
 	</div>
 </div>

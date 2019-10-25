@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ include file="/NewCSS/StatisticscssSales.jsp"%> 
 <link rel="stylesheet" type="text/css" href="../NewCSS/main.css">
+
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>

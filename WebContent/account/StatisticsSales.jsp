@@ -2,7 +2,7 @@
 <%@ page import="java.util.*" %>
 <%-- <%@ include file="/NewCSS/StatisticscssSales.jsp"%> --%> 
 
-<link rel="stylesheet" type="text/css" href="../NewCSS/main.css">
+<!-- <link rel="stylesheet" type="text/css" href="../NewCSS/main.css"> -->
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!-- jstl을 사용하기 위해서 c:set으로 chart에 값을 담음. -->
