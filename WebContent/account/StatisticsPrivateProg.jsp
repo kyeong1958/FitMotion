@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ page import="java.util.*"%>
-<%@ include file="/NewCSS/StatisticscssSales.jsp"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <link rel="stylesheet" type="text/css" href="../NewCSS/main.css">
 <link rel="stylesheet" type="text/css" href="../NewCSS/table.css">
@@ -21,7 +20,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/paginationjs/2.1.4/pagination.min.js"></script>    
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/paginationjs/2.1.4/pagination.css"/>  -->
 
-<%@ include file="/common/JEasyUICommon.jsp"%>   
+<%-- <%@ include file="/common/JEasyUICommon.jsp"%>  --%>  
 
 <%
 	int size = 0;
@@ -30,42 +29,28 @@
 	if (privateProg != null && privateProg.size() > 0) {
 		size = privateProg.size();
 	}
+   String startDate = "";
+   String endDate ="";
+   if(startDate == ""){
+	   startDate = "20190801";
+   }
+   if(endDate == ""){
+	   endDate = "20191101";
+   }
+   
+   if(request.getAttribute("startDate") != null && request.getAttribute("endDate") != null){   
+	   startDate = (String)request.getAttribute("startDate");
+	   endDate = (String)request.getAttribute("endDate");
+   }
 %>
-
-<script>
-
-	
-	
-	
-/* 	//(페이지네이션) 한화면에서 보여줄 컬럼숫자를 담는 변수
-	var pageNumm = 5;
-    
-	jb('#pagination1').pagination({
-        dataSource: testdata,
-        pageSize:pageNumm,
-        align:"center",
-        callback: function(data, pagination) {
-            // template method of yourself
-           
-            var datahtml = '<table id="table" class="table table-bordered  table-striped">';
-            	datahtml += '<thead><tr><th class="tableheader">주문번호</th><th class="tableheader">결제일시</th><th class="tableheader">구매회원</th><th class="tableheader">휴대폰 번호</th><th class="tableheader">결제내역</th><th class="tableheader">상태</th><th class="tableheader">결제금액</th><th class="tableheader">미수금</th><th class="tableheader">환불금액</th><th class="tableheader">결제방법</th><th class="tableheader">결제담당</th></tr></thead>';
-	         for (var i = 0, len = data.length; i < len; i++) {	        	
-	        	 datahtml += '<tbody><tr>';
- 	            for (var j = 0;j < 11; j++) {
-	            	datahtml += '<td>' +  data[i][j] + '</td>';
-	            }
-	             datahtml += '</tbody></tr>';    	
-	         } 
-            datahtml += '</table>';
-            jb("#data-container").html(datahtml);
-        }
-    }); */
-	</script>
 
 <!-- jstl을 사용하기 위해서 c:set으로 chart에 값을 담음. -->
 
 <c:set var="private_size" value="<%=size%>" />
 <c:set var="privatep" value="<%=privateProg%>" />
+<c:set var="startDate" value="<%=startDate %>" />
+<c:set var="endDate" value="<%=endDate %>" />
+<div id="mainboard2">
 <style type="text/css">
 body {
 	padding: 0%;
@@ -73,7 +58,39 @@ body {
 </style>
 
 <script type="text/javascript">
+function myformatter(date){
+    var y = date.getFullYear();
+    var m = date.getMonth()+1;
+    var d = date.getDate();
+    return y+'-'+(m<10?('0'+m):m)+'-'+(d<10?('0'+d):d);
+}
+function myparser(s){
+    if (!s) return new Date();
+    var ss = (s.split('-'));
+    var y = parseInt(ss[0],10);
+    var m = parseInt(ss[1],10);
+    var d = parseInt(ss[2],10);
+    if (!isNaN(y) && !isNaN(m) && !isNaN(d)){
+        return new Date(y,m-1,d);
+    } else {
+        return new Date();
+    }
+}
+
 	$(document).ready(function(){
+		alert("시작");
+       $('#datebox11').datebox({
+          onSelect: function(date){
+        	 alert(date.getFullYear()+":"+(date.getMonth()+1)+":"+date.getDate());
+             firstDate = date;
+             $('#datebox22').datebox().datebox('calendar').calendar({
+                   validator: function(date){
+                        var d1 = new Date(firstDate.getFullYear(), firstDate.getMonth(), firstDate.getDate());
+                       return d1<=date;
+                   }
+               });
+          }
+       });
 
 		$(".sales").hide();
 		$(".member").hide();
@@ -82,7 +99,7 @@ body {
 
 	   $('.dataTables_length').addClass('bs-select');
 	    
-	   //선택가능날짜 범위 설정
+/* 	   //선택가능날짜 범위 설정
  	   $('#datebox1').datebox().datebox('calendar').calendar({
 	       validator: function(date){
 	           var now = new Date();
@@ -90,12 +107,21 @@ body {
 	           var d2 = new Date(now.getFullYear(), now.getMonth(), now.getDate());
 	           return d1<=date && date<=d2;
 	       }
-	   }); 
- 	  //datebox1 날짜 선택에 따라 datebox2의 선택가능날짜 설정
+	   });  */
+	   
+/*  	  $('#datebox22').datebox({
+ 			onSelect: function(date){
+ 				alert(date.getFullYear()+":"+(date.getMonth()+1)+":"+date.getDate());
+ 			}
+ 	  });
+	    */
+	    //datebox1 날짜 선택에 따라 datebox2의 선택가능날짜 설정
+	    
+/*  	  //datebox1 날짜 선택에 따라 datebox2의 선택가능날짜 설정
 	   $('#datebox1').datebox({
 	      onSelect: function(date){
 	    	  startDate = date;
-	    	  alert("startDate" + startDate);
+	    	  alert("startDate");
 	         $('#datebox2').datebox().datebox('calendar').calendar({
 	               validator: function(date){
 	                   var d1 = new Date(firstDate.getFullYear(), firstDate.getMonth(), firstDate.getDate());
@@ -103,14 +129,15 @@ body {
 	               }
 	           });
 	      }
-	   });
+	   }); */
    
-	   $('#datebox2').datebox({
+/* 	   $('#datebox2').datebox({
 		      onSelect: function(date){
 		    	  endDate = date;
-		    	  alert("endDate" + endDate);
+		    	  alert("endDate");
 		      }
-	   }); 
+	   });  */
+	   
 	   /* //datebox1 날짜 선택에 따라 datebox2의 선택가능날짜 설정
  	   $('#datebox1').datebox({
 	      onSelect: function(date){
@@ -140,6 +167,11 @@ body {
 		   });
 	
 		}); */
+		
+ 	 
+     
+		/* $('#datebox11').datebox('setValue', ${startDate})
+		$('#datebox22').datebox('setValue', ${endDate}) */
 	});
 	
 	var test1 = new Array();
@@ -187,6 +219,8 @@ body {
 		</c:choose>
 	</c:if>
 </c:forEach>   
+
+
 </script>
 
 
@@ -206,7 +240,6 @@ body {
 			</ul>
 		</div>
 	</div>
-
 	<!-- 메뉴바 누르는 부분 끝 -->
 </div>
 <!-- ================================= [[ 홈 ]] =================================================== -->
@@ -217,9 +250,10 @@ body {
 		<button class="btn blue small">당 분기</button>
 		<button class="btn blue small">당 월</button>
 
-		<span style="margin-left: 1%"> <input
-			class="easyui-datebox historydatebox" id="datebox1" /> <span>~</span>
-			<input class="easyui-datebox historydatebox" id="datebox2" />
+		<span style="margin-left: 1%"> 
+		
+		<input class="easyui-datebox historydatebox" data-options="formatter:myformatter,parser:myparser" id="datebox11" type="text"/> <span>~</span>
+			<input class="easyui-datebox historydatebox" data-options="formatter:myformatter,parser:myparser" id="datebox22" type="text"/>
 			<button class="btn blue small">조회</button>
 		</span>
 	</div>
@@ -365,10 +399,4 @@ body {
 		<div class="pagination_top">전체 11개 항목 중 1 부터 10 까지 표시</div>
 	</div>
 </div>
-
-<!-- //////////////////////////////////////////////////////// -->
-
-
-
-<!-- ///////////////////////////////////////////////////////////////// -->
-
+</div>

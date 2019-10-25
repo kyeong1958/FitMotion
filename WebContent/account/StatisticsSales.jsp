@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"   pageEncoding="UTF-8"%>
 <%@ page import="java.util.*" %>
-<%@ include file="/NewCSS/StatisticscssSales.jsp"%> 
+<%-- <%@ include file="/NewCSS/StatisticscssSales.jsp"%> --%> 
 
 <link rel="stylesheet" type="text/css" href="../NewCSS/main.css">
 
