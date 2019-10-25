@@ -226,6 +226,50 @@ public class ShopController implements Controller {
 			mav.pageMove("forward");
 			mav.setViewName("/shop/GoodAjax.jsp");
 		}
+		else if("eqINS".equals(crud)) {
+	         logger.info("기구관리입력");
+	         int result = 0;
+	         Map<String,Object> pMap = new HashMap<>();
+	         HashMapBinder hmb = new HashMapBinder(req);
+	         hmb.bindPost(pMap);
+	         logger.info(pMap);
+	         logger.info("기구이름:"+pMap.get("se_name"));
+	         result = shopLogic.eqINS(pMap);
+	         logger.info(result);
+	         mav.pageMove("redirect");
+	         mav.setViewName("/shop/eqSEL.fm");
+	      }
+	      
+	      else if("eqSEL".equals(crud)) {
+	         logger.info("기구관리조회");
+	         List<Map<String,Object>> eqSelList = null;
+	         eqSelList = shopLogic.eqSEL();
+	         mav.addObject("eqSelList", eqSelList);
+	         mav.pageMove("forward");
+	         mav.setViewName("/Equipment/EqCard.jsp");            
+	      }
+	      else if("eqUPD".equals(crud)) {
+	         logger.info("기구관리수정");
+	         int result =0;
+	         Map<String,Object> pMap = new HashMap<>();
+	         HashMapBinder hmb = new HashMapBinder(req);
+	         hmb.bindPost(pMap);
+	         result = shopLogic.eqUPD(pMap);
+	         logger.info(result);
+	         //mav.setViewName("/both/cccc");
+	         mav.pageMove("redirect");
+	         mav.setViewName("/shop/eqSEL.fm");
+	      }
+	      else if("eqDEL".equals(crud)) {
+	         logger.info("비품관리 삭제 ");
+	         int result = 0;
+	         Map<String,Object> pMap = new HashMap<>();
+	         HashMapBinder hmb = new HashMapBinder(req);
+	         hmb.bindPost(pMap);
+	         result = shopLogic.eqDEL(pMap);
+	         mav.pageMove("redirect");
+	         mav.setViewName("/shop/eqSEL.fm");
+	      }
 /*<!--==========================[[민지 끝 ]]=======================================================================  -->*/
 
 		return mav;
@@ -238,3 +282,4 @@ public class ShopController implements Controller {
 
 
 }
+
