@@ -1,43 +1,4 @@
-<link type="text/css" rel="stylesheet"
-   href="/bootstrap/css/bootstrap.min.css">
-<link type="text/css" rel="stylesheet"
-   href="/bootstrap/css/datepicker.css">
-<link type="text/css" rel="stylesheet" href="/css/jquery-ui.min.css">
 
-<link type="text/css" rel="stylesheet" href="/css/common.css">
-<link type="text/css" rel="stylesheet" href="/css/layout.css">
-<link type="text/css" rel="stylesheet"
-   href="https://fonts.googleapis.com/earlyaccess/notosanskr.css">
-
-<script src="/jquery/jquery-1.11.3.min.js"></script>
-<script src="/jquery/jquery.number.min.js"></script>
-<script src="/jquery/jquery.cookie.js"></script>
-
-<script src="/bootstrap/js/bootstrap.min.js"></script>
-<script src="/bootstrap/js/moment.js"></script>
-<script src="/bootstrap/js/moment-with-locales.js"></script>
-<script type="text/javascript"
-   src="/resources/static/bower_components/moment/min/moment-with-locales.min.js"></script>
-
-<!-- 협의에 의해 사용하기로 함 -->
-<script src="/bootstrap/js/bootstrap-datetimepicker.min.js"></script>
-
-<script src="/jquery/jquery-ui.js"></script>
-<script src="/jquery/i18n/datepicker-ko.js"></script>
-
-<script src="/bootstrap/js/validator.js"></script>
-<script type="text/javascript" src="/js/ui.js"></script>
-
-<script src="/socketio/socket.io.1.7.3.js"></script>
-<script src="/jquery/jquery.blockUI.js"></script>
-<script src="/js/dateFormatUtil.js" type="text/javascript"
-   charset="utf-8"></script>
-<script defer=""
-   src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
-<script src="/js/printer/printer_core.js" type="text/javascript"
-   charset="utf-8"></script>
-<script src="/js/barcode/barcode_core.js" type="text/javascript"
-   charset="utf-8"></script>
 <style>
 /*--------------------- 상단바 부분  -------------------------------  */
 .bar_area {
@@ -421,7 +382,6 @@ em, i {
 }
 .grid_list ul li .service_detail .service_price p:last-child .btn {
     min-width: 20px;
-    padding: 0 9px;
 }
 .btn.green {
     color: #FFF;
@@ -433,6 +393,12 @@ em, i {
 
 
 
+#TM_ul li{
+	margin-top: 10px;
+	border: 1px solid #BCBBCA;
+    border-radius: 5px;
+
+}
 
 
 /* -----------------------------메인 리스트 부분 -----------------------------*/

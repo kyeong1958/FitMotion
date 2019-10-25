@@ -1,7 +1,113 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.mybatis.mapper.MemberMapper">
-	<select id="test2">
-		SELECT 1 FROM dual
-	</select>
+   <select id="test2">
+      SELECT 1 FROM dual
+   </select>
+   
+   <insert id="MemModal" parameterType="map">
+         insert into Member(mem_num,mem_name,mem_birth,mem_gender,mem_address,mem_hp,
+                                    mem_registration_date,mem_manager,mem_app_availability,mem_barcode_num
+                                      ,mem_memo,mem_pw,mem_id,mem_image)
+                                   values(#{mem_num},#{mem_name},#{mem_birth},#{mem_gender},#{mem_address},
+                                   #{mem_hp},#{mem_registration_date},#{mem_manager},#{mem_app_availability},#{mem_barcode_num},
+                                   #{mem_memo},'abc','1234','png')
+   
+   
+   </insert>
+   
+   <update  id="MemUpd" parameterType="map">
+         UPDATE member
+               SET mem_name = #{mem_name},
+                   mem_birth = #{mem_birth},
+                   mem_gender = #{mem_gender},
+                   mem_address = #{mem_address},
+                   mem_hp = #{mem_hp},
+                   mem_registration_date = #{mem_registration_date},
+                   mem_manager = #{mem_manager},
+                   mem_app_availability = #{mem_app_availability},
+                   mem_barcode_num = #{mem_barcode_num},
+                   mem_memo = #{mem_memo},
+                   mem_pw = #{mem_pw},
+                   mem_id = #{mem_id},
+             WHERE mem_num = #{mem_num}      
+   
+   
+   </update>
+   
+   
+   
+   <select id="MemSel" parameterType="map" resultType="map">
+         select rownum rno,mem_num,mem_name,mem_birth
+                       ,mem_gender,mem_address
+                               ,mem_hp,mem_registration_date,mem_manager,mem_app_availability
+                               ,mem_barcode_num,mem_memo,mem_id,mem_pw
+                                           from Member
+                    order by rno asc
+   </select>
+   
+   
+   <delete id="MemDEL" parameterType="map">
+      delete from member where mem_num=#{mem_num}
+   </delete>
+
+   <select id="MemSearch" parameterType="map" resultType="int">
+             
+       select mem_num,mem_name,mem_birth
+                       ,mem_gender,mem_address
+                               ,mem_hp,mem_registration_date,mem_manager,mem_app_availability
+                               ,mem_barcode_num,mem_memo,mem_id,mem_pw
+                                           from Member
+       <if  test="mem_search!=null and mem_search.equals('mem_name')">
+             AND mem_name LIKE '%'||#{keyword}||'%'
+       
+       </if>
+      <if test="genderSearch!=null and genderSearch.equals('mem_gender')">
+      
+      </if>
+   
+   </select>
+   
+   
+   <select id="mem_gender" parameterType="map" resultType="int"> 
+          SELECT mem_num,mem_name,mem_birth
+                       ,mem_gender,mem_address
+                               ,mem_hp,mem_registration_date,mem_manager,mem_app_availability
+                               ,mem_barcode_num,mem_memo,mem_id,mem_pw  FROM  member
+                        WHERE mem_gender  = #{mem_gender} ;
+   
+   </select>
+   
+   <select id="memDET" parameterType="map" resultType="map">
+  		 select MEMBER.MEM_BARCODE_NUM,MEMBER.MEM_ID , MEMBER.MEM_ADDRESS, MEMBER.MEM_APP_AVAILABILITY
+    		  , MEMBER.MEM_BIRTH, MEMBER.MEM_GENDER, MEMBER.MEM_HP, MEMBER.MEM_IMAGE, MEMBER.MEM_MANAGER
+    		  , MEMBER.MEM_MEMO, MEMBER.MEM_NAME, MEMBER.MEM_NUM, MEMBER.MEM_PW, MEMBER.MEM_REGISTRATION_DATE
+     		  , LOCKER .LOCKER_NUM  from member,LOCKER_RENTAL,LOCKER  
+		 where MEMBER.MEM_NUM = LOCKER_RENTAL.MEM_NUM 
+		 AND LOCKER_RENTAL.LOCKER_NUM = LOCKER.LOCKER_NUM 
+		 AND MEMBER.MEM_NUM = #{mem_num}
+                           
+   </select>
+   
+   <update id="memUPD" parameterType="map">
+		UPDATE member 
+		SET 
+		mem_name = #{mem_name}
+		,mem_barcode_num = #{mem_barcode_num}
+		,mem_gender = #{mem_gender}
+		,mem_address = #{mem_address}
+		,mem_memo = #{mem_memo}
+		,mem_app_availability = #{mem_app_availability}
+		,mem_manager = #{mem_manager}
+		,mem_registration_date = #{mem_registration_date}
+		,mem_birth = #{mem_birth}
+		,mem_hp = #{mem_hp}
+		WHERE mem_num = #{mem_num}   
+   
+   </update>
+   
+    
+   
+   
 </mapper> 
  

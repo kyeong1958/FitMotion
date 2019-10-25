@@ -227,12 +227,12 @@ body{
 <!--========================== [[홈바 끝 ]] ========================== -->
 <!-- ================================= [[ 화면전환 모달창 ]] =================================================== -->
       <!-- Button to Open the Modal -->
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#sfInsert">
   Open modal
 </button>
 
 <!-- The Modal -->
-<div class="modal" id="myModal">
+<div class="modal" id="sfInsert">
   <div class="modal-dialog">
     <div class="modal-content">
 

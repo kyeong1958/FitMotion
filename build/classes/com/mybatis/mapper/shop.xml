@@ -1,7 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.mybatis.mapper.ShopMapper">
 	<select id="test5">
 		SELECT 1 FROM dual
 	</select>
+	<insert id="eqINS" parameterType="map">
+		<!-- insert into SPORTS_EQUIPMENT(se_num, se_name, se_operating_mode, se_repair_datail, se_repairs, se_buy_date, se_buy_price,gym_num)
+                    values ('21','ㅇㅇ','ㄷㄷ','ㅂㅂ','ㄹㄹ','ㅍㅍ','ㅅㅅ','1');     -->
+         insert into SPORTS_EQUIPMENT(se_num, se_name, se_operating_mode, se_repair_datail, se_repairs, se_buy_date, se_buy_price, gym_num)
+                    values (FM.EQ_INS.NEXTVAL,#{se_name},#{se_operating_mode},#{se_repair_datail},#{se_repairs},#{se_buy_date},#{se_buy_price},'1')              
+	</insert>
+	<select id="eqSEL" parameterType="map" resultType="map"> 
+		<!-- select se_num,se_name,se_operating_mode,se_repair_datail,se_repairs,se_buy_date,se_buy_price,SPORTS_EQUIPMENT.gym_num
+    		from SPORTS_EQUIPMENT , GYM
+   		   where SPORTS_EQUIPMENT.gym_num = GYM.gym_num   -->
+   		 select se_num,se_name,se_operating_mode,se_repair_datail,se_repairs,se_buy_date,se_buy_price,SPORTS_EQUIPMENT.gym_num
+  		   from SPORTS_EQUIPMENT , GYM
+   		  where SPORTS_EQUIPMENT.gym_num = GYM.gym_num  
+	</select>
+	<update id="eqUPD" parameterType="map">
+		 update SPORTS_EQUIPMENT
+			set se_name = #{se_name}
+  		  		,se_operating_mode = #{se_operating_mode}
+		  		,se_repair_datail = #{se_repair_datail}
+		   		,se_repairs = #{se_repairs}
+		   		,se_buy_date = #{se_buy_date}
+		   		,se_buy_price = #{se_buy_price}
+    	  where se_num = #{se_num}
+	</update>
+	<delete id="eqDEL" parameterType="map">
+      delete from SPORTS_EQUIPMENT where se_num=#{se_num}
+   </delete>
 </mapper> 
  

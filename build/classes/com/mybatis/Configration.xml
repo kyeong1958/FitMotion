@@ -29,3 +29,4 @@
 		<mapper resource="com/mybatis/mapper/Both.xml" />
 	</mappers>
 </configuration> 
+

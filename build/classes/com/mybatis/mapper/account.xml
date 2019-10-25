@@ -4,5 +4,19 @@
 	<select id="test1">
 		SELECT 1 FROM dual
 	</select>
+	
+	<insert id="pfIns" parameterType="map">
+		insert into gym_sales(gs_dep_num, gs_dep_mem,
+								 gs_dep_history,gs_state,gs_pay_amount,
+								 gs_pay_method,gs_account_due,gs_ref_amount,
+								 gs_billing_person,gs_dep_date,gs_division,
+								 gs_ticp_num) 
+						 	values(pf_Ins.NEXTVAL,#{gs_dep_mem},#{gs_dep_history},'입금완료',
+									#{gs_pay_amount},#{gs_pay_method},'없음',#{gs_ref_amount},
+									#{gs_billing_person},#{gs_dep_date},'직원','123')  
+															
+	</insert>
 </mapper> 
+ 
+ 
  

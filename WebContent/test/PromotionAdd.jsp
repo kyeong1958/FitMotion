@@ -16,7 +16,7 @@ body {
 
 .container-fluid {
 	padding-right: 0px;
-	padding-left: 0px;
+	padding-left: 0px;      
 }
 
 .nav {

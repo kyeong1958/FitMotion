@@ -1,8 +1,81 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.mybatis.mapper.StaffMapper">
-	<select id="test6">
-		SELECT 1 FROM dual
-	</select>
+   <select id="test6">
+      SELECT 1 FROM dual
+   </select>
+   <!--========================================[[민지 xml 시작 ]]=========================================================  -->
+   <insert id="Staffinsert" parameterType="map">
+      insert into staff(staff_id,staff_name,staff_gender,staff_hp,staff_introduce
+                  ,staff_pw,staff_birth,pi_num,staff_image,gym_num)
+                  values('ioio',#{staff_name},#{staff_gender},#{staff_hp},
+                  #{staff_introduce},'1234',#{staff_birth},'23','png','1')
+   
+   
+   </insert>
+   
+   
+   <insert id="staffsal" parameterType="map">
+      insert into persnel_info(pi_num,pi_base_pay,pi_join_day,rank_num,pi_private_pay,pi_group_pay)
+            values(SF_PL_NUM.NEXTVAL,#{pi_base_pay},#{pi_join_day},#{rank_num},#{pi_private_pay},#{pi_group_pay})
+
+   
+   </insert>
+   
+   
+   <resultMap type="map" id="rmap"/>
+   <select id="proc_name"  parameterType="map" statementType="CALLABLE">
+         {call proc_name(
+                  #{key, jdbcType=CURSOR, mode=OUT, javaType=java.sql.ResultSet, resultMap=rmap}
+                  )}
+   
+   </select>
+   
+   
+   <select id="rankname" parameterType="map" resultType="map">
+            select rank_name from rank 
+               order by rank_num asc
+   </select>
+   
+    <insert id="rankInsert" parameterType="map">
+          insert into rank(rank_num,rank_name)
+                   values(SEQ_RANK_NUM.NEXTVAL,#{rank_name})
+    </insert>
+    
+   <resultMap type="map" id="rmap2"/>
+    <!--    <result property="staff_id" column="staff_id" javaType="string"/>
+   </resultMap> -->
+    <select id="proc_staffDetail" parameterType="map" statementType="CALLABLE" >
+          {call proc_upList(
+                    #{staff_id,mode=IN, jdbcType=VARCHAR, javaType=java.lang.String}
+                  ,#{key, jdbcType=CURSOR, mode=OUT, javaType=java.sql.ResultSet, resultMap=rmap2}
+                  )}
+    </select>
+    
+   <update id="SFUPD" parameterType="map">
+     update staff
+		set staff_name = #{staff_name}
+  		   ,staff_gender = #{staff_gender}
+		   ,staff_hp = #{staff_hp}
+		   ,staff_introduce = #{staff_introduce}
+		   ,staff_birth = #{staff_birth}
+     where staff_id = #{staff_id}
+      
+      
+   
+   </update>
+   <update id="SFUPDATE" parameterType="map">
+    update persnel_info
+       set pi_base_pay = #{pi_base_pay},
+          pi_join_day = #{pi_join_day},
+          rank_num = #{rank_num},
+          pi_private_pay = #{pi_private_pay},
+          pi_group_pay = #{pi_group_pay}
+     where   pi_num = #{pi_num}
+   
+   </update>
+
+  
+   <!--========================================[[민지 xml 끝]]=========================================================  -->
 </mapper> 
  

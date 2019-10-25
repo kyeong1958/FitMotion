@@ -226,6 +226,8 @@ $(function () {
  });
  
 });
+
+
  </script>
 
 
@@ -290,7 +292,7 @@ $(function () {
             <ul style="list-style: none">
                
                   <li>
-                     <a href="/tickets/types/form" class="pr_btn btn dark" style="height: inherit; text-align: center; padding: 5px;">이용권 등록</a>
+                     <a class="pr_btn btn dark" style="height: inherit; text-align: center; padding: 5px;">이용권 등록</a>
                   </li>
                
             </ul>
@@ -298,7 +300,7 @@ $(function () {
   
        
                   <li style="margin-top: 10px">
-                     <span class="pr_btn btn text-border gray c_gray" ">
+                     <span class="pr_btn btn text-border gray c_gray" >
                         락카
                     
                      </span>
@@ -324,54 +326,8 @@ $(function () {
 <!-- /* -----------------------------메인 분류 카테고리 부분 -----------------------------*/-->
 
 <!-- /* -----------------------------메인 리스트 부분 -----------------------------*/-->
-      <div class="column col_span width_right_add" style="width: calc(((115% - 15px) / 3) * 2);">
-         <div class="grid_list over_view">
-            <ul data-template="products">
-            <li class="text-border /*purple c_purple*/">
-               <div class="service_itm">
-                  <p>
-                     <span class="purple c_purple">개인레슨
-                        <em class="fr">
-                           최근수정일 : 2019-09-23
-                        </em>
-                     </span>
-                     <i>1:1 개인레슨 (기구필라테스) 48회</i>
-                  </p>
-               </div>
-               <div class="service_detail text-border /*purple c_purple*/" style="margin: 0 -1px; width: calc(100% + 2px); border-top: none !important;">
-                  <div class="service_price">
-                     <p>30,000,000원</p>
-                     <p style="display: block;">
-                        <a  class="btn blue">결제하기</a>
-                     </p>
-                  </div>
-               </div>
-            </li>
-            <li class="text-border /*purple c_purple*/">
-               <div class="service_itm">
-                  <p>
-                     <span class="purple c_purple">개인레슨
-                        <em class="fr">
-                           최근수정일 : 2019-09-23
-                        </em>
-                     </span>
-                     <i>1:1 개인레슨 (헬스 PT) 48회</i>
-                  </p>
-               </div>
-               <div class="service_detail text-border /*purple c_purple*/" style="margin: 0 -1px; width: calc(100% + 2px); border-top: none !important;">
-                  <div class="service_price">
-                     <p>1,800,000원</p>
-                     <p style="display: block;">
-                        <a  class="btn blue">결제하기</a>
-                     </p>
-                  </div>
-               </div>
-            </li>
-
-       
-             </ul>
-            </div>
-          </div>
+		<div id="tasel">
+		</div>
          </div>
          </div>
       </div>

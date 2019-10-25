@@ -12,24 +12,89 @@
 body{
 	padding:0%;
 }
+.container-fluid {
+	padding:0%;
+
+}
 </style>
 </head>
 <script type="text/javascript">
 /* 페이지이동  */
-	function pagemove(url){
-			$.ajax({
-				method:'get'
-			   ,url:url
-			   ,success:function(data){
-				   $("#mainboard").html(data);
-			   }
-			});
-		}
-/* 페이지이동  */
-	function menu(menu){
+	
+	function pagemove(url) {
+		$.ajax({
+			method : 'get',
+			url : url,
+			success : function(data) {
+				$("#mainboard").html(data);
+				if (url == "../member/memberList.jsp") {
+					var formData = $("#f_insert").serialize();
+					$.ajax({
+						method : "POST",
+						data : formData,
+						url : "/member/BHSEL.fm",
+						success : function(data) {
+							$("#in_005fcard").html(data);
+						}
+					});
+
+				} else if (url == "../staff/staffList.jsp") {
+					var formData = $("#add_coach_form").serialize();
+					$.ajax({
+						method : "POST",
+						data : formData,
+						url : "/staff/SFSEL.fm",
+						success : function(data) {
+							$("#staff_card").html(data);
+
+							var formData = $("#F_rank").serialize();
+							$.ajax({
+								method : "POST",
+								data : formData,
+								url : "/staff/RankSEL.fm",
+								success : function(data) {
+									//alert("성공");		
+									$("#rankNameAdd").html(data);
+								}
+							});
+						}
+					});
+				}
+				else if (url == "../program/TicketMain.jsp") {
+					var formData = $("#f_insert").serialize();
+					$.ajax({
+						method : "POST",
+						data : formData,
+						url : "/program/taSEL.fm",
+						success : function(data) {
+							$("#tasel").html(data);
+
+						}
+					});
+				}
+				 else if (url == "../Equipment/Equipment.jsp") {
+					alert(url);
+					 $.ajax({
+						method : "POST",
+						url : "/shop/eqSEL.fm",
+						success : function(data) {
+							$("#EqCard").html(data);
+
+						}
+					});
+				} 
+				
+				
+				
+
+			}
+		});
+	}
+	/* 페이지이동  */
+	function menu(menu) {
 		$(".history").hide();
-	    $(".account").hide();
-	    $(".service").hide();
+		$(".account").hide();
+		$(".service").hide();
 		$(menu).show();
 	}
 </script>
@@ -55,6 +120,7 @@ body{
          <div class="row sidemenutitle" onClick="menu(''),pagemove('../staff/staffList.jsp')">직원관리</div>
          <div class="row sidemenutitle" onClick="menu(''),pagemove('../program/TicketMain.jsp')">이용권관리</div>
          <div class="row sidemenutitle" onClick="menu(''),pagemove('../shop/Lock.jsp')">락커관리</div>
+         <div class="row sidemenutitle" onClick="menu(''),pagemove('../Equipment/Equipment.jsp')">기구관리</div>
          <div class="row sidemenutitle" onClick="menu('.history'),pagemove('../schedule/reservation.jsp')">내역관리</div>
          <div class="row history">
             <div class="row sidemenu" id="allsalesmanagement" onClick="pagemove('../schedule/reservation.jsp')">예약내역</div>

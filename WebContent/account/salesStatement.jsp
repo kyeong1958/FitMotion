@@ -291,7 +291,6 @@ body{
 									<th class="tableheader">결제내역</th>
 									<th class="tableheader">상태</th>
 									<th class="tableheader">정가</th>
-									<th class="tableheader">할인금액</th>
 									<th class="tableheader">결제금액</th>
 									<th class="tableheader">미수금</th>
 									<th class="tableheader">환불금액</th>
@@ -309,7 +308,6 @@ body{
 									<td>예약</td>
 									<td>200,000</td>
 									<td>50,000</td>
-									<td>50,000</td>
 									<td>-100,000</td>
 									<td>0</td>
 									<td>이경애</td>
@@ -323,7 +321,6 @@ body{
 									<td>결제내역</td>
 									<td>예약</td>
 									<td>200,000</td>
-									<td>50,000</td>
 									<td>50,000</td>
 									<td>-100,000</td>
 									<td>0</td>

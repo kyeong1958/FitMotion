@@ -3,15 +3,33 @@
 <!-- ================================= [[ 이용권 및 상품관리 ]] =================================================== -->
 <%@ include file="/common/JEasyUICommon.jsp"%>
 <%@ include file="/NewCSS/TicketMain.jsp"%>
-<link rel="stylesheet" type="text/css" href="../NewCSS/main.css">
+<link rel="stylesheet" type="text/css" href="/NewCSS/main.css">
 <style type="text/css">
 body{
    padding:0%;
 }
 </style>
+
+<script type="text/javascript">
+	function mempage(url){
+		alert("눌림?");
+		$.ajax({
+			method:'get'
+		   ,url:url
+		   ,success:function(data){
+			   $("#ticketmain").html(data);
+		   }
+		});
+	}
+</script>
 <!-- ================================= [[ 화면전환 ]] =================================================== -->
 <script type="text/javascript">
- 
+
+
+
+
+
+/*  
 $(function () {
  $(".tab_area  #MC-ul li button").click(function () {
            $(".tab_area #MC-ul li button").removeClass("active").css("color", "#333");
@@ -20,12 +38,13 @@ $(function () {
                                     "border-bottom","1px solid #fff");
  });
  
-});
+}); */
+
  </script>
 
 
 
-
+<div id="ticketmain" >
 <!-- ----------------------------상단바 부분 ----------------------------------------->
 
 <div class="bar_area">
@@ -38,20 +57,6 @@ $(function () {
 </div>
 <!-- ----------------------------상단바 부분 ----------------------------------------->
 
-<!-- ----------------------------상단바 메뉴탭부분---------------------------- -->    
-<div class="tab_area">
-   <div class="section">
-      <ul id="MC-ul">
-         <li>
-            <button type="button" class="active">이용권 상품</button>
-         </li>
-         <li>
-            <button type="button" data-action="href-product-public">프로모션 상품</button>
-         </li>
-      </ul>
-   </div>
-</div>  
-<!-- ----------------------------상단바 메뉴탭부분---------------------------- -->      
 <!-- /* -----------------------------검색어 메뉴부분 -----------------------------*/-->
 <div class="product_tab">
    <div class="search_bar" style="margin: 0;">
@@ -80,30 +85,29 @@ $(function () {
          <div class="product-category">
             <ul>
                <li class="btn blue" data-action="display" data-value="tickets">이용권 분류</li>
-               <li class="btn gray" data-action="display" data-value="productGroups">카테고리 분류</li>
+               <li class="btn gray" data-action="display" data-value="productGroups">프로모션 분류</li>
             </ul>
          </div>
          <div data-display-container="tickets" style="margin-top: 10px; height: 95%; overflow: hidden; overflow-y: auto;">
             <ul style="list-style: none">
                
                   <li>
-                     <a href="/tickets/types/form" class="pr_btn btn dark" style="height: inherit; text-align: center; padding: 5px;">이용권 등록</a>
+                     <a  class="pr_btn btn dark"  onClick="mempage('../program/TicketAdd.jsp')" style="height: inherit; text-align: center; padding: 5px;">상품 등록</a>
                   </li>
                
             </ul>
-            <ul data-template="tickets" style="list-style: none">
+            <ul  style="list-style: none" id="TM_ul">
   
        
-                  <li style="margin-top: 10px">
-                     <span class="pr_btn btn text-border gray c_gray" ">
-                        락카
+                  <li>
+                     <span class="pr_btn btn text-border gray c_gray" >
+                        			락카
                     
                      </span>
                   </li>
-                  <li style="margin-top: 10px">
+                  <li>
                      <span class="pr_btn btn text-border gray c_gray" >
-                        환불
-                       
+                     			   환불
                      </span>
                   </li>
              
@@ -123,51 +127,17 @@ $(function () {
 <!-- /* -----------------------------메인 리스트 부분 -----------------------------*/-->
       <div class="column col_span width_right_add" style="width: calc(((115% - 15px) / 3) * 2);">
          <div class="grid_list over_view">
-            <ul data-template="products">
-            <li class="text-border /*purple c_purple*/">
-               <div class="service_itm">
-                  <p>
-                     <span class="purple c_purple">개인레슨
-                        <em class="fr">
-                           최근수정일 : 2019-09-23
-                        </em>
-                     </span>
-                     <i>1:1 개인레슨 (기구필라테스) 48회</i>
-                  </p>
-               </div>
-               <div class="service_detail text-border /*purple c_purple*/" style="margin: 0 -1px; width: calc(100% + 2px); border-top: none !important;">
-                  <div class="service_price">
-                     <p>30,000,000원</p>
-                     <p style="display: block;">
-                        <a  class="btn blue">결제하기</a>
-                     </p>
-                  </div>
-               </div>
-            </li>
-            <li class="text-border /*purple c_purple*/">
-               <div class="service_itm">
-                  <p>
-                     <span class="purple c_purple">개인레슨
-                        <em class="fr">
-                           최근수정일 : 2019-09-23
-                        </em>
-                     </span>
-                     <i>1:1 개인레슨 (헬스 PT) 48회</i>
-                  </p>
-               </div>
-               <div class="service_detail text-border /*purple c_purple*/" style="margin: 0 -1px; width: calc(100% + 2px); border-top: none !important;">
-                  <div class="service_price">
-                     <p>1,800,000원</p>
-                     <p style="display: block;">
-                        <a  class="btn blue">결제하기</a>
-                     </p>
-                  </div>
-               </div>
-            </li>
-
-       
-             </ul>
+        	<div id="tasel">
+        	
+           
+			  </div>
             </div>
           </div>
-         </div>
-         </div>
+          
+          <!--  -->
+     	</div>
+     </div>
+         
+<!--==================================================================================================  -->         
+  </div>       
+         

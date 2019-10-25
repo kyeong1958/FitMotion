@@ -168,12 +168,12 @@
     max-width: none;
 }
 #appointmentName {
-	padding-left: 10px;
-	height: 34px;
-    
+    padding-left: 10px;
+     text-align: center;
+    height: 34px;
     border: 1px solid #BABBC2;
     border-radius: 5px;
-    width: 480px !important;
+    width: 250px !important;
     outline: none;
 }
 #appointmentName:focus {
@@ -213,9 +213,6 @@
 #pro_p3{
     line-height: 34px;
 }
-#spanmin { 
-	margin-left : 5px;
-}
 #spacechoice {
 	padding: 0 20px 0 10px;
     min-width: 30%;
@@ -239,17 +236,13 @@
     background : url(/images/drop_down.png) no-repeat right 10px top 50% #FFF !important;
 }
 #descriptionbox {
-	padding: 10px;
-	width: 480px !important;
-	height: 100px;
-    line-height: 1.4;
-    background-color: #FFF;
+    padding-left: 10px;
+	height: 34px;
     border: 1px solid #BABBC2;
     border-radius: 5px;
-    resize: none;
-    overflow-y: auto;
     outline: none;
-    vertical-align: top;
+    width: 250px !important;
+    text-align: center;
 }
 /* =====================메인 부분============================== */
 /* =====================제일아래 버튼 부분============================== */

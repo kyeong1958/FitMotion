@@ -6,7 +6,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <%@ include file="/common/JEasyUICommon.jsp"%>
-<%@ include file="/CSS/ProRegistration.jsp"%>
+<%@ include file="../NewCSS/TicketAdd.css"%>
 <link rel="stylesheet" type="text/css" href="../NewCSS/main.css">
 <style type="text/css">
 body{
@@ -234,52 +234,19 @@ body{
 				<form name="regist-ticket">
 					<fieldset id="proreg_fs">
 						<legend id="pro_leg">이용권 등록</legend>
-							<p id="pro_p0">
-							<label id="pro_label0" for="space" class="wd_150">이용권 종류</label>
-							<select name="ticket" id="ticketchoice">
-								<option value="">이용권 선택</option>
-								
-									<option value="1156">요가</option>
-								
-									<option value="1157">스피닝</option>
-								
-									<option value="1158">헬스</option>
-								
-									<option value="1159">필라테스</option>
-								
-							</select>
-						</p>
 						<p id="proreg_p">
 							<label id="pro_label1" for="appointmentName" class="wd_150">이용권 이름</label>
-							<input type="text" id="appointmentName" name="appointmentName" class="wd_550" placeholder="예) 퍼스널 트레이닝" autofocus="">
+							<input type="text" id="appointmentName" name="appointmentName" class="wd_550" placeholder="예) 퍼스널 트레이닝                                    ">
 						</p>
 						<p id="pro_p1">
 							<label id="pro_label2" for="classTime" class="wd_150">수업 진행시간</label>
 							<input type="text" id="classTime" name="classTime" class="wd_250" placeholder="예) 50 (분 단위로 입력해주세요)           ">
 							<span id="spanmin">분</span>
 						</p>
-						<p id="pro_p2">
-							<label id="pro_label3" for="space" class="wd_150">장소</label>
-							<select name="seqPartnerSpace" id="spacechoice">
-								<option value="">장소 선택</option>
-								
-									<option value="1156">그룹레슨 룸</option>
-								
-									<option value="1157">스프링보드+바렐 룸</option>
-								
-									<option value="1158">캐포머 1룸</option>
-								
-									<option value="1159">개인레슨 1룸</option>
-								
-									<option value="1160">스피닝 룸</option>
-								
-									<option value="1161">그룹레슨 2룸</option>
-								
-							</select>
-						</p>
 						<p id="pro_p3">
-							<label id="pro_label4" for="description" class="wd_150">수업 설명</label>
-							<textarea id="descriptionbox" name="description" class="wd_550"></textarea>
+							<label id="pro_label4" for="description" class="wd_150">가격</label>
+							<input type="text" id="descriptionbox" name="descriptionbox" class="wd_550">
+							<span id="pricespan">원</span>
 						</p>
 					</fieldset>
 				</form>

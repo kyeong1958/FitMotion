@@ -1,10 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
 <%@ include file="/common/JEasyUICommon.jsp"%>
 <%@ include file="/CSS/TicketMain.jsp"%>
 
@@ -280,7 +275,7 @@ body{
           <!--=====================================분류 시작 =================================  -->
                <div class="product-category">
                   <ul>
-                     <li class="btn blue" >이용권 분류</li>
+                     <li class="btn blue">이용권 분류</li>
                      <li class="btn gray">프로모션 분류</li>
                   </ul>
                </div>

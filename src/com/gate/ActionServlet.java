@@ -32,8 +32,8 @@ public class ActionServlet extends HttpServlet {
 			controller = ControllerMapping.getController(command);
 		 
 /************************************* 응답 페이지 ***********************************/
-		mav = controller.execute();
-		json = controller.jsonexecute();
+		mav = controller.execute(req, res);
+		//json = controller.jsonexecute();
 		logger.info(mav+" , "+json);
 		String pageMove = mav.pageMove;
 		String viewName = mav.viewName;
