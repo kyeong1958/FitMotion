@@ -20,6 +20,7 @@ public class AccountDao {
 		sqlSessionFactory = MyBatisCommonFactory.getSqlSessionFactory();
 	}
 //////////////////////////////////[[ 경애 시작 ]] ///////////////////////////////////////////////////////////////////
+//매출내역
 	public Map<String, Object> salesStatementMap(Map<String, Object> date) {
 		Map<String, Object> rMap = new HashMap<String, Object>();
 		try {
@@ -33,11 +34,12 @@ public class AccountDao {
 		}
 		return rMap;
 	}
-	public List<Map<String, Object>> ssTableList(int month) {
+
+	public List<Map<String, Object>> ssTableList(Map<String, Object> date) {
 		List<Map<String, Object>> ssTableList = new ArrayList<Map<String,Object>>();
 		try {
 			sqlSession = sqlSessionFactory.openSession();
-			ssTableList  = sqlSession.selectOne("ssTableList", month);
+			ssTableList  = sqlSession.selectList("ssTableList", date);
 			logger.info(ssTableList);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -46,6 +48,8 @@ public class AccountDao {
 		}
 		return ssTableList;
 	}
+//매출내역끝
+//지출내역
 	public Map<String, Object> expenseStatementMap(Map<String, Object> date) {
 		Map<String, Object> rMap = new HashMap<String, Object>();
 		try {
@@ -59,19 +63,20 @@ public class AccountDao {
 		}
 		return rMap;
 	}
-	public List<Map<String, Object>> esTableList(int month) {
-		List<Map<String, Object>> esTableList = new ArrayList<Map<String,Object>>();
+	public List<Map<String, Object>> geTableList(Map<String, Object> date) {
+		List<Map<String, Object>> geTableList = new ArrayList<Map<String,Object>>();
 		try {
 			sqlSession = sqlSessionFactory.openSession();
-			esTableList  = sqlSession.selectOne("esTableList", month);
-			logger.info(esTableList);
+			geTableList  = sqlSession.selectList("geTableList", date);
+			logger.info(geTableList);
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
 			if(sqlSession != null) sqlSession.close();
 		}
-		return esTableList;
+		return geTableList;
 	}
+//지출내역끝
 //////////////////////////////////[[ 경애 끝 ]] ///////////////////////////////////////////////////////////////////
 /*
  * ====================================[[민지 시작]]==========================================

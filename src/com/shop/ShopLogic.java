@@ -1,6 +1,7 @@
 package com.shop;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -67,55 +68,20 @@ public class ShopLogic {
 	
 //////////////////////////////////[[ 민지 끝  ]] /////////////////////////////////////////////	
 //////////////////////////////////[[ 정은 시작  ]] /////////////////////////////////////////////	
-	public String slogin(SupervisorVO sVO) {
-		logger.info("login 호출 성공");
-		String sv_id = null;
-		sv_id = shopDao.sisId(sVO);
-		if("아이디가 존재합니다.".equals(sv_id)) {// 아이디가 존재할 때
-			sv_id = shopDao.slogin(sVO);
-		}
-		else {
-			sv_id="아이디가 존재하지 않습니다.";
-		}
-		return sv_id;
+	public Map<String,Object> slogin(Map<String, Object> pMap) {
+		Map<String,Object> rMap = new HashMap<String, Object>();
+		rMap = shopDao.slogin(pMap);
+		return rMap;
 	}
-	public SupervisorVO proc_login(SupervisorVO sVO) {
-		logger.info("proc_login 호출 성공");
-		shopDao.proc_login(sVO);
-		return sVO;
-	}
-	public int sINS(Map<String, Object> pMap) {
-		int result =0;
-		logger.info("회원관리 Logic 호출 성공");
-		result = shopDao.sINS(pMap);
+	public String idCheck(String joinid) {
+		String result = null;
+		result = shopDao.idCheck(joinid);
 		return result;
-	
 	}
-	public List<Map<String, Object>> sSEL() {
-		logger.info("회원관리 조회부분 Logic 호출성공");
-		List<Map<String, Object>> joinList =null;		
-		joinList = shopDao.sSEL();
-		return joinList;
-	}
-	public String sisId(SupervisorVO sVO) {
-		logger.info("아이디 검사 호출 성공");
-		String sv_id = null;
-		sv_id = shopDao.sisId(sVO);
-		if("아이디가 존재합니다.".equals(sv_id)) {// 아이디가 존재할 때
-			sv_id = shopDao.slogin(sVO);
-			
-		}
-		else {
-			sv_id="아이디가 존재하지 않습니다.";
-		}
-		return sv_id;
-	}
-	public int slINS(Map<String, Object> pMap) {
-		int result =0;
-		logger.info("회원관리 Logic 호출 성공");
-		result = shopDao.slINS(pMap);
+	public int join(Map<String, Object> pMap) {
+		int result = 0;
+		result = shopDao.join(pMap);
 		return result;
-	
 	}
 
 //////////////////////////////////[[ 정은 끝  ]] /////////////////////////////////////////////	

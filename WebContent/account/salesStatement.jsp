@@ -29,7 +29,7 @@ body{
 <script type="text/javascript">
 	$(document).ready(function(){
 		$.ajax({
-			url:'/account/salesStatement.fm?month=<%=y%>-<%=month+1%>'
+			url:'/account/salesStatement.fm?month=<%=y%>/<%=month+1%>'
 			,success:function(data){
 				$("#statement").html(data);
 			}
@@ -80,7 +80,6 @@ body{
 		$.ajax({
 			url:'/account/salesStatement.fm?year=<%=year%>'
 			,success:function(data){
-				//alert("성공");
 				$("#statement").html(data);
 			}
 		});
@@ -89,7 +88,6 @@ body{
 		$.ajax({
 			url:'/account/salesStatement.fm?quarter=<%=quarter%>'
 			,success:function(data){
-				//alert("성공");
 				$("#statement").html(data);
 			}
 		});
@@ -98,7 +96,6 @@ body{
 		$.ajax({
 			url:'/account/salesStatement.fm?month=<%=y%>-<%=month+1%>'
 			,success:function(data){
-				//alert("성공");
 				$("#statement").html(data);
 			}
 		});
@@ -106,13 +103,10 @@ body{
 	function dateSEL(){
 		var startDay = $('#datebox1').datebox('getValue');
 		var endDay = $('#datebox2').datebox('getValue');
-		//alert(startDay+", "+endDay);
 		if(startDay != '' && endDay != ''){
-		//	alert("ajax");
 			$.ajax({
 				url:'/account/salesStatement.fm?startDay='+startDay+'&endDay='+endDay
 				,success:function(data){
-					//alert("성공");
 					$("#statement").html(data);
 				}
 			});
@@ -147,51 +141,6 @@ body{
 </div>
 <!-- ================================= [[ TABLE BOTTOM ]] =================================================== -->
 		<div class="section">
-					<div class="row">
-						<div class="reservation_middle" id="reservationList_total">
-							<span class="middle">
-								<label id="reservationlabel">페이지 당</label>
-									<select name="pagetotal" id="pagetotal">
-										<option>10</option>
-										<option>25</option>
-										<option>50</option>
-										<option>100</option>
-									</select>
-								<label id="reservationlabel">개 표시</label>
-							</span>
-							<span class="middle">
-								<label id="reservationlabel">검색:</label>
-								<input type="search" class="reservation_searchbox">
-							</span>
-						</div>
-					</div>
-						<div class="row">
-						<table id="table" class="table table-bordered  table-striped">
-							<thead>
-								<tr>
-									<th class="tableheader">결제번호</th>
-									<th class="tableheader">결제일시</th>
-									<th class="tableheader">구매회원</th>
-									<th class="tableheader">HP</th>
-									<th class="tableheader">결제수단</th>
-									<th class="tableheader">정가</th>
-									<th class="tableheader">할인금액</th>
-									<th class="tableheader">결제금액</th>
-									<th class="tableheader">미수금</th>
-									<th class="tableheader">환불금액</th>
-									<th class="tableheader">결제담당</th>
-								</tr>
-							</thead>
-							<tbody>
-								
-							</tbody>
-						</table>
-					</div>
-<!-- ================================= [[ TABLE BOTTOM ]] =================================================== -->
-					<div class="row pagination">
-						<div class="pagination_top">
-							전체 11개 항목 중 1 부터 10 까지 표시
-						</div>
-					</div>
+				
 				</div>
 <!-- ================================= [[ 화면전환 ]] =================================================== -->

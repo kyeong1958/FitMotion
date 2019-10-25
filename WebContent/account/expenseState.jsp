@@ -10,6 +10,8 @@
 		rMap = (Map<String,Object>)request.getAttribute("expenseStatement");
 	}
 	Map<String,Object> up = (Map<String,Object>)rMap.get("up");
+	String geTableList = (String)rMap.get("table");
+	out.print(geTableList);
 	int paymethodTotal = Integer.parseInt(up.get("cardexp").toString())+Integer.parseInt(up.get("transexp").toString())+Integer.parseInt(up.get("cashexp").toString());
 	int sortTotal = Integer.parseInt(up.get("person").toString())+Integer.parseInt(up.get("etc").toString())+Integer.parseInt(up.get("purchase").toString());
 	    	
@@ -97,3 +99,58 @@
 				</div>
 			</div>
 		</div>
+<!-- ================================= [[ table right ]] =================================================== -->
+		
+		<script>
+		//(페이지네이션) 한화면에서 보여줄 컬럼숫자를 담는 변수
+		var pageNumm = 10;
+	    
+		jb('#pagination1').pagination({
+	        dataSource: <%=geTableList%>,
+	        pageSize:10,
+	        align:"center",
+	        callback: function(data, pagination) {
+	            // template method of yourself
+				var datahtml ='	<table id="salestable" class="table table-bordered  table-striped"><thead>'
+	            	datahtml +=	'<tr><th class="tableheader" data-field="RNO">번호</th>'
+	            	datahtml +=	'	<th class="tableheader" data-field="GE_DATE">지출일시</th>'
+	            	datahtml +=	'	<th class="tableheader" data-field="EXB_KINDS">지출분류</th>'
+            		datahtml +=	'	<th class="tableheader" data-field="GE_STORY">지출내역</th>'
+           			datahtml +=	'	<th class="tableheader" data-field="GE_COUNT">수량</th>'
+       				datahtml +=	'	<th class="tableheader" data-field="GE_PRICE">지출금액</th>'
+    				datahtml += '	<th class="tableheader" data-field="GE_REF_AMOUNT">미지급금</th>'
+	            	datahtml +=	'	<th class="tableheader" data-field="GE_PAY_METHOD">지출수단</th>'
+	            	datahtml +=	'	<th class="tableheader" data-field="GE_STATE">결제상태</th>'
+	            	datahtml +=	'	<th class="tableheader" data-field="GE_BILLER">결제자</th>'
+	            jb.each(data,function(index,item){
+		            	console.log(data.length);
+			        		datahtml += '<tr>';
+			            	datahtml += '<td style="align:center">' + item.RNO+  '</td>';
+			            	datahtml += '<td style="align:center">' + item.GE_DATE + '</td>';
+			            	datahtml += '<td style="align:center">' + item.EXB_KINDS + '</td>';
+			            	datahtml += '<td style="align:center">' + item.GE_STORY + '</td>';
+			            	datahtml += '<td style="align:center">' + item.GE_COUNT + '</td>';
+			            	datahtml += '<td style="align:center">' + item.GE_PRICE + '</td>';
+			            	datahtml += '<td style="align:center">' + item.GE_REF_AMOUNT + '</td>';
+			            	datahtml += '<td style="align:center">' + item.GE_PAY_METHOD + '</td>';
+			            	datahtml += '<td style="align:center">' + item.GE_STATE + '</td>';
+			            	datahtml += '<td style="align:center">' + item.GE_BILLER + '</td>';
+			             	datahtml += '</tr>';    	
+		         });
+	            datahtml += '</tbody></table>';
+	            jb("#data-container").html(datahtml);
+	        }
+	    });
+</script>  
+
+		<div class="section">
+			<div class="row">
+				<div id="data-container"></div>
+				<div id="pagination1"></div>
+			</div>
+		</div>
+
+
+
+
+

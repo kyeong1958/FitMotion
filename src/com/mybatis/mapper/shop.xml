@@ -85,6 +85,46 @@
 </update> -->
 
 <!--==========================[[민지 끝 ]]=======================================================================  -->
+<!--========================================[[ 정은 시작 ]]===============================================================  -->
 
+   <!-- ============================================================================================================== -->
+   <select id="sisId" parameterType="map" statementType="CALLABLE">
+	    {call proc_login(
+						 #{login_id, mode=IN, jdbcType=VARCHAR, javaType=java.lang.String}
+						 ,#{login_pw, mode=IN, jdbcType=VARCHAR, javaType=java.lang.String}
+					     ,#{rid, mode=OUT, jdbcType=VARCHAR, javaType=java.lang.String}
+					     ,#{name, mode=OUT, jdbcType=VARCHAR, javaType=java.lang.String}
+					     ,#{rank, mode=OUT, jdbcType=VARCHAR, javaType=java.lang.String}
+		)}
+	</select>
+	<select id="idCheck" parameterType="string" statementType="CALLABLE">
+	 	{call proc_idcheck(
+						 #{joinid, mode=IN, jdbcType=VARCHAR, javaType=java.lang.String}
+					     ,#{result, mode=OUT, jdbcType=VARCHAR, javaType=java.lang.String}
+		)}
+	</select>
+	<update id="superjoin">
+		INSERT INTO gym(gym_num,gym_name,gym_address,sv_id,gym_postal_code)
+		VALUES (seq_gym_code.nextval,#{gym_name},#{gym_address}||' '||#{gym_extraAddress},#{joinid}.#{gym_postal_code})
+	</update>
+	<select id="superjoin" parameterType="map" statementType="CALLABLE">
+	 	{call proc_idcheck(
+						 #{gym_name, mode=IN, jdbcType=VARCHAR, javaType=java.lang.String}
+						,#{gym_postal_code, mode=IN, jdbcType=VARCHAR, javaType=java.lang.String}
+						,#{gym_address, mode=IN, jdbcType=VARCHAR, javaType=java.lang.String}
+						,#{gym_extraAddress, mode=IN, jdbcType=VARCHAR, javaType=java.lang.String}
+						,#{joinid, mode=IN, jdbcType=VARCHAR, javaType=java.lang.String}
+						,#{join_pw, mode=IN, jdbcType=VARCHAR, javaType=java.lang.String}
+						,#{join_name, mode=IN, jdbcType=VARCHAR, javaType=java.lang.String}
+						,#{join_hp, mode=IN, jdbcType=VARCHAR, javaType=java.lang.String}
+						,#{join_gender, mode=IN, jdbcType=VARCHAR, javaType=java.lang.String}
+						,#{join_birth, mode=IN, jdbcType=VARCHAR, javaType=java.lang.String}
+					    ,#{result, mode=OUT, jdbcType=VARCHAR, javaType=java.lang.String}
+		)}
+	</select>
+	<select id="staffjoin">
+	
+	</select>
+<!--========================================[[ 정은 끝 ]]===============================================================  -->
 </mapper> 
  

@@ -41,6 +41,7 @@ public class AccountController implements Controller {
 			mav.addObject("제발", "잘됨??");
 		}
 ////////////////////////////////// [[ 경애 시작 ]] ///////////////////////////////////////////////////////////////////
+		// 매출내역
 		else if("salesStatement".equals(crud)) {
 			Map<String,Object> salesStatement = new HashMap<String, Object>();
 			Map<String,Object> date = new HashMap<String, Object>();
@@ -86,6 +87,7 @@ public class AccountController implements Controller {
 			mav.setViewName("/account/salesajax.jsp");
 			mav.addObject("salesStatement", salesStatement);
 		}
+		// 지출내역
 		else if("expenseStatement".equals(crud)) {
 			Map<String,Object> expenseStatement = new HashMap<String, Object>();
 			Map<String,Object> date = new HashMap<String, Object>();

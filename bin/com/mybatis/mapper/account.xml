@@ -10,6 +10,7 @@
 		      ,NVL(SUM (gs_pay_amount),0) as "sales"
 		      ,NVL(SUM (GS_REF_AMOUNT),0) as "refund"
 		      ,NVL(SUM (gs_account_due),0)  as "receivable"
+              ,NVL(COUNT(DECODE(gs_account_due,0,NULL,gs_account_due)),0)  as "receivablecnt"
 		      ,NVL(COUNT(DECODE(gs_pay_method,'카드',gs_pay_amount)),0)  as "cardsalescnt"
 		      ,NVL(SUM(DECODE(gs_pay_method,'카드',gs_pay_amount)),0)  as "cardsales"
 		      ,NVL(COUNT(DECODE(gs_pay_method,'현금',gs_pay_amount)),0)  as "cashsalescnt" 
@@ -56,10 +57,49 @@
       <if test="endDay != null">
 <![CDATA[ AND to_date(gs_dep_date) <= to_date(#{endDay}) ]]>
      </if> 
-	</select>
-
-	<select id="ssTableList" parameterType="java.lang.Integer">
-	
+    </select>
+	<resultMap type="map" id="ssTableList"></resultMap>
+	<select id="ssTableList" parameterType="java.lang.Integer" resultMap="ssTableList">
+		SELECT rno, gs_dep_num, gs_dep_date, gs_dep_mem, mem_hp, gs_pay_method, ticket_price, sale, ticp_payment
+		      ,gs_account_due, gs_ref_amount
+		FROM (SELECT rownum as rno, gs_dep_num, gs_dep_date, gs_dep_mem, mem_hp, gs_pay_method, ticket_price, (ticket_price - ticp_payment ) as sale, ticp_payment
+			      ,gs_account_due, gs_ref_amount
+			  FROM gym_sales gs, member m, ticket t, tic_purchase tp
+			 WHERE gs_dep_mem = m.mem_num
+			   AND m.mem_num = tp.mem_num
+			   AND ticp_num = gs_ticp_num
+			   AND tp.ticket_num = t.ticket_num
+			    <if test="month != null">
+				 AND SUBSTR (gs_dep_date, 0, 7) = #{month}
+			     </if>
+			     <if test="year != null">
+				 AND SUBSTR (gs_dep_date, 0, 4) = #{year}
+			     </if> 
+			      <if test="quarter != null and quarter == 1">
+			<![CDATA[ AND SUBSTR (gs_dep_date, INSTR (gs_dep_date, '-', 1) + 1, 2) >= '01'
+				 	  AND SUBSTR (gs_dep_date, INSTR (gs_dep_date, '-', 1) + 1, 2) <= '03' ]]>
+			     </if> 
+			     <if test="quarter != null and quarter == 2">
+			<![CDATA[ AND SUBSTR (gs_dep_date, INSTR (gs_dep_date, '-', 1) + 1, 2) >= '04'
+				 	  AND SUBSTR (gs_dep_date, INSTR (gs_dep_date, '-', 1) + 1, 2) <= '06' ]]>
+			     </if> 
+			     <if test="quarter != null and quarter == 3">
+			<![CDATA[ AND SUBSTR (gs_dep_date, INSTR (gs_dep_date, '-', 1) + 1, 2) >= '07'
+				 	  AND SUBSTR (gs_dep_date, INSTR (gs_dep_date, '-', 1) + 1, 2) <= '09' ]]>
+			     </if> 
+			     <if test="quarter != null and quarter == 4">
+			<![CDATA[ AND SUBSTR (gs_dep_date, INSTR (gs_dep_date, '-', 1) + 1, 2) >= '10'
+				 	  AND SUBSTR (gs_dep_date, INSTR (gs_dep_date, '-', 1) + 1, 2) <= '12' ]]>
+			     </if> 
+			      <if test="startDay != null">
+			<![CDATA[ AND to_date(gs_dep_date) >= to_date(#{startDay}) ]]>
+			     </if> 
+			      <if test="endDay != null">
+			<![CDATA[ AND to_date(gs_dep_date) <= to_date(#{endDay}) ]]>
+			     </if> 
+		     )
+		     ORDER BY rno desc
+		 
 	</select>
 <!-- 지출관리 페이지에서 사용할 값 select -->
 	<select id="expenseStatementMap" parameterType="map" resultMap="ssm_map">
@@ -108,6 +148,44 @@
       <if test="endDay != null">
 <![CDATA[ AND to_date(ge_date) <= to_date(#{endDay}) ]]>
      </if> 
+	</select>
+		<resultMap type="map" id="geTableList"></resultMap>
+	<select id="geTableList" parameterType="java.lang.Integer" resultMap="geTableList">
+	SELECT rno, ge_date, exb_kinds, ge_story, ge_count, ge_price, ge_ref_amount,ge_pay_method,ge_state, ge_biller
+               FROM (  SELECT rownum as rno, ge_date, exb_kinds, ge_story, ge_count, ge_price, ge_ref_amount,ge_pay_method,ge_state, ge_biller
+                       FROM gym_expenditure ge, ex_breakdown eb
+                      WHERE ge.exb_num = eb.exb_num
+			    <if test="month != null">
+				 AND SUBSTR (ge_date, 0, 7) = #{month}
+			     </if>
+			     <if test="year != null">
+				 AND SUBSTR (ge_date, 0, 4) = #{year}
+			     </if> 
+			      <if test="quarter != null and quarter == 1">
+			<![CDATA[ AND SUBSTR (ge_date, INSTR (ge_date, '-', 1) + 1, 2) >= '01'
+				 	  AND SUBSTR (ge_date, INSTR (ge_date, '-', 1) + 1, 2) <= '03' ]]>
+			     </if> 
+			     <if test="quarter != null and quarter == 2">
+			<![CDATA[ AND SUBSTR (ge_date, INSTR (ge_date, '-', 1) + 1, 2) >= '04'
+				 	  AND SUBSTR (ge_date, INSTR (ge_date, '-', 1) + 1, 2) <= '06' ]]>
+			     </if> 
+			     <if test="quarter != null and quarter == 3">
+			<![CDATA[ AND SUBSTR (ge_date, INSTR (ge_date, '-', 1) + 1, 2) >= '07'
+				 	  AND SUBSTR (ge_date, INSTR (ge_date, '-', 1) + 1, 2) <= '09' ]]>
+			     </if> 
+			     <if test="quarter != null and quarter == 4">
+			<![CDATA[ AND SUBSTR (ge_date, INSTR (ge_date, '-', 1) + 1, 2) >= '10'
+				 	  AND SUBSTR (ge_date, INSTR (ge_date, '-', 1) + 1, 2) <= '12' ]]>
+			     </if> 
+			      <if test="startDay != null">
+			<![CDATA[ AND to_date(ge_date) >= to_date(#{startDay}) ]]>
+			     </if> 
+			      <if test="endDay != null">
+			<![CDATA[ AND to_date(ge_date) <= to_date(#{endDay}) ]]>
+			     </if> 
+		     )
+		     ORDER BY rno desc
+		 
 	</select>
 <!-- //////////////////////////////////[[ 경애 끝 ]] ///////////////////////////////////////////////////////////////////-->
 <!--    ======================= 수근시작 ================================== //-->

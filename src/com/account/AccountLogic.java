@@ -8,6 +8,8 @@ import java.util.Map;
 
 import org.apache.log4j.Logger;
 
+import com.google.gson.Gson;
+
 public class AccountLogic {
 	Logger logger = Logger.getLogger(AccountLogic.class);
 	AccountDao accountDao = null;
@@ -20,17 +22,23 @@ public class AccountLogic {
 		List<Map<String,Object>> ssTableList = new ArrayList<Map<String,Object>>();
 		Map<String,Object> rMap = accountDao.salesStatementMap(date);
 		salesStatement.put("up",rMap);
-		//ssTableList = accountDao.ssTableList(month);
-		//salesStatement.put("table",ssTableList);
+		ssTableList = accountDao.ssTableList(date);
+		Gson gson = new Gson();
+		String ssTableListjson = gson.toJson(ssTableList);
+		logger.info("매출테이블"+ssTableListjson);
+		salesStatement.put("table",ssTableListjson);
 		return salesStatement;
 	}
 	public Map<String, Object> expenseStatementList(Map<String, Object> date) {
 		Map<String, Object> expenseStatement = new HashMap<String, Object>();
-		List<Map<String,Object>> esTableList = new ArrayList<Map<String,Object>>();
+		List<Map<String,Object>> geTableList = new ArrayList<Map<String,Object>>();
 		Map<String,Object> rMap = accountDao.expenseStatementMap(date);
 		expenseStatement.put("up",rMap);
-		//esTableList = accountDao.ssTableList(month);
-		//salesStatement.put("table",esTableList);
+		geTableList = accountDao.geTableList(date);
+		Gson gson = new Gson();
+		String geTableListjson = gson.toJson(geTableList);
+		logger.info("지출테이블"+geTableListjson);
+		expenseStatement.put("table",geTableListjson);
 		return expenseStatement;
 	}
 //////////////////////////////////[[ 경애 끝 ]] ///////////////////////////////////////////////////////////////////

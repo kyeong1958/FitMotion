@@ -5,7 +5,7 @@
     pageEncoding="UTF-8"%>
 	<!-- ============================ [[ 회계관리 ]] ======================================== -->
 	<!-- ============================ [[ 지출내역 ]] ======================================== -->
-<%@ include file="/common/JEasyUICommon.jsp"%>
+<%-- <%@ include file="/common/JEasyUICommon.jsp"%> --%>
 <link rel="stylesheet" type="text/css" href="../NewCSS/main.css">
 <link rel="stylesheet" type="text/css" href="../NewCSS/table.css">
 <link rel="stylesheet" type="text/css" href="../NewCSS/expenseStatement.css">
@@ -38,10 +38,10 @@ $(document).ready(function(){
 		}
 	}); 
 	 //datebox1 날짜 선택에 따라 datebox2의 선택가능날짜 설정
-	   $('#datebox1').datebox({
+	   aa('#datebox1').datebox({
 	      onSelect: function(date){
 	         firstDate = date;
-	         $('#datebox2').datebox().datebox('calendar').calendar({
+	         aa('#datebox2').datebox().datebox('calendar').calendar({
 	               validator: function(date){
 		                   var d1 = new Date(firstDate.getFullYear(), firstDate.getMonth(), firstDate.getDate());
 	                   return d1<=date;
@@ -56,14 +56,14 @@ $(document).ready(function(){
 <script type="text/javascript">
 /*///////////////// [[ 데이트박스 ]] ///////////////////////////////  */
 //datebox 날짜형식 YYYY-MM-DD로 설정
- 	 $.fn.datebox.defaults.formatter = function(date){
+ 	 aa.fn.datebox.defaults.formatter = function(date){
 	    var y = date.getFullYear();
 	    var m = date.getMonth()+1;
 	    var d = date.getDate();
 	    return y+'/'+(m<10 ? "0"+m:m)+'/'+(d<10 ? "0"+d:d);
 	}
 //datebox parser설정
- 	 $.fn.datebox.defaults.parser = function(s){
+ 	 aa.fn.datebox.defaults.parser = function(s){
 	    var t = Date.parse(s);
 	    if (!isNaN(t)){
 	       return new Date(t);
@@ -72,17 +72,16 @@ $(document).ready(function(){
 	    }
 	}
 //datebox 한글화
- 	$.fn.datebox.defaults.currentText = '오늘'
-	$.fn.datebox.defaults.closeText = '닫기'
-	$.fn.calendar.defaults.weeks = ['일','월','화','수','목','금','토']
-	$.fn.calendar.defaults.months = ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월']
+ 	aa.fn.datebox.defaults.currentText = '오늘'
+	aa.fn.datebox.defaults.closeText = '닫기'
+	aa.fn.calendar.defaults.weeks = ['일','월','화','수','목','금','토']
+	aa.fn.calendar.defaults.months = ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월']
 
 /*///////////////// [[ 데이트박스 ]] ///////////////////////////////  */
 	function thisyear(){
 		$.ajax({
 			url:'/account/expenseStatement.fm?year=<%=year%>'
 			,success:function(data){
-			//	alert("성공");
 				$("#statement").html(data);
 			}
 		});
@@ -106,8 +105,8 @@ $(document).ready(function(){
 		});
 	}
 	function dateSEL(){
-		var startDay = $('#datebox1').datebox('getValue');
-		var endDay = $('#datebox2').datebox('getValue');
+		var startDay = aa('#datebox1').datebox('getValue');
+		var endDay = aa('#datebox2').datebox('getValue');
 		//alert(startDay+", "+endDay);
 		if(startDay != '' && endDay != ''){
 		//	alert("ajax");
@@ -232,7 +231,7 @@ $(document).ready(function(){
 <!-- ================================= [[ TABLE BOTTOM ]] =================================================== -->
 		<div class="section">
 					<div class="row">
-						<div class="reservation_middle" id="reservationList_total">
+						<!-- <div class="reservation_middle" id="reservationList_total">
 							<span class="middle">
 								<label id="reservationlabel">페이지 당</label>
 									<select name="pagetotal" id="pagetotal">
@@ -285,11 +284,11 @@ $(document).ready(function(){
 							</tbody>
 						</table>
 					</div>
-<!-- ================================= [[ TABLE BOTTOM ]] =================================================== -->
+================================= [[ TABLE BOTTOM ]] ===================================================
 					<div class="row pagination">
 						<div class="pagination_top">
 							전체 11개 항목 중 1 부터 10 까지 표시
-						</div>
+						</div> -->
 					</div>
 				</div>
 <!-- ================================= [[ 화면전환 ]] =================================================== -->

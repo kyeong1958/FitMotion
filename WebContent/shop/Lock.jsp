@@ -80,8 +80,6 @@ body{
 				 ,url:'/shop/lockUPD.fm'
 				 ,data:formData
 				 ,success:function(data){
-					// alert("성공");
-					// alert("|"+data+"|");
 					 if(data == '0'){
 						alert('이용기간이 변경되지 않았습니다.');	 
 					 }else{
@@ -94,7 +92,6 @@ body{
 	 }
 /* 회원검색모달창 */
 	 function lockmemberSearch(){
-			//alert("회원검색");
 			var l_memname = $("#lock_memname").val();
 			$.ajax({
 				url:"/member/lockmemSearch.fm?mem_name="+l_memname
@@ -107,17 +104,13 @@ body{
 /* 회원검색모달창 */
 /* 락커배정 */
 	function lockSetUPD(){
-		//	alert("등록버튼");
 		if(document.getElementById("lockradio1").checked){
-		//	alert("라디오1선택"+document.getElementById("lockradio1").value);
 			var formData = $("#f_lockset").serialize();
 			 $.ajax({
 				 method:'get'
 				 ,url:'/shop/lockINS.fm'
 				 ,data:formData
 				 ,success:function(data){
-					// alert("성공");
-					// alert("|"+data+"|");
 					 $("#L_Assignment").modal({backdrop: false});
 					 $("#L_Assignment").modal('hide');
 					 $("#locker_list").html(data);

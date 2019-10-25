@@ -16,6 +16,10 @@
 				+Integer.parseInt(up.get("refundcardcnt").toString())+refundcashcnt;
 	int paysort = Integer.parseInt(up.get("newsales").toString())+Integer.parseInt(up.get("refundcard").toString())
 				+Integer.parseInt(up.get("refundcard").toString())-refundcash; 
+
+	String salesTable = (String)salesStatement.get("table");
+
+
 %>
 	 <div class="section" style="padding-top:0px !important;">
 			<div class="row">
@@ -45,7 +49,7 @@
 						<span>미수 잔액 </span>
 					</div>
 					<div class="sales-calculation-standby number">
-						<span style="display:inline-block">건</span>
+						<span style="display:inline-block"><%=up.get("receivablecnt")  %>건</span>
 					</div>
 					<div class="sales-calculation-standby sum">
 						<span><%=up.get("receivable")  %>원</span>
@@ -141,3 +145,53 @@
 				</div>
 			</div>
 		</div> 
+<!-- ================================= [[ table ]] =================================================== -->
+		
+		<script>
+		//(페이지네이션) 한화면에서 보여줄 컬럼숫자를 담는 변수
+		var pageNumm = 10;
+	    
+		jb('#pagination1').pagination({
+	        dataSource: <%=salesTable%>,
+	        pageSize:10,
+	        align:"center",
+	        callback: function(data, pagination) {
+	            // template method of yourself
+				var datahtml ='	<table id="salestable" class="table table-bordered  table-striped"><thead>'
+	            	datahtml +=	'<tr><th class="tableheader" data-field="RNO">번호</th>'
+	            	datahtml +=	'	<th class="tableheader" data-field="GS_DEP_DATE">결제일시</th>'
+	            	datahtml +=	'	<th class="tableheader" data-field="GS_DEP_MEM">구매회원</th>'
+            		datahtml +=	'	<th class="tableheader" data-field="MEM_HP">HP</th>'
+           			datahtml +=	'	<th class="tableheader" data-field="GS_PAY_METHOD">결제수단</th>'
+       				datahtml +=	'	<th class="tableheader" data-field="TICKET_PRICE">정가</th>'
+    				datahtml += '	<th class="tableheader" data-field="SALE">할인금액</th>'
+	            	datahtml +=	'	<th class="tableheader" data-field="TICP_PAYMENT">결제금액</th>'
+	            	datahtml +=	'	<th class="tableheader" data-field="GS_ACCOUNT_DUE">미수금</th>'
+	            	datahtml +=	'	<th class="tableheader" data-field="GS_REF_AMOUNT">환불금액</th></tr></thead><tbody>'
+	            jb.each(data,function(index,item){
+		            	console.log(data.length);
+			        		datahtml += '<tr>';
+			            	datahtml += '<td style="align:center">' + item.RNO+  '</td>';
+			            	datahtml += '<td style="align:center">' + item.GS_DEP_DATE + '</td>';
+			            	datahtml += '<td style="align:center">' + item.GS_DEP_MEM + '</td>';
+			            	datahtml += '<td style="align:center">' + item.MEM_HP +		 '</td>';
+			            	datahtml += '<td style="align:center">' + item.GS_PAY_METHOD + '</td>';
+			            	datahtml += '<td style="align:center">' + item.TICKET_PRICE + '</td>';
+			            	datahtml += '<td style="align:center">' + item.SALE + '</td>';
+			            	datahtml += '<td style="align:center">' + item.TICP_PAYMENT + '</td>';
+			            	datahtml += '<td style="align:center">' + item.GS_ACCOUNT_DUE + '</td>';
+			            	datahtml += '<td style="align:center">' + item.GS_REF_AMOUNT + '</td>';
+			             	datahtml += '</tr>';    	
+		         });
+	            datahtml += '</tbody></table>';
+	            jb("#data-container").html(datahtml);
+	        }
+	    });
+</script>  
+
+		<div class="section">
+			<div class="row">
+				<div id="data-container"></div>
+				<div id="pagination1"></div>
+			</div>
+		</div>
