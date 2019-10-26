@@ -1,11 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ page import="java.util.*"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
+<%@ include file="/NewCSS/StatisticscssSales.jsp"%> 
 <link rel="stylesheet" type="text/css" href="../NewCSS/main.css">
 <link rel="stylesheet" type="text/css" href="../NewCSS/table.css">
 <link rel="stylesheet" type="text/css" href="../NewCSS/StatisticsProg.css">
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!-- 여기가 easyui 관련
 <link rel="stylesheet" type="text/css" href="../themes/default/easyui.css">
 <link rel="stylesheet" type="text/css" href="../themes/icon.css">
@@ -14,13 +16,12 @@
 <script type="text/javascript" src="../js/commons.js"></script>
 <script type="text/javascript" src="../js/jquery.cookie.js"></script>  -->
 
-
 <!--   여기가 pagination.js 관련
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/paginationjs/2.1.4/pagination.min.js"></script>    
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/paginationjs/2.1.4/pagination.css"/>  -->
 
-<%-- <%@ include file="/common/JEasyUICommon.jsp"%>  --%>  
+<%--  <%@ include file="/common/JEasyUICommon.jsp"%>  --%>
 
 <%
 	int size = 0;
@@ -29,19 +30,25 @@
 	if (privateProg != null && privateProg.size() > 0) {
 		size = privateProg.size();
 	}
-   String startDate = "";
-   String endDate ="";
-   if(startDate == ""){
-	   startDate = "20190801";
-   }
-   if(endDate == ""){
-	   endDate = "20191101";
-   }
-   
-   if(request.getAttribute("startDate") != null && request.getAttribute("endDate") != null){   
-	   startDate = (String)request.getAttribute("startDate");
-	   endDate = (String)request.getAttribute("endDate");
-   }
+
+	String startDate = "";
+	String endDate ="";
+	if(startDate == ""){
+		   startDate = "20190801";
+	}
+	if(endDate == ""){
+		   endDate = "20191101";
+	}
+	
+	/*  if(request.getAttribute("startDate") != null && request.getAttribute("endDate") != null){   
+		   startDate = (String)request.getAttribute("startDate");
+		   endDate = (String)request.getAttribute("endDate");
+	} */
+	int paysize = privateProg.get("개인강의매출").size();
+	
+	String hap = startDate+endDate;
+	
+	String pagenumber = (String)privateProg.get("페이지").get(0).get("page");  
 %>
 
 <!-- jstl을 사용하기 위해서 c:set으로 chart에 값을 담음. -->
@@ -50,7 +57,6 @@
 <c:set var="privatep" value="<%=privateProg%>" />
 <c:set var="startDate" value="<%=startDate %>" />
 <c:set var="endDate" value="<%=endDate %>" />
-<div id="mainboard2">
 <style type="text/css">
 body {
 	padding: 0%;
@@ -58,12 +64,66 @@ body {
 </style>
 
 <script type="text/javascript">
+var startD;
+var endD;
+var dateHap;
+
+//(페이지네이션) 한화면에서 보여줄 컬럼숫자를 담는 변수
+var pageNumm = <%=pagenumber%>;
+if( pageNumm == null){
+	pageNumm = 10;
+}
+
+//페이지 변경때 select box change
+function pagichange(){
+	var pval = $("#pagetotal option:selected").val();
+	if(pval == 10){
+		pageNumm = 10;
+		$.ajax({
+			method : 'get',
+			url : '/account/privateProg.fm?startDate=20190701&endDate=20191001&pageNumm=10',
+			success : function(data) {
+				$("#mainboard2").html(data);
+			}
+		}); 
+	}else if (pval == 25){
+		pageNumm = 25;
+		$.ajax({
+			method : 'get',
+			url : '/account/privateProg.fm?startDate=20190701&endDate=20191001&pageNumm=25',
+			success : function(data) {
+				$("#mainboard2").html(data);
+			}
+		}); 
+	}else if (pval == 50){
+		pageNumm = 50;
+		$.ajax({
+			method : 'get',
+			url : '/account/privateProg.fm?startDate=20190701&endDate=20191001&pageNumm=50',
+			success : function(data) {
+				$("#mainboard2").html(data);
+			}
+		}); 
+	}else if (pval == 100){
+		pageNumm = 100;
+		$.ajax({
+			method : 'get',
+			url : '/account/privateProg.fm?startDate=20190701&endDate=20191001&pageNumm=100',
+			success : function(data) {
+				$("#mainboard2").html(data);
+			}
+		}); 
+	}
+}
+
+
 function myformatter(date){
     var y = date.getFullYear();
     var m = date.getMonth()+1;
     var d = date.getDate();
     return y+'-'+(m<10?('0'+m):m)+'-'+(d<10?('0'+d):d);
 }
+
 function myparser(s){
     if (!s) return new Date();
     var ss = (s.split('-'));
@@ -77,101 +137,89 @@ function myparser(s){
     }
 }
 
-	$(document).ready(function(){
-		alert("시작");
-       $('#datebox11').datebox({
-          onSelect: function(date){
-        	 alert(date.getFullYear()+":"+(date.getMonth()+1)+":"+date.getDate());
-             firstDate = date;
-             $('#datebox22').datebox().datebox('calendar').calendar({
-                   validator: function(date){
-                        var d1 = new Date(firstDate.getFullYear(), firstDate.getMonth(), firstDate.getDate());
-                       return d1<=date;
-                   }
-               });
-          }
-       });
+// 달력 검색버튼 이벤트
+function dateClick(){
 
-		$(".sales").hide();
-		$(".member").hide();
-		$(".analysis").hide();
-		$(".service").hide();
+	startD = $('#datebox11').datebox('getValue');
+	endD = $('#datebox22').datebox('getValue');
+	alert(startD+", "+endD);
+	
+ 	 $.ajax({
+			method : 'get',
+			url : '/account/privateProg.fm?startDate='+startD+'&endDate='+endD+'&pageNumm='+pageNumm,
+			success : function(data) {
+				$("#mainboard2").html(data);
+			}
+		});  
+}
+//달력 당월버튼 이벤트
+function dateMClick(){
+ 	 $.ajax({
+			method : 'get',
+			url : '/account/privateProg.fm?startDate=20191101&endDate=20191130&pageNumm='+pageNumm,
+			success : function(data) {
+				$("#mainboard2").html(data);
+			}
+		});  
+}
+//달력 당분기버튼 이벤트
+function dateBClick(){
+ 	 $.ajax({
+			method : 'get',
+			url : '/account/privateProg.fm?startDate=20191001&endDate=20191231&pageNumm='+pageNumm,
+			success : function(data) {
+				$("#mainboard2").html(data);
+			}
+		});  
+}
+//달력 당 해(YEAR) 버튼 이벤트
+function dateYClick(){
+
+ 	 $.ajax({
+			method : 'get',
+			url : '/account/privateProg.fm?startDate=20190101&endDate=20191231&pageNumm='+pageNumm,
+			success : function(data) {
+				$("#mainboard2").html(data);
+			}
+		});  
+ 	 
+}
+	$(document).ready(function(){
+		startD = ${startDate};
+		endD = ${endDate};
+		
+		$('#pagetotal').val(<%=pagenumber%>);
+	   $(".sales").hide();
+	   $(".member").hide();
+	   $(".analysis").hide();
+	   $(".service").hide();
 
 	   $('.dataTables_length').addClass('bs-select');
 	    
-/* 	   //선택가능날짜 범위 설정
- 	   $('#datebox1').datebox().datebox('calendar').calendar({
+ 	   //선택가능날짜 범위 설정
+ 	   $('#datebox11').datebox().datebox('calendar').calendar({
 	       validator: function(date){
 	           var now = new Date();
 	           var d1 = new Date(now.getFullYear()-1, now.getMonth(), now.getDate());
 	           var d2 = new Date(now.getFullYear(), now.getMonth(), now.getDate());
 	           return d1<=date && date<=d2;
 	       }
-	   });  */
-	   
-/*  	  $('#datebox22').datebox({
+	   });  
+ 	   
+       /* $('#datebox11').datebox('setValue', startD);
+	  $('#datebox22').datebox('setValue', endD);   */
+	  
+	  
+ 	  $('#datebox11').datebox({
+			onSelect: function(date){
+/* 				alert(date.getFullYear()+":"+(date.getMonth()+1)+":"+date.getDate()); */
+			}
+	  });
+  	  $('#datebox22').datebox({
  			onSelect: function(date){
- 				alert(date.getFullYear()+":"+(date.getMonth()+1)+":"+date.getDate());
+ 				//alert(date.getFullYear()+":"+(date.getMonth()+1)+":"+date.getDate());
  			}
  	  });
-	    */
-	    //datebox1 날짜 선택에 따라 datebox2의 선택가능날짜 설정
-	    
-/*  	  //datebox1 날짜 선택에 따라 datebox2의 선택가능날짜 설정
-	   $('#datebox1').datebox({
-	      onSelect: function(date){
-	    	  startDate = date;
-	    	  alert("startDate");
-	         $('#datebox2').datebox().datebox('calendar').calendar({
-	               validator: function(date){
-	                   var d1 = new Date(firstDate.getFullYear(), firstDate.getMonth(), firstDate.getDate());
-	                   return d1<=date;
-	               }
-	           });
-	      }
-	   }); */
-   
-/* 	   $('#datebox2').datebox({
-		      onSelect: function(date){
-		    	  endDate = date;
-		    	  alert("endDate");
-		      }
-	   });  */
-	   
-	   /* //datebox1 날짜 선택에 따라 datebox2의 선택가능날짜 설정
- 	   $('#datebox1').datebox({
-	      onSelect: function(date){
-	         firstDate = date;
-	         $('#datebox2').datebox().datebox('calendar').calendar({
-	               validator: function(date){
-	                   var now = new Date();
-	                   var d1 = new Date(firstDate.getFullYear(), firstDate.getMonth(), firstDate.getDate());
-	                   var d2 = new Date(now.getFullYear(), now.getMonth(), now.getDate());
-	                   return d1<=date && date<=d2;
-	               }
-	           });
-	      }
-	   });  */ 
-/*  	   $(document).ready(function(){
-          //datebox1 날짜 선택에 따라 datebox2의 선택가능날짜 설정
-		   $('#datebox1').datebox({
-		      onSelect: function(date){
-		         firstDate = date;
-		         $('#datebox2').datebox().datebox('calendar').calendar({
-		               validator: function(date){
-		                    var d1 = new Date(firstDate.getFullYear(), firstDate.getMonth(), firstDate.getDate());
-		                   return d1<=date;
-		               }
-		           });
-		      }
-		   });
-	
-		}); */
-		
- 	 
-     
-		/* $('#datebox11').datebox('setValue', ${startDate})
-		$('#datebox22').datebox('setValue', ${endDate}) */
 	});
 	
 	var test1 = new Array();
@@ -235,8 +283,8 @@ function myparser(s){
 			<ul>
 				<li><a class="n_04" href="javascript:ajax('../account/StatisticsSales2.jsp')">매출통계</a></li>
 				<li><a class="n_05" href="javascript:ajax('../account/StatisticsMember2.jsp')">회원통계</a></li>	
-				<li><a class="n_01 active" href="javascript:ajax('/account/privateProg.fm?startDate=20190701&endDate=20191001')">개인레슨 통계</a></li>
-				<li><a class="n_03"	href="javascript:ajax('/account/publicProg.fm?startDate=20190701&endDate=20191001')">그룹수업 통계</a></li>
+				<li><a class="n_01 active" href="javascript:ajax('../account/StatisticsPrivateProg2.jsp')">개인레슨 통계</a></li>
+				<li><a class="n_03"	href="javascript:ajax('../account/StatisticsPublicProg2.jsp')">그룹수업 통계</a></li>
 			</ul>
 		</div>
 	</div>
@@ -246,15 +294,15 @@ function myparser(s){
 
 <div class="tab-area">
 	<div id="period_btns">
-		<button class="btn blue small">당 해</button>
-		<button class="btn blue small">당 분기</button>
-		<button class="btn blue small">당 월</button>
+		<button class="btn blue small" onclick="dateYClick()">당 해</button>
+		<button class="btn blue small" onclick="dateBClick()">당 분기</button>
+		<button class="btn blue small" onclick="dateMClick()">당 월</button>
 
 		<span style="margin-left: 1%"> 
-		
-		<input class="easyui-datebox historydatebox" data-options="formatter:myformatter,parser:myparser" id="datebox11" type="text"/> <span>~</span>
-			<input class="easyui-datebox historydatebox" data-options="formatter:myformatter,parser:myparser" id="datebox22" type="text"/>
-			<button class="btn blue small">조회</button>
+			<input class="easyui-datebox" data-options="formatter:myformatter,parser:myparser" id="datebox11" type="text"/> 
+			<span>~</span>
+			<input class="easyui-datebox" data-options="formatter:myformatter,parser:myparser" id="datebox22" type="text"/>
+			<button class="btn blue small" onclick="dateClick()">조회</button>
 		</span>
 	</div>
 </div>
@@ -342,14 +390,14 @@ function myparser(s){
 		</select>
 		</span>
 <!-- ================================= [[ combobox end ]] =================================================== -->
-	
+		
 			<span class="middle"> 
 			<label id="reservationlabel">검색:</label>
 				<input type="search" class="reservation_searchbox">
 			</span>
 			<span class="middle" style="width: 180px; float: right">
 				<label id="reservationlabel">페이지 당</label>
-					<select name="pagetotal" id="pagetotal">
+					<select name="pagetotal" id="pagetotal" onchange="pagichange()">
 						<option>10</option>
 						<option>25</option>
 						<option>50</option>
@@ -368,9 +416,8 @@ function myparser(s){
 		</div>
 	</div>
 
-	 	<script>
-		//(페이지네이션) 한화면에서 보여줄 컬럼숫자를 담는 변수
-		var pageNumm = 10;
+	 <script>
+	 
 	    
 		jb('#pagination1').pagination({
 	        dataSource: testdata,
@@ -379,15 +426,15 @@ function myparser(s){
 	        callback: function(data, pagination) {
 	            // template method of yourself
 	           
-	            var datahtml = '<table id="table" class="table table-bordered  table-striped">';
+	            var datahtml = '<table id="table" class="table table-bordered table-striped">';
 	            	datahtml += '<thead><tr><th class="tableheader">주문번호</th><th class="tableheader">결제일시</th><th class="tableheader">구매회원</th><th class="tableheader">휴대폰 번호</th><th class="tableheader">결제내역</th><th class="tableheader">상태</th><th class="tableheader">결제금액</th><th class="tableheader">미수금</th><th class="tableheader">환불금액</th><th class="tableheader">결제방법</th><th class="tableheader">결제담당</th></tr></thead>';
 		         for (var i = 0, len = data.length; i < len; i++) {	        	
 		        	 datahtml += '<tbody><tr>';
 	 	            for (var j = 0;j < 11; j++) {
 		            	datahtml += '<td>' +  data[i][j] + '</td>';
 		            }
-		             datahtml += '</tbody></tr>';    	
-		         } 
+		             datahtml += '</tr></tbody>';    	
+		         }
 	            datahtml += '</table>';
 	            jb("#data-container").html(datahtml);
 	        }
@@ -396,7 +443,7 @@ function myparser(s){
 
 	<!-- ================================= [[ TABLE BOTTOM ]] =================================================== -->
 	<div class="row pagination">
-		<div class="pagination_top">전체 11개 항목 중 1 부터 10 까지 표시</div>
+		<div class="pagination_top">전체 <%=paysize %>개 항목 중 1 부터 <%=pagenumber %> 까지 표시</div>
 	</div>
 </div>
 </div>

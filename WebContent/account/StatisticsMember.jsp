@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"  pageEncoding="UTF-8"%>
 <%@ page import="java.util.*" %>
-<%@ include file="/NewCSS/StatisticscssSales.jsp"%> 
 
+<%@ include file="/NewCSS/StatisticscssSales.jsp"%> 
 <link rel="stylesheet" type="text/css" href="../NewCSS/main.css">
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -10,11 +10,11 @@
    int size = 0;
 Map<String, List<Map<String, String>>> memsales = 
          (Map<String, List<Map<String, String>>>)request.getAttribute("memsales");
-   String year;
-   String month;
+   String year2;
+   String month2;
       
-   year = (String)memsales.get("날짜").get(0).get("year");
-   month = (String)memsales.get("날짜").get(0).get("month");  
+   year2 = (String)memsales.get("날짜").get(0).get("year");
+   month2 = (String)memsales.get("날짜").get(0).get("month");  
 %>
 <!-- jstl을 사용하기 위해서 c:set으로 chart에 값을 담음. -->
 <c:set var="memp" value="<%=memsales %>" />
@@ -29,8 +29,8 @@ var kyear;
 var kmonth;
 //다음버튼눌렀을 때
 function nextmonth2(){
-	kyear =<%=year%>;
-	kmonth = <%=month%>;
+	kyear =<%=year2%>;
+	kmonth = <%=month2%>;
 	var kkmonth = parseInt(kmonth);
 	if(kkmonth<11){
 		kkmonth += 1;
@@ -53,13 +53,13 @@ function nextmonth2(){
 
 //이전버튼눌렀을때
 function premonth2(){
-	kyear = <%=year%>;
-	kmonth = <%=month%>;
+	kyear = <%=year2%>;
+	kmonth = <%=month2%>;
 	var kkmonth = parseInt(kmonth);
-	if(kkmonth>2){
+	if(kkmonth>1){
 		kkmonth -= 1;
 	}else{
-		kyear = parseInt(kyear);
+		kkyear = parseInt(kyear);
 		kkyear -= 1;
 		kkmonth = 12;
 	}
@@ -99,9 +99,9 @@ function premonth2(){
 			<div class="homenav fr">
 				<ul>
 					<li><a class="n_04" href="javascript:ajax('../account/StatisticsSales2.jsp')">매출통계</a></li>
-					<li><a class="n_05 active" href="javascript:ajax('/account/memsales.fm?date=201910')">회원통계</a></li>
-					<li><a class="n_01" href="javascript:ajax('/account/privateProg.fm?startDate=20190701&endDate=20191001')">개인레슨 통계</a></li>
-					<li><a class="n_03" href="javascript:ajax('/account/publicProg.fm')">그룹수업 통계</a></li>
+					<li><a class="n_05 active" href="javascript:ajax('../account/StatisticsMember2.jsp')">회원통계</a></li>
+					<li><a class="n_01" href="javascript:ajax('../account/StatisticsPrivateProg2.jsp')">개인레슨 통계</a></li>
+					<li><a class="n_03" href="javascript:ajax('../account/StatisticsPublicProg2.jsp')">그룹수업 통계</a></li>
 				</ul>
 			</div>
 		</div>
@@ -116,9 +116,9 @@ function premonth2(){
 			<div class="section">
 				<form>
 					 <div class="date_set">
-						<span id="kyear"> <%=year%> </span>
+						<span id="kyear"> <%=year2 %> </span>
 						<span> / </span>
-						<span id="kmonth"> <%=month %> </span>
+						<span id="kmonth"> <%=month2 %> </span>
 						<a class="prev" href="javascript:premonth2()" >
 						이전 (월)
 						</a>
@@ -137,17 +137,17 @@ function premonth2(){
  			<!-- 회원 일반 현황  시작  -->
  				<div class="itm" style="width:100%; height:400px">
  				
-		          <h3>회원 일반 현황</h3>
+		          <h3>방문 회원</h3>
 		          
 		          <!-- 그래프 넣을 자리  -->
 		          
 		          <!-- 여기안에게 넣어주세요 수근 씨  -->
 		          <!-- <canvas id="stackChart2" style="width: 50%; height: 70%; max-width: 700px"></canvas> -->
 		          
-		          <a style="width: 400px; height: 300px; float: left; margin-left:2%; margin-right:2%"><canvas id="doughnutChart" ></canvas></a> 
-		          <a style="width: 400px; height: 300px; float: left"><canvas id="doughnutChart2"></canvas></a>
+		          <a style="width: 500px; height: 400px; float: left;"><canvas id="doughnutChart" ></canvas></a> 
+		          <a style="width: 500px; height: 400px; float: left; margin-left:2%;"><canvas id="doughnutChart2"></canvas></a>
 		          <!-- 추가 또는 수정 -->
-		          <%--  <a style="width: 400px; height: 300px; float: left"><canvas id="doughnutChart3"></canvas></a>  --%>
+		          <a style="width: 500px; height: 400px; float: left; margin-left:2%;"><canvas id="doughnutChart3"></canvas></a>
 		           
 		          <!-- 그래프 넣을 자리  -->
 		        </div>
@@ -190,6 +190,7 @@ function premonth2(){
 	<script>
 	var mdatas = new Array();
 	var mtime = new Array();
+	var mplace = new Array();
 	var mpay = new Array();
 	
 	<c:forEach items="${memp}" var="map">
@@ -205,8 +206,17 @@ function premonth2(){
 		<c:if test = "${map.key == '방문결제'}">
 			<c:forEach items="${map.value}" var="list">
 				<c:forEach items="${list}" var="map2">
-					<c:if test = "${map2.key == 'MCOUNT'}">
-						mtime.push("${map2.value}");
+					<c:if test = "${map2.key == 'NEWPAY'}">
+						mpay.push("${map2.value}");
+			    	</c:if> 
+				</c:forEach>
+			</c:forEach>
+		</c:if>  
+		<c:if test = "${map.key == '방문장소'}">
+			<c:forEach items="${map.value}" var="list">
+				<c:forEach items="${list}" var="map2">
+					<c:if test = "${map2.key == '명'}">
+						mplace.push("${map2.value}");
 			    	</c:if> 
 				</c:forEach>
 			</c:forEach>
@@ -214,12 +224,13 @@ function premonth2(){
 		<c:if test = "${map.key == '방문시간'}">
 			<c:forEach items="${map.value}" var="list">
 				<c:forEach items="${list}" var="map2">
-					<c:if test = "${map2.key == 'newpay'}">
-						mpay.push("${map2.value}");
+					<c:if test = "${map2.key == 'MCOUNT'}">
+						mtime.push("${map2.value}");
 			    	</c:if> 
 				</c:forEach>
 			</c:forEach>
 		</c:if>  
+		
 
 	</c:forEach> 
 
@@ -233,18 +244,20 @@ function premonth2(){
 					data : mdatas,
 					backgroundColor : [ 'rgba(255, 99, 132, 0.6)',
 							'rgba(255, 206, 86, 0.6)',
-							'rgba(54, 162, 235, 0.6)' ],
-					borderColor : [ 'rgba(255, 99, 132, 1)',
-							'rgba(255, 206, 86, 1)', 'rgba(54, 162, 235, 1)' ]
+							'rgba(54, 162, 235, 0.6)' ]
 				} ],
 
 				// These labels appear in the legend and in the tooltips when hovering different arcs
 				labels : [ '남자','여자' ],
-
 				weight : 1,
 				borderWidth : 10
 			},
 			options : {
+				title : {
+					display : true,
+					fontSize : 20,
+					text : "성별 비율                 "
+				},
 				layout : {
 					padding : {
 						left : 50,
@@ -296,10 +309,9 @@ function premonth2(){
 					label : '시간대 별',
 					data : mtime,
 					backgroundColor : [ 'rgba(255, 99, 132, 0.5)',
-							'rgba(155, 156, 100, 0.5)',
-							'rgba(54, 162, 235, 0.5)' ],
-					borderColor : [ 'rgba(255, 99, 132, 1)',
-							'rgba(155, 156, 100, 1)', 'rgba(54, 162, 235, 1)' ]
+										'rgba(155, 156, 100, 0.5)',
+										'rgba(54, 162, 235, 0.5)',
+										'rgba(105, 106, 50, 0.5)']
 				} ],
 
 				// These labels appear in the legend and in the tooltips when hovering different arcs
@@ -309,6 +321,11 @@ function premonth2(){
 				borderWidth : 10
 			},
 			options : {
+				title : {
+					display : true,
+					fontSize : 20,
+					text : "입장 시간 비율                 "
+				},
 				layout : {
 					padding : {
 						left : 50,
@@ -352,27 +369,31 @@ function premonth2(){
 			}
 		});
 		
-		/* var doughnutChart3 = document.getElementById('doughnutChart3');
+		var doughnutChart3 = document.getElementById('doughnutChart3');
 
 		var myDoughnutChart3 = new Chart(doughnutChart3, {
 			type : 'doughnut',
 			data : data = {
 				datasets : [ {
-					data : [ 30, 50, 100 ],
+					label : '장소 별',
+					data : mplace,
 					backgroundColor : [ 'rgba(255, 99, 132, 0.5)',
 							'rgba(155, 156, 100, 0.5)',
-							'rgba(54, 162, 235, 0.5)' ],
-					borderColor : [ 'rgba(255, 99, 132, 1)',
-							'rgba(155, 156, 100, 1)', 'rgba(54, 162, 235, 1)' ]
+							'rgba(54, 162, 235, 0.5)' ]
 				} ],
 
 				// These labels appear in the legend and in the tooltips when hovering different arcs
-				labels : [ 'Red', 'Yellow', 'Blue' ],
+				labels : [ 'GX룸', '요가실', '필라테스룸','스피닝실' ],
 
 				weight : 1,
 				borderWidth : 10
 			},
 			options : {
+				title : {
+					display : true,
+					fontSize : 20,
+					text : "장소별 비율                       "
+				},
 				layout : {
 					padding : {
 						left : 50,
@@ -384,10 +405,37 @@ function premonth2(){
 				legend: {
 			    	display: true,
 	                position: 'right' //차트 레이블 위치 조정 
-			 }
+			 },
+			 "animation": {
+
+		            "duration": 0,
+
+		            "onComplete": function (chart) {
+
+		                var chartInstance = this.chart,
+
+		                ctx = chartInstance.ctx;
+		                ctx.fillStyle = 'rgb(0, 0, 0)';
+		                var fontSize = 16;
+		                ctx.font = Chart.helpers.fontString(fontSize, Chart.defaults.global.defaultFontStyle, Chart.defaults.global.defaultFontFamily);
+		                
+			            this.data.datasets.forEach(function (dataset, i) {
+					        var meta = chartInstance.controller.getDatasetMeta(i);
+							if (!meta.hidden) {
+								 meta.data.forEach(function (bar, index) {
+
+				                        var data = dataset.data[index].toString();                            
+										var position = bar.tooltipPosition();
+				                        
+				                        ctx.fillText(data, position.x, position.y - 5);
+				                    });
+							}
+			            });
+		            }
+		        }
 			}
 		});
-		 */
+		 
 		
 			
 			var barchart = document.getElementById('barchart');

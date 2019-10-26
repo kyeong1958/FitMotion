@@ -27,17 +27,17 @@ public class AccountLogic {
 		return memsales;
 	}
 	//개인레슨 통계
-	public Map<String, List<Map<String, String>>> privateProg(String startDate, String endDate) {
+	public Map<String, List<Map<String, String>>> privateProg(String startDate, String endDate, String pageNumm) {
 		logger.info("AccountLogic-privateProg 호출성공");
 		Map<String, List<Map<String, String>>> privateProg = null;
-		privateProg = accountDao.privateProg(startDate, endDate);
+		privateProg = accountDao.privateProg(startDate, endDate, pageNumm);
 		return privateProg;
 	}
 	//그룹 레슨 통계
-	public Map<String, List<Map<String, String>>> publicProg(String startDate, String endDate) {
+	public Map<String, List<Map<String, String>>> publicProg(String startDate, String endDate, String pageNumm) {
 		logger.info("AccountLogic-publicProg 호출성공");
 		Map<String, List<Map<String, String>>> publicProg = null;
-		publicProg = accountDao.publicProg(startDate, endDate);
+		publicProg = accountDao.publicProg(startDate, endDate, pageNumm);
 		return publicProg;
 	}
 	////////////////수근끝/////////////////

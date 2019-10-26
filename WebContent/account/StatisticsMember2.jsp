@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"  pageEncoding="UTF-8"%>
 <%@ page import="java.util.*" %>
-<%@ include file="/NewCSS/StatisticscssSales.jsp"%> 
 
 <link rel="stylesheet" type="text/css" href="../NewCSS/main.css">
 
@@ -68,8 +67,8 @@ function nextmonth2(){
 
 //이전버튼눌렀을때
 function premonth2(){
-	kyear = ${year};
-	kmonth = ${month};
+	kyear = <%=year%>;
+	kmonth = <%=month%>;
 	var kkmonth = parseInt(kmonth);
 	var kkyear = parseInt(kyear);
 	if(kkmonth>2){
@@ -117,8 +116,8 @@ function premonth2(){
 				<ul>
 					<li><a class="n_04" href="javascript:ajax('../account/StatisticsSales2.jsp')">매출통계</a></li>
 					<li><a class="n_05 active" href="javascript:ajax('../account/StatisticsMember2.jsp')">회원통계</a></li>
-					<li><a class="n_01" href="javascript:ajax('/account/privateProg.fm?startDate=20190701&endDate=20191001')">개인레슨 통계</a></li>
-					<li><a class="n_03" href="javascript:ajax('/account/publicProg.fm')">그룹수업 통계</a></li>
+					<li><a class="n_01" href="javascript:ajax('../account/StatisticsPrivateProg2.jsp')">개인레슨 통계</a></li>
+					<li><a class="n_03" href="javascript:ajax('../account/StatisticsPublicProg2.jsp')">그룹수업 통계</a></li>
 				</ul>
 			</div>
 		</div>

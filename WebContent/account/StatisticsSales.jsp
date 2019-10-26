@@ -1,7 +1,8 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"   pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" 
+	pageEncoding="UTF-8"%>
 <%@ page import="java.util.*" %>
-<%-- <%@ include file="/NewCSS/StatisticscssSales.jsp"%> --%> 
 
+<%@ include file="/NewCSS/StatisticscssSales.jsp"%> 
 <link rel="stylesheet" type="text/css" href="../NewCSS/main.css">
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -70,7 +71,7 @@ function premonth(){
 	kyear = <%=year%>;
 	kmonth = <%=month%>;
 	var kkmonth = parseInt(kmonth);
-	if(kkmonth>2){
+	if(kkmonth>1){
 		kkmonth -= 1;
 	}else{
 		kyear = parseInt(kyear);
@@ -128,7 +129,7 @@ function ajax(url) {
 					<li><a class="n_04 active" href="javascript:ajax('../account/StatisticsSales2.jsp')">매출통계</a></li>
 					<li><a class="n_05" href="javascript:ajax('../account/StatisticsMember2.jsp')">회원통계</a></li>					
 					<li><a class="n_01" href="javascript:ajax('../account/StatisticsPrivateProg2.jsp')">개인레슨 통계</a></li>
-					<li><a class="n_03" href="javascript:ajax('/account/publicProg.fm?startDate=20190701&endDate=20191001')">그룹수업 통계</a></li>
+					<li><a class="n_03" href="javascript:ajax('../account/StatisticsPublicProg2.jsp')">그룹수업 통계</a></li>
 				</ul>
 			</div>
 		</div>
@@ -412,7 +413,7 @@ function ajax(url) {
 					                    meta.data.forEach(function (bar, index) {	
 					                        var data = dataset.data[index];                            
 											var position = bar.tooltipPosition();					                        
-					                        ctx.fillText(data, position.x, position.y + 30);
+					                        ctx.fillText(data, position.x - 3, position.y + 20);
 					                    });
 									}
 					            });
@@ -467,7 +468,7 @@ function ajax(url) {
 					                    meta.data.forEach(function (bar, index) {	
 					                        var data = dataset.data[index];                            
 											var position = bar.tooltipPosition();					                        
-					                        ctx.fillText(data, position.x, position.y + 30);
+					                        ctx.fillText(data, position.x - 5, position.y + 20);
 					                    });
 									}
 					            });
@@ -542,7 +543,7 @@ function ajax(url) {
 					                        var data = dataset.data[index];                            
 											var position = bar.tooltipPosition();
 					                        
-					                        ctx.fillText(data, position.x - 28, position.y + 15);
+					                        ctx.fillText(data, position.x - 28, position.y + 10);
 					                    });
 									}
 					            });
@@ -616,7 +617,7 @@ function ajax(url) {
 					                        var data = dataset.data[index].toString();                            
 											var position = bar.tooltipPosition();
 					                        
-					                        ctx.fillText(data, position.x - 5, position.y + 15);
+					                        ctx.fillText(data, position.x - 5, position.y + 10);
 					                    });
 									}
 					            });

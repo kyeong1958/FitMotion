@@ -103,23 +103,19 @@ public class AccountController implements Controller {
 		else if ("privateProg".equals(crud)) {
 			logger.info("OwnerController-privateProg 호출성공");
 			Map<String, List<Map<String, String>>> privateProg = null;
-			
-			/*
-			 * if(date.length() == 6) { year = date.substring(0,4); month =
-			 * date.substring(4); }else if(date.length() == 5) { year = date.substring(0,4);
-			 * month = "0"+date.substring(4); } date = year + month;
-			 * logger.info("year = "+year); logger.info("month = "+month);
-			 */
 			String startDate = "";
 			String endDate = "";
-			
+			String pageNumm = "";
 			if(req.getParameter("startDate") != null) { 
 				startDate = req.getParameter("startDate");
 			}
 			if(req.getParameter("endDate") != null) { 
 				endDate = req.getParameter("endDate");
 			}
-			privateProg = accountLogic.privateProg(startDate, endDate);
+			if(req.getParameter("pageNumm") != null) { 
+				pageNumm = req.getParameter("pageNumm");
+			}
+			privateProg = accountLogic.privateProg(startDate, endDate, pageNumm);
 
 			mav.pageMove("forward");
 			mav.setViewName("/account/StatisticsPrivateProg.jsp");
@@ -132,6 +128,7 @@ public class AccountController implements Controller {
 			
 			String startDate = "";
 			String endDate = "";
+			String pageNumm = "";
 			
 			if(req.getParameter("startDate") != null) { 
 				startDate = req.getParameter("startDate");
@@ -139,7 +136,10 @@ public class AccountController implements Controller {
 			if(req.getParameter("endDate") != null) { 
 				endDate = req.getParameter("endDate");
 			}
-			publicProg = accountLogic.publicProg(startDate, endDate);
+			if(req.getParameter("pageNumm") != null) { 
+				pageNumm = req.getParameter("pageNumm");
+			}
+			publicProg = accountLogic.publicProg(startDate, endDate, pageNumm);
 
 			mav.pageMove("forward");
 			mav.setViewName("/account/StatisticsPublicProg.jsp");

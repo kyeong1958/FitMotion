@@ -3,6 +3,7 @@
 
  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/paginationjs/2.1.4/pagination.css"/>
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/paginationjs/2.1.4/pagination.min.js"></script>
 <script>
 	var jb = jQuery.noConflict();
@@ -23,6 +24,7 @@ body{
 }
 </style>
 </head>
+
 <script type="text/javascript">
 /* 페이지이동  */
 	function pagemove(url){

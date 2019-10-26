@@ -33,9 +33,9 @@ public class AccountDao {
 		Map<String,String> dateMap = new HashMap<String, String>();
 		String year = date.substring(0,4); 
 		String month = date.substring(4);
-		 dateMap.put("year", year);
-		 dateMap.put("month", month);
-		 dateList.add(dateMap);
+		dateMap.put("year", year);
+		dateMap.put("month", month);
+		dateList.add(dateMap);
 		 
 		Map<String,List<Map<String, String>>> allsales = new HashMap<>();
 		 try {
@@ -72,6 +72,7 @@ public class AccountDao {
 		 List<Map<String, String>> mems = new ArrayList<>();
 		 List<Map<String, String>> mems2 = new ArrayList<>();
 		 List<Map<String, String>> mems3 = new ArrayList<>();
+		 List<Map<String, String>> mems4 = new ArrayList<>();
 		 List<Map<String, String>> dateList = new ArrayList<>();
 		 Map<String,String> dateMap = new HashMap<String, String>();
 		 String year = date.substring(0,4); 
@@ -86,9 +87,11 @@ public class AccountDao {
 				mems = sqlSession.selectList("visitmem",date);
 				mems2 = sqlSession.selectList("visittime",date);
 				mems3 = sqlSession.selectList("visitpay",date);
+				mems4 = sqlSession.selectList("visitplace",date);
 				memsales.put("방문회원", mems);
 				memsales.put("방문시간", mems2);
 				memsales.put("방문결제", mems3);
+				memsales.put("방문장소", mems4);
 				memsales.put("날짜", dateList);
 				sqlSession.commit();
 				logger.info("AccountDao / memsales.size() "+memsales.size());
@@ -102,7 +105,7 @@ public class AccountDao {
 		return memsales;
 	}
 	//개인레슨 통계
-	public Map<String, List<Map<String, String>>> privateProg(String startDate, String endDate) {
+	public Map<String, List<Map<String, String>>> privateProg(String startDate, String endDate, String pageNumm) {
 		logger.info("AccountDao-privateProg 호출성공");
 		Map<String,List<Map<String, String>>> privateProg = new HashMap<>();
 		List<Map<String, String>> prog = new ArrayList<>();
@@ -113,6 +116,9 @@ public class AccountDao {
 
 		List<Map<String, String>> dateList = new ArrayList<>();
 		Map<String,String> dateMap = new HashMap<String, String>();
+		
+		List<Map<String, String>> pageList = new ArrayList<>();
+		Map<String,String> pageMap = new HashMap<String, String>();
 		String start = startDate;
 		String end = endDate;
 		String hap;
@@ -121,6 +127,10 @@ public class AccountDao {
 		hap = start + "," + end;
 		logger.info("hap : "+hap);
 		dateList.add(dateMap);
+		
+		String page = pageNumm;
+		pageMap.put("page", page);
+		pageList.add(pageMap);
 		try {
 			sqlSession = sqlSessionFactory.openSession();
 			prog = sqlSession.selectList("privateProg",hap);
@@ -134,6 +144,7 @@ public class AccountDao {
 			privateProg.put("개인강의남자", prog4);
 			privateProg.put("개인페이지네이션", prog5);
 			privateProg.put("날짜", dateList);
+			privateProg.put("페이지", pageList);
 
 			sqlSession.commit();
 			
@@ -148,23 +159,32 @@ public class AccountDao {
 		return privateProg;
 	}
 	//그룹 레슨 통계
-	public Map<String, List<Map<String, String>>> publicProg(String startDate, String endDate) {
+	public Map<String, List<Map<String, String>>> publicProg(String startDate, String endDate, String pageNumm) {
 		logger.info("AccountDao-publicProg 호출성공");
 		Map<String,List<Map<String, String>>> publicProg = new HashMap<>();
 		List<Map<String, String>> proga = new ArrayList<>();
 		List<Map<String, String>> proga2 = new ArrayList<>();
 		List<Map<String, String>> proga3 = new ArrayList<>();
 		List<Map<String, String>> proga4 = new ArrayList<>();
+		
 		List<Map<String, String>> dateList = new ArrayList<>();
 		Map<String,String> dateMap = new HashMap<String, String>();
+		
+		List<Map<String, String>> pageList = new ArrayList<>();
+		Map<String,String> pageMap = new HashMap<String, String>();
+		
 		String start = startDate;
 		String end = endDate;
 		String hap;
 		dateMap.put("start", start);
 		dateMap.put("end", end);
 		hap = start + "," + end;
-		 
 		dateList.add(dateMap);
+		
+		String page = pageNumm;
+		pageMap.put("page", page);
+		pageList.add(pageMap);
+		 
 		try {
 			sqlSession = sqlSessionFactory.openSession();
 			proga = sqlSession.selectList("publicProg",hap);
@@ -176,6 +196,7 @@ public class AccountDao {
 			publicProg.put("그룹강의합", proga2);
 			publicProg.put("그룹강의남자", proga3);
 			publicProg.put("그룹강의여자", proga4);
+			publicProg.put("페이지", pageList);
 
 			sqlSession.commit();
 			

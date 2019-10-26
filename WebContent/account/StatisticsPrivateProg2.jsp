@@ -1,9 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ page import="java.util.*"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
-
+<%-- <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%> --%>
 <!-- 여기가 easyui 관련
 <link rel="stylesheet" type="text/css" href="../themes/default/easyui.css">
 <link rel="stylesheet" type="text/css" href="../themes/icon.css">
@@ -12,14 +10,12 @@
 <script type="text/javascript" src="../js/commons.js"></script>
 <script type="text/javascript" src="../js/jquery.cookie.js"></script>  -->
 
-
 <!--   여기가 pagination.js 관련
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/paginationjs/2.1.4/pagination.min.js"></script>    
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/paginationjs/2.1.4/pagination.css"/>  -->
 
 <%-- <%@ include file="/common/JEasyUICommon.jsp"%>    --%>
-
 
 <div id="mainboard2">
 
@@ -32,26 +28,22 @@
 	if (privateProg != null && privateProg.size() > 0) {
 		size = privateProg.size();
 	}
+	String startDate = "";
+	   String endDate ="";
+	   if(startDate == ""){
+		   startDate = "20190801";
+	   }
+	   if(endDate == ""){
+		   endDate = "20191101";
+	   }
+	   
+	   if(request.getAttribute("startDate") != null && request.getAttribute("endDate") != null){   
+		   startDate = (String)request.getAttribute("startDate");
+		   endDate = (String)request.getAttribute("endDate");
+	   }
 %>
-<!-- 
-<div id="mainboard2">
 
-<form id="form"> -->
-<%
-   String startDate = "";
-   String endDate ="";
-   if(startDate == ""){
-	   startDate = "20190801";
-   }
-   if(endDate == ""){
-	   endDate = "20191101";
-   }
-   
-   if(request.getAttribute("startDate") != null && request.getAttribute("endDate") != null){   
-	   startDate = (String)request.getAttribute("startDate");
-	   endDate = (String)request.getAttribute("endDate");
-   }
-%>
+
 <!-- jstl을 사용하기 위해서 c:set으로 chart에 값을 담음. -->
 
 <c:set var="private_size" value="<%=size%>" />
@@ -68,7 +60,7 @@ body {
 	$(document).ready(function(){
 		 $.ajax({
 			method : 'get',
-			url : '/account/privateProg.fm?startDate=20190701&endDate=20191001',
+			url : '/account/privateProg.fm?startDate=20190101&endDate=20191101&pageNumm=10',
 			success : function(data) {
 				$("#mainboard2").html(data);
 			}
@@ -79,54 +71,11 @@ body {
 		$(".service").hide();
 
 	   $('.dataTables_length').addClass('bs-select');
-	    
-	   //선택가능날짜 범위 설정
- 	   $('#datebox1').datebox().datebox('calendar').calendar({
-	       validator: function(date){
-	           var now = new Date();
-	           var d1 = new Date(now.getFullYear()-1, now.getMonth(), now.getDate());
-	           var d2 = new Date(now.getFullYear(), now.getMonth(), now.getDate());
-	           return d1<=date && date<=d2;
-	       }
-	   }); 
-          //datebox1 날짜 선택에 따라 datebox2의 선택가능날짜 설정
-	   $('#datebox1').datebox({
-	      onSelect: function(date){
-	    	  startDate = date;
-	    	  alert("startDate" + startDate);
-	         $('#datebox2').datebox().datebox('calendar').calendar({
-	               validator: function(date){
-	                   var d1 = new Date(firstDate.getFullYear(), firstDate.getMonth(), firstDate.getDate());
-	                   return d1<=date;
-	               }
-	           });
-	      }
-	   });
-   
-	   $('#datebox2').datebox({
-		      onSelect: function(date){
-		    	  endDate = date;
-		    	  alert("endDate" + endDate);
-		      }
-	   });
-	   /* //datebox1 날짜 선택에 따라 datebox2의 선택가능날짜 설정
- 	   $('#datebox1').datebox({
-	      onSelect: function(date){
-	         firstDate = date;
-	         $('#datebox2').datebox().datebox('calendar').calendar({
-	               validator: function(date){
-	                   var now = new Date();
-	                   var d1 = new Date(firstDate.getFullYear(), firstDate.getMonth(), firstDate.getDate());
-	                   var d2 = new Date(now.getFullYear(), now.getMonth(), now.getDate());
-	                   return d1<=date && date<=d2;
-	               }
-	           });
-	      }
-	   });   */
+	 
 	
 	});
 	
-	var test1 = new Array();
+/* 	var test1 = new Array();
 	var testdata = new Array(new Array());
 	<c:forEach items="${privatep}" var="map">
 		<c:if test = "${map.key == '개인강의매출'}">
@@ -170,14 +119,15 @@ body {
 		   	</c:when>
 		   </c:choose>
 		</c:if>
-	</c:forEach>    
+	</c:forEach>   */  
 </script>
 
 
 	<div class="bar_area" id="SS-bar">
 		<div class="homefl">
-			<a href="/home/" id="home">홈</a> <a id="management">리포트와 통계</a> <a>회원
-				통계 </a>
+			<a href="/home/" id="home">홈</a> 
+			<a id="management">리포트와 통계</a> 
+			<a>회원 통계</a>
 		</div>
 		<!-- 메뉴바 누르는 부분 시작  -->
 		<div class="homenav fr">
@@ -185,8 +135,8 @@ body {
 				<ul>
 					<li><a class="n_04" href="javascript:ajax('../account/StatisticsSales2.jsp')">매출통계</a></li>
 					<li><a class="n_05" href="javascript:ajax('../account/StatisticsMember2.jsp')">회원통계</a></li>	
-					<li><a class="n_01 active" href="javascript:ajax('/account/privateProg.fm?startDate=20190701&endDate=20191001')">개인레슨 통계</a></li>
-					<li><a class="n_03"	href="javascript:ajax('/account/publicProg.fm?startDate=20190701&endDate=20191001')">그룹수업 통계</a></li>
+					<li><a class="n_01 active" href="javascript:ajax('../account/StatisticsPrivateProg2.jsp')">개인레슨 통계</a></li>
+					<li><a class="n_03"	href="javascript:ajax('../account/StatisticsPublicProg2.jsp')">그룹수업 통계</a></li>
 				</ul>
 			</div>
 		</div>
@@ -200,16 +150,17 @@ body {
 			<button class="btn blue small">당 해</button>
 			<button class="btn blue small">당 분기</button>
 			<button class="btn blue small">당 월</button>
-	
-			<span style="margin-left: 1%"> <input
-				class="easyui-datebox historydatebox" id="datebox1" /> <span>~</span>
-				<input class="easyui-datebox historydatebox" id="datebox2" />
+			<span style="margin-left: 1%"> 
+			<input class="easyui-datebox" id="datebox11" /> 
+			<span>~</span>
+			<input class="easyui-datebox" id="datebox22" />
 				<button class="btn blue small">조회</button>
 			</span>
 		</div>
 	</div>
 
-<%-- <c:forEach items="${privatep}" var="map">
+<%-- 
+	<c:forEach items="${privatep}" var="map">
 			<c:if test = "${map.key == '개인강의정리'}">
 				<c:forEach items="${map.value}" var="list">
 					${list}
@@ -217,7 +168,7 @@ body {
 			</c:if>
 		</c:forEach> --%>
 
-	<div class="section">
+<%-- 	<div class="section">
 		<div class="row">
 	
 			<c:forEach items="${privatep}" var="map">
@@ -348,7 +299,7 @@ body {
 		<div class="row pagination">
 			<div class="pagination_top">전체 11개 항목 중 1 부터 10 까지 표시</div>
 		</div>
-	</div>
+	</div> --%>
 </form>
 </div>
 
