@@ -368,32 +368,44 @@ function dateYClick(){
 	
 	<div class="combobox-area">
 		<span class="middle">
-		<select class="accounting-combobox">
+<!-- 		<select class="accounting-combobox">
 			<option value="">그룹</option>
 			<option value="">0000</option>
 			<option value="">헬스</option>
 			<option value="">스피닝</option>
-		</select> <select class="accounting-combobox">
+		</select>  -->
+		<select class="accounting-combobox">
+			<option value="">구매회원</option>
+			<option value="">결제내역</option>
+<!-- 			<option value="">이관영</option>
+			<option value="">박주석</option>
+			<option value="">김우영</option>
+			<option value="">기성유</option>
+			<option value="">박보영</option>
+			<option value="">김지우</option>
+			<option value="">이지성</option>
+			<option value="">이지은</option>
+			<option value="">최종현</option>
+			<option value="">곽호영</option>
+			<option value="">김다정</option>
+			<option value="">남소영</option> -->
+		</select>
+<!-- 		<select class="accounting-combobox">
 			<option value="">상품 목록</option>
-			<option value="19906">0000</option>
 			<option value="17025">10:1 그룹레슨 (플라잉요가) 12회</option>
 			<option value="17027">10:1 그룹레슨 (플라잉요가) 36회</option>
 			<option value="17029">10:1 그룹레슨 (플라잉요가) 72회</option>
 			<option value="18973">1:1 TEST 20회 3개월</option>
 			<option value="20117">1:1 TEST 무제한 1개월</option>
-		</select> <select class="accounting-combobox">
-			<option value="">담당강사</option>
-			<option value="">이경애</option>
-			<option value="">이경애</option>
-			<option value="">이경애</option>
-			<option value="">이경애</option>
-		</select>
+		</select> -->
+
 		</span>
 <!-- ================================= [[ combobox end ]] =================================================== -->
 		
 			<span class="middle"> 
-			<label id="reservationlabel">검색:</label>
+			<!-- <label id="reservationlabel">검색:</label> -->
 				<input type="search" class="reservation_searchbox">
+				<button class="btn blue small" onclick="searchClick()">검색</button>
 			</span>
 			<span class="middle" style="width: 180px; float: right">
 				<label id="reservationlabel">페이지 당</label>
