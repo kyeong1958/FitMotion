@@ -37,7 +37,7 @@ function nextmonth2(){
 	}else{
 		kyear =  parseInt(kyear);
 		kyear += 1;
-		kkmonth = 0;
+		kkmonth = 1;
 	}
 	var date = kyear +""+ kkmonth
 	var formData = $("#form").serialize();
@@ -59,8 +59,8 @@ function premonth2(){
 	if(kkmonth>1){
 		kkmonth -= 1;
 	}else{
-		kkyear = parseInt(kyear);
-		kkyear -= 1;
+		kyear = parseInt(kyear);
+		kyear -= 1;
 		kkmonth = 12;
 	}
 	var date = kyear +""+ kkmonth
@@ -193,6 +193,10 @@ function premonth2(){
 	var mplace = new Array();
 	var mpay = new Array();
 	
+	var maverage = 0;
+	var maverage2 = 0;
+	var maverage3 = 0;
+	
 	<c:forEach items="${memp}" var="map">
 		<c:if test = "${map.key == '방문회원'}">
 			<c:forEach items="${map.value}" var="list">
@@ -233,6 +237,19 @@ function premonth2(){
 		
 
 	</c:forEach> 
+	
+	for(var i=0;i<mdatas.length;i++){
+		maverage += parseFloat(mdatas[i]);
+	}
+	for(var i=0;i<mtime.length;i++){
+		maverage2 += parseFloat(mtime[i]);
+	}
+	for(var i=0;i<mplace.length;i++){
+		maverage3 += parseFloat(mplace[i]);
+	}
+	
+	
+	
 
 		var doughnutChart = document.getElementById('doughnutChart');
 
@@ -289,10 +306,11 @@ function premonth2(){
 							if (!meta.hidden) {
 								 meta.data.forEach(function (bar, index) {
 
-				                        var data = dataset.data[index].toString();                            
+				                        //var data = dataset.data[index].toString();  
+				                        var data = (parseInt(dataset.data[index].toString()) / maverage * 100).toFixed(0) + "%";
 										var position = bar.tooltipPosition();
 				                        
-				                        ctx.fillText(data, position.x, position.y - 5);
+				                        ctx.fillText(data, position.x - 10, position.y - 5);
 				                    });
 							}
 			            });
@@ -357,10 +375,11 @@ function premonth2(){
 							if (!meta.hidden) {
 								 meta.data.forEach(function (bar, index) {
 
-				                        var data = dataset.data[index].toString();                            
-										var position = bar.tooltipPosition();
+				                        //var data = dataset.data[index].toString();                            
+										var data = (parseInt(dataset.data[index].toString()) / maverage2 * 100).toFixed(0) + "%";
+				                        var position = bar.tooltipPosition();
 				                        
-				                        ctx.fillText(data, position.x, position.y - 5);
+				                        ctx.fillText(data, position.x - 10, position.y - 5);
 				                    });
 							}
 			            });
@@ -424,10 +443,11 @@ function premonth2(){
 							if (!meta.hidden) {
 								 meta.data.forEach(function (bar, index) {
 
-				                        var data = dataset.data[index].toString();                            
-										var position = bar.tooltipPosition();
+				                        //var data = dataset.data[index].toString();                            
+										var data = (parseInt(dataset.data[index].toString()) / maverage3 * 100).toFixed(0) + "%";
+				                        var position = bar.tooltipPosition();
 				                        
-				                        ctx.fillText(data, position.x, position.y - 5);
+				                        ctx.fillText(data, position.x - 12, position.y - 7);
 				                    });
 							}
 			            });
@@ -443,12 +463,14 @@ function premonth2(){
 			var barchart = new Chart(barchart, {
 				type : 'bar',
 				data : {
-					labels : [ '신규결제','제결제' ],
+					labels : [ '신규결제','제결제','만료예정','만료' ],
 					datasets : [ {
-						label : 'My First Dataset',
+						label : '매출 현황',
 						data : mpay,
 						fill : false,
 						backgroundColor : [ 'rgba(201, 203, 207, 0.6)',
+								'rgba(153, 102, 255, 0.6)',
+								'rgba(201, 203, 207, 0.6)',
 								'rgba(153, 102, 255, 0.6)'],
 						borderWidth : 1
 					}]

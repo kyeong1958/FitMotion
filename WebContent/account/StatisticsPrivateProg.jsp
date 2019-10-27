@@ -73,7 +73,20 @@ var pageNumm = <%=pagenumber%>;
 if( pageNumm == null){
 	pageNumm = 10;
 }
-
+// 내역, 회원이름 별 검색 기능
+function searchClick(){
+	var search = $("#search").val();
+	var searchText = $("#searchText").val();
+	alert("검색버튼클릭 "+search +", "+ searchText );
+	$.ajax({
+		method : 'get',
+		url : '/account/privateProg.fm?startDate=20190101&endDate=20191130&pageNumm='+pageNumm+'&search='+search+"&searchText="+searchText,
+		success : function(data) {
+			$("#mainboard2").html(data);
+		}
+	}); 
+}
+	
 //페이지 변경때 select box change
 function pagichange(){
 	var pval = $("#pagetotal option:selected").val();
@@ -229,7 +242,7 @@ function dateYClick(){
 			<c:choose>
 		       <c:when test="${private_size>0}">
 			   	<c:forEach var="privat" items="${map.value}" varStatus="status">
-					test1.push("${privat.GS_DEP_NUM}");
+					test1.push("${privat.ROWNUM}");
 					test1.push("${privat.GS_DEP_DATE}");  
 					test1.push("${privat.MEM_NAME}");  
 					test1.push("${privat.MEM_HP}");  
@@ -240,10 +253,10 @@ function dateYClick(){
 					test1.push("${privat.GS_ACCOUNT_DUE}");  
 					test1.push("${privat.GS_PAY_METHOD}");  	          
 		            test1.push("${privat.GS_BILLING_PERSON}");   
-		          
 		          <c:choose>
+		          
 		          <c:when test="${status.index == 0}">
-		              testdata[0].push("${privat.GS_DEP_NUM}");
+		              testdata[0].push("${privat.ROWNUM}");
 		              testdata[0].push("${privat.GS_DEP_DATE}");
 		              testdata[0].push("${privat.MEM_NAME}");
 		              testdata[0].push("${privat.MEM_HP}");
@@ -374,9 +387,9 @@ function dateYClick(){
 			<option value="">헬스</option>
 			<option value="">스피닝</option>
 		</select>  -->
-		<select class="accounting-combobox">
-			<option value="">구매회원</option>
-			<option value="">결제내역</option>
+		<select class="accounting-combobox" id="search">
+			<option value="구매회원">구매회원</option>
+			<option value="결제내역">결제내역</option>
 <!-- 			<option value="">이관영</option>
 			<option value="">박주석</option>
 			<option value="">김우영</option>
@@ -404,7 +417,7 @@ function dateYClick(){
 		
 			<span class="middle"> 
 			<!-- <label id="reservationlabel">검색:</label> -->
-				<input type="search" class="reservation_searchbox">
+				<input type="search" class="reservation_searchbox" id="searchText">
 				<button class="btn blue small" onclick="searchClick()">검색</button>
 			</span>
 			<span class="middle" style="width: 180px; float: right">

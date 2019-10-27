@@ -52,7 +52,7 @@ function nextmonth(){
 	}else{
 		kyear =  parseInt(kyear);
 		kyear += 1;
-		kkmonth = 0;
+		kkmonth = 1;
 	}
 	var date = kyear +""+ kkmonth
 	var formData = $("#form").serialize();
@@ -204,7 +204,7 @@ function ajax(url) {
 		           <!-- 이용회원 연령비율 시작   -->
 			        <div class="itm" style="height:400px">
 			          <h3>이용회원 연령비율</h3>
-			          <a style="width: 550px; height: 250px; float: left"><canvas style="display:block; margin:2%" id="doughnutChart" ></canvas></a> 
+			          <a style="width: 550px; height: 250px; float: left"><canvas style="margin:2%" id="doughnutChart" ></canvas></a> 
 			          </div>
 			          <!-- 이용회원 연령비율 끝   -->
 			        <!-- 누적회원 연령비율 시작   -->
@@ -247,6 +247,12 @@ function ajax(url) {
    		
    		var year;
    		var month;
+   		
+   		
+   		var average1=0;
+   		//var aver = new Array();
+   		var average2=0;
+   		//var aver2 = new Array(); 
    	//받아온 값을 넣기
 		//jstl 사용 c:forEach == 반복문. 
 		//Map<String,List<Map<String, String>>>
@@ -333,6 +339,19 @@ function ajax(url) {
 				</c:forEach>
 			</c:if>  
 		</c:forEach>   
+		
+		for(var i=0;i<agecount.length;i++){
+			average1 += parseFloat(agecount[i]);
+		}
+		
+		for(var i=0;i<agecount.length;i++){
+			average2 += parseFloat(agecount2[i]);
+		}
+		
+/*  		for(var i=0;i<agecount.length;i++){
+			aver[i] = (parseInt(agecount[i]) / average1 * 100).toFixed(0);
+		}  */
+		
    		
    		mMen.push(mdatas[0]);
    		mWomen.push(mdatas[1]);	
@@ -633,6 +652,7 @@ function ajax(url) {
 				type : 'doughnut',
 				data : data = {
 					datasets : [ {
+						//data : aver,
 						data : agecount,
 						backgroundColor : [ 'rgba(255, 99, 132, 0.6)',
 								'rgba(255, 206, 86, 0.6)',
@@ -640,7 +660,6 @@ function ajax(url) {
 					} ],
 
 					labels : agevalue,
-
 					weight : 1,
 					borderWidth : 10
 				},
@@ -648,62 +667,33 @@ function ajax(url) {
 					 legend: {
 					    	display: true,
 			                position: 'right' //차트 레이블 위치 조정 
-					 },
-/* 				plugins: {	 
-					afterDatasetsDraw: function(chart) {
-					    var ctx = chart.ctx;
-					    chart.data.datasets.forEach(function(dataset, i) {
-					      var meta = chart.getDatasetMeta(i);
-					      if (!meta.hidden) {
-					        meta.data.forEach(function(element, index) {
-					          // Draw the text in black, with the specified font
-					          ctx.fillStyle = 'rgb(0, 0, 0)';
-					          var fontSize = 16;
-					          var fontStyle = 'normal';
-					          var fontFamily = 'Helvetica Neue';
-					          ctx.font = Chart.helpers.fontString(fontSize, fontStyle, fontFamily);
-					          // Just naively convert to string for now
-					          var dataString = dataset.data[index];
-					          // Make sure alignment settings are correct
-					          ctx.textAlign = 'center';
-					          ctx.textBaseline = 'middle';
-					          var padding = 5;
-					          var position = element.tooltipPosition();
-					          ctx.fillText(dataString, position.x, position.y * 1.1);
-					        });
-					      }
-					    });
-					  }
-					 } */
-					    
-					    "animation": {
+					 },					    
+				    "animation": {
 
-				            "duration": 0,
+			            "duration": 0,
 
-				            "onComplete": function (chart) {
+			            "onComplete": function (chart) {
 
-				                var chartInstance = this.chart,
+			                var chartInstance = this.chart,
 
-				                ctx = chartInstance.ctx;
-				                ctx.fillStyle = 'rgb(0, 0, 0)';
-				                var fontSize = 16;
-				                ctx.font = Chart.helpers.fontString(fontSize, Chart.defaults.global.defaultFontStyle, Chart.defaults.global.defaultFontFamily);
-				                
-					            this.data.datasets.forEach(function (dataset, i) {
-							        var meta = chartInstance.controller.getDatasetMeta(i);
-									if (!meta.hidden) {
-										 meta.data.forEach(function (bar, index) {
-
-					                        var data = dataset.data[index].toString();                            
-											var position = bar.tooltipPosition();
-					                        
-					                        ctx.fillText(data, position.x, position.y - 5);
-					                    });
-									}
-					            });
-				            }
-				        } 
-					 
+			                ctx = chartInstance.ctx;
+			                ctx.fillStyle = 'rgb(0, 0, 0)';
+			                var fontSize = 16;
+			                ctx.font = Chart.helpers.fontString(fontSize, Chart.defaults.global.defaultFontStyle, Chart.defaults.global.defaultFontFamily);
+			                
+				            this.data.datasets.forEach(function (dataset, i) {
+						        var meta = chartInstance.controller.getDatasetMeta(i);
+								if (!meta.hidden) {
+									 meta.data.forEach(function (bar, index) {                      
+										var data = (parseInt(dataset.data[index].toString()) / average1 * 100).toFixed(0) + "%";                            
+										var position = bar.tooltipPosition();
+				                        
+				                        ctx.fillText(data, position.x - 10, position.y - 5);
+				                    });
+								}
+				            });
+			            }
+			        } 
 				}
 			});
 			
@@ -760,11 +750,11 @@ function ajax(url) {
 					        var meta = chartInstance.controller.getDatasetMeta(i);
 							if (!meta.hidden) {
 								 meta.data.forEach(function (bar, index) {
-
-				                        var data = dataset.data[index].toString();                            
+				                        //var data = dataset.data[index].toString();   
+				                        var data = (parseInt(dataset.data[index].toString()) / average2 * 100).toFixed(0) + "%"; 
 										var position = bar.tooltipPosition();
 				                        
-				                        ctx.fillText(data, position.x, position.y - 5);
+				                        ctx.fillText(data, position.x - 10, position.y - 5);
 				                    });
 							}
 			            });

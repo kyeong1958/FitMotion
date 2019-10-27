@@ -1,6 +1,7 @@
 package com.account;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -103,9 +104,13 @@ public class AccountController implements Controller {
 		else if ("privateProg".equals(crud)) {
 			logger.info("OwnerController-privateProg 호출성공");
 			Map<String, List<Map<String, String>>> privateProg = null;
+			Map<String, Object> data = new HashMap<>();
 			String startDate = "";
 			String endDate = "";
 			String pageNumm = "";
+			String search = "";
+			String searchText = "";
+			String hap ="";
 			if(req.getParameter("startDate") != null) { 
 				startDate = req.getParameter("startDate");
 			}
@@ -115,7 +120,18 @@ public class AccountController implements Controller {
 			if(req.getParameter("pageNumm") != null) { 
 				pageNumm = req.getParameter("pageNumm");
 			}
-			privateProg = accountLogic.privateProg(startDate, endDate, pageNumm);
+			if(req.getParameter("search") != null) { 
+				search = req.getParameter("search");
+			}
+			if(req.getParameter("searchText") != null) { 
+				searchText = req.getParameter("searchText");
+			}
+			hap = startDate + "," + endDate;
+			data.put("hap", hap);
+			data.put("pageNumm", pageNumm);
+			data.put("search", search);
+			data.put("searchText", searchText);
+			privateProg = accountLogic.privateProg(data);
 
 			mav.pageMove("forward");
 			mav.setViewName("/account/StatisticsPrivateProg.jsp");
@@ -125,11 +141,13 @@ public class AccountController implements Controller {
 		else if ("publicProg".equals(crud)) {
 			logger.info("OwnerController-publicProg 호출성공");
 			Map<String, List<Map<String, String>>> publicProg = null;
-			
+			Map<String, Object> data = new HashMap<>();
 			String startDate = "";
 			String endDate = "";
 			String pageNumm = "";
-			
+			String search = "";
+			String searchText = "";
+			String hap ="";
 			if(req.getParameter("startDate") != null) { 
 				startDate = req.getParameter("startDate");
 			}
@@ -139,8 +157,19 @@ public class AccountController implements Controller {
 			if(req.getParameter("pageNumm") != null) { 
 				pageNumm = req.getParameter("pageNumm");
 			}
-			publicProg = accountLogic.publicProg(startDate, endDate, pageNumm);
-
+			if(req.getParameter("search") != null) { 
+				search = req.getParameter("search");
+			}
+			if(req.getParameter("searchText") != null) { 
+				searchText = req.getParameter("searchText");
+			}
+			hap = startDate + "," + endDate;
+			data.put("hap", hap);
+			data.put("pageNumm", pageNumm);
+			data.put("search", search);
+			data.put("searchText", searchText);
+			publicProg = accountLogic.publicProg(data);
+			
 			mav.pageMove("forward");
 			mav.setViewName("/account/StatisticsPublicProg.jsp");
 			mav.addObject("publicProg", publicProg);

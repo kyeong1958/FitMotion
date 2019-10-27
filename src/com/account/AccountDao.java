@@ -105,7 +105,7 @@ public class AccountDao {
 		return memsales;
 	}
 	//개인레슨 통계
-	public Map<String, List<Map<String, String>>> privateProg(String startDate, String endDate, String pageNumm) {
+	public Map<String, List<Map<String, String>>> privateProg(Map<String,Object> data) {
 		logger.info("AccountDao-privateProg 호출성공");
 		Map<String,List<Map<String, String>>> privateProg = new HashMap<>();
 		List<Map<String, String>> prog = new ArrayList<>();
@@ -119,25 +119,22 @@ public class AccountDao {
 		
 		List<Map<String, String>> pageList = new ArrayList<>();
 		Map<String,String> pageMap = new HashMap<String, String>();
-		String start = startDate;
-		String end = endDate;
-		String hap;
-		dateMap.put("start", start);
-		dateMap.put("end", end);
-		hap = start + "," + end;
-		logger.info("hap : "+hap);
-		dateList.add(dateMap);
 		
-		String page = pageNumm;
+		String hap = data.get("hap").toString();
+		logger.info("hap : "+hap); 
+		dateList.add(dateMap);
+		 
+		logger.info("data.get(\"hap\").toString() "+data.get("hap").toString());
+		String page = data.get("pageNumm").toString();
 		pageMap.put("page", page);
 		pageList.add(pageMap);
 		try {
 			sqlSession = sqlSessionFactory.openSession();
-			prog = sqlSession.selectList("privateProg",hap);
-			prog2 = sqlSession.selectList("privatehap",hap);			
-			prog3 = sqlSession.selectList("privategender",hap);			
-			prog4 = sqlSession.selectList("privategender2",hap);			
-			prog5 = sqlSession.selectList("getCount",hap);			
+			prog = sqlSession.selectList("privateProg",data);
+			prog2 = sqlSession.selectList("privatehap",data);			
+			prog3 = sqlSession.selectList("privategender",data);			
+			prog4 = sqlSession.selectList("privategender2",data);			
+			prog5 = sqlSession.selectList("getCount",data);			
 			privateProg.put("개인강의매출", prog);
 			privateProg.put("개인강의합", prog2);
 			privateProg.put("개인강의여자", prog3);
@@ -159,7 +156,7 @@ public class AccountDao {
 		return privateProg;
 	}
 	//그룹 레슨 통계
-	public Map<String, List<Map<String, String>>> publicProg(String startDate, String endDate, String pageNumm) {
+	public Map<String, List<Map<String, String>>> publicProg(Map<String, Object> data) {
 		logger.info("AccountDao-publicProg 호출성공");
 		Map<String,List<Map<String, String>>> publicProg = new HashMap<>();
 		List<Map<String, String>> proga = new ArrayList<>();
@@ -173,29 +170,27 @@ public class AccountDao {
 		List<Map<String, String>> pageList = new ArrayList<>();
 		Map<String,String> pageMap = new HashMap<String, String>();
 		
-		String start = startDate;
-		String end = endDate;
-		String hap;
-		dateMap.put("start", start);
-		dateMap.put("end", end);
-		hap = start + "," + end;
+		String hap = data.get("hap").toString();
+		logger.info("hap : "+hap); 
 		dateList.add(dateMap);
 		
-		String page = pageNumm;
+		logger.info("data.get(\"hap\").toString() "+data.get("hap").toString());
+		String page = data.get("pageNumm").toString();
 		pageMap.put("page", page);
 		pageList.add(pageMap);
 		 
 		try {
 			sqlSession = sqlSessionFactory.openSession();
-			proga = sqlSession.selectList("publicProg",hap);
-			proga2 = sqlSession.selectList("publichap",hap);			
-			proga3 = sqlSession.selectList("publicgender",hap);			
-			proga4 = sqlSession.selectList("publicgender2",hap);			
+			proga = sqlSession.selectList("publicProg",data);
+			proga2 = sqlSession.selectList("publichap",data);			
+			proga3 = sqlSession.selectList("publicgender",data);			
+			proga4 = sqlSession.selectList("publicgender2",data);			
 			
 			publicProg.put("그룹강의매출", proga);
 			publicProg.put("그룹강의합", proga2);
 			publicProg.put("그룹강의남자", proga3);
 			publicProg.put("그룹강의여자", proga4);
+			publicProg.put("날짜", dateList);
 			publicProg.put("페이지", pageList);
 
 			sqlSession.commit();

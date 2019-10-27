@@ -59,17 +59,24 @@ var endD;
 var dateHap;
 
 //(페이지네이션) 한화면에서 보여줄 컬럼숫자를 담는 변수
-<%-- var pageNumm;
-if( <%=pagenumber%> != null){
-	pageNumm = <%=pagenumber%>;
-}else{
-	pageNumm = 10;
-} --%>
 var pageNumm = <%=pagenumber%>;
 if( pageNumm == null){
 	pageNumm = 10;
 }
-
+//내역, 회원이름 별 검색 기능
+function searchClick(){
+	var search = $("#search2").val();
+	var searchText = $("#searchText").val();
+	alert("검색버튼클릭 "+search +", "+ searchText );
+	$.ajax({
+		method : 'get',
+		url : '/account/publicProg.fm?startDate=20190101&endDate=20191130&pageNumm='+pageNumm+'&search='+search+"&searchText="+searchText,
+		success : function(data) {
+			$("#mainboard2").html(data);
+		}
+	}); 
+}
+	
 //페이지 변경때 select box change
 function pagichangea(){
 	var pval = $("#pagetotal option:selected").val()
@@ -265,7 +272,7 @@ function dateYClicka(){
 			<c:choose>
 		       <c:when test="${public_size>0}">
 	       		<c:forEach var="privat" items="${map.value}" varStatus="status">
-	       			test1.push("${privat.GS_DEP_NUM}");
+	       			test1.push("${privat.ROWNUM}");
  	       			test1.push("${privat.GS_DEP_DATE}");  
 	       			test1.push("${privat.MEM_NAME}");  
 	       			test1.push("${privat.MEM_HP}");  
@@ -279,7 +286,7 @@ function dateYClicka(){
 		              
 		              <c:choose>
 		              <c:when test="${status.index == 0}">
-			              testdata[0].push("${privat.GS_DEP_NUM}");
+			              testdata[0].push("${privat.ROWNUM}");
 			              testdata[0].push("${privat.GS_DEP_DATE}");
 			              testdata[0].push("${privat.MEM_NAME}");
 			              testdata[0].push("${privat.MEM_HP}");
@@ -404,15 +411,15 @@ function dateYClicka(){
 					<option value="18973">1:1 TEST 20회 3개월</option>
 					<option value="20117">1:1 TEST 무제한 1개월</option>
 				</select> -->
-				<select class="accounting-combobox">
-					<option value="">구매회원</option>
-					<option value="">결제내역</option>
+				<select class="accounting-combobox" id="search2">
+					<option value="구매회원">구매회원</option>
+					<option value="결제내역">결제내역</option>
 				</select>
 			</span>
 			
 			<span class="middle"> 
 			<!-- <label id="reservationlabel">검색:</label> -->
-				<input type="search" class="reservation_searchbox">
+				<input type="search" class="reservation_searchbox" id="searchText">
 				<button class="btn blue small" onclick="searchClick()">검색</button>
 			</span>
 			<span class="middle" style="width: 180px; float: right">
