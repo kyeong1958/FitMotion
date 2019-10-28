@@ -14,6 +14,8 @@
 }
 
 </style>    
+
+
     
     
 <%
@@ -37,6 +39,7 @@
      	 <%
          for(int j=0; j<pr_size; j++){
       	   Map<String,Object> proMap = pro_list.get(j);
+      	   
          %>
  		 <option value="<%=proMap.get("PROM_DIS_PRICE")%>"><%=proMap.get("PROM_NAME") %></option>
  		 <%

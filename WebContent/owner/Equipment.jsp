@@ -1,5 +1,4 @@
-<%@page import="java.util.Map"%>
-<%@page import="java.util.List"%>
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
    pageEncoding="UTF-8"%>
 
@@ -21,7 +20,7 @@
 		 
 		     // select element에서 선택된 option의 text가 저장된다.
 		    var text = modeSelect.options[document.getElementById("se_operating_mode").selectedIndex].text;
-		   alert("text:" + text);
+		//   alert("text:" + text);
 	 
 	
 	}
@@ -29,7 +28,7 @@
 	//======================================================================================================================///
 		function eqIns_click(){
 			var formData = $("#eqIns").serialize();
-				alert("등록버튼 눌림?");
+		//	alert("등록버튼 눌림?");
 				 $.ajax({
 					method:"POST"
 					,data:formData
@@ -44,12 +43,12 @@
 		$(document).ready(function(){
 		    //최상단 체크박스 클릭
 		    $("#checkall").click(function(){
-		    	alert("체크박스눌림");
+		    //	alert("체크박스눌림");
 		        //클릭되었으면
 		         if($("#checkall").prop("checked")){
 		            //input태그의 name이 chk인 태그들을 찾아서 checked옵션을 true로 정의
 		            $("input[name=check]").prop("checked",true);
-		            alert("전체가 다눌린다");
+		       //     alert("전체가 다눌린다");
 		            //클릭이 안되있으면
 		        }else{
 		            //input태그의 name이 chk인 태그들을 찾아서 checked옵션을 false로 정의
@@ -60,12 +59,12 @@
 		
 		
 		function eqDel(){
-			alert("삭제버튼눌림");
+		//	alert("삭제버튼눌림");
 			var se_code = null;
 	/* 		if(function eqCh(se_code) ) */
 			se_code = $("#checkbox_id").val();
 				var formData = $("#eqIns").serialize();
-				alert("등록버튼 눌림?");
+			//	alert("등록버튼 눌림?");
 				 $.ajax({
 					method:"POST"
 					,data:formData

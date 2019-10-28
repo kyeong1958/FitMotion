@@ -2,20 +2,15 @@
     pageEncoding="UTF-8"%>
 <link rel="stylesheet" type="text/css" href="/NewCSS/BillingHistoryList.css">
     <!-- ============================ [[ 회원결제내역 ]] ======================================== -->
+    
 
 
 <style type="text/css">
 
 body{
    padding:0%;
+   
 }
-
-
-                  
-                 
-
-
-
 
 </style>
 <!-- ================================= [[ 화면전환 ]] =================================================== -->
@@ -34,6 +29,8 @@ body{
     <!-- 리스트 검색 -->
     <div class="search_bar">
         <fieldset>
+        
+       
             <legend>검색</legend>
             <form >
                 <select>
@@ -78,7 +75,7 @@ body{
 <!--============================[[select부분 끝 ]] ========================================== -->
 
  <!--=============================[[카드 부분 시작 ]]====================================================  -->
- 		<div class="grid_list" id="BHLgrid" >
+ 		<div class="grid_list" id="BHLgrid"  >
                
              <!--    <form id="paymentFrom" method="post" action="/manager/member/editPaymentReceivables">
                     <input type="hidden" name="seqMember">

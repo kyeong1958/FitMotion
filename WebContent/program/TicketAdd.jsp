@@ -25,6 +25,13 @@ body{
 				   ,url:"/program/taSEL.fm"
 				   ,success:function(data){
 						$("#tasel").html(data);
+						$.ajax({
+							method : "POST",
+							url : "/program/prornk.fm",
+							success : function(data) {
+								$("#pro_rank").html(data);
+							}
+						});
 				   }
 				});
 			}

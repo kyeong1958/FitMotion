@@ -9,10 +9,18 @@ import org.apache.log4j.Logger;
 public class MemberLogic {
 	Logger logger = Logger.getLogger(MemberLogic.class);
 	MemberDao memberDao = null;
-	int total =0;
 	public MemberLogic() {
 		memberDao = new MemberDao();
 	}
+	/////////////////////////////// [[ 경애  ]] /////////////////////////////////////
+	//회원검색창에서 회원정보찾는 메소드
+	public List<Map<String, Object>> memInfoList(String mem_name) {
+		logger.info("memInfoList Logic");
+		List<Map<String, Object>> memInfoList = null;
+		memInfoList = memberDao.memInfoList(mem_name);
+		return memInfoList;
+	}
+	/////////////////////////////// [[ 경애  ]] /////////////////////////////////////
 	/*============================[[민지 시작 ]]====================================================*/
 	public int bhIns(Map<String, Object> pMap) {
 		logger.info("등록하기 로직");
@@ -54,5 +62,4 @@ public class MemberLogic {
 	      return rMap;
 	   }
 	 /*==================================[[주노끝 ]]=================================================*/
-	
 }

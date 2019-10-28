@@ -19,6 +19,7 @@ legend {
 
 
 <script>
+
 	function prodelete(prom_num){
 		alert("삭제하기 쫌따하기"+prom_num);
 		 $.ajax({
@@ -47,6 +48,7 @@ legend {
 	
 	function probuy(prom_num){
 		alert(prom_num);
+		$("#fprom_num").val(prom_num);
 		 $.ajax({
 				method:"get"
 				,url:"/program/probuyDTL.fm?prom_num="+prom_num
@@ -112,4 +114,4 @@ legend {
 	}
 %> 
           </ul>
-	
+	`

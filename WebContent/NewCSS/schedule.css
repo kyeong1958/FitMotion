@@ -24,9 +24,21 @@
     background: url(../images/triangle.png) no-repeat right 5px top 50% #FFF !important;
 }
 .calendar-header{
-	position: absolute;
-    z-index: 3;
-    color: #2F3A48;
 	width:100%;    
-    padding: 15px 60px;
+	height: auto; 
+/* 	position: absolute;
+    z-index: 3;
+    color: #2F3A48;*/
+    background-color:transparent;
+    padding: 15px 30px; 
+    text-align: -webkit-right;
+}
+.weeklycalendar{
+	width: 100%;
+	align:center;
+	border:1px solid #BABBC2;
+}
+.scheduletd{
+	align:center;
+	border:1px solid #BABBC2;
 }

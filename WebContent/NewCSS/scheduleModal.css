@@ -1,5 +1,5 @@
 @charset "UTF-8";
-.bar_area {
+/* .bar_area {
     padding: 10px 66px;
     height: 54px;
     background-color: #FFF;
@@ -40,13 +40,7 @@
     line-height: 34px;
     width: 130px;
 }
-.spending-text{
-	text-align: center;
-	height: 34px;
-	font-size: 13px;
-	border: 1px solid #BABBC2;
-	border-radius: 5px;
-}
+
 .spend-table{
 	width: 100%;
 	border: 1px solid #9fa0aa;
@@ -144,7 +138,7 @@
 .add{
 	background-color: #42485A;
 }
-
+ */
 
 /* 사용 */
 
@@ -188,4 +182,44 @@
     cursor: pointer;
     overflow: hidden;
 }
+.spend-box-right-column{
+    font-size: 13px;
+    font-weight: normal;
+    color: #42485A;
+    text-align: left;
+    line-height: 34px;
+    width: 130px;
+}
+.spending-text{
+	text-align: center;
+	height: 34px;
+	font-size: 13px;
+	border: 1px solid #BABBC2;
+	border-radius: 5px;
+}
+.modal-header{
+	padding: 15px;
+    border-bottom: 1px solid #e5e5e5;
+    font-size: 18px;
+    background-color: #42485A;
+    color: white;
+    border-radius: 4px 4px 0 0;
+}
+.tableheader{
+    background-color: #686D7B;
+   /*  height: 45px; */
+    font-weight: normal;
+    color: #FFF;
+    text-align: center;
+    vertical-align:middle;
+}
+.search-mem-modal{
+    padding: 0 0 5px;
+    height: 85%;
+    overflow-y: scroll;
+}
+}
+
+
+
 

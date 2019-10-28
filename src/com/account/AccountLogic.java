@@ -1,5 +1,6 @@
 package com.account;
 
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -10,15 +11,33 @@ import org.apache.log4j.Logger;
 public class AccountLogic {
 	Logger logger = Logger.getLogger(AccountLogic.class);
 	AccountDao accountDao = null;
-
-	public AccountLogic() {
+	public AccountLogic () {
 		accountDao = new AccountDao();
 	}
-
-	/*
-	 * =========================[[민지 시작
-	 * ]]============================================
-	 */
+//////////////////////////////////[[ 경애 시작 ]] ///////////////////////////////////////////////////////////////////
+	public Map<String, Object> salesStatementList(Map<String, Object> date) {
+		Map<String, Object> salesStatement = new HashMap<String, Object>();
+		List<Map<String,Object>> ssTableList = new ArrayList<Map<String,Object>>();
+		Map<String,Object> rMap = accountDao.salesStatementMap(date);
+		salesStatement.put("up",rMap);
+		//ssTableList = accountDao.ssTableList(month);
+		//salesStatement.put("table",ssTableList);
+		return salesStatement;
+	}
+	public Map<String, Object> expenseStatementList(Map<String, Object> date) {
+		Map<String, Object> expenseStatement = new HashMap<String, Object>();
+		List<Map<String,Object>> esTableList = new ArrayList<Map<String,Object>>();
+		Map<String,Object> rMap = accountDao.expenseStatementMap(date);
+		expenseStatement.put("up",rMap);
+		//esTableList = accountDao.ssTableList(month);
+		//salesStatement.put("table",esTableList);
+		return expenseStatement;
+	}
+//////////////////////////////////[[ 경애 끝 ]] ///////////////////////////////////////////////////////////////////
+/*
+ * =========================[[민지 시작
+ * ]]============================================
+ */
 	public int pfIns(Map<String, Object> pMap) {
 		int result = 0;
 		logger.info("매출등록 입력 부분 Logic 호출 성공");
@@ -38,10 +57,55 @@ public class AccountLogic {
 		
 		return ProbuySel;
 	}
-	/*
-	 * =========================[[민지 끝
-	 * ]]============================================
-	 */
+
+	public int progive(Map<String, Object> pMap) {
+	int result  = 0;
+	result = accountDao.progive(pMap);
+	logger.info(pMap);
+	logger.info(result);
+	return result;
+}
+	public int proback(Map<String, Object> pMap) {
+		int result  = 0;
+		result = accountDao.proback(pMap);
+		logger.info(pMap);
+		logger.info(result);
+		return result;
+	}
+	
+/*
+ * =========================[[민지 끝]]============================================
+ */
+////////////////수근시작/////////////////
+	//전체매출 통계
+	public  Map<String,List<Map<String, String>>> allsales(String date) {
+	logger.info("AccountLogic-allsales 호출성공");
+	Map<String,List<Map<String, String>>> allsales = null;
+	allsales = accountDao.allsales(date);
+	return allsales;
+	}
+	//회원 통계
+	public  Map<String,List<Map<String, String>>> memsales(String date) {
+	logger.info("AccountLogic 호출성공");
+	Map<String,List<Map<String, String>>> memsales = null;
+	memsales = accountDao.memsales(date);
+	return memsales;
+	}
+	//개인레슨 통계
+	public Map<String, List<Map<String, String>>> privateProg(String startDate, String endDate) {
+	logger.info("AccountLogic-privateProg 호출성공");
+	Map<String, List<Map<String, String>>> privateProg = null;
+	privateProg = accountDao.privateProg(startDate, endDate);
+	return privateProg;
+	}
+	//그룹 레슨 통계
+	public Map<String, List<Map<String, String>>> publicProg(String startDate, String endDate) {
+	logger.info("AccountLogic-publicProg 호출성공");
+	Map<String, List<Map<String, String>>> publicProg = null;
+	publicProg = accountDao.publicProg(startDate, endDate);
+	return publicProg;
+	}
+////////////////수근끝/////////////////
 	
 
 }

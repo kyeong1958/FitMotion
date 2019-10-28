@@ -59,12 +59,8 @@ public class ProgramLogic {
 	}
 	public int probuy(Map<String, Object> pMap) {
 		int result =0;
-		logger.info("Logic");
-		logger.info("Logic");
-		logger.info("Logic");
-		logger.info("Logic");
-		result = programDao.probuy(pMap);
 		logger.info(pMap);
+		result = programDao.probuy(pMap);
 		logger.info(result);
 		return result;
 	}

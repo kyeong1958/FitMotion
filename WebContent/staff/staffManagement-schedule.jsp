@@ -60,7 +60,7 @@
 	}
 	//월별 달력 날짜 클릭에 따른 주간달력 날짜변경
 	function weekly(year,month,day){
-		alert("날짜선택"+year+month+day);
+	//	alert("날짜선택"+year+month+day);
 		var theday = new Date(year,month,day).getDay();//해당날짜의 요일
 		var startday = 0;
 		if(theday%6 == 0){
@@ -71,7 +71,7 @@
 				
 			}			
 		}
-		alert("startday"+startday);
+	//alert("startday"+startday);
 		
 	}
 </script>

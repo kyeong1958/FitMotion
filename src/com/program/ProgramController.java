@@ -8,6 +8,9 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.apache.log4j.Logger;
 
 import com.gate.Controller;
@@ -130,16 +133,15 @@ public class ProgramController implements Controller {
 		else if("probuy".equals(crud)) {
 			int result =0;
 			logger.info("Controller");
-			logger.info("Controller");
-			logger.info("Controller");
-			logger.info("Controller");
 			Map<String,Object> pMap = new HashMap<>();
 			HashMapBinder hmb = new HashMapBinder(req);
 			hmb.bindPost(pMap);
+			logger.info("start"+pMap);
 		    result =  programLogic.probuy(pMap);
 			logger.info(pMap);
-			//mav.pageMove("redirect");
-			//mav.setViewName("/program/TicketMain.jsp");
+			logger.info(result);
+			mav.pageMove("redirect");
+			mav.setViewName("/program/TicketMain.jsp");
 		}
 		
 /*=======================================[[민지 끝 ]]==============================================*/

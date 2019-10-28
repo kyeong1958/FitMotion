@@ -1,11 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.mybatis.mapper.MemberMapper">
-<!-- 주노랑 이관완료 -->
-	<select id="test2">
-		SELECT 1 FROM dual
+
+	<!--==================================[[경애 시작]]==============================================================  -->
+	<select id="memInfoList" parameterType="java.lang.String" resultType="map">
+		SELECT mem_name, mem_birth, mem_hp, mem_num
+		  FROM member
+		 WHERE mem_name  Like '%'||#{mem_name}||'%'
 	</select>
-	<!--==================================[[민지 시작]]==============================================================  -->
+		<!--==================================[[경애 끝]]==============================================================  -->
+<!-- 주노랑 이관완료 -->
+<!--==================================[[민지 시작]]==============================================================  -->
 	<insert id="MemModal" parameterType="map">
 			insert into Member(mem_num,mem_name,mem_birth,mem_gender,mem_address,mem_hp,
                                     mem_registration_date,mem_manager,mem_app_availability,mem_barcode_num
@@ -101,7 +106,6 @@
 	
 	<!--========================================[[주노끝 ]]===============================================================  -->
 	 
-	
-	
+
 </mapper> 
  

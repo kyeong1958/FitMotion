@@ -133,13 +133,12 @@
 }
 
 #BHLgrid ul {
-    display: flex;
-    flex-flow: row wrap;
+	display: flex;
+    flex-flow: wrap-reverse;
     justify-content: flex-start;
     margin-left: -20px;
-    list-style: none; 
+    list-style: none;
 }
-  
            
 
 
@@ -214,6 +213,9 @@
     border-radius: 0 0 5px 5px;
     text-align: center;
 }
+
+
+
 
 #BHLgrid ul li .card_point_txt .use_service {
     background-color: #22B2FB;

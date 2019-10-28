@@ -40,4 +40,10 @@ public class OwnerController implements Controller {
 		return mav;
 	}
 
+	@Override
+	public String jsonexecute(HttpServletRequest req, HttpServletResponse res) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

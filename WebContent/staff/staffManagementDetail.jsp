@@ -90,14 +90,14 @@
 		$("#group").val(pi_group_pay);
 	}
 	function staffupd(){
-		alert("수정버튼 ");
+	//	alert("수정버튼 ");
 		var formData = $("#add_coach_form2").serialize();
 		 $.ajax({
 			method:"POST"
 			,data:formData
 			,url:"/staff/SFUPD.fm"
 			,success:function(data){ 
-				alert(data);
+			//	alert(data);
 				$("#stupdate").html(data);
 			}
 		}); 

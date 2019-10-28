@@ -4,8 +4,61 @@
 	<select id="test5">
 		SELECT 1 FROM dual
 	</select>
+<!--========================== [[ 경애시작 ]] ========================================-->
+	<select id="lockerList" resultType="map">
+	 SELECT locker_num ,status, lrent_purchase_date, lrent_start_day, lrent_end_day, mem_name, mem_hp, lrent_num
+      FROM (               
+              SELECT l.locker_num , '이용중' status, lrent_purchase_date, lrent_start_day, lrent_end_day, mem_name, mem_hp, lrent_num
+                FROM locker l,  locker_rental lr, member m
+               WHERE l.locker_num = lr.locker_num
+                 AND lr.mem_num = m.mem_num
+    <![CDATA[    AND to_date(to_char(sysdate,'yyyy/mm/dd')) >= to_date(lrent_start_day)
+                 AND to_date(to_char(sysdate,'yyyy/mm/dd')) <= to_date(lrent_end_day)
+                 AND (to_date(lrent_end_day) - to_date(to_char(sysdate,'yyyy/mm/dd')))>5       ]]>                                                                                      
+          UNION ALL 
+              SELECT l.locker_num, '만료임박' status, lrent_purchase_date, lrent_start_day, lrent_end_day, mem_name, mem_hp, lrent_num  
+                FROM locker l,  locker_rental lr, member m
+               WHERE l.locker_num = lr.locker_num
+                 AND lr.mem_num = m.mem_num
+     <![CDATA[   AND to_date(lrent_end_day) >= to_date(to_char(sysdate,'yyyy/mm/dd'))
+                 AND (to_date(lrent_end_day)-to_date(to_char(sysdate,'yyyy/mm/dd'))) > 0
+                 AND  (to_date(lrent_end_day)-to_date(to_char(sysdate,'yyyy/mm/dd'))) <6     ]]>   
+          UNION ALL
+              SELECT l.locker_num, locker_condition,'','','','','', to_number('')
+                FROM locker l
+   <![CDATA[   WHERE l.locker_num NOT IN ( SELECT locker_num
+                                        FROM locker_rental
+                                        WHERE to_char(sysdate,'yyyy/mm/dd') >= lrent_start_day
+                                          AND to_char(sysdate,'yyyy/mm/dd') <= lrent_end_day    ]]>   
+                                          )                                                    
+              )
+     GROUP BY locker_num ,status, lrent_purchase_date, lrent_start_day, lrent_end_day, mem_name, mem_hp, lrent_num
+     ORDER BY locker_num
+     
+	</select>
+	<update id="lockUPD" parameterType="map">
+		UPDATE locker_rental
+		   SET lrent_start_day = #{lrent_start_day},
+		   	   lrent_end_day = #{lrent_end_day}
+		 WHERE lrent_num = #{rent_num}
+	</update>
+	<update id="lockStatusUPD" parameterType="map">
+		  UPDATE locker
+	    	 SET locker_condition = '고장'
+	   	   WHERE locker_num = #{lockNum}
+	</update>
+	<insert id="lockINS">
+		INSERT INTO locker_rental(lrent_num,mem_num,lrent_start_day,lrent_end_day,locker_num,gym_num)
+		VALUES (seq_lrent.nextval, #{lm_memnum},#{lrent_start_day},#{lrent_end_day},#{locknum},'1')
+	</insert>
+	<update id="lockChange" parameterType="string">
+		UPDATE locker
+		   SET locker_condition = '사용가능'
+		 WHERE locker_num = #{lockNum}
+	</update>
+<!--========================== [[ 경애끝 ]] ========================================-->
 	
-	<!--==========================[[민지 시작 ]]=======================================================================  -->
+<!--==========================[[민지 시작 ]]=======================================================================  -->
 	<select id="gdSel" resultType="map" parameterType="map">
 	SELECT go_num,go_type,go_name,go_stock,purchase_date,purchase_price FROM Goods
 	</select>
@@ -29,8 +82,7 @@
 			purchase_price = #{purchase_price}
 			WHERE go_num =#{go_num} 
 </update> -->
-	<!--==========================[[민지 끝 ]]=======================================================================  -->
+<!--==========================[[민지 끝 ]]=======================================================================  -->
 
-	
 </mapper> 
  

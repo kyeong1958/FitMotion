@@ -21,12 +21,11 @@ public class MemberController implements Controller {
 	String crud = null;
 	MemberLogic memberLogic = null;
 	Gson gson = null;
-	int tot=0;
-	
 	public MemberController(String crud) {
 		this.crud = crud;
 		memberLogic = new MemberLogic();
 	}
+
 	@Override
 	public ModelAndView execute(HttpServletRequest req, HttpServletResponse res) throws Exception {
 		ModelAndView mav = new ModelAndView();
@@ -42,7 +41,31 @@ public class MemberController implements Controller {
 			mav.setViewName("/owner/example");
 			mav.addObject("제발", "잘됨??");
 		}
-	/*================================[[민지 Mcontroller 시작 ]]=======================================*/
+	/////////////////////////////// [[ 경애  ]] /////////////////////////////////////
+		//예약관리의 회원검색모달창
+		else if("memInfoList".equals(crud)) {
+			logger.info("memberSearch 호출성공");
+			String mem_name = req.getParameter("mem_name");
+			logger.info(mem_name);
+			List<Map<String,Object>> memInfoList = null;
+			memInfoList = memberLogic.memInfoList(mem_name);
+			mav.pageMove("forward");
+			mav.setViewName("/schedule/memberSearchTable.jsp");
+			mav.addObject("memInfoList", memInfoList);
+		}
+		//락커관리의 락커배정모달창
+		else if("lockmemSearch".equals(crud)) {
+			logger.info("lockmemSearch 호출성공");
+			String mem_name = req.getParameter("mem_name");
+			logger.info(mem_name);
+			List<Map<String,Object>> memInfoList = null;
+			memInfoList = memberLogic.memInfoList(mem_name);
+			mav.pageMove("forward");
+			mav.setViewName("/shop/lockMemSearchTable.jsp");
+			mav.addObject("memInfoList", memInfoList);
+		}
+	/////////////////////////////// [[ 경애  ]] /////////////////////////////////////
+		/*================================[[민지 Mcontroller 시작 ]]=======================================*/
 		else if("BHINS".equals(crud)) {
 			logger.info("회원등록 모달창 등록");
 			int result=0;
@@ -65,15 +88,15 @@ public class MemberController implements Controller {
 			mav.setViewName("/member/in_005fcard.jsp");
 			
 		}else if("bhUPD".equals(crud)) {
-	         logger.info("기구관리수정");
 	         int result =0;
 	         Map<String,Object> pMap = new HashMap<>();
 	         HashMapBinder hmb = new HashMapBinder(req);
 	         hmb.bindPost(pMap);
+	         pMap.put("mem_num",req.getParameter("mem_num"));
 	         result = memberLogic.bhUPD(pMap);
 	         logger.info(result);
 	         mav.pageMove("forward");
-	         mav.setViewName("/member/memberManagementDetail.fm");
+	         mav.setViewName("/member/memberManagementDetail.jsp");
 	      }
 	      else if("bhDEL".equals(crud)) {
 	         logger.info("회원관리 삭제 ");
@@ -85,13 +108,23 @@ public class MemberController implements Controller {
 	         mav.pageMove("redirect");
 	         mav.setViewName("/member/BHSEL.fm");
 	      }
+		//매출등록 회원검색
 	      else if("BHMSEL".equals(crud)) {
 				logger.info("회원조회 창 ");
 				List<Map<String,Object>> bhSelList = null;
 				bhSelList = memberLogic.bhsel2();
 				mav.addObject("bhSelList", bhSelList);
 				mav.pageMove("forward");
-				mav.setViewName("/account/imsi_change.jsp");
+				mav.setViewName("/account/profitMemSearch.jsp");
+	      }
+		//billing 회원 검색
+	      else if("BIMSEL".equals(crud)) {
+	    	  logger.info("회원조회 창 ");
+	    	  List<Map<String,Object>> bhSelList = null;
+	    	  bhSelList = memberLogic.bhsel2();
+	    	  mav.addObject("bhSelList", bhSelList);
+	    	  mav.pageMove("forward");
+	    	  mav.setViewName("/account/BillingHistoryMemberSearch.jsp");
 	      }
 	     
 		/*================================[[민지 Mcontroller 끝 ]]=======================================*/
@@ -110,6 +143,7 @@ public class MemberController implements Controller {
 	         }
 	      
 	      /*=====================================[[주노 끝 ]]====================================*/
+
 		return mav;
 	}
 

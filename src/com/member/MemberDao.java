@@ -18,6 +18,25 @@ public class MemberDao {
 	public MemberDao() {
 		sqlSessionFactory = MyBatisCommonFactory.getSqlSessionFactory();
 	}
+	/////////////////////////////// [[ 경애  ]] /////////////////////////////////////
+	public List<Map<String, Object>> memInfoList(String mem_name) {
+		List<Map<String, Object>> memInfoList = null;
+		Map<String, Object> pMap = null;
+		try {
+			sqlSession = sqlSessionFactory.openSession();
+			logger.info(mem_name);
+			memInfoList = sqlSession.selectList("memInfoList",mem_name);
+			logger.info("memInfoList.size : "+memInfoList.size());
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if(sqlSession!=null) {
+				sqlSession.close();
+			}
+		}
+		return memInfoList;
+	}
+	/////////////////////////////// [[ 경애  ]] /////////////////////////////////////	
 	/*===============================[[민지 시작 ]]===========================================*/
 	public int bfIns(Map<String, Object> pMap) {
 		int result = 0;
@@ -125,8 +144,7 @@ public class MemberDao {
 				sqlSession = sqlSessionFactory.openSession();
 				bhSelList = sqlSession.selectList("MemSel");
 				 Map<String,Object> rMap = bhSelList.get(0);
-				 logger.info(bhSelList.size()); 
-				 logger.info(rMap.get("MEM_NAME"));
+				 logger.info(bhSelList.size());
 				 
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -162,6 +180,5 @@ public class MemberDao {
 	      return rMap;
 	}
 	/*===============================[[주노끝]]================================================*/
-
 
 }

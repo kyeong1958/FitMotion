@@ -10,10 +10,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.log4j.Logger;
 
-import com.member.MemberController;
-import com.program.ProgramController;
-import com.program.RestController;
-import com.staff.StaffController;
 
 public class ActionServlet extends HttpServlet {
 	Logger logger = Logger.getLogger(ActionServlet.class);
@@ -33,37 +29,35 @@ public class ActionServlet extends HttpServlet {
 		 
 /************************************* 응답 페이지 ***********************************/
 		mav = controller.execute(req, res);
-		json = controller.jsonexecute(req,res);
+		json = controller.jsonexecute(req, res);
 		logger.info(mav+" , "+json);
 		String pageMove = mav.pageMove;
 		String viewName = mav.viewName;
 		Object obj = mav.obj;
 		String name = mav.name;
 		logger.info(pageMove);
+		logger.info(viewName);
+		logger.info("obj"+obj);
 			if(pageMove != null && json == null) {
 				if("forward".equals(pageMove)) {
-					logger.info("ghost"+pageMove);
-					logger.info("ghost"+viewName);
 					req.setAttribute(name, obj);
 					RequestDispatcher view = req.getRequestDispatcher(viewName);
+					logger.info("action view");
 					view.forward(req, res);
-					
-					
+					logger.info("action forward");
 				}else if("redirect".equals(pageMove)) {
 					res.sendRedirect(viewName);
-					
 				}
-				
 			}else if(json != null) {
+				logger.info("json");
 				req.setAttribute("json", json);
-				RequestDispatcher view = req.getRequestDispatcher("/both/JsonTest.jsp");
+				logger.info(req.getAttribute("json"));
+				RequestDispatcher view = req.getRequestDispatcher("../schedule/jsonResult.jsp");
 				view.forward(req, res);
-				
-				
 			}
 		}catch (Exception e) {
 			e.printStackTrace();
-		}		
+		}
 		
 }
 	

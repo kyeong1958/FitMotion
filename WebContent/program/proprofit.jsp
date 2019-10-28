@@ -33,8 +33,6 @@ body{
 		}
 %>
 
-
-
 <script type="text/javascript">
 	$(document).ready(function(){
 	 //데이트박스 
@@ -67,10 +65,13 @@ body{
 </script>
 <script type="text/javascript">
 
+	var protext = "";
 	var g_val="";
 	var g_Card="";
 	var g_Money="";
 	var g_Fund="";
+	var g_dis ="";
+	var g_dismoney ="";
 	var alltotal ="";
 
 /* 키보드로 입력시 콤마  */
@@ -134,119 +135,123 @@ function removeComma(str)
 	
 	
 	
-/* 	function total(){
-		$("#t_card").val() + $("#t_money").val() = $("#total_buy").val(); 
-	} */
 	
-/* 카드를 눌렀을때 */
- function card(){
-	 if($("#t_card").text()=='0원'){
-		$("#t_card").html($("#etextname").val()+"원");
+	
+	function card(){
 		
-		//0일경우 이것이 타는것이맞음 
-		if($("#total_buy").text()=='0원'){
-		$("#total_buy").html($("#etextname").val()+"원");
-		
+			  g_card = $("#etextname").val(); 
+	
+			//alert(g_card);
+		if($("#t_card").text()==""){
+ 			document.getElementById("t_card").value = g_card;
+ 			if($("#total_buy").text()==""){
+ 			document.getElementById("total_buy").value = g_card;
+ 			}
+ 			g_val="";
 		}
-
-		 g_val ="";
-		 document.getElementById("etextname").value = g_val;    
-	 }
-	else{
- 		 var ctext = $("#t_card").text().substr(0, $("#t_card").text().length -1); 
-		 var resultCard = Number(removeComma(ctext))+  
-		 				  Number(removeComma($("#etextname").val()));
-			$("#t_card").html(commatogeter(resultCard)+"원");
-		 
-		 
-		 var total = $("#total_buy").text().substr(0, $("#total_buy").text().length -1);
-		 var Card = Number(removeComma(total))+  
-		 			 Number(removeComma($("#etextname").val()));
+		
+		else if(g_money!=null){
 			
-			 $("#total_buy").html(commatogeter(Card)+"원");
-			 
-			 
-			//alert(commatogeter(Card));
-			
-			
-			
-			
-			 g_val ="";
-			 document.getElementById("etextname").value = g_val;
-		  
-	 } 
+			commatogeter(document.getElementById("total_buy").value) = 
+	 		 Number(removeComma(document.getElementById("total_buy").value)) + Number(removeComma(g_money)); 
+		}  
 	 
-	 $("form[name=f_insert]").attr({ action: "/member/pfINS.fm?value="+$(this).text(), method: "post" }).submit();
+	}	
 
-
-
-
-	 
-	 
-}	
-	
   
  /* 현금 눌렀을때 */
  function money(){ 
-	 if($("#t_money").text()=='0원'){
-		$("#t_money").html($("#etextname").val()+"원");
-		if($("#total_buy").text()=='0원'){
-			$("#total_buy").html($("#etextname").val()+"원");
+	 g_money = $("#etextname").val(); 
+		
+		//alert(g_card);
+	if($("#t_money").text()==""){
+		document.getElementById("t_money").value = g_money;
+		if($("#total_buy").text()==""){
+		document.getElementById("total_buy").value = g_money;
 		}
-			g_Money =  $("#etextname").val();
-			g_val ="";
-			 document.getElementById("etextname").value = g_val;     
-	 } else {
- 		 var ctext = $("#t_money").text().substr(0, $("#t_money").text().length -1); 
-		 var resultCard = Number(removeComma(ctext))+  
-		 				  Number(removeComma($("#etextname").val()));
-			$("#t_money").html(commatogeter(resultCard)+"원");
-		 var total = $("#total_buy").text().substr(0, $("#total_buy").text().length -1);
-		 var Card = Number(removeComma(total))+  
-		 			 Number(removeComma($("#etextname").val()));
-			 g_val ="";
-			 document.getElementById("etextname").value = g_val;		 		 
-	 }	 	
+		g_val="";
+	}
+	
+	else if(g_card!=null){
+		
+		commatogeter(document.getElementById("total_buy").value) = 
+	 		 Number(removeComma(document.getElementById("total_buy").value)) + Number(removeComma(g_card)); 
+		}
  }
 
- /* 이체 눌렀을때 */
-function fund(){
-	 if($("#t_fund").text()=='0원'){
-		$("#t_fund").html($("#etextname").val()+"원");
-		$("#total_buy").html($("#etextname").val()+"원");
-		 g_Fund =  $("#etextname").val();
-		 g_val ="";
-		 document.getElementById("etextname").value = g_val;     
-	 } else {
- 		 var ctext = $("#t_fund").text().substr(0, $("#t_fund").text().length -1); 
-		 var resultCard = Number(removeComma(ctext))+  
-		 				  Number(removeComma($("#etextname").val()));
-			$("#t_fund").html(commatogeter(resultCard)+"원");
+	 /* 이체 눌렀을때 */
+	function fund(){
+	 	g_Fund = $("#etextname").val(); 
 		
-		 var total = $("#total_buy").text().substr(0, $("#total_buy").text().length -1);
-		 var Card = Number(removeComma(total))+  
-		 			 Number(removeComma($("#etextname").val()));
-		
-			 g_val ="";
-			 document.getElementById("etextname").value = g_val;		 		 
-	 }	 	
+	if($("#t_fund").text()==""){
+		document.getElementById("t_fund").value = g_Fund;
+		if($("#nomoney").text()==""){
+		document.getElementById("nomoney").value = g_Fund;
 	
-	
-}
- 
+		}
+		g_val="";
+	}
+	commatogeter(document.getElementById("total_buy").value) = 
+	 	Number(removeComma(document.getElementById("total_buy").value)) - Number(removeComma(g_Fund)); 
+	}
 
- function pfIns_buy(){
-		var formData = $("#f_insert").serialize();
-		alert(formData);
-		 $.ajax({
-			method:"POST"
-			,data:formData
-			,url:"/program/probuy.fm"
-			,success:function(data){
-				//$("#eqbox").html(data);
-			}
-		}); 
- }
+ 	/* 할인% */
+	function discount(){
+		g_dis = $("#etextname").val();
+		
+		if($("#t_dis").text()==""){
+			document.getElementById("t_dis").value = g_dis;
+			g_val="";
+		}
+		commatogeter(document.getElementById("total_buy").value) = 
+		 	Number(removeComma(document.getElementById("total_buy").value)) / Number(removeComma(g_dis)); 
+	 	}
+ 	
+ 	function discountmoney(){
+ 		g_dismoney = $("#etextname").val();
+ 		commatogeter(document.getElementById("total_buy").value) = 
+		 	Number(removeComma(document.getElementById("total_buy").value)) - Number(removeComma(g_dismoney)); 
+ 	}
+	
+ 	
+ 	//프로모션 구매 
+ 	 function pfIns_buy(){
+ 		var formData = $("#f_insert").serialize();
+ 		if($("#t_card").val()!=0){
+ 		formData+="&ticp_pay_period=카드"
+ 		}
+ 		 else if($("#t_money").val()!=0){
+ 		formData+="&ticp_pay_period=현금"
+ 		}
+ 		 else if($("t_fund").val()!=0){
+ 		formData+="&ticp_pay_period=이체"
+ 		 }
+ 		console.log(formData);
+ 		alert(formData);
+ 		 $.ajax({
+ 			method:"POST"
+ 			,data:formData
+ 			,url:"/program/probuy.fm"
+ 			,success:function(data){
+ 				$("#ticketmain").html(data);
+ 				$.ajax({
+					method : "POST",
+					data : formData,
+					url : "/program/taSEL.fm",
+					success : function(data) {
+						$("#tasel").html(data);
+						$.ajax({
+							method : "POST",
+							url : "/program/prornk.fm",
+							success : function(data) {
+								$("#pro_rank").html(data);
+							}
+						});
+					}
+				});
+ㅋ 			}
+ 		}); 
+  }
  function imsi_change(imsi){
 	 $("#imsi_ghost").val(imsi);
  }
@@ -261,16 +266,19 @@ function fund(){
       <div class="section">
    <!-- ================================= [[ left ]] =================================================== -->
         <form id=f_insert onSubmit="return false" name="f_insert" >
+        <input type="hidden" id="fprom_num" value="<%=probuyList.get("PROM_NUM") %>" name="prom_num"> 
+        <input type="hidden"  value="" name="ticket_num"> 
          <div class="row spending-box">
         	
-            <div class="row">
+           <div class="row">
                <div class="col-sm-6" style="border-right:1px solid #BABBC2;padding-right:30px;">
                   <h4 class="spending-box-left">매출등록</h4>
                   <div>
                      <div style="padding:0 0 5px">
                         <label class="spend-box-left-column">회원명</label>
                         <span>
-                           <input type="text" id="sm_memname"  name="mem_num"  class="spending-text" style="width:260px;">
+                           <input type="text" id="sm_memname"   class="spending-text" style="width:260px;">
+                           <input type="hidden" id="sm_mem_num" name="mem_num"  class="spending-text" style="width:260px;">
                         </span>
                         <span>
                            <button type="button" class="btn_cancle search_mem" style="margin-left:10px" data-toggle="modal" data-target="#search_member">회원찾기</button>
@@ -295,7 +303,7 @@ function fund(){
                      <div style="padding:0 0 5px">
                         <label class="spend-box-left-column">상품가격</label>
                         <span>
-                           <input type="text" id="imsi_ghost" value="<%=probuyList.get("PROM_DIS_PRICE") %>" class="spending-text" style="width:50%;" name="ticp_payment">
+                           <input type="text" id="imsi_ghost" value="<%=probuyList.get("PROM_DIS_PRICE") %>" class="spending-text" style="width:50%;" >
                         </span>
                      </div>
                      
@@ -303,31 +311,38 @@ function fund(){
                         <table class="spend-table">
                            <tr class="spend-table-row">
                               <td class="spend-table-column" >카드</td>
-                              <td class="spend-table-content" id="t_card">0원</td>
+                              <td class="spend-table-content">
+                              <input type="text" value="0" id="t_card"  style="text-align: right;border: none;">
+                              	원</td>
                            </tr>
                            <tr class="spend-table-row">
                               <td class="spend-table-column">현금</td>
-                              <td class="spend-table-content" id="t_money">0원</td>
+                              <td class="spend-table-content" >
+                              <input type="text" value="0" id="t_money" style="border: none;text-align: right;">원</td>
                            </tr>
                            <tr class="spend-table-row">
                               <td class="spend-table-column" >이체</td>
-                              <td class="spend-table-content" id="t_fund">0원</td>
+                              <td class="spend-table-content">
+                              <input type="text" value="0"  id="t_fund" style="border: none;text-align: right;">원</td>
                            </tr>
                            <tr class="spend-table-row">
                               <td class="spend-table-column">할인</td>
-                              <td class="spend-table-content">%</td>
+                              <td class="spend-table-content">
+                              <input type="text"  id="t_dis" style="border: none;text-align: right;" >%</td>
                            </tr>
                            <tr class="spend-table-row">
                               <td class="spend-table-column">총 결제금액</td>
                               <td class="spend-table-content" style="color: #2196F3 !important;"> 
 	                              <div>
-	                              		<span name="proticp_payment" id="total_buy">0원</span>
+	                              		<span>
+	                              			<input type="text" id="total_buy" name="proticp_payment" style="border: none;text-align: right;">원</span>
 	                              	</div> 
                               </td>
                            </tr>
                            <tr class="spend-table-row">
                               <td class="spend-table-column">미수금</td>
-                              <td class="spend-table-content" style="color: #FF5722 !important;">0원</td>
+                              <td class="spend-table-content" style="color: #FF5722 !important;">
+                              		<input type="text" id="nomoney" style="border: none;text-align: right;">원</td>
                            </tr>
                         </table>
                      </div>
@@ -345,12 +360,12 @@ function fund(){
                   <div style="padding:0 0 5px">
                      <label class="spend-box-right-column">이용 시작일</label>
                 
-                     <input  id="datebox" class="easyui-datebox" style="text-align: center; width: 25%;" value="<%=probuyList.get("PROM_START_DATE")%>~<%=probuyList.get("PROM_END_DATE")%>">
+                     <input  id="datebox" class="easyui-datebox">
                   </div>
                   <div style="padding:0 0 5px">
                      <label class="spend-box-right-column">결제일</label>
                     
-                     <input  id="datebox"  name="ticp_reg_date" class="easyui-datebox" style="width: 25%;">
+                     <input  id="datebox"  name="ticp_reg_date" class="easyui-datebox">
                   </div>
                   <div style="padding:0 0 5px" >
                  
@@ -392,11 +407,11 @@ function fund(){
                  </div>
                   <div>
                      <h4 class="spending-box-payment-title">결제 수단 선택</h4>
-                     <button class="spending-payment-method card"  name="ticp_pay_period" value="card" onclick="card()">카드</button>
-                     <button class="spending-payment-method cash" name="ticp_pay_period" value="cash" onclick="money()">현금</button>
+                     <button class="spending-payment-method card" name="ticp_pay_period" value="카드" onclick="card()">카드</button>
+                     <button class="spending-payment-method cash" name="ticp_pay_period" value="현금" onclick="money()">현금</button>
                      <button class="spending-payment-method bankTransfer"  name="ticp_pay_period" value="trans" onclick="fund()">이체</button>
-                     <button class="spending-payment-method bankTransfer">할인(%)</button>
-                     <button class="spending-payment-method bankTransfer">할인(원)</button>
+                     <button class="spending-payment-method bankTransfer" onclick="discount()">할인(%)</button>
+                     <button class="spending-payment-method bankTransfer" onclick="discountmoney()">할인(원)</button>
                      <button class="spending-payment-method bankTransfer">미수금</button>
                   </div>                  
                </div>
@@ -418,15 +433,17 @@ function fund(){
 	
 	<script>
 			function memberSearch(){
-				alert("검색버튼 눌림?");
+			//	alert("검색버튼 눌림?");
 				var formData = $("#MemSearch").serialize();
-				alert(formData);
+			//	alert(formData);
 				 $.ajax({
 					method:"POST"
 					,data:formData
 					,url:"/member/BHMSEL.fm"
 					,success:function(data){
 						$("#memsearch").html(data);
+						
+						
 					}
 				}); 
 				

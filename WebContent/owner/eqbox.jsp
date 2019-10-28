@@ -6,7 +6,7 @@
  
 <script  type="text/javascript">
 	function eqDTL(se_code,se_name,se_operating_mode,se_buy_price,se_repair_count,se_repair_detail,se_buy_date){
-		alert("모달창열리나보기"+se_name+se_code);
+		//alert("모달창열리나보기"+se_name+se_code);
 		
 		$("#myModal").modal();
 		
@@ -23,7 +23,7 @@
 	function eqUpd(){	
 		$('#myModal').modal("hide"); 
 		var formData = $("#f_eqDtl").serialize();
-		alert("수정완료버튼");
+		//alert("수정완료버튼");
 		$.ajax({
 			method:"POST"
 			,data:formData
@@ -39,11 +39,11 @@
 	}
 	
 	function eqCh(se_code){
-		alert("체크박스눌림 ");
+//	alert("체크박스눌림 ");
 		
 	 $("#checkbox_id").val(se_code);
 	 	/* var test = $('input:checkbox[id="checkbox_id"]').val(); */
-		alert(se_code);
+//	alert(se_code);
 	
 	}
 	

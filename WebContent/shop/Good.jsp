@@ -35,11 +35,8 @@ body{
 
 
  function gdDel(){
-			//번호를 안가꼬옴
-		alert("삭제버튼눌림");
 		var go_num = null;
 		go_num = $("#checkbox_id").val();
-		alert(go_num);
 			  $.ajax({
 				method:"POST"
 				,url:"/shop/GoodDEL.fm?go_num="+go_num
@@ -51,7 +48,7 @@ body{
 
 
  function gdIns(){
-  		alert("클릭?");
+  	//	alert("클릭?");
   		var formData = $("#gd_insert").serialize();
  		//alert("등록버튼 눌림?");
  		 $.ajax({
@@ -59,7 +56,7 @@ body{
  			,data:formData
  			,url:"/shop/GoodINS.fm"
  			,success:function(data){
- 				alert("성공");
+ 		//		alert("성공");
  				$("#gdSel").html(data);
  			}
  		}); 
@@ -92,7 +89,7 @@ body{
 <div class="bar_area">
     <div class="homefl">
         <a href="/home/" id="home">홈</a>
-        <a href="#" id="management">기구 관리</a>
+        <a href="#" id="management">비품 관리</a>
     </div>
        <div class="homefr" style="padding-right:10px;">
               <a class="btn dark" id="MIns-B"   data-toggle="modal" data-target="#gd_modal">비품등록</a>

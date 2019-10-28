@@ -38,7 +38,7 @@ body{
        
   /* 임직원 등록   */    
        function staffInser(){
-    	  alert("눌림?");
+    	//  alert("눌림?");
     		var formData = $("#add_coach_form").serialize();
     	  $.ajax({
     		  method:"POST"
@@ -65,14 +65,14 @@ body{
 
 	/*  상세조회  */
 	function staffdetele(staff_id){
-		alert(staff_id);
+//	alert(staff_id);
     	   var formData = $("#f_sfdetail").serialize();
     	  $.ajax({
     		  method:"POST"
   				,data:formData
   				,url:"/staff/SFDTL.fm?staff_id="+staff_id
   				,success:function(data){
-  					alert("성공");
+  				//	alert("성공");
   					$("#staffList").html(data);
   			}
     	  });

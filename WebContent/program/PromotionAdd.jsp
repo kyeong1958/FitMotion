@@ -102,9 +102,9 @@ body {
 			});
 		});
 	
-		function a() {
+		function a() {																									
 			$(".proaddbox").each(function(index, item) {
-				alert(index + ", " + item);
+			//	alert(index + ", " + item);
 			});
 		}
 		

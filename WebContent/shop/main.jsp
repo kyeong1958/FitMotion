@@ -7,16 +7,21 @@
 <head>
 <meta charset="UTF-8">
 <title>FitMotion</title>
-<%@ include file="../common/JEasyUICommon.jsp"%>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/paginationjs/2.1.4/pagination.css"/>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/paginationjs/2.1.4/pagination.min.js"></script>
+<script>
+	var jb = jQuery.noConflict();
+</script>
+ <%@ include file="../common/JEasyUICommon.jsp"%> 
 <link rel="stylesheet" type="text/css" href="../NewCSS/main.css">
 <style type="text/css">
-body{
-	padding:0%;
-}
-.container-fluid {
-	padding:0%;
-
-}
+	body{
+		padding:0%;
+	}
+	.container-fluid{
+		padding:0%;
+	}
 </style>
 </head>
 <script type="text/javascript">
@@ -26,7 +31,7 @@ body{
 				method:'get'
 			   ,url:url
 			   ,success:function(data){
-				   alert(url);
+				//   alert(url);
 				   $("#mainboard").html(data);
 				    if(url=="../member/memberList.jsp"){
 						var formData = $("#f_insert").serialize();
@@ -88,7 +93,7 @@ body{
 								method:"POST"
 								,url:"/shop/GoodSEL.fm"
 								,success:function(data){
-									alert("성공");
+									//alert("성공");
 									$("#gdSel").html(data);
 								}
 							}); 
@@ -123,6 +128,18 @@ body{
 						});
 			   		 }
 				    /*url=="../account/BillingHistoryList.jsp" 끝*/
+				    else if(url=='../account/spending.jsp'){
+				    	 $.ajax({
+		  			    		  method:"POST"
+		  			  				,data:formData
+		  			  				,url:"/account/PROSEL2.fm"
+		  			  				,success:function(data){
+		  			  					//alert("성공");
+		  			  					$("#selectpro2").html(data);
+		  			  				}
+		  			    	  }); 
+				   		 }
+				    /* url=='../account/spending.jsp' 끝 */
 			  }
 		   });
 		}
@@ -150,7 +167,7 @@ body{
       </div>
    </div>
       <div class="col-lg-1" id="sidebar">
-         <div class="row sidemenutitle" onClick="menu('')">스케줄</div>
+         <div class="row sidemenutitle" onClick="menu(''),pagemove('../schedule/scheduleweekly.jsp')">스케줄</div>
          <div class="row sidemenutitle" onClick="menu(''),pagemove('../account/profit.jsp')">매출등록</div>
          <div class="row sidemenutitle" onClick="menu(''),pagemove('../account/spending.jsp')">지출등록</div>
          <div class="row sidemenutitle" onClick="menu(''),pagemove('../member/memberList.jsp')">회원목록</div>
@@ -158,7 +175,7 @@ body{
          <div class="row sidemenutitle" onClick="menu(''),pagemove('../program/TicketMain.jsp')">이용권관리</div>
          <div class="row sidemenutitle" onClick="menu(''),pagemove('../shop/Lock.jsp')">락커관리</div>
       	 <div class="row sidemenutitle" onClick="menu(''),pagemove('../shop/Good.jsp')">비품관리</div>
-         <div class="row sidemenutitle" onClick="menu(''),pagemove('../shop/Lock.jsp')">기구관리</div> 
+         <div class="row sidemenutitle" onClick="menu(''),pagemove('../shop/Good.jsp')">기구관리</div> 
          <div class="row sidemenutitle" onClick="menu('.history'),pagemove('../schedule/reservation.jsp')">내역관리</div>
          <div class="row history">
             <div class="row sidemenu" id="allsalesmanagement" onClick="pagemove('../schedule/reservation.jsp')">예약내역</div>
@@ -182,12 +199,6 @@ body{
       </div>
       <div id="mainboard">
 <!-- ================================= [[ 화면전환 ]] =================================================== -->
-      
-      
-      
-      
-      
-      
 <!-- ================================= [[ 화면전환 ]] =================================================== -->
       
       </div>

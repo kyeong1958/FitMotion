@@ -150,21 +150,15 @@ public class ProgramDao {
 		}
 		
 	}
+	
 	public int probuy(Map<String, Object> pMap) {
 		int result = 0;
 		logger.info("Dao");
-		logger.info("Dao");
-		logger.info("Dao");
-		logger.info("Dao");
+		pMap.put("result_value", "inputValue");
 		try {
 			sqlSession = sqlSessionFactory.openSession();
 			logger.info(pMap);
-			result =  sqlSession.selectOne("probuyinsert",pMap);
-			logger.info(pMap);
-			logger.info(pMap);
-			logger.info(pMap);
-			logger.info(pMap);
-			logger.info(result);
+			 result = sqlSession.update("probuyinsert",pMap);
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -172,11 +166,6 @@ public class ProgramDao {
 				sqlSession.close(); 
 			}
 		}
-		
-		
-		
-		
-		
 		return result;
 	}
 	/*=============================[[민지 끝]]========================================================*/

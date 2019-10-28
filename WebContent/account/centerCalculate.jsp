@@ -40,18 +40,18 @@ body{
 			<a class="bar_menu" href="#">홈</a>
 			<img src="../images/location_arrow.png">
 			<a class="bar_menu" href="#">회계 관리</a>
-			<img src="../images/location_arrow.png">
+			<img src="../images/location_arrow.png">	
 			<a class="bar_menu" href="#">센터 정산</a>
 		</div>
 <!-- ================================= [[ 홈 ]] =================================================== -->
 		<div class="tab-area">
 			<div class="tab-session">
-				<button class="tabBtn" id="btn_center" onClick="center('#btn_center')">센터정산</button>
-				<button class="tabBtn" id="btn_payment_method" onClick="center('#btn_payment_method'),tabmove('./paymentMethod.jsp')">결제수단 별 조회</button>
-				<button class="tabBtn" id="btn_payment_sort" onClick="center('#btn_payment_sort'),tabmove('./paymentSort.jsp')">결제분류 별 조회</button>
-				<button class="tabBtn" id="btn_center" onClick="center('#btn_center')">이용권상품 별 조회</button>
-				<button class="tabBtn" id="btn_general" onClick="center('#btn_general'),tabmove('./generalProduct.jsp')">일반상품 별 조회</button>
-				<button class="tabBtn" id="btn_expense_sort" onClick="center('#btn_expense_sort'),tabmove('./expenseSort.jsp')">지출 별 조회</button>
+				<button class="tabBtn" id="btn_center" onClick="center('#btn_center'),tabmove('/account/centerCal.jsp')">센터정산</button>
+				<button class="tabBtn" id="btn_payment_method" onClick="center('#btn_payment_method'),tabmove('/account/paymentMethod.jsp')">결제수단 별 조회</button>
+				<button class="tabBtn" id="btn_payment_sort" onClick="center('#btn_payment_sort'),tabmove('/account/paymentSort.jsp')">결제분류 별 조회</button>
+			<!-- 	<button class="tabBtn" id="btn_center" onClick="center('#btn_center')">이용권상품 별 조회</button> -->
+				<button class="tabBtn" id="btn_general" onClick="center('#btn_general'),tabmove('/account/generalProduct.jsp')">일반상품 별 조회</button>
+				<button class="tabBtn" id="btn_expense_sort" onClick="center('#btn_expense_sort'),tabmove('/account/expenseSort.jsp')">지출 별 조회</button>
 			</div>
 		</div> 
 		<div id="tabmove">
@@ -101,9 +101,9 @@ body{
 					</div>
 					<div>
 						<div class="sales-calculation-standby title">
-							<span>미수 잔액 </span>
+							<span>미지급 잔액 </span>
 						</div>
-						<div class="sales-calculation-standby number">
+						<div class="sales-calculation-standby number" style="width: 18%;">
 							<span style="display:inline-block">0건</span>
 						</div>
 						<div class="sales-calculation-standby sum">
