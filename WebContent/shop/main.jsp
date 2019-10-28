@@ -1,3 +1,4 @@
+<%@page import="java.util.Map"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <!-- ============================ [[ 메인폼 ]] ======================================== -->
@@ -23,7 +24,24 @@
 	}
 </style>
 </head>
+<%
+	Map<String,Object> sMap = (Map<String,Object>)request.getAttribute("login"); 
+//	HttpSession session = request.getSession();
+	String login_id = sMap.get("rid").toString();
+	String login_rank = sMap.get("rank").toString();
+	session.setAttribute("login_id", login_id);
+	session.setAttribute(login_id+"r", login_rank);
+%>
 <script type="text/javascript">
+/* 전역변수 선언 */
+	var login_id = <%=login_id%>;
+	var login_rank = <%=login_rank%>;
+/* 전역변수 선언 */
+/* 로그아웃시 세션제거 */
+	function logout(){
+		<%session.removeAttribute(login_id);%>
+	}
+/* 로그아웃시 세션제거 */
 /* 페이지이동  */
 	function pagemove(url){
 			$.ajax({
@@ -142,8 +160,16 @@
 </script>
 <div class="container-fluid">
    <div class="row nav">
-      <div class="col-sm-2"style="border:1px soild">
+      <div class="col-sm-2" style="border:1px soild">
          <img src="../images/fitmotionLogo.png" style="width:180px;margin-left:-15px;"/>
+      </div>
+      <div class="col-sm-8">
+      </div>
+      <div class="col-sm-1"style="padding: 1%;text-align: right;">
+		<a href="#" style="color:white;" onClick="logout()">로그아웃</a>
+      </div>
+      <div class="col-sm-1"style="padding: 1%;">
+		<a href="/shop/login.jsp" style="color:white;">My Page</a>
       </div>
    </div>
       <div class="col-lg-1" id="sidebar">

@@ -44,17 +44,50 @@
 		)}
 	</select>
 <!-- 스케줄내역 -->
-	<select id="scheduleList" resultType="map">
-		SELECT appli_start_time, appli_end_time, appli_date, pro_place, att_num, mem_name, member.mem_num, staff_name, staff.staff_id, appli_num
-		  FROM class_application, staff, member
+<!-- 	<parameterMap type="string" id="loginid"></parameterMap> -->
+	<select id="scheduleList" parameterType="string" resultType="map">
+<!-- 		SELECT appli_start_time, appli_end_time, appli_date, pro_place, att_num, mem_name, member.mem_num, staff_name, staff.staff_id, appli_num
+		  FROM class_application, staff, member, program
 		 WHERE class_application.mem_num = member.mem_num
 		   AND class_application.staff_id = staff.staff_id
+		   AND staff.staff_id = #{login_id}
+		   AND staff.staff_id = program.staff_id -->
+		     
+    SELECT  mem_name, appli_date,appli_start_time, appli_end_time,pro_place, staff_name, s.staff_id, ca.att_num, m.mem_num, staff_name, s.staff_id, appli_num
+      FROM staff s, program p, ticket t, tic_purchase tp, member m, class_application ca, attendance a,persnel_info pi
+     WHERE s.staff_id = #{login_id}
+       AND s.staff_id = p.staff_id
+       AND p.ticket_num = t.ticket_num
+       AND p.pro_limit_people IS NULL
+       AND T.TICKET_NUM = tp.ticket_num
+       AND tp.mem_num = m.mem_num
+       AND m.mem_num = ca.mem_num
+       AND ca.staff_id = s.staff_id
+       AND ca.att_num = a.att_num
+       AND s.pi_num = pi.pi_num
+     GROUP BY mem_name, appli_date,appli_start_time, appli_end_time,pro_place, staff_name, s.staff_id, ca.att_num, m.mem_num, staff_name, s.staff_id, appli_num
+     UNION ALL
+    SELECT  mem_name, appli_date,appli_start_time, appli_end_time,pro_place, staff_name, s.staff_id, ca.att_num, m.mem_num, staff_name, s.staff_id, appli_num
+      FROM staff s, program p, promotion_prog pp, promotion prom, tic_purchase tp, member m, class_application ca, attendance a,persnel_info pi
+     WHERE s.staff_id = #{login_id}
+       AND s.staff_id = p.staff_id
+       AND p.pro_limit_people IS NULL
+       AND p.pro_num = pp.pro_num
+       AND pp.prom_num = prom.prom_num
+       AND prom.prom_num = tp.prom_num
+       AND tp.mem_num = m.mem_num
+       AND m.mem_num = ca.mem_num
+       AND ca.staff_id = s.staff_id
+       AND ca.att_num = a.att_num
+       AND s.pi_num = pi.pi_num
+     GROUP BY mem_name, appli_date, appli_start_time, appli_end_time,pro_place, staff_name, s.staff_id, ca.att_num, m.mem_num, staff_name, s.staff_id, appli_num
 	</select>
 	<update id="caUPD">
 		UPDATE class_application
 		   SET att_num = #{att_num}
 		 WHERE appli_num = #{appli_num}
 	</update>
+
 <!-- ======================================= [[ 경애  ]] ====================================== -->
 	
 </mapper> 

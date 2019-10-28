@@ -4,7 +4,7 @@
     pageEncoding="UTF-8"%>
 	<!-- ============================ [[ 회계관리 ]] ======================================== -->
 	<!-- ============================ [[ 매출내역 ]] ======================================== -->
-<%@ include file="/common/JEasyUICommon.jsp"%> 
+<%@ include file="/common/JEasyUICommon.jsp"%>
 <link rel="stylesheet" type="text/css" href="../NewCSS/main.css">
 <link rel="stylesheet" type="text/css" href="../NewCSS/table.css">
 <link rel="stylesheet" type="text/css" href="../NewCSS/salesStatement.css">
@@ -86,7 +86,7 @@ body{
 	}
 	function quarter(){
 		$.ajax({
-			url:'/account/salesStatement.fm?quarter=<%=quarter%>'
+			url:'/account/salesStatement.fm?year=<%=year%>&quarter=<%=quarter%>'
 			,success:function(data){
 				$("#statement").html(data);
 			}
@@ -94,7 +94,7 @@ body{
 	}
 	function thismonth(){
 		$.ajax({
-			url:'/account/salesStatement.fm?month=<%=y%>-<%=month+1%>'
+			url:'/account/salesStatement.fm?month=<%=y%>/<%=month+1%>'
 			,success:function(data){
 				$("#statement").html(data);
 			}

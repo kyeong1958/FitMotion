@@ -94,7 +94,9 @@ public class ScheduleController implements Controller {
 		else if("scheduleList".equals(crud)) {
 			List<Map<String,Object>> scheduleList = new ArrayList<Map<String,Object>>();
 			Map<String,Object> pMap = new HashMap<String, Object>();
-			scheduleList = scheduleLogic.scheduleList();
+			String login_id = req.getParameter("login_id");
+			logger.info(login_id);
+			scheduleList = scheduleLogic.scheduleList(login_id);
 			if(req.getParameter("year") != null) {
 				logger.info(req.getParameter("year"));
 				logger.info(req.getParameter("month"));

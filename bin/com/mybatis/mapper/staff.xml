@@ -2,9 +2,25 @@
 <!DOCTYPE mapper     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.mybatis.mapper.StaffMapper">
 <!-- 주노랑 이관완료 -->
-   <select id="test6">
-      SELECT 1 FROM dual
-   </select>
+
+<!--========================================[[ 경애 시작 ]]=========================================================  -->
+<!-- 직원별 정산 페이지 -->
+	<resultMap id="staffpi" type="map"/>
+	<resultMap id="personallesson" type="map"/>
+	<resultMap id="grouplesson" type="map"/>
+	<select id="staffSalaryDetail" parameterType="map" statementType="CALLABLE">
+		{call proc_staffsalarydetail(
+						 #{login_id, mode=IN, jdbcType=VARCHAR, javaType=java.lang.String}
+					   , #{todate, mode=IN, jdbcType=VARCHAR, javaType=java.lang.String}
+				       , #{sp, mode=OUT, jdbcType=CURSOR, javaType=java.sql.ResultSet, resultMap=staffpi}
+				       , #{pl, mode=OUT, jdbcType=CURSOR, javaType=java.sql.ResultSet, resultMap=personallesson}
+					   , #{gl, mode=OUT, jdbcType=CURSOR, javaType=java.sql.ResultSet, resultMap=grouplesson}
+				      
+		)}
+	</select>
+<!--========================================[[ 경애 끝 ]]=========================================================  -->
+   
+   
    <!--========================================[[민지 xml 시작 ]]=========================================================  -->
    <insert id="Staffinsert" parameterType="map">
       insert into staff(staff_id,staff_name,staff_gender,staff_hp,staff_introduce

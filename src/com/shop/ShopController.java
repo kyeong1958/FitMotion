@@ -22,6 +22,7 @@ public class ShopController implements Controller {
 	String crud = null;
 	ShopLogic shopLogic = null;
 	Gson gson = null;
+	String login_id = null;
 	public ShopController(String crud) {
 		this.crud = crud;
 		shopLogic = new ShopLogic();
@@ -144,7 +145,7 @@ public class ShopController implements Controller {
 			mav.setViewName("/shop/GoodSEL.fm");
 		}
 /*================================[[민지 끝]]======================================================*/
-/*================================[[정은 시작]]======================================================*/
+/*================================[[정은 시작 -> 경애 시작]]======================================================*/
 
 		else if("slogin".equals(crud)) {
 			logger.info("로그인호출 성공");
@@ -154,16 +155,12 @@ public class ShopController implements Controller {
 			hmb.bind(pMap);
 			rMap = shopLogic.slogin(pMap);
 			logger.info(rMap);
-			logger.info(rMap.get("rank"));
-			logger.info(rMap.get("rid"));
 			if(rMap.get("rank") != null && rMap.get("rid") != null) {
 				logger.info("if");
-				HttpSession session = req.getSession();
-				session.setAttribute("sid", rMap.get("rid"));
-				session.setAttribute("srank", rMap.get("rank"));
-				mav.pageMove("redirect");
+				login_id = (String)rMap.get("rid");
+				mav.pageMove("forward");
 				mav.setViewName("/shop/main.jsp");
-				mav.addObject("name", rMap.get("name"));
+				mav.addObject("login", rMap);
 			}
 		}
 		else if("join".equals(crud)) {
@@ -175,14 +172,13 @@ public class ShopController implements Controller {
 			int result = 0;
 			result = shopLogic.join(pMap);
 			if(result == 1) {
+				logger.info("회원가입성공");
 				mav.pageMove("redirect");
 				mav.setViewName("/shop/login.jsp");
 			}
 		}
 
-
-		
-/*================================[[정은 끝]]======================================================*/
+/*================================[[정은 끝 -> 경애 끝]]======================================================*/
 
 		return mav;
 	}
@@ -191,6 +187,7 @@ public class ShopController implements Controller {
 	public String jsonexecute(HttpServletRequest req, HttpServletResponse res) throws Exception {
 		String json =  null;
 		if("idcheck".equals(crud)) {
+			logger.info("아이디중복검사");
 			String joinid = null;
 			if(req.getParameter("joinid") != null) {
 				joinid = req.getParameter("joinid");

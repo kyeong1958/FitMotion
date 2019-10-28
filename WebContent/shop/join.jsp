@@ -142,11 +142,9 @@ onclose: function(state) {
 			$.ajax({
 				url:'/shop/idcheck.fm?joinid='+joinid
 			   ,success:function(data){
-				   alert(data);
 				   if("사용가능" == data){
 					   $("#idcheckresult").html('<b>사용가능한 아이디입니다.</b>');
 					   $("#checkid").val('yes');
-					   alert($("#checkid").val());
 				   }
 				   else if("사용불가" == data){
 					   $("#idcheckresult").html('<b>이미 존재하는 아이디입니다.</b>');
@@ -162,43 +160,75 @@ onclose: function(state) {
 
 //회원가입
 	function join(){
+	//점주
 	 	if(document.getElementById("superradio").checked || document.getElementById("staffradio").checked){
-			var checkid = $("#checkid").val();
-			if(checkid == 'yes'){
-				var pw = $("#join_pw").val();
-				var pwc = $("#join_pwcheck").val();
-				if(pw == pwc){
-					var name = $("#join_name").val();
-					alert("name"+name);
-					if(name != ''){
-						var address = $("#gym_postal_code").val();
-						if(address != ''){
-							var gymname = $("#gym_name").val();
-							if(gymname != ''){
+	 		if(document.getElementById("superradio").checked){
+	 			var checkid = $("#checkid").val();
+				if(checkid == 'yes'){
+					var pw = $("#join_pw").val();
+					var pwc = $("#join_pwcheck").val();
+					if(pw == pwc){
+						var name = $("#join_name").val();
+						if(name != ''){
+							var address = $("#gym_postal_code").val();
+							if(address != ''){
+								var gymname = $("#gym_name").val();
+								if(gymname != ''){
+									$("#f_join").attr('post');
+									$("#f_join").attr('action','/shop/join.fm');
+									$("#f_join").submit();
+								}else{
+									alert("사업장 상호를 입력하세요");
+								}
+							}else{
+								alert("주소를 입력하세요");
+							}
+						}else{
+							alert("이름을 입력하세요");
+						}
+					}else{
+						alert("비밀번호가 일치하지 않습니다.");
+					}
+				}else if(checkid == 'no'){
+					alert("아이디 중복검사를 체크하세요.");
+				}
+	 		}
+	 		//직원
+	 		else if( document.getElementById("staffradio").checked){
+		 		var checkid = $("#checkid").val();
+				if(checkid == 'yes'){
+					var pw = $("#join_pw").val();
+					var pwc = $("#join_pwcheck").val();
+					if(pw == pwc){
+						var name = $("#join_name").val();
+						if(name != ''){
+							var address = $("#gym_num").val();
+							if(address != ''){
 								$("#f_join").attr('post');
 								$("#f_join").attr('action','/shop/join.fm');
 								$("#f_join").submit();
 							}else{
-								alert("사업장 상호를 입력하세요");
+								alert("사업장코드를 입력하세요.");
 							}
 						}else{
-							alert("주소를 입력하세요");
+							alert("이름을 입력하세요.");
 						}
 					}else{
-						alert("이름을 입력하세요");
+						alert("비밀번호가 일치하지 않습니다.");
 					}
-				}else{
-					alert("|"+pwcheckmsg+"|")
-					alert("비밀번호가 일치하지 않습니다.");
+				}else if(checkid == 'no'){
+					alert("아이디 중복검사를 체크하세요.");
 				}
-			}else if(checkid == 'no'){
-				alert("아이디 중복검사를 체크하세요.");
-			}
-		}else{
+		 	}
+			
+	 	}else{
 			alert("점주 및 직원을 선택해주세요");
 		}
 	}
+
+//keyup이벤트
 	$(function(){
+		//비밀번호확인
 		$("#join_pwcheck").keyup(function(e){
 			var pw = $("#join_pw").val();
 			var pwc = $("#join_pwcheck").val();
@@ -216,7 +246,28 @@ onclose: function(state) {
 				 $("#pwcheckmsg").hide();
 			}
 		});
+		$("#join_pw").keyup(function(e){
+			var pw = $("#join_pw").val();
+			var pwc = $("#join_pwcheck").val();
+			if(pwc != ''){
+				$("#pwcheckmsg").show();
+				if(pw != pwc){
+					 $("#pwcheckmsg").css('color','red');
+					 $("#pwcheckmsg").html('비밀번호가 일치하지 않습니다.');
+				}else if(pw == pwc){
+					 $("#pwcheckmsg").css('color','green');
+					 $("#pwcheckmsg").html('비밀번호가 일치합니다.');
+				}
+			}
+			else if(pwc == ''){
+				 $("#pwcheckmsg").hide();
+			}
+		});
 	})
+//가입취소
+	function cancel(){
+		location.href = "/shop/login.jsp";
+	}
 </script>
 
 <body>
@@ -269,8 +320,8 @@ onclose: function(state) {
 							class="form-control" id="join_name" name="join_name" placeholder="이름을 입력해 주세요">
 					</div>
 					<label for="inputgender" class="lab">성별</label> 
-						남 <input type="radio" name="join_gender" id="join_gender" value="남자" checked/> 
-						여 <input type="radio" name="join_gender" id="join_gender" value="여자" />
+						남 <input type="radio" name="join_gender" id="join_genderm" value="남자" checked/> 
+						여 <input type="radio" name="join_gender" id="join_genderf" value="여자" />
 					
 					<div class="form-group">
 						<label for="inputMobile" class="lab">휴대폰 번호</label> 
@@ -313,10 +364,10 @@ onclose: function(state) {
 					</div>
 			</form>
 			<div class="form-group text-center">
-				<button id="joinsubmit" class="btn btn-primary"  onClick="join()"> 
+				<button id="joinsubmit" class="btn btn-primary" onClick="join()"> 
 					회원가입 <!-- <i class="fa fa-check spaceLeft"></i> -->
 				</button>
-				<button class="btn btn-warning">
+				<button class="btn btn-warning" onClick="cancel()">
 					가입취소<!-- <i class="fa fa-times spaceLeft"></i> -->
 				</button>
 			</div>

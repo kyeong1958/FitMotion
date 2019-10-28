@@ -59,14 +59,12 @@ public class ScheduleDao {
 		return result;
 	}
 	//스케줄내역 출력
-	public List<Map<String, Object>> scheduleList() {
+	public List<Map<String, Object>> scheduleList(String login_id) {
 		List<Map<String, Object>> scheduleList = new ArrayList<Map<String,Object>>();
 		try {
 			sqlSession = sqlSessionFactory.openSession();
-			scheduleList = sqlSession.selectList("scheduleList");
-//			for(int i=0; i<scheduleList.size();i++) {
-//				logger.info(scheduleList.get(i));
-//			}
+			scheduleList = sqlSession.selectList("scheduleList",login_id);
+				logger.info(scheduleList.size());
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {

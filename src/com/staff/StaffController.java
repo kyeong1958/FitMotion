@@ -29,8 +29,28 @@ public class StaffController implements Controller {
 	@Override
 	public ModelAndView execute(HttpServletRequest req, HttpServletResponse res) throws Exception {
 		ModelAndView mav = new ModelAndView();
+/////////////////////////////////////////// [[ 경애 시작 ]] /////////////////////////////////////////////////
+		if("staffSalaryDetail".equals(crud)) {
+			logger.info("staffSalaryDetail 호출 성공");
+			String login_id = null;
+			String todate = null;
+			if(req.getParameter("login_id") != null) {
+				login_id = req.getParameter("login_id");
+				todate = req.getParameter("todate");
+			}
+			Map<String,Object> staffSalaryDetail = new HashMap<String, Object>();
+			staffSalaryDetail =  staffLogic.staffSalaryDetail(login_id,todate);
+			logger.info(staffSalaryDetail);
+			if(staffSalaryDetail != null) {
+				mav.pageMove("forward");
+				mav.setViewName("/account/ssdAjax.jsp");
+				mav.addObject("staffSalaryDetail", staffSalaryDetail);
+			}
+		}
+
+/////////////////////////////////////////// [[ 경애 시작 ]] /////////////////////////////////////////////////
 		//===============================[[민지 시작 Controller]]=======================================
-	       if("SFINS".equals(crud)) {
+		else if("SFINS".equals(crud)) {
 	         logger.info("회원등록 모달창 등록");
 	         int result=0;
 	         Map<String,Object> pMap = new HashMap<>();

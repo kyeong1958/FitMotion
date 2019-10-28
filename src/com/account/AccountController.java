@@ -45,43 +45,46 @@ public class AccountController implements Controller {
 		else if("salesStatement".equals(crud)) {
 			Map<String,Object> salesStatement = new HashMap<String, Object>();
 			Map<String,Object> date = new HashMap<String, Object>();
-			String month = null;
-			int year = 0;
-			int quarter = 0;
-			String startDay = null;
-			String endDay = null;
-			if(req.getParameter("month")!= null) {
-				month = req.getParameter("month").toString();
-				date.put("month", month);
-				salesStatement = accountLogic.salesStatementList(date);
-			}
-			if(req.getParameter("year") != null) {
-				year = Integer.parseInt(req.getParameter("year").toString());
-				date.put("year", year);
-				salesStatement = accountLogic.salesStatementList(date);
-				logger.info(year);
-			}
-			if(req.getParameter("quarter") != null) {
-				quarter = Integer.parseInt(req.getParameter("quarter").toString());
-				date.put("quarter", quarter);
-				salesStatement = accountLogic.salesStatementList(date);
-				logger.info(quarter);
-			}
-			if(req.getParameter("startDay") != null || req.getParameter("endDay")  != null) {
-				if(req.getParameter("startDay") != null) {
-					startDay = req.getParameter("startDay").toString();
-					date.put("startDay", startDay);
-					logger.info(startDay);
-				}
-				if(req.getParameter("endDay") != null) {
-					endDay = req.getParameter("endDay").toString();
-					date.put("endDay", endDay);
-					logger.info(endDay);
-				}
-				logger.info(date);
-				salesStatement = accountLogic.salesStatementList(date);
-				
-			}
+			HashMapBinder hmb = new HashMapBinder(req);
+			hmb.bind(date);
+//			String month = null;
+//			int year = 0;
+//			int quarter = 0;
+//			String startDay = null;
+//			String endDay = null;
+//			if(req.getParameter("month")!= null) {
+//				month = req.getParameter("month").toString();
+//				date.put("month", month);
+//				//salesStatement = accountLogic.salesStatementList(date);
+//			}
+//			if(req.getParameter("year") != null) {
+//				year = Integer.parseInt(req.getParameter("year").toString());
+//				date.put("year", year);
+//			//	salesStatement = accountLogic.salesStatementList(date);
+//				logger.info(year);
+//			}
+//			if(req.getParameter("quarter") != null) {
+//				quarter = Integer.parseInt(req.getParameter("quarter").toString());
+//				date.put("quarter", quarter);
+//			//	salesStatement = accountLogic.salesStatementList(date);
+//				logger.info(quarter);
+//			}
+//			if(req.getParameter("startDay") != null || req.getParameter("endDay")  != null) {
+//				if(req.getParameter("startDay") != null) {
+//					startDay = req.getParameter("startDay").toString();
+//					date.put("startDay", startDay);
+//					logger.info(startDay);
+//				}
+//				if(req.getParameter("endDay") != null) {
+//					endDay = req.getParameter("endDay").toString();
+//					date.put("endDay", endDay);
+//					logger.info(endDay);
+//				}
+//				logger.info(date);
+//				
+//			}
+			
+			salesStatement = accountLogic.salesStatementList(date);
 			logger.info(date);
 			mav.pageMove("forward");
 			mav.setViewName("/account/salesajax.jsp");

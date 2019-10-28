@@ -42,7 +42,7 @@ public class MemberController implements Controller {
 			mav.addObject("제발", "잘됨??");
 		}
 	/////////////////////////////// [[ 경애  ]] /////////////////////////////////////
-		//예약관리의 회원검색모달창
+		//스케줄관리의 회원검색모달창
 		else if("memInfoList".equals(crud)) {
 			logger.info("memberSearch 호출성공");
 			String mem_name = req.getParameter("mem_name");

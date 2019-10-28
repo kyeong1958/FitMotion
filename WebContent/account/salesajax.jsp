@@ -1,9 +1,11 @@
+<%@page import="java.text.DecimalFormat"%>
 <%@page import="java.util.Map"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <!-- ============================ [[ 회계관리 ]] ======================================== -->
 	<!-- ============================ [[ 매출내역 ajax ]] ======================================== -->
 <%
+	DecimalFormat df = new DecimalFormat("###,###");
 	Map<String,Object> salesStatement = (Map<String,Object>)request.getAttribute("salesStatement");
 	Map<String,Object> up = (Map<String,Object>)salesStatement.get("up");
 	int refundcash = Integer.parseInt(up.get("refundcash").toString())+Integer.parseInt(up.get("refundtrans").toString());
@@ -27,20 +29,20 @@
 					<div class="col-lg-4 sales-calculation">
 						<div>
 							<div class="sales-calculation-title">총 이용권상품 매출</div>
-							<p class="sales-calculation-sum" style="padding-top: 16px"><%=up.get("netprofit")  %>원</p>
+							<p class="sales-calculation-sum" style="padding-top: 16px"><%=df.format(up.get("netprofit"))  %>원</p>
 						</div>
 					</div>
 					<div class="col-lg-4 sales-calculation">
 						<div>
 							<div class="sales-calculation-title">&nbsp;&nbsp;&nbsp;총 이용권상품 결제금액</div>
-							<p class="sales-calculation-sum" style="padding-top: 16px">&nbsp;&nbsp;&nbsp;<%=up.get("sales")  %>원</p>
+							<p class="sales-calculation-sum" style="padding-top: 16px">&nbsp;&nbsp;&nbsp;<%=df.format(up.get("sales"))  %>원</p>
 						</div>
 					</div>
 					<div class="col-lg-4">
 						<div>
 							<div class="sales-calculation-title">&nbsp;&nbsp;&nbsp;총 이용권상품 환불
 															 <br>&nbsp;&nbsp;&nbsp;(현금/이체)</div>
-							<p class="sales-calculation-sum">&nbsp;&nbsp;&nbsp;<%=up.get("refund")  %>원</p>
+							<p class="sales-calculation-sum">&nbsp;&nbsp;&nbsp;<%=df.format(up.get("refund"))  %>원</p>
 						</div>
 					</div>
 				</div>
@@ -52,7 +54,7 @@
 						<span style="display:inline-block"><%=up.get("receivablecnt")  %>건</span>
 					</div>
 					<div class="sales-calculation-standby sum">
-						<span><%=up.get("receivable")  %>원</span>
+						<span><%=df.format(up.get("receivable"))  %>원</span>
 					</div>
 				</div>
 			</div>
@@ -71,31 +73,31 @@
 								<td class="sales-calculation-table-column1">신용카드
 									<p style="display: inline-block;float: right;"><%= up.get("cardsalescnt")  %>건</p>
 								</td>
-								<td class="sales-calculation-table-column2"><%=up.get("cardsales")  %>원</td>
+								<td class="sales-calculation-table-column2"><%=df.format(up.get("cardsales"))  %>원</td>
 							</tr>
 							<tr>
 								<td class="sales-calculation-table-column1">이체
 									<p style="display: inline-block;float: right;"><%=up.get("transsalescnt")%>건</p>
 								</td>
-								<td class="sales-calculation-table-column2"><%= up.get("transsales") %>원</td>
+								<td class="sales-calculation-table-column2"><%= df.format(up.get("transsales")) %>원</td>
 							</tr>
 							<tr>
 								<td class="sales-calculation-table-column1">현금
 									<p style="display: inline-block;float: right;"><%=up.get("cashsalescnt")  %>건</p>
 								</td>
-								<td class="sales-calculation-table-column2"><%=up.get("cashsales")  %>원</td>
+								<td class="sales-calculation-table-column2"><%=df.format(up.get("cashsales"))  %>원</td>
 							</tr>
 							<tr>
 								<td class="sales-calculation-table-column1" style="color: #FF5722 !important;">이체/현금 환불
 									<p style="display: inline-block;float: right;"><%=refundcashcnt %>건</p>
 								</td>
-								<td class="sales-calculation-table-column2" style="color: #FF5722 !important;"><%=refundcash %>원</td>
+								<td class="sales-calculation-table-column2" style="color: #FF5722 !important;"><%=df.format(refundcash) %>원</td>
 							</tr>
 							<tr>
 								<td class="sales-calculation-table-column1" style="background: #F2F2F2;">합계
 									<p style="display: inline-block;float: right;"><%=payMethodcnt %>건</p>
 								</td>
-								<td class="sales-calculation-table-column2" style="background: #F2F2F2;"><%=payMethodsales %>원</td>
+								<td class="sales-calculation-table-column2" style="background: #F2F2F2;"><%=df.format(payMethodsales) %>원</td>
 							</tr>
 						</tbody>
 					</table>
@@ -114,31 +116,31 @@
 								<td class="sales-calculation-table-column1">신규결제
 									<p style="display: inline-block;float: right;"><%=up.get("newsalescnt") %>건</p>
 								</td>
-								<td class="sales-calculation-table-column2"><%=up.get("newsales") %>원</td>
+								<td class="sales-calculation-table-column2"><%=df.format(up.get("newsales")) %>원</td>
 							</tr>
 							<tr>
 								<td class="sales-calculation-table-column1">재 결제
 									<p style="display: inline-block;float: right;"><%=up.get("resalescnt") %>건</p>
 								</td>
-								<td class="sales-calculation-table-column2"><%=up.get("resales") %>원</td>
+								<td class="sales-calculation-table-column2"><%=df.format(up.get("resales")) %>원</td>
 							</tr>
 							<tr>
 								<td class="sales-calculation-table-column1" style="color: #FF5722 !important;">카드취소
 									<p style="display: inline-block;float: right;"><%=up.get("refundcardcnt") %>건</p>
 								</td>
-								<td class="sales-calculation-table-column2" style="color: #FF5722 !important;"><%=up.get("refundcard") %>원</td>
+								<td class="sales-calculation-table-column2" style="color: #FF5722 !important;"><%=df.format(up.get("refundcard")) %>원</td>
 							</tr>
 							<tr>
 								<td class="sales-calculation-table-column1" style="color: #FF5722 !important;">이체/현금 환불
 									<p style="display: inline-block;float: right;"><%=refundcashcnt%>건</p>
 								</td>
-								<td class="sales-calculation-table-column2" style="color: #FF5722 !important;"><%=refundcash%>원</td>
+								<td class="sales-calculation-table-column2" style="color: #FF5722 !important;"><%=df.format(refundcash)%>원</td>
 							</tr>
 							<tr>
 								<td class="sales-calculation-table-column1" style="background: #F2F2F2;">합계
 									<p style="display: inline-block;float: right;"><%=paysortcnt %>건</p>
 								</td>
-								<td class="sales-calculation-table-column2" style="background: #F2F2F2;"><%=paysort %>원</td>
+								<td class="sales-calculation-table-column2" style="background: #F2F2F2;"><%=df.format(paysort) %>원</td>
 							</tr>
 						</tbody>
 					</table>

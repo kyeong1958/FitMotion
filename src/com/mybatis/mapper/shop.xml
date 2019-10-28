@@ -85,7 +85,7 @@
 </update> -->
 
 <!--==========================[[민지 끝 ]]=======================================================================  -->
-<!--========================================[[ 정은 시작 ]]===============================================================  -->
+<!--========================================[[ 정은 시작 -> 경애시작 ]]===============================================================  -->
 
    <!-- ============================================================================================================== -->
    <select id="sisId" parameterType="map" statementType="CALLABLE">
@@ -103,28 +103,34 @@
 					     ,#{result, mode=OUT, jdbcType=VARCHAR, javaType=java.lang.String}
 		)}
 	</select>
-	<update id="superjoin">
-		INSERT INTO gym(gym_num,gym_name,gym_address,sv_id,gym_postal_code)
-		VALUES (seq_gym_code.nextval,#{gym_name},#{gym_address}||' '||#{gym_extraAddress},#{joinid}.#{gym_postal_code})
-	</update>
 	<select id="superjoin" parameterType="map" statementType="CALLABLE">
-	 	{call proc_idcheck(
-						 #{gym_name, mode=IN, jdbcType=VARCHAR, javaType=java.lang.String}
-						,#{gym_postal_code, mode=IN, jdbcType=VARCHAR, javaType=java.lang.String}
-						,#{gym_address, mode=IN, jdbcType=VARCHAR, javaType=java.lang.String}
-						,#{gym_extraAddress, mode=IN, jdbcType=VARCHAR, javaType=java.lang.String}
-						,#{joinid, mode=IN, jdbcType=VARCHAR, javaType=java.lang.String}
+	 	{call proc_gymjoin(
+						 #{joinid, mode=IN, jdbcType=VARCHAR, javaType=java.lang.String}
 						,#{join_pw, mode=IN, jdbcType=VARCHAR, javaType=java.lang.String}
 						,#{join_name, mode=IN, jdbcType=VARCHAR, javaType=java.lang.String}
 						,#{join_hp, mode=IN, jdbcType=VARCHAR, javaType=java.lang.String}
 						,#{join_gender, mode=IN, jdbcType=VARCHAR, javaType=java.lang.String}
 						,#{join_birth, mode=IN, jdbcType=VARCHAR, javaType=java.lang.String}
+						,#{gym_name, mode=IN, jdbcType=VARCHAR, javaType=java.lang.String}
+						,#{gym_postal_code, mode=IN, jdbcType=VARCHAR, javaType=java.lang.String}
+						,#{gym_address, mode=IN, jdbcType=VARCHAR, javaType=java.lang.String}
+						,#{gym_extraAddress, mode=IN, jdbcType=VARCHAR, javaType=java.lang.String}
 					    ,#{result, mode=OUT, jdbcType=VARCHAR, javaType=java.lang.String}
 		)}
 	</select>
-	<select id="staffjoin">
-	
+	<select id="staffjoin" parameterType="map" statementType="CALLABLE">
+		{call proc_staffjoin(
+							 #{joinid, mode=IN, jdbcType=VARCHAR, javaType=java.lang.String}
+							,#{gym_num, mode=IN, jdbcType=VARCHAR, javaType=java.lang.String}
+							,#{join_name, mode=IN, jdbcType=VARCHAR, javaType=java.lang.String}
+							,#{join_gender, mode=IN, jdbcType=VARCHAR, javaType=java.lang.String}
+							,#{join_hp, mode=IN, jdbcType=VARCHAR, javaType=java.lang.String}
+							,#{staff_introduce, mode=IN, jdbcType=VARCHAR, javaType=java.lang.String}
+							,#{join_pw, mode=IN, jdbcType=VARCHAR, javaType=java.lang.String}
+							,#{join_birth, mode=IN, jdbcType=VARCHAR, javaType=java.lang.String}
+						    ,#{result, mode=OUT, jdbcType=VARCHAR, javaType=java.lang.String}
+			)}
 	</select>
-<!--========================================[[ 정은 끝 ]]===============================================================  -->
+<!--========================================[[ 정은 끝 -> 경애 끝 ]]===============================================================  -->
 </mapper> 
  

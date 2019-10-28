@@ -14,6 +14,7 @@
 	}
 </style>
 <%
+	String login_id = session.getAttribute("login_id").toString();
 	Calendar cal = Calendar.getInstance();
 	int day[][][] = new int[12][6][7];
 	DecimalFormat df = new DecimalFormat("00");
@@ -53,23 +54,11 @@
 							}}}}}}}
 %>
 <!-- ============================ [[ 주간달력날짜추출 ]] ======================================== -->
- 
 
-<style type="text/css">
-	body{
-		padding:0%;
-	}
-</style>
-
-<body>
 <script type="text/javascript">
 	$(document).ready(function(){
-		$(".sales").hide();
-		$(".member").hide();
-		$(".analysis").hide();
-		$(".service").hide();
 		$.ajax({
-			url:"/schedule/scheduleList.fm"
+			url:"/schedule/scheduleList.fm?login_id=<%=login_id%>"
 		   ,success:function(data){
 			   $("#schedule_week").html(data);
 		   }
@@ -85,6 +74,7 @@
 		}); 
 	});
 </script>
+<body>
 <script type="text/javascript">
 /* 모달창 */
  	function scheduleModal(){
@@ -92,7 +82,6 @@
 	} 
 
  	function schedulechangeModal(mem_name, mem_num, appli_date, shour, smin, ehour, emin, place, appli_num){
- 	//	alert(mem_name+", "+mem_num+", "+appli_date+", "+shour+", "+smin+", "+ehour+", "+emin+", "+place+", "+appli_num);
  		$.ajax({
 			method:'get'
 			,url:'/schedule/scheduleModal.fm'
@@ -114,7 +103,6 @@
 /* 모달창 */
 /* 출결사항 */
 	function caUPD(appli_num,att_num){
-	//	alert(appli_num+", "+att_num);
 		$.ajax({
 			url:'/schedule/caUPD.fm?appli_num='+appli_num+'&att_num='+att_num
 			,success:function(data){
@@ -160,7 +148,6 @@
 /* 수업 예약모달창 */
 	function smreservation(){
 		 var formData = $("#f_sm").serialize();
-	//	 alert("form전성");
 		 $.ajax({
 			 method:'get'
 			 ,url:'/schedule/scheduleReservation.fm'
@@ -180,7 +167,6 @@
 /* 예약변경 모달창 */
 	function smreservation(){
 		 var formData = $("#f_scm").serialize();
-	//	 alert("form전성");
 		 $.ajax({
 			 method:'get'
 			 ,url:'/schedule/scheduleReservationUPD.fm'
@@ -201,7 +187,7 @@
 	function prev(year,month,week){
 	//	alert(year+", "+month+", "+week);
 		$.ajax({
-			url:"/schedule/scheduleList.fm?year="+year+"&month="+month+"&week="+week+"&move=prev"
+			url:"/schedule/scheduleList.fm?year="+year+"&month="+month+"&week="+week+"&move=prev&login_id=<%=login_id%>"
 		   ,success:function(data){
 			  // alert("성공");
 			   $("#schedule_week").html(data);
@@ -211,7 +197,7 @@
 	function next(year,month,week){
 	//	alert(year+", "+month+", "+week);
 		$.ajax({
-			url:"/schedule/scheduleList.fm?year="+year+"&month="+month+"&week="+week+"&move=next"
+			url:"/schedule/scheduleList.fm?year="+year+"&month="+month+"&week="+week+"&move=next&login_id=<%=login_id%>"
 		   ,success:function(data){
 			  // alert("성공");
 			   $("#schedule_week").html(data);

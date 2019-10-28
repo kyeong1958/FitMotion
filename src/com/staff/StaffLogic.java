@@ -13,6 +13,15 @@ public class StaffLogic {
    public StaffLogic() {
       staffDao = new StaffDao();
    }
+///////////////////////////////////////////// [[ 경애시작 ]] ////////////////////////////////////////////////////////
+
+	public Map<String, Object> staffSalaryDetail(String login_id, String todate) {
+		Map<String, Object> staffSalaryDetail = new HashMap<String, Object>();
+		staffSalaryDetail = staffDao.staffSalaryDetail(login_id,todate);
+		return staffSalaryDetail;
+	}
+
+///////////////////////////////////////////// [[ 경애 끝 ]] ////////////////////////////////////////////////////////
    //===================================[[민지 Logic 시작 ]]=====================================
    public int sfIns(Map<String, Object> pMap) {
       logger.info("등록하기 로직");
@@ -59,7 +68,10 @@ public int SFUPD(Map<String, Object> pMap) {
       return result;
 }
 
-
-   
    //===================================[[민지 Logic 끝]]=====================================
+
+
+
+
+
 }

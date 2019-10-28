@@ -1,4 +1,4 @@
-<style>
+@charset "UTF-8";
 .signup-container {
     width: 280px;
     height: 850px;
@@ -6,13 +6,13 @@
     left: 50%;
     margin-left: -150px;
     margin-top: 100px;
-    color: #606f3d;
+    color: #42485A;
 }
 .signup-container .signup-title1 {
     margin: 0 0 15px 0;
     font-size: 45px;
     text-align: center;
-    color: #606f3d;
+    color: #42485A;
     font-weight: bold;
 }
 .signup-container .controls {
@@ -57,7 +57,7 @@ input, button {
     position: absolute;
     top: 16px;
     right: 12px;
-    color: inherit;
+    color: #42485A;
     font-size: 12px;
     font-weight: bold;
     text-decoration: underline;
@@ -91,7 +91,7 @@ a {
     background: -webkit-linear-gradient(left, #58e5e4, #6ab9f1);
     background: -o-linear-gradient(right, #58e5e4, #6ab9f1);
     background: -moz-linear-gradient(right, #58e5e4, #6ab9f1);
-    background: #606f3d;
+    background: #42485A;
 }
 .ui.button {
     display: inline-block;
@@ -109,4 +109,3 @@ body {
     margin: 0;
     color: #37454a;
 }
-</style>

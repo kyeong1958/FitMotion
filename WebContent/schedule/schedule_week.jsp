@@ -14,6 +14,13 @@
 	.container-fluid{
 		padding:0%;
 	}
+	.schebtn{
+		border:1px solid #BABBC2;
+		border-radius:5px;
+		width: 100%;
+		height: 90%;
+		text-align: center;
+	}
 </style>
 <%
 	if(request.getAttribute("result") != null){
@@ -95,23 +102,27 @@
 	if(toweek != 0){
 		icweek = toweek;
 	}
+	
+	
 	int year = currCal.get(Calendar.YEAR);
 	if(year==icyear){
 		for(int month=0;month<12;month++){
+			//올해 년도를 Calendar년도로 설정			
 			cal.set(Calendar.YEAR,year);
 				if(month == icmonth){
-					//이번달 마지막 날짜 저장하기
+				//당월을 해당 월로 설정			
 					cal.set(Calendar.MONTH, month);
 					for(int tweek=1;tweek<cal.getMaximum(Calendar.WEEK_OF_MONTH);tweek++){
+						//이번주 날짜 가져오기
 						cal.set(Calendar.WEEK_OF_MONTH,tweek);
 						if(tweek == icweek){
-							int cnt = 0;
 							for(int i=1;i<week.length+1;i++){
+								//주간을 일요일 부터 시작하도록 설정
 								cal.set(Calendar.DAY_OF_WEEK,i);
+								//오늘 날짜 가져오기
 								String tday = df.format(cal.get(Calendar.DAY_OF_MONTH));
 								int today = Integer.parseInt(tday);
-								weekday[cnt] = today;
-								cnt++;
+								weekday[i-1] = today;
 								for(int t=8;t<24;t++){
 									day[tweek][i][t] = tday;
 									hour[tweek][i][t] = df.format(t);
@@ -194,11 +205,10 @@
 												%>
 												<td class="dropdown" height='30' style='border-right:1px solid #BABBC2;border-bottom:1px solid #aaaaaa73;'
 													onmouseover="this.style.background='#7dc9f961'" onmouseout="this.style.background='#fff'" rowspan="<%=row%>">
-													<button class="dropdown-toggle" style="border:1px solid #BABBC2;border-radius:5px;background-color: <%=color %>;width: 100%;height: 90%;text-align: center;"
+													<button class="dropdown-toggle schebtn" style="background-color: <%=color %>;"
 													 	 data-toggle="dropdown">
 														<div style="color:white;"><%=scheduleMap.get("MEM_NAME")%> / 
 														<%=scheduleMap.get("APPLI_START_TIME") %> ~ <%=scheduleMap.get("APPLI_END_TIME") %>
-													<%-- 	<%= day[i][j+reserv][time] %>,<%=hour[i][j][time] %> --%>
 														</div>
 													</button>
 														<ul class="dropdown-menu dropdown-menu-right" style="padding: 4%;">
@@ -244,6 +254,8 @@
 									String date[] = scheduleMap.get("APPLI_DATE").toString().split("/");
 									String starttime[] = scheduleMap.get("APPLI_START_TIME").toString().split(":");
 									String endtime[] = scheduleMap.get("APPLI_END_TIME").toString().split(":");
+									int att_num = Integer.parseInt(scheduleMap.get("ATT_NUM").toString());
+									String color = null;
 									if(date[0].equals(Integer.toString(icyear)) && date[1].equals(Integer.toString(icmonth+1))){
 										if(day[i][k+1][time].equals(date[2]) && df.format(time).equals(starttime[0])){
 											if(Integer.parseInt(starttime[1]) >= 30){
@@ -251,16 +263,39 @@
 												reserv++;
 												int row = ((Integer.parseInt(starttime[1])-30) / 15)+2;
 												if(row > 2) {dres++;}
+												if(att_num == 1){ color = "#0080d4";}//출석
+												else if(att_num == 2){color = "#d87708";}//지각
+												else if(att_num == 3){color = "#b79403";}//취소
+												else if(att_num == 4){color = "#7f0202";}//결석
+												else if(att_num == 5){color = "#008000";}//예약
 									%>
-									 	<td height='30' style='border-right:1px solid #BABBC2;border-bottom:1px solid #aaaaaa73;' ondblClick="scheduleModal()"
-											onmouseover="this.style.background='#7dc9f961'" onmouseout="this.style.background='#fff'" rowspan="<%= row%>">
-											<div style="border:1px solid #BABBC2;border-radius:5px;background-color: green;width: 100%;height: 90%;text-align: center;">
-												<div style="color:white;"><%=scheduleMap.get("MEM_NAME")%> / 
-												<%=scheduleMap.get("APPLI_START_TIME") %> ~ <%=scheduleMap.get("APPLI_END_TIME") %>
-												<%= day[i][k+reser][time] %>,<%=hour[i][k][time] %>
-												</div>
-											</div>
-										</td>	
+									 	<td class="dropdown" height='30' style='border-right:1px solid #BABBC2;border-bottom:1px solid #aaaaaa73;'
+													onmouseover="this.style.background='#7dc9f961'" onmouseout="this.style.background='#fff'" rowspan="<%=row%>">
+													<button class="dropdown-toggle schebtn" style="background-color: <%=color %>;"
+													 	 data-toggle="dropdown">
+														<div style="color:white;"><%=scheduleMap.get("MEM_NAME")%> / 
+														<%=scheduleMap.get("APPLI_START_TIME") %> ~ <%=scheduleMap.get("APPLI_END_TIME") %>
+														</div>
+													</button>
+														<ul class="dropdown-menu dropdown-menu-right" style="padding: 4%;">
+														    <li class="dropdown-header" style="padding-bottom: 3%;border-bottom: 1px solid #7777778a;font-weight: 600;font-size: 18px;">출석 체크</li>
+														    <li><a href="javascript:caUPD(<%=scheduleMap.get("APPLI_NUM") %>,'1')" style="margin-top: 7%;">출석</a></li>
+														    <li><a href="javascript:caUPD(<%=scheduleMap.get("APPLI_NUM") %>,'2')">지각</a></li>
+														    <li><a href="javascript:caUPD(<%=scheduleMap.get("APPLI_NUM") %>,'4')">결석</a></li>
+														    <li><a href="javascript:caUPD(<%=scheduleMap.get("APPLI_NUM") %>,'3')">취소</a></li>
+														    <li><a onClick="schedulechangeModal('<%=scheduleMap.get("MEM_NAME")%>'
+														    							,'<%=scheduleMap.get("MEM_NUM")%>'
+														    							,'<%=scheduleMap.get("APPLI_DATE")%>'
+														    							,'<%=starttime[0]%>'
+														    							,'<%=starttime[1]%>'
+														    							,'<%=endtime[0]%>'
+														    							,'<%=endtime[1]%>'
+														    							,'<%=scheduleMap.get("PRO_PLACE")%>'
+														    							,'<%=scheduleMap.get("APPLI_NUM")%>'
+														    								)">
+														          변경</a></li>
+														</ul>
+												</td>	
 									<%		}
 										}
 									}

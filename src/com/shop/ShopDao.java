@@ -187,8 +187,8 @@ public class ShopDao {
 		   }
 
 //////////////////////////////////[[ 민지끝 ]] /////////////////////////////////////////////	
-//////////////////////////////////[[ 정은 시작 ]] /////////////////////////////////////////////	
-
+//////////////////////////////////[[ 정은 시작 -> 경애 시작 ]] /////////////////////////////////////////////	
+		   //로그인
 			public Map<String, Object> slogin(Map<String, Object> pMap) {
 				try {
 					SqlSession sqlSession = sqlSessionFactory.openSession();
@@ -203,7 +203,7 @@ public class ShopDao {
 		         }
 				return pMap;
 			}
-
+			//아이디중복검사
 			public String idCheck(String joinid) {
 				Map<String,Object> pMap = new HashMap<String, Object>();
 				pMap.put("joinid",joinid);
@@ -222,15 +222,26 @@ public class ShopDao {
 		         }
 				return result;
 			}
-//////////////////////////////////[[ 정은 끝 ]] /////////////////////////////////////////////	
+			//회원가입
 			public int join(Map<String, Object> pMap) {
 				int result = 0;
 				try {
 					SqlSession sqlSession = sqlSessionFactory.openSession();
 					if ("super".equals(pMap.get("target"))){
-						result = sqlSession.update("superjoin",pMap);
+						sqlSession.selectOne("superjoin",pMap);
+						logger.info(pMap);
+						result = Integer.parseInt(pMap.get("result").toString());
+						logger.info(result);
+						if(result == 1) {
+							sqlSession.commit();
+						}
 					}else if ("staff".equals(pMap.get("target"))){
-						result = sqlSession.update("staffjoin",pMap);
+						sqlSession.update("staffjoin",pMap);
+						result = Integer.parseInt(pMap.get("result").toString());
+						logger.info(result);
+						if(result == 1) {
+							sqlSession.commit();
+						}
 					}
 					logger.info(pMap);
 				} catch (Exception e) {
@@ -243,4 +254,5 @@ public class ShopDao {
 				return result;
 			}
 
+//////////////////////////////////[[ 정은 끝 -> 경애 끝 ]] /////////////////////////////////////////////	
 }

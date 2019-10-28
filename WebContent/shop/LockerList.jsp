@@ -85,6 +85,14 @@ body{
 					<p><%=locMap.get("LOCKER_NUM") %></p>					     		
 				</div>
             </li>
+	    <%} 
+	    else if("사용만료".equals(status)){
+    	%>   
+			<li class="expiration" onClick="detailModal_n('<%=locMap.get("LOCKER_NUM") %>')">
+		        <div class="locker_box ">
+					<p><%=locMap.get("LOCKER_NUM") %></p>					     		
+				</div>
+            </li>
 	    <%}} %>
 	 </ul>
 <%} %>

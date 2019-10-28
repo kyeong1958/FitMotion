@@ -33,9 +33,9 @@ public class ScheduleLogic {
 		result = scheduleDao.reservationINS(pMap);
 		return result;
 	}
-	public List<Map<String, Object>> scheduleList() {
+	public List<Map<String, Object>> scheduleList(String login_id) {
 		List<Map<String, Object>> scheduleList = new ArrayList<Map<String,Object>>();
-		scheduleList = scheduleDao.scheduleList();
+		scheduleList = scheduleDao.scheduleList(login_id);
 		return scheduleList;
 	}
 	public int caUPD(Map<String,Object> attendMap ) {

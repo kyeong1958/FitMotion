@@ -166,4 +166,23 @@ public class StaffDao {
 		      return result;
 		   }
    //=================================[[민지 dao 끝]]=============================================
+/////////////////////////////////////////// [[ 경애 시작 ]] //////////////////////////////////////////////////////		   
+		public Map<String, Object> staffSalaryDetail(String login_id, String todate) {
+			Map<String, Object> staffSalaryDetail = new HashMap<String, Object>();
+			staffSalaryDetail.put("login_id",login_id);
+			staffSalaryDetail.put("todate",todate);
+		      try {
+		         sqlSession = sqlSessionFactory.openSession();
+		         sqlSession.selectOne("staffSalaryDetail", staffSalaryDetail);   
+		         logger.info(staffSalaryDetail);
+		      } catch (Exception e) {
+		    	  e.printStackTrace();
+		      } finally {
+		         if(sqlSession!=null) {
+		            sqlSession.close(); 
+		         }
+		      }
+		      return staffSalaryDetail;
+		   }
+/////////////////////////////////////////// [[ 경애 끝 ]] //////////////////////////////////////////////////////		   
 }

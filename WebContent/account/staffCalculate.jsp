@@ -57,12 +57,12 @@ function next(year,month){
 		<div class="tab-area" align="center">
 			<div>
 				<span>
-				<a class="staff-prev-next" style="margin-right: 15px;" href="javascript:prev('<%=year%>','<%=month+1%>')"><img src="../images/previous.png"></a>
-					<span id="kyear"><font size="5px" style="vertical-align: bottom;" color="#454544"><%=year%></font></span>
-			        <span><font size="5px" color="#454544">.</font></span>
-			        <span id="kmonth"><font size="5px" style="vertical-align: bottom;" color="#454544"><%=month+1%></font></span>
-				<a class="staff-prev-next" style="margin-left:15px"href="javascript:next('<%=year%>','<%=month+1%>')"><img src="../images/next.png"></a>
-			</span>
+					<a class="staff-prev-next" style="margin-right: 15px;" href="javascript:prev('<%=year%>','<%=month+1%>')"><img src="../images/previous.png"></a>
+						<span id="kyear"><font size="5px" style="vertical-align: bottom;" color="#454544"><%=year%></font></span>
+				        <span><font size="5px" color="#454544">.</font></span>
+				        <span id="kmonth"><font size="5px" style="vertical-align: bottom;" color="#454544"><%=month+1%></font></span>
+					<a class="staff-prev-next" style="margin-left:15px"href="javascript:next('<%=year%>','<%=month+1%>')"><img src="../images/next.png"></a>
+				</span>
 			</div>
 			<div>
 <!-- ================================= [[ 상위 테이블  ]] =================================================== -->

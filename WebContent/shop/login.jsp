@@ -85,17 +85,12 @@ body{
         </form>
       </div>
             <div class="signup-link" style="margin-left: 100px;margin-top:4%;">
-               <a href="join.jsp" style="color: black; ">회원가입</a>
+               <a href="/shop/join.jsp" style="color: black;">회원가입</a>
                <a href=# style="padding-left: 38px;">아이디/비번찾기</a>
             </div>
             </div>        
             <div class="row" style="background-color: black; margin-top: 322px" >
-           <!--  <div id="footer" style="color: white" >
-                   <p ><a id="foot"href="#" style="color: white" >About Fit Motion</a>
-                <p >©2019 FitMotion Data based on Health Korea.</p>
-              </div>
-            </div>
- -->
+
          </div>
       </div>
    </div>
