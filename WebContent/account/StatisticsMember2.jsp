@@ -30,7 +30,7 @@
 $(document).ready(function() {
 	$.ajax({
 		method : 'get',
-		url : '/account/memsales.fm?date='+201910,
+		url : '/account/memsales.fm?date='+201911,
 		success : function(data) {
 			$("#mainboard3").html(data);
 		}

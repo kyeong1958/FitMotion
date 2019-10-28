@@ -32,7 +32,7 @@ function nextmonth2(){
 	kyear =<%=year2%>;
 	kmonth = <%=month2%>;
 	var kkmonth = parseInt(kmonth);
-	if(kkmonth<11){
+	if(kkmonth<12){
 		kkmonth += 1;
 	}else{
 		kyear =  parseInt(kyear);

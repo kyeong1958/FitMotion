@@ -3,7 +3,7 @@
 <%@ include file="/NewCSS/StatisticscssSales.jsp"%> 
 <link rel="stylesheet" type="text/css" href="../NewCSS/main.css">
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
+<script src="//cdnjs.cloudflare.com/ajax/libs/numeral.js/2.0.6/numeral.min.js"></script>
 <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/paginationjs/2.1.4/pagination.css"/>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/paginationjs/2.1.4/pagination.min.js"></script>
@@ -43,7 +43,7 @@ var $j = jQuery.noConflict();
   $(document).ready(function() {
 		$.ajax({
 			method : 'get',
-			url : '/account/allsales.fm?date='+'201910',
+			url : '/account/allsales.fm?date='+'201911',
 			success : function(data) {
 				$("#mainboard2").html(data);
 			}

@@ -84,7 +84,7 @@ function pagichangea(){
 		pageNumm = 10;
 		$.ajax({
 			method : 'get',
-			url : '/account/publicProg.fm?startDate=20190701&endDate=20191001&pageNumm=10',
+			url : '/account/publicProg.fm?startDate=20190701&endDate=20191105&pageNumm=10',
 			success : function(data) {
 				$("#mainboard2").html(data);
 			}
@@ -93,7 +93,7 @@ function pagichangea(){
 		pageNumm = 25;
 		$.ajax({
 			method : 'get',
-			url : '/account/publicProg.fm?startDate=20190701&endDate=20191001&pageNumm=25',
+			url : '/account/publicProg.fm?startDate=20190701&endDate=20191105&pageNumm=25',
 			success : function(data) {
 				$("#mainboard2").html(data);
 			}
@@ -102,7 +102,7 @@ function pagichangea(){
 		pageNumm = 50;
 		$.ajax({
 			method : 'get',
-			url : '/account/publicProg.fm?startDate=20190701&endDate=20191001&pageNumm=50',
+			url : '/account/publicProg.fm?startDate=20190701&endDate=20191105&pageNumm=50',
 			success : function(data) {
 				$("#mainboard2").html(data);
 			}
@@ -111,7 +111,7 @@ function pagichangea(){
 		pageNumm = 100;
 		$.ajax({
 			method : 'get',
-			url : '/account/publicProg.fm?startDate=20190701&endDate=20191001&pageNumm=100',
+			url : '/account/publicProg.fm?startDate=20190701&endDate=20191105&pageNumm=100',
 			success : function(data) {
 				$("#mainboard2").html(data);
 			}

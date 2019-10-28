@@ -1,11 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" 
 	pageEncoding="UTF-8"%>
 <%@ page import="java.util.*" %>
-
+<%@ page import="java.text.DecimalFormat" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ include file="/NewCSS/StatisticscssSales.jsp"%> 
+
 <link rel="stylesheet" type="text/css" href="../NewCSS/main.css">
 
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <!-- jstl을 사용하기 위해서 c:set으로 chart에 값을 담음. -->
 <%
    int size = 0;
@@ -36,7 +38,6 @@
   
     });
 }); */
-
 //콤보박스 년도 받아올 변수
 var kyear;
 //콤보박스 월 받아올 변수
@@ -46,9 +47,9 @@ function nextmonth(){
 	kyear = <%=year%>;
 	kmonth = <%=month%>;
 	var kkmonth = parseInt(kmonth);
-	if(kkmonth<11){
+	if(kkmonth<12){
 		kkmonth += 1;
-		$("#kyear").value =  kkmonth;
+		/* $("#kyear").value =  kkmonth; */
 	}else{
 		kyear =  parseInt(kyear);
 		kyear += 1;
@@ -61,6 +62,7 @@ function nextmonth(){
 	     ,data:formData
 		 ,url:'/account/allsales.fm?date='+date
 		 ,success:function(data){
+		     alert("date = "+ date);
 			 $("#mainboard2").html(data);
 		 }
     });
@@ -100,6 +102,10 @@ function ajax(url) {
 	});
 }
 
+
+function numberWithCommas(x) {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
 
 
 /* function memberSearch(){
@@ -253,6 +259,8 @@ function ajax(url) {
    		//var aver = new Array();
    		var average2=0;
    		//var aver2 = new Array(); 
+   		
+      //NumberFormat df1 = new DecimalFormat("#,##0");
    	//받아온 값을 넣기
 		//jstl 사용 c:forEach == 반복문. 
 		//Map<String,List<Map<String, String>>>
@@ -348,6 +356,7 @@ function ajax(url) {
 			average2 += parseFloat(agecount2[i]);
 		}
 		
+		alert("average2 = "+average2);
 /*  		for(var i=0;i<agecount.length;i++){
 			aver[i] = (parseInt(agecount[i]) / average1 * 100).toFixed(0);
 		}  */
@@ -430,7 +439,10 @@ function ajax(url) {
 							        var meta = chartInstance.controller.getDatasetMeta(i);
 									if (!meta.hidden) {
 					                    meta.data.forEach(function (bar, index) {	
-					                        var data = dataset.data[index];                            
+					                        //var data = dataset.data[index];        
+					                        var nudata = numeral(dataset.data[index]);
+					                        var data = nudata.format('0,0');  
+					                        	
 											var position = bar.tooltipPosition();					                        
 					                        ctx.fillText(data, position.x - 3, position.y + 20);
 					                    });
@@ -559,7 +571,9 @@ function ajax(url) {
 									if (!meta.hidden) {
 										meta.data.forEach(function (bar, index) {
 
-					                        var data = dataset.data[index];                            
+					                        //var data = dataset.data[index];
+					                        var nudata = numeral(dataset.data[index]);
+					                        var data = nudata.format('0,0');  
 											var position = bar.tooltipPosition();
 					                        
 					                        ctx.fillText(data, position.x - 28, position.y + 10);
@@ -632,8 +646,10 @@ function ajax(url) {
 							        var meta = chartInstance.controller.getDatasetMeta(i);
 									if (!meta.hidden) {
 										meta.data.forEach(function (bar, index) {
-
-					                        var data = dataset.data[index].toString();                            
+											//String.format("%,d", val);
+					                        //var data = dataset.data[index].toString(); 
+					                        var nudata = numeral(dataset.data[index]);
+					                        var data = nudata.format('0,0');  
 											var position = bar.tooltipPosition();
 					                        
 					                        ctx.fillText(data, position.x - 5, position.y + 10);
@@ -653,13 +669,13 @@ function ajax(url) {
 				data : data = {
 					datasets : [ {
 						//data : aver,
-						data : agecount,
+						data : agecount2,
 						backgroundColor : [ 'rgba(255, 99, 132, 0.6)',
 								'rgba(255, 206, 86, 0.6)',
 								'rgba(54, 162, 235, 0.6)' ]
 					} ],
 
-					labels : agevalue,
+					labels : agevalue2,
 					weight : 1,
 					borderWidth : 10
 				},
@@ -685,7 +701,7 @@ function ajax(url) {
 						        var meta = chartInstance.controller.getDatasetMeta(i);
 								if (!meta.hidden) {
 									 meta.data.forEach(function (bar, index) {                      
-										var data = (parseInt(dataset.data[index].toString()) / average1 * 100).toFixed(0) + "%";                            
+										var data = (parseInt(dataset.data[index].toString()) / average2 * 100).toFixed(0) + "%";                            
 										var position = bar.tooltipPosition();
 				                        
 				                        ctx.fillText(data, position.x - 10, position.y - 5);
@@ -703,13 +719,13 @@ function ajax(url) {
 				type : 'doughnut',
 				data : data = {
 					datasets : [ {
-						data : agecount2,
+						data : agecount,
 						backgroundColor : [ 'rgba(255, 99, 132, 0.5)',
 								'rgba(155, 156, 100, 0.5)',
 								'rgba(54, 162, 235, 0.5)' ]
 					} ],
 
-					labels : agevalue2,
+					labels : agevalue,
 
 					weight : 1
 				},
@@ -751,7 +767,7 @@ function ajax(url) {
 							if (!meta.hidden) {
 								 meta.data.forEach(function (bar, index) {
 				                        //var data = dataset.data[index].toString();   
-				                        var data = (parseInt(dataset.data[index].toString()) / average2 * 100).toFixed(0) + "%"; 
+				                        var data = (parseInt(dataset.data[index].toString()) / average1 * 100).toFixed(0) + "%"; 
 										var position = bar.tooltipPosition();
 				                        
 				                        ctx.fillText(data, position.x - 10, position.y - 5);

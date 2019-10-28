@@ -94,7 +94,7 @@ function pagichange(){
 		pageNumm = 10;
 		$.ajax({
 			method : 'get',
-			url : '/account/privateProg.fm?startDate=20190701&endDate=20191001&pageNumm=10',
+			url : '/account/privateProg.fm?startDate=20190701&endDate=20191105&pageNumm=10',
 			success : function(data) {
 				$("#mainboard2").html(data);
 			}
@@ -103,7 +103,7 @@ function pagichange(){
 		pageNumm = 25;
 		$.ajax({
 			method : 'get',
-			url : '/account/privateProg.fm?startDate=20190701&endDate=20191001&pageNumm=25',
+			url : '/account/privateProg.fm?startDate=20190701&endDate=20191105&pageNumm=25',
 			success : function(data) {
 				$("#mainboard2").html(data);
 			}
@@ -112,7 +112,7 @@ function pagichange(){
 		pageNumm = 50;
 		$.ajax({
 			method : 'get',
-			url : '/account/privateProg.fm?startDate=20190701&endDate=20191001&pageNumm=50',
+			url : '/account/privateProg.fm?startDate=20190701&endDate=20191105&pageNumm=50',
 			success : function(data) {
 				$("#mainboard2").html(data);
 			}
@@ -121,7 +121,7 @@ function pagichange(){
 		pageNumm = 100;
 		$.ajax({
 			method : 'get',
-			url : '/account/privateProg.fm?startDate=20190701&endDate=20191001&pageNumm=100',
+			url : '/account/privateProg.fm?startDate=20190701&endDate=20191105&pageNumm=100',
 			success : function(data) {
 				$("#mainboard2").html(data);
 			}
@@ -237,6 +237,7 @@ function dateYClick(){
 	
 	var test1 = new Array();
 	var testdata = new Array(new Array());
+	var nudata = "";
 	<c:forEach items="${privatep}" var="map">
 		<c:if test = "${map.key == '개인강의매출'}">
 			<c:choose>
@@ -247,29 +248,29 @@ function dateYClick(){
 					test1.push("${privat.MEM_NAME}");  
 					test1.push("${privat.MEM_HP}");  
 					test1.push("${privat.GS_DEP_HISTORY}");  
-					test1.push("${privat.GS_STATE}");  
+					test1.push("${privat.GS_STATE}");
 					test1.push("${privat.GS_PAY_AMOUNT}");  
 					test1.push("${privat.GS_REF_AMOUNT}");  
 					test1.push("${privat.GS_ACCOUNT_DUE}");  
 					test1.push("${privat.GS_PAY_METHOD}");  	          
 		            test1.push("${privat.GS_BILLING_PERSON}");   
+		            
 		          <c:choose>
-		          
-		          <c:when test="${status.index == 0}">
-		              testdata[0].push("${privat.ROWNUM}");
-		              testdata[0].push("${privat.GS_DEP_DATE}");
-		              testdata[0].push("${privat.MEM_NAME}");
-		              testdata[0].push("${privat.MEM_HP}");
-		              testdata[0].push("${privat.GS_DEP_HISTORY}");  
-		              testdata[0].push("${privat.GS_STATE}");
-		              testdata[0].push("${privat.GS_PAY_AMOUNT}");  
-		              testdata[0].push("${privat.GS_REF_AMOUNT}");  
-		              testdata[0].push("${privat.GS_ACCOUNT_DUE}");
-		              testdata[0].push("${privat.GS_PAY_METHOD}");
-		              testdata[0].push("${privat.GS_BILLING_PERSON}");   
-		       	 </c:when>
+				     <c:when test="${status.index == 0}">
+			              testdata[0].push("${privat.ROWNUM}");
+			              testdata[0].push("${privat.GS_DEP_DATE}");
+			              testdata[0].push("${privat.MEM_NAME}");
+			              testdata[0].push("${privat.MEM_HP}");
+			              testdata[0].push("${privat.GS_DEP_HISTORY}");  
+			              testdata[0].push("${privat.GS_STATE}");
+			              testdata[0].push("${privat.GS_PAY_AMOUNT}");  
+			              testdata[0].push("${privat.GS_REF_AMOUNT}");  
+			              testdata[0].push("${privat.GS_ACCOUNT_DUE}");
+			              testdata[0].push("${privat.GS_PAY_METHOD}");
+			              testdata[0].push("${privat.GS_BILLING_PERSON}");   
+		    		 </c:when> 
 		       </c:choose>
-		       
+		      
 		       <c:if test="${status.index > 0}">
 					testdata.push(test1);
 			   </c:if>
