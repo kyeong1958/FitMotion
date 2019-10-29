@@ -15,9 +15,9 @@ public class StaffLogic {
    }
 ///////////////////////////////////////////// [[ 경애시작 ]] ////////////////////////////////////////////////////////
 
-	public Map<String, Object> staffSalaryDetail(String login_id, String todate) {
+	public Map<String, Object> staffSalaryDetail(Map<String, Object> pMap) {
 		Map<String, Object> staffSalaryDetail = new HashMap<String, Object>();
-		staffSalaryDetail = staffDao.staffSalaryDetail(login_id,todate);
+		staffSalaryDetail = staffDao.staffSalaryDetail(pMap);
 		return staffSalaryDetail;
 	}
 

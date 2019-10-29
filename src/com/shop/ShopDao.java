@@ -113,7 +113,22 @@ public class ShopDao {
 		}
 		return result;
 	}
-	
+	public String idFind(Map<String, Object> pMap) {
+		String id = null;
+		try {
+			sqlSession = sqlSessionFactory.openSession();
+			sqlSession.selectOne("idFind",pMap);
+			logger.info(pMap);
+			id = pMap.get("id").toString();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if(sqlSession != null) {
+				sqlSession.close();
+			}
+		}
+		return id;
+	}
 	
 //////////////////////////////////[[ 경애끝 ]] /////////////////////////////////////////////	
 //////////////////////////////////[[ 민지시작 ]] /////////////////////////////////////////////	
@@ -253,6 +268,7 @@ public class ShopDao {
 		         }
 				return result;
 			}
+			
 
 //////////////////////////////////[[ 정은 끝 -> 경애 끝 ]] /////////////////////////////////////////////	
 }

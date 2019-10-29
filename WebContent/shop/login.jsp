@@ -78,7 +78,7 @@ body{
           </div>
           <div class="form-group">
           <label for="exampleInputName2">Password</label>
-            <input type="text" class="form-control" id="login_pw" name="login_pw"
+            <input type="password" class="form-control" id="login_pw" name="login_pw"
             style="text-align: left; width: 250px; height: 40px;" placeholder="비밀번호">
           </div>
           <button type="button" style="width: 250px; height: 40px;" class="btn btn-dark" onClick="loginAction()">로그인</button>
@@ -86,7 +86,7 @@ body{
       </div>
             <div class="signup-link" style="margin-left: 100px;margin-top:4%;">
                <a href="/shop/join.jsp" style="color: black;">회원가입</a>
-               <a href=# style="padding-left: 38px;">아이디/비번찾기</a>
+               <a href="/shop/idfind.jsp" style="padding-left: 38px;">아이디/비번찾기</a>
             </div>
             </div>        
             <div class="row" style="background-color: black; margin-top: 322px" >

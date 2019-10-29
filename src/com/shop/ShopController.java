@@ -100,6 +100,7 @@ public class ShopController implements Controller {
 				mav.setViewName("/shop/LockerList.fm");
 			}
 		}
+		
 ////////////////////////////////// [[ 경애끝 ]] /////////////////////////////////////////////	
 /*================================[[민지 시작 ]]======================================================*/
 		else if("GoodINS".equals(crud)) {
@@ -186,6 +187,7 @@ public class ShopController implements Controller {
 	@Override
 	public String jsonexecute(HttpServletRequest req, HttpServletResponse res) throws Exception {
 		String json =  null;
+//////////////////////////////////[[ 경애 시작 ]] /////////////////////////////////////////////	
 		if("idcheck".equals(crud)) {
 			logger.info("아이디중복검사");
 			String joinid = null;
@@ -194,6 +196,14 @@ public class ShopController implements Controller {
 			}
 			json = shopLogic.idCheck(joinid);
 		}
+		else if("idfind".equals(crud)) {
+			Map<String,Object> pMap = new HashMap<>();
+			Map<String,Object> rMap = new HashMap<>();
+			HashMapBinder hmb = new HashMapBinder(req);
+			hmb.bindPost(pMap);
+			json = shopLogic.idFind(pMap);
+		}
+//////////////////////////////////[[ 경애 끝 ]] /////////////////////////////////////////////	
 		return json;
 	}
 

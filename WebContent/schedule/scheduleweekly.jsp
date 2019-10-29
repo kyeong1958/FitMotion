@@ -2,7 +2,7 @@
 <%@page import="java.util.Calendar"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" trimDirectiveWhitespaces="true"%>
-<%--    <%@ include file="/common/JEasyUICommon.jsp"%>  --%>
+<%@ include file="/common/JEasyUICommon.jsp"%>
 <link rel="stylesheet" type="text/css" href="../NewCSS/main.css?22">
 <link rel="stylesheet" type="text/css" href="../NewCSS/schedule.css?22">
 <link rel="stylesheet" type="text/css" href="../NewCSS/scheduleModal.css?22">
@@ -78,7 +78,7 @@
 <script type="text/javascript">
 /* 모달창 */
  	function scheduleModal(){
-		$("#scheduleModal").modal();
+		aa("#scheduleModal").modal();
 	} 
 
  	function schedulechangeModal(mem_name, mem_num, appli_date, shour, smin, ehour, emin, place, appli_num){
@@ -98,7 +98,7 @@
  		$("#scm_appli_end_hour").val(ehour);
  		$("#scm_appli_end_min").val(emin);
  		$("#ep_name").val(place);
- 		$("#schedulechangeModal").modal();
+ 		aa("#schedulechangeModal").modal();
  	}
 /* 모달창 */
 /* 출결사항 */
@@ -156,8 +156,8 @@
 				 if(data == '예약불가'){
 					alert('예약된 수업이 존재합니다.');	 
 				 }else{
-					 $("#scheduleModal").modal({backdrop: false});
-					 $("#scheduleModal").modal('hide');
+					 aa("#scheduleModal").modal({backdrop: false});
+					 aa("#scheduleModal").modal('hide');
 					 $("#schedule_week").html(data);
 			 	 }
 			 }
@@ -175,8 +175,8 @@
 				 if(data == '변경불가'){
 					alert('예약된 수업이 존재합니다.');	 
 				 }else{
-					 $("#scheduleModal").modal({backdrop: false});
-					 $("#scheduleModal").modal('hide');
+					 aa("#scheduleModal").modal({backdrop: false});
+					 aa("#scheduleModal").modal('hide');
 					 $("#schedule_week").html(data);
 			 	 }
 			 }
@@ -205,6 +205,9 @@
 		});
 	}
 /* 날짜이동 */
+	function msModal(){
+		aa("#search_member2").modal();
+	} 
 </script>
 <div>
 	<!-- ============================ [[ 화면전환 ]] ======================================== -->
@@ -240,7 +243,8 @@
 					<input type="text" class="spending-text" id="sm_memname" name="sm_memname" style="width:260px;">
 				</span>
 				<span>
-					<button type="button" class="btn-schedule-memsearch" data-toggle="modal" data-target="#search_member2">회원검색</button>
+				<!-- 	<button type="button" class="btn-schedule-memsearch" data-toggle="modal" data-target="#search_member2">회원검색</button> -->
+					<button type="button" class="btn-schedule-memsearch" onClick="msModal()">회원검색</button>
 				</span>
 			</div>
 			<div id="sm_combobox">

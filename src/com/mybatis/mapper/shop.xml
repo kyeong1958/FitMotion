@@ -56,6 +56,13 @@
 		   SET locker_condition = '사용가능'
 		 WHERE locker_num = #{lockNum}
 	</update>
+	<select id="idFind" parameterType="map" statementType="CALLABLE">
+		{call proc_idfind(
+					#{name, mode=IN, jdbcType=VARCHAR, javaType=java.lang.String}
+					,#{hp, mode=IN, jdbcType=VARCHAR, javaType=java.lang.String}
+					,#{id, mode=OUT, jdbcType=VARCHAR, javaType=java.lang.String}
+		)}
+	</select>
 <!--========================== [[ 경애끝 ]] ========================================-->
 	
 <!--==========================[[민지 시작 ]]=======================================================================  -->

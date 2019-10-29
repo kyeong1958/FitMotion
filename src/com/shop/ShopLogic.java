@@ -42,7 +42,11 @@ public class ShopLogic {
 		result = shopDao.lockChange(lockNum);
 		return result;
 	}
-
+	public String idFind(Map<String, Object> pMap) {
+		String id = null;
+		id = shopDao.idFind(pMap);
+		return id;
+	}
 //////////////////////////////////[[ 경애끝 ]] /////////////////////////////////////////////	
 //////////////////////////////////[[ 민지시작 ]] /////////////////////////////////////////////
 	public int GoodIns(Map<String, Object> pMap) {
@@ -83,6 +87,8 @@ public class ShopLogic {
 		result = shopDao.join(pMap);
 		return result;
 	}
+
+	
 
 //////////////////////////////////[[ 정은 끝 -> 경애 끝  ]] /////////////////////////////////////////////	
 

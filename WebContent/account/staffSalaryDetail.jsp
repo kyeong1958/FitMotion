@@ -27,22 +27,18 @@ body{
 <script type="text/javascript">
 /* 날짜이동 */
 	function prev(year,month){
-		//alert(year+", "+month);
 		$.ajax({
-			url:"/account/staffSalaryDetail.fm?year="+year+"&month="+month+"&move=prev"
+			url:"/staff/staffSalaryDetail.fm?login_id=<%=login_id%>&year="+year+"&month="+month+"&move=prev"
 		   ,success:function(data){
-			  // alert("성공");
-			  // $("#schedule_week").html(data);
+			   $("#ajaxinsert").html(data);
 		   }
 		});
 	}
 	function next(year,month){
-		//alert(year+", "+month);
 		$.ajax({
-			url:"/account/staffSalary.fm?year="+year+"&month="+month+"&move=next"
+			url:"/staff/staffSalaryDetail.fm?login_id=<%=login_id%>&year="+year+"&month="+month+"&move=next"
 		   ,success:function(data){
-			  // alert("성공");
-			 //  $("#schedule_week").html(data);
+			   $("#ajaxinsert").html(data);
 		   }
 		});
 	}
@@ -50,10 +46,11 @@ body{
 </script>
 <script type="text/javascript">
 	$(document).ready(function(){
+		alert(<%=year%>);
+		alert(<%=month+1%>);
 		$.ajax({
-			url:'/staff/staffSalaryDetail.fm?login_id=<%=login_id%>&todate=<%=year%>/<%=month+1%>'
+			url:'/staff/staffSalaryDetail.fm?login_id=<%=login_id%>&year=<%=year%>&month=<%=month+1%>'
 			,success:function(data){
-				//alert("성공 "+data);
 				$("#ajaxinsert").html(data);
 			}
 		});
@@ -68,7 +65,8 @@ body{
 			<a class="bar_menu" href="#">직원별 정산</a>
 		</div>
 <!-- ================================= [[ 홈^ ]] =================================================== -->
-			<div class="staff-salary-detail-day">
+			<div id="ajaxinsert">
+			<%--  <div class="staff-salary-detail-day">
 				<span>
 					<a class="staff-prev-next" style="margin-right: 15px;" href="javascript:prev('<%=year%>','<%=month+1%>')"><img src="../images/previous.png"></a>
 						<span id="kyear"><font size="5px" style="vertical-align: bottom;" color="#454544"><%=year%></font></span>
@@ -76,9 +74,9 @@ body{
 				        <span id="kmonth"><font size="5px" style="vertical-align: bottom;" color="#454544"><%=month+1%></font></span>
 					<a class="staff-prev-next" style="margin-left:15px"href="javascript:next('<%=year%>','<%=month+1%>')"><img src="../images/next.png"></a>
 				</span>
-			</div>
+			</div>  --%>
 <!-- <!-- ================================= [[ 테이블  top ]] =================================================== -->
-			<div id="ajaxinsert"></div>
+			</div>
 	<!-- 	<div class="section">
 			<div class="row">
 				<div class="entrance-table-top" style="padding-top:10px;"></div>

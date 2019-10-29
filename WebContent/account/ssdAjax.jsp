@@ -1,15 +1,41 @@
+<%@page import="java.util.Calendar"%>
 <%@page import="java.text.DecimalFormat"%>
 <%@page import="java.util.List"%>
 <%@page import="java.util.Map"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
-	DecimalFormat df = new DecimalFormat("###,###");
 	Map<String,Object> rMap = (Map<String,Object>)request.getAttribute("staffSalaryDetail");
 	List<Map<String,Object>> spList = (List<Map<String,Object>>)rMap.get("sp");
 	Map<String,Object> sp = (Map<String,Object>)spList.get(0);
 	List<Map<String,Object>> plList = (List<Map<String,Object>>)rMap.get("pl");
 	List<Map<String,Object>> glList = (List<Map<String,Object>>)rMap.get("gl");
+	int year = 0;
+	int month = 0;
+	if(rMap.get("year") != null && rMap.get("month") != null){
+		year = Integer.parseInt(rMap.get("year").toString());
+		month = Integer.parseInt(rMap.get("month").toString());
+	}
+	String move = null;
+	if(rMap.get("move") != null){
+		move = rMap.get("move").toString();
+	}
+	if("prev".equals(move)){
+		if(month > 1){
+			month -= 1;
+		}else if(month == 1){
+			year -= 1;
+			month = 12;
+		}
+	}else if("next".equals(move)){
+		if(month<12){
+			month += 1;
+		}else if(month == 12){
+			month = 1;
+			year += 1;
+		}
+	}
+	DecimalFormat df = new DecimalFormat("###,###");
 	int plSum = 0;
 	int plSumcomm = 0;
 	int glSum = 0;
@@ -27,6 +53,17 @@
 	int commSum = plSumcomm + glSumcomm;
 	int salary = Integer.parseInt(sp.get("PI_BASE_PAY").toString()) + commSum;
 %>
+ <div class="staff-salary-detail-day">
+	<span>
+		<a class="staff-prev-next" style="margin-right: 15px;" href="javascript:prev('<%=year%>','<%=month%>')"><img src="../images/previous.png"></a>
+			<span id="kyear"><font size="5px" style="vertical-align: bottom;" color="#454544"><%=year%></font></span>
+	        <span><font size="5px" color="#454544">.</font></span>
+	        <span id="kmonth"><font size="5px" style="vertical-align: bottom;" color="#454544"><%=month%></font></span>
+		<a class="staff-prev-next" style="margin-left:15px"href="javascript:next('<%=year%>','<%=month%>')"><img src="../images/next.png"></a>
+	</span>
+</div> 
+
+
 <!-- ================================= [[ 테이블  top ]] =================================================== -->
 		<div class="section">
 			<div class="row">

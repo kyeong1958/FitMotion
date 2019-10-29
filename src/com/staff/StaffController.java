@@ -32,19 +32,17 @@ public class StaffController implements Controller {
 /////////////////////////////////////////// [[ 경애 시작 ]] /////////////////////////////////////////////////
 		if("staffSalaryDetail".equals(crud)) {
 			logger.info("staffSalaryDetail 호출 성공");
-			String login_id = null;
-			String todate = null;
-			if(req.getParameter("login_id") != null) {
-				login_id = req.getParameter("login_id");
-				todate = req.getParameter("todate");
-			}
 			Map<String,Object> staffSalaryDetail = new HashMap<String, Object>();
-			staffSalaryDetail =  staffLogic.staffSalaryDetail(login_id,todate);
-			logger.info(staffSalaryDetail);
+			Map<String,Object> rMap = new HashMap<String, Object>();
+			HashMapBinder hmb = new HashMapBinder(req);
+			hmb.bind(staffSalaryDetail);
+			logger.info("CON"+staffSalaryDetail);
+			rMap =  staffLogic.staffSalaryDetail(staffSalaryDetail);
+			logger.info("===="+staffSalaryDetail);
 			if(staffSalaryDetail != null) {
 				mav.pageMove("forward");
 				mav.setViewName("/account/ssdAjax.jsp");
-				mav.addObject("staffSalaryDetail", staffSalaryDetail);
+				mav.addObject("staffSalaryDetail", rMap);
 			}
 		}
 
