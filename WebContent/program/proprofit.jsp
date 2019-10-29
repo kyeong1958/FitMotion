@@ -249,7 +249,7 @@ function removeComma(str)
 						});
 					}
 				});
-ㅋ 			}
+ 			}
  		}); 
   }
  function imsi_change(imsi){

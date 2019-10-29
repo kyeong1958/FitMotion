@@ -7,7 +7,6 @@
 <link rel="stylesheet" type="text/css" href="../NewCSS/profit.css">
 <link rel="stylesheet" type="text/css" href="../NewCSS/MemberSearch.css">
 
-
 <style type="text/css">
 body{
 	padding:0;
@@ -83,19 +82,12 @@ body{
 		  
 		  
 	/* 숫자 타입 버튼틀릭시 text박스에 값 넣기 */
-
-
-  
   function number(num){
-
      g_val +=num;
      g_val = String(g_val);
      var temp = g_val.replace(/(\d)(?=(?:\d{3})+(?!\d))/g, "$1,");
      //alert("temp:"+temp);
-     
      document.getElementById("etextname").value=temp;
- 
-        
 }  
   /* 지우기 눌렀을때 전체 삭제  */
   function clean() {
@@ -185,22 +177,70 @@ function removeComma(str)
  		document.getElementById("total_buy").value = 
 		 	Number(removeComma(document.getElementById("total_buy").value)) - Number(removeComma(g_dismoney)); 
  	}
+	
+ 	function nomoney(){
+ 		
+ 	}
+ 	
 
+ function imsi_change(imsi){
+	 data = imsi.split(",")  
+	 $("#imsi_ghost").val(data[0]);
+	 if(data[2]=="promotion"){
+     $("#prom_num").val(data[1]);
+	 }
+	 else if(data[2]=="ticket"){
+     $("#ticket_num").val(data[1]);
+	 }
+ }
+ 
  function pfIns_buy(){
-		var formData = $("#ftable").serialize();
-	//	alert(formData);
+		var formData = $(".f_insert").serialize();
+		if($("#t_card").val()!=0){
+		formData+="&ticp_pay_period=카드"
+		}
+		 else if($("#t_money").val()!=0){
+		formData+="&ticp_pay_period=현금"
+		}
+		 else if($("t_fund").val()!=0){
+		formData+="&ticp_pay_period=이체"
+		 }
+		console.log(formData);
+		alert(formData);
 		 $.ajax({
 			method:"POST"
 			,data:formData
-			,url:"/account/pfINS.fm"
+			,url:"/program/profitIns.fm"
 			,success:function(data){
-				//$("#eqbox").html(data);
-			}
-		}); 
- }
- function imsi_change(imsi){
-	 $("#imsi_ghost").val(imsi);
- }
+				document.getElementById("total_buy").value = "";
+				document.getElementById("t_card").value = "";
+				document.getElementById("t_money").value = "";
+				document.getElementById("t_dis").value = "";
+				document.getElementById("t_fund").value = "";
+				document.getElementById("datebox").value = "";
+				document.getElementById("imsi_ghost").value = "";
+				 $.ajax({
+			    		  method:"POST"
+			  				,data:formData
+			  				,url:"/account/PROSEL.fm"
+			  				,success:function(data){
+			  					//alert("성공");
+			  					$("#selectpro").html(data);
+	  			  				 $.ajax({
+	  		  			    		  method:"POST"
+	  		  			  				,data:formData
+	  		  			  				,url:"/account/PROSEL2.fm"
+	  		  			  				,success:function(data){
+	  		  			  					//alert("성공");
+	  		  			  					$("#selectpro2").html(data);
+	  		  			}
+	  		  		}); 
+			  	}
+			}); 
+		}
+	}); 
+}
+ 
  
 
  
@@ -215,9 +255,10 @@ function removeComma(str)
    <!-- ================================= [[ 홈 끝 ]] =================================================== -->
       <div class="section">
    <!-- ================================= [[ left ]] =================================================== -->
-        <form id=f_insert onSubmit="return false" name="f_insert" >
+        <form id=f_insert onSubmit="return false" name="f_insert" class="f_insert" >
          <div class="row spending-box">
-        	
+         <input type="hidden" id="ticket_num" name="ticket_num">
+         <input type="hidden" id="prom_num" name="prom_num">
             <div class="row">
                <div class="col-sm-6" style="border-right:1px solid #BABBC2;padding-right:30px;">
                   <h4 class="spending-box-left">매출등록</h4>
@@ -226,6 +267,7 @@ function removeComma(str)
                         <label class="spend-box-left-column">회원명</label>
                         <span>
                            <input type="text" id="sm_memname"  class="spending-text" style="width:260px;">
+                           <input type="hidden" id="sm_mem_num" name="mem_num" class="spending-text" style="width:260px;">
                         </span>
                         <span>
                            <button type="button" class="btn_cancle search_mem" style="margin-left:10px" data-toggle="modal" data-target="#search_member">회원찾기</button>
@@ -245,7 +287,7 @@ function removeComma(str)
                      <div style="padding:0 0 5px">
                         <label class="spend-box-left-column">상품명</label>
                         <span>
-                           <select class="spend-combobox" name="ticket_num"  id="selectpro" onchange="imsi_change(this.value)">
+                           <select class="spend-combobox" id="selectpro" onchange="imsi_change(this.value)">
                       		<!-- PROMOTION AJAX -->
                            </select>
                         </span>
@@ -253,7 +295,7 @@ function removeComma(str)
                      <div style="padding:0 0 5px">
                         <label class="spend-box-left-column">상품가격</label>
                         <span>
-                           <input type="text" id="imsi_ghost" class="spending-text" style="width:260px;" name="ticp_payment">
+                           <input type="text" id="imsi_ghost" class="spending-text" style="width:260px;" >
                         </span>
                      </div>
                      
@@ -284,8 +326,8 @@ function removeComma(str)
                               <td class="spend-table-column">총 결제금액</td>
                               <td class="spend-table-content" style="color: #2196F3 !important;"> 
 	                              <div>
-	                              		<span name="prom_dis_price" >
-	                              			<input type="text" id="total_buy" style="border: none;text-align: right;">원</span>
+	                              		<span >
+	                              			<input type="text" name="proticp_payment" id="total_buy" style="border: none;text-align: right;">원</span>
 	                              	</div> 
                               </td>
                            </tr>
@@ -302,7 +344,7 @@ function removeComma(str)
                   <div style="padding:0 0 5px">
                      <label class="spend-box-right-column">결제 담당자 선택</label>
                      <span>
-                        <select class="spend-combobox" name="" id="selectpro2">
+                        <select class="spend-combobox" id="selectpro2">
                           <!--콤보박스 AJAX  -->
                         </select>
                      </span>
@@ -310,11 +352,10 @@ function removeComma(str)
                   <div style="padding:0 0 5px">
                      <label class="spend-box-right-column">이용 시작일</label>
                 
-                     <input  id="datebox" class="easyui-datebox">
+                     <input  id="datebox" class="easyui-datebox" >
                   </div>
                   <div style="padding:0 0 5px">
                      <label class="spend-box-right-column">결제일</label>
-                    
                      <input  id="datebox"  name="ticp_reg_date" class="easyui-datebox">
                   </div>
                   <div style="padding:0 0 5px" >
@@ -357,12 +398,12 @@ function removeComma(str)
                  </div>
                   <div>
                      <h4 class="spending-box-payment-title">결제 수단 선택</h4>
-                     <button class="spending-payment-method card"  name="ticp_pay_period" value="card" onclick="card()">카드</button>
-                     <button class="spending-payment-method cash" name="ticp_pay_period" value="cash" onclick="money()">현금</button>
-                     <button class="spending-payment-method bankTransfer"  name="ticp_pay_period" value="trans" onclick="fund()">이체</button>
+                     <button class="spending-payment-method card" onclick="card()">카드</button>
+                     <button class="spending-payment-method cash" onclick="money()">현금</button>
+                     <button class="spending-payment-method bankTransfer" onclick="fund()">이체</button>
                      <button class="spending-payment-method bankTransfer" onclick="discount()">할인(%)</button>
                      <button class="spending-payment-method bankTransfer" onclick="discountmoney()">할인(원)</button>
-                     <button class="spending-payment-method bankTransfer">미수금</button>
+                     <button class="spending-payment-method bankTransfer" onclick="nomoney()">미수금</button>
                   </div>                  
                </div>
             </div>

@@ -155,7 +155,9 @@ public class AccountController implements Controller {
 			mav.pageMove("forward");
 			mav.setViewName("/account/selectpro.jsp");
 
-		} else if ("PROSEL2".equals(crud)) {
+		} 
+		/* 직원 콤보 */
+		else if ("PROSEL2".equals(crud)) {
 			logger.info("프로모션 선택시 뿌려주는것컨트롤");
 			Map<String, Object> proSel = new HashMap<String, Object>();
 			proSel = accountLogic.prosel();
@@ -193,6 +195,31 @@ public class AccountController implements Controller {
 			result = accountLogic.proback(pMap);
 			mav.pageMove("redirect");
 			mav.setViewName("/account/probuySel.fm");
+		}
+		/*지출분류 콤보박스*/
+		else if("spendingcombo".equals(crud)) {
+			logger.info("프로모션 선택시 뿌려주는것컨트롤");
+			Map<String, Object> spendingcombo = new HashMap<String, Object>();
+			List<Map<String,Object>> rMap = new ArrayList<Map<String,Object>>();
+			rMap = accountLogic.spendingcombo(spendingcombo);
+			mav.addObject("spendingcombo", rMap);
+			logger.info(spendingcombo);
+			//logger.info(proSel);
+			mav.pageMove("forward");
+			mav.setViewName("/account/spending_breakdown.jsp");
+		}
+		/*지출 insert*/
+		else if("spendingInsert".equals(crud)) {
+			int result = 0;
+			Map<String, Object> pMap = new HashMap<>();
+			HashMapBinder hmb = new HashMapBinder(req);
+			hmb.bindPost(pMap);
+			logger.info(pMap);
+			logger.info(result);
+			result = accountLogic.spendingInsert(pMap);
+			mav.pageMove("redirect");
+			//mav.setViewName("/account/profit.jsp");
+			
 		}
 /*
  * =============================[[민지 끝]]==============================================================

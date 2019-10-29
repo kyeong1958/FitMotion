@@ -14,7 +14,11 @@
 }
 
 </style>    
+<script>
 
+
+
+</script>
 
     
     
@@ -41,7 +45,7 @@
       	   Map<String,Object> proMap = pro_list.get(j);
       	   
          %>
- 		 <option value="<%=proMap.get("PROM_DIS_PRICE")%>"><%=proMap.get("PROM_NAME") %></option>
+ 		 <option value="<%=proMap.get("PROM_DIS_PRICE")%>,<%=proMap.get("PROM_NUM")%>,promotion"><%=proMap.get("PROM_NAME") %></option>
  		 <%
          }
  		 %>
@@ -49,7 +53,9 @@
          for(int z=0; z<tic_size; z++){
       	   Map<String,Object> ticMap = tic_list.get(z);
          %>
- 		 <option value="<%=ticMap.get("TICKET_PRICE")%>"><%=ticMap.get("TICKET_NAME") %></option>
+ 		 <option value="<%=ticMap.get("TICKET_PRICE")%>,<%=ticMap.get("TICKET_NUM")%>,ticket"><%=ticMap.get("TICKET_NAME") %></option>
+ 		 
+ 		 
  		  <%
          }
  		 %>

@@ -44,7 +44,7 @@ public class AccountLogic {
 		result = accountDao.pfIns(pMap);
 		return result;
 	}
-
+	/*직원 ,이용권 콤보박스 */
 	public Map<String, Object> prosel() {
 		Map<String, Object> prosel = new HashMap<String, Object>();
 		prosel = accountDao.prosel();
@@ -72,7 +72,21 @@ public class AccountLogic {
 		logger.info(result);
 		return result;
 	}
-	
+	/*지출 분류 콤보박스*/
+	public List<Map<String,Object>> spendingcombo(Map<String, Object> spendingcombo) {
+		List<Map<String,Object>> rMap = new ArrayList<Map<String,Object>>();
+		rMap = accountDao.spendingcombo(spendingcombo);
+		logger.info(rMap);
+		return rMap;
+	}
+	/*지출 insert*/
+	public int spendingInsert(Map<String, Object> pMap) {
+		int result = 0;
+		logger.info("지출등록 입력 부분 Logic 호출 성공");
+		logger.info(pMap);
+		result = accountDao.spendingInsert(pMap);
+		return result;
+	}
 /*
  * =========================[[민지 끝]]============================================
  */
@@ -106,6 +120,8 @@ public class AccountLogic {
 	return publicProg;
 	}
 ////////////////수근끝/////////////////
+	
+	
 	
 
 }

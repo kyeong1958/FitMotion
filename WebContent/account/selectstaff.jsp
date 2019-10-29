@@ -30,7 +30,7 @@
          for(int i=0; i<size; i++){
       	   Map<String,Object> rMap = list.get(i);
          %>
-     		<option value='<%=rMap.get("STAFF_NUM")%>'><%=rMap.get("STAFF_NAME") %></option>
+     		<option value="<%=rMap.get("STAFF_NUM")%>,<%=rMap.get("STAFF_NAME") %>"><%=rMap.get("STAFF_NAME") %></option>
           <%
        	} 
           %>

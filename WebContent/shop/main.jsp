@@ -128,18 +128,26 @@
 						});
 			   		 }
 				    /*url=="../account/BillingHistoryList.jsp" 끝*/
-				    else if(url=='../account/spending.jsp'){
-				    	 $.ajax({
-		  			    		  method:"POST"
-		  			  				,data:formData
-		  			  				,url:"/account/PROSEL2.fm"
-		  			  				,success:function(data){
-		  			  					//alert("성공");
-		  			  					$("#selectpro2").html(data);
-		  			  				}
-		  			    	  }); 
-				   		 }
-				    /* url=='../account/spending.jsp' 끝 */
+				   else if(url=='../account/spending.jsp'){
+				    	$.ajax({
+	  			    		  method:"POST"
+	  			  				,url:"/account/spendingcombo.fm"
+	  			  				,success:function(data){
+	  			  					//alert("성공");
+	  			  					$("#breakcombo").html(data);
+			  			  				 $.ajax({
+			  		  			    		  method:"POST"
+			  		  			  				,url:"/account/PROSEL2.fm"
+			  		  			  				,success:function(data){
+			  		  			  					//alert("성공");
+			  		  			  					$("#selectpro2").html(data);
+			  		  			  			}
+			  		  			    	  }); 
+	  			  						}
+	  			    			     });  
+				    	
+				    	/*  url=='../account/spending.jsp' 끝 */
+				    }
 			  }
 		   });
 		}

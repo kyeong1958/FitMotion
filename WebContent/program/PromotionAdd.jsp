@@ -42,7 +42,6 @@ body {
 		function proadd(){
 			var text = " ";
 			var text2= " ";
-		
 			for (var i = 1; i <= count; i++) {
 				if(i > 1){
 						text += "+"

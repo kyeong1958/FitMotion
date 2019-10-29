@@ -130,6 +130,7 @@ public class ProgramController implements Controller {
             mav.pageMove("redirect");
             mav.setViewName("/program/TicketMain.jsp");
 		}
+		/*이용권관리에서 티켓구매*/
 		else if("probuy".equals(crud)) {
 			int result =0;
 			logger.info("Controller");
@@ -142,6 +143,20 @@ public class ProgramController implements Controller {
 			logger.info(result);
 			mav.pageMove("redirect");
 			mav.setViewName("/program/TicketMain.jsp");
+		}
+		/*매출등록창에서 티켓구매*/
+		else if("profitIns".equals(crud)) {
+			int result =0;
+			logger.info("Controller");
+			Map<String,Object> pMap = new HashMap<>();
+			HashMapBinder hmb = new HashMapBinder(req);
+			hmb.bindPost(pMap);
+			logger.info("start"+pMap);
+			result =  programLogic.probuy(pMap);
+			logger.info(pMap);
+			logger.info(result);
+			mav.pageMove("redirect");
+			mav.setViewName("/account/profit.jsp");
 		}
 		
 /*=======================================[[민지 끝 ]]==============================================*/

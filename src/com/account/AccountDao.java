@@ -101,7 +101,7 @@ public class AccountDao {
 			logger.info("여기탐?");
 			sqlSession = sqlSessionFactory.openSession();
 			sqlSession.selectOne("promotionSEL", prosel);
-			//logger.info(prosel);
+			logger.info(prosel);
 			sqlSession.commit();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -118,7 +118,7 @@ public class AccountDao {
 		try {
 			logger.info("여기탐?");
 			sqlSession = sqlSessionFactory.openSession();
-			ProbuySel = sqlSession.selectList("promcomdo");
+			ProbuySel = sqlSession.selectList("promobuysel");
 			sqlSession.commit();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -167,6 +167,46 @@ public class AccountDao {
 		return result;
 	}
 	
+	/*지출분류 콤보 */
+	public List<Map<String,Object>> spendingcombo(Map<String, Object> spendingcombo) {
+		List<Map<String,Object>> rMap = new ArrayList<Map<String,Object>>();
+		try {
+			
+			logger.info("여기탐?");
+			sqlSession = sqlSessionFactory.openSession();
+			rMap = sqlSession.selectList("spendingcombo",spendingcombo);
+			logger.info(rMap);
+			sqlSession.commit();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (sqlSession != null) {
+				sqlSession.close();
+			}
+		}
+		return rMap;
+	}
+	/*지출 insert*/
+	public int spendingInsert(Map<String, Object> pMap) {
+		int result = 0;
+		try {
+			logger.info("여기탐?");
+			sqlSession = sqlSessionFactory.openSession();
+			logger.info("여기는??");
+			result = sqlSession.update("speningInsert", pMap);
+//			logger.info(pMap);
+			logger.info(result);
+			sqlSession.commit();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (sqlSession != null) {
+				sqlSession.close();
+			}
+		}
+		return result;
+	}
+
 /*
   ====================================[[민지 끝]]==========================================
  */
@@ -342,6 +382,7 @@ public class AccountDao {
 		return publicProg;
 		}
 /////////////////////////수근끝/////////////////////////
+	
 		
 		
 
