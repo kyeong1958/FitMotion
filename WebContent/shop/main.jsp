@@ -99,6 +99,17 @@
                      }); 
                } 
                 /* url=="../shop/Good.jsp"끝 */
+               else if(url=="../shop/Equipment.jsp"){
+                   $.ajax({
+                        method:"POST"
+                        ,url:"/shop/eqSEL.fm"
+                        ,success:function(data){
+                           //alert("성공");
+                           $("#EqCard").html(data);
+                        }
+                     }); 
+               } 
+                /* url=="../shop/Equipment.jsp"끝 */
                 else if(url=="../program/TicketMain.jsp"){
                       var formData = $("#f_insert").serialize();
                      $.ajax({
