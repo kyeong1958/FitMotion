@@ -92,5 +92,19 @@ public class AccountLogic {
 	}
 ////////////////수근끝/////////////////
 	
+////////////////준호 시작/////////////////
+	public int expendINS(Map<String, Object> pMap) {
+		int result = 0;
+		logger.info("pMap");
+		logger.info(result);
+		result = accountDao.expendINS(pMap);
+		return result;
+	}
+	
+	
+	
+	
+////////////////준호 끝/////////////////
+	
 
 }

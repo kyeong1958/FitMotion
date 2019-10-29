@@ -130,6 +130,35 @@ public class ShopLogic {
 		logger.info(rMap);
 		return rMap;
 	}
+	public int eqINS(Map<String, Object> pMap) {
+	      int result = 0;
+	      result = shopDao.eqINS(pMap);
+	      return result;
+	   }
+	   public List<Map<String, Object>> eqSEL() {
+	      List<Map<String,Object>> eqSelList = null;
+	      eqSelList = shopDao.eqSEL();
+	      return eqSelList;
+	   }
+	   public int eqUPD(Map<String, Object> pMap) {
+	      int result = 0;
+	      result = shopDao.eqUPD(pMap);
+	      return result;
+	   }
+	   public int eqDEL(Map<String, Object> pMap) {
+	     logger.info("eqDEL Logic 호출성공");
+	      int result = 0;
+	      result = shopDao.eqDEL(pMap);
+	      return result;
+	   }
+	public List<Map<String, Object>> eqdetSEL(Map<String, Object> pMap) {
+		logger.info("기구사용여부조회 Logic 호출 성공");
+		List<Map<String,Object>> rMap =new ArrayList<>();
+		rMap = shopDao.eqdetSEL(pMap);
+		logger.info(pMap.size());
+		logger.info(rMap);
+		return rMap;
+	}
 	/*<!--==========================[[민지 끝 ]]=======================================================================  -->*/
 
 

@@ -246,7 +246,7 @@ public class ShopController implements Controller {
 	         eqSelList = shopLogic.eqSEL();
 	         mav.addObject("eqSelList", eqSelList);
 	         mav.pageMove("forward");
-	         mav.setViewName("/Equipment/EqCard.jsp");            
+	         mav.setViewName("/shop/EqCard.jsp");            
 	      }
 	      else if("eqUPD".equals(crud)) {
 	         logger.info("기구관리수정");
@@ -270,6 +270,18 @@ public class ShopController implements Controller {
 	         mav.pageMove("redirect");
 	         mav.setViewName("/shop/eqSEL.fm");
 	      }
+	      else if("eqdetSEL".equals(crud)) {
+				logger.info("기구사용여부조회 Controller 호출 성공");
+				List<Map<String,Object>> rMap = null;
+				Map<String,Object> pMap = new HashMap<>();
+				pMap.put("se_operating_mode",req.getParameter("se_operating_mode"));
+				rMap = shopLogic.eqdetSEL(pMap);
+				logger.info(rMap);
+				logger.info("controller"+pMap);
+				mav.addObject("eqSelList", rMap);
+				mav.pageMove("forward");
+				mav.setViewName("/shop/EqCard.jsp");
+			}
 /*<!--==========================[[민지 끝 ]]=======================================================================  -->*/
 
 		return mav;

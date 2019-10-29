@@ -78,7 +78,7 @@ body{
  }
  
  
- function aa(go_type){
+ function clickgo(go_type){
 	 alert(go_type);
 	 var formData = $("#gd_insert").serialize();
 		//alert("등록버튼 눌림?");
@@ -125,7 +125,7 @@ body{
 <div class="bar_area">
     <div class="homefl">
         <a href="/home/" id="home">홈</a>
-        <a href="#" id="management">기구 관리</a>
+        <a href="#" id="management">비품 관리</a>
     </div>
        <div class="homefr" style="padding-right:10px;">
               <a class="btn dark" id="MIns-B"   data-toggle="modal" data-target="#gd_modal">비품등록</a>
@@ -144,17 +144,17 @@ body{
                </button>
             </li>
             <li>
-               <button type="button" class=" tabBtn" id="aaa"value="사무용품" onclick="aa($('#aaa').val())" >사무용품
+               <button type="button" class=" tabBtn" id="officegoods" value="사무용품" onclick="clickgo($('#officegoods').val())" >사무용품
                   <span>6</span>
                </button>
             </li>
             <li>
-               <button type="button" class=" active tabBtn" id="bbb" value="헬스장용품" onclick="aa($('#bbb').val())" >헬스장용품          
+               <button type="button" class=" active tabBtn" id="healthgoods" value="헬스장용품" onclick="clickgo($('#healthgoods').val())" >헬스장용품          
                   <span>6</span>
                </button>
             </li>
             <li>
-               <button type="button" class=" tabBtn" id="cccc" value="소모품" onclick="aa($('#cccc').val())" >소모품
+               <button type="button" class=" tabBtn" id="suppliesgoods" value="소모품" onclick="clickgo($('#suppliesgoods').val())" >소모품
                   <span>184</span></button>
             </li>
             

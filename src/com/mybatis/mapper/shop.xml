@@ -70,7 +70,6 @@
 				values(gd_Ins.NEXTVAL,#{go_type},#{go_name},#{go_stock},#{purchase_date},#{purchase_price},'1') 
 	</insert>
 
-<!--==========================[[민지 시작 ]]=======================================================================  -->
 	
 	<select id="officegdSEL" resultType="map" parameterType="map">
 		select go_num, go_type, go_name, go_stock, purchase_date, purchase_price
@@ -117,7 +116,11 @@
       delete from SPORTS_EQUIPMENT where se_num=#{se_num}
    </delete>
 	
-
+	<select id="eqdetSEL" resultType="map" parameterType="map">
+		select se_num, se_name, se_operating_mode, se_repair_datail, se_repairs, se_buy_date, se_buy_price
+		  from SPORTS_EQUIPMENT
+		 where se_operating_mode = #{se_operating_mode} 
+	</select>
 
 <!--===========================================[[주노끝 ]]=================================================  -->
 </mapper> 

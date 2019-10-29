@@ -11,126 +11,146 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/paginationjs/2.1.4/pagination.css"/>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/paginationjs/2.1.4/pagination.min.js"></script>
 <script>
-	var jb = jQuery.noConflict();
+   var jb = jQuery.noConflict();
 </script>
  <%@ include file="../common/JEasyUICommon.jsp"%> 
 <link rel="stylesheet" type="text/css" href="../NewCSS/main.css">
 <style type="text/css">
-	body{
-		padding:0%;
-	}
-	.container-fluid{
-		padding:0%;
-	}
+   body{
+      padding:0%;
+   }
+   .container-fluid{
+      padding:0%;
+   }
 </style>
 </head>
 <script type="text/javascript">
 /* 페이지이동  */
-	function pagemove(url){
-			$.ajax({
-				method:'get'
-			   ,url:url
-			   ,success:function(data){
-				//   alert(url);
-				   $("#mainboard").html(data);
-				    if(url=="../member/memberList.jsp"){
-						var formData = $("#f_insert").serialize();
-					   $.ajax({
-							method:"POST"
-							,data:formData
-							,url:"/member/BHSEL.fm"
-							,success:function(data){
-								$("#in_005fcard").html(data);
-							}
-						}); 
-				 	  }
-				/* url=="../member/memberList.jsp" 끝 */    
-				    else if(url=="../staff/staffList.jsp") {
-					   var formData = $("#add_coach_form").serialize();
-				    	  $.ajax({
-				    		  method:"POST"
-				  				,data:formData
-				  				,url:"/staff/SFSEL.fm"
-				  				,success:function(data){
-				  					$("#staff_card").html(data); 
-					  				var formData = $("#F_rank").serialize();
-					  			    	  $.ajax({
-					  			    		  method:"POST"
-					  			  				,data:formData
-					  			  				,url:"/staff/RankSEL.fm"
-					  			  				,success:function(data){
-					  			  					//alert("성공");
-					  			  					$("#rankNameAdd").html(data);
-					  			  				}
-					  			    	  }); 
-						  		}//end of 전체조회 
-						  });
-				   }//end of 직원관리 	
-				    /* url=="../staff/staffList.jsp" 끝 */
-				   else if(url=="../account/profit.jsp"){
-					   $.ajax({
-	  			    		  method:"POST"
-	  			  				,data:formData
-	  			  				,url:"/account/PROSEL.fm"
-	  			  				,success:function(data){
-	  			  					//alert("성공");
-	  			  					$("#selectpro").html(data);
-			  			  				 $.ajax({
-			  		  			    		  method:"POST"
-			  		  			  				,data:formData
-			  		  			  				,url:"/account/PROSEL2.fm"
-			  		  			  				,success:function(data){
-			  		  			  					//alert("성공");
-			  		  			  					$("#selectpro2").html(data);
-			  		  			  			}
-			  		  			    	  }); 
-	  			  						}
-	  			    			     }); 
-				  				 }
-			/*  url=="../account/profit.jsp" 끝*/
-					else if(url=="../shop/Good.jsp"){
-						 $.ajax({
-								method:"POST"
-								,url:"/shop/GoodSEL.fm"
-								,success:function(data){
-									//alert("성공");
-									$("#gdSel").html(data);
-								}
-							}); 
-					} 
-				    /* url=="../shop/Good.jsp"끝 */
-				    else if(url=="../program/TicketMain.jsp"){
-					    	var formData = $("#f_insert").serialize();
-							$.ajax({
-								method : "POST",
-								data : formData,
-								url : "/program/taSEL.fm",
-								success : function(data) {
-									$("#tasel").html(data);
-								}
-							});
-				    }
-				    /* url=="../program/TicketMain.jsp"끝 */
-				    else if(url=="../account/BillingHistoryList.jsp"){
-						$.ajax({
-							method : "POST",
-							url : "/account/probuySel.fm",
-							success : function(data) {
-								$("#BHLgrid").html(data);
-							}
-						});
-			   		 }
-				    /*url=="../account/BillingHistoryList.jsp" 끝*/
-			  }
-		   });
-		}
+   function pagemove(url){
+         $.ajax({
+            method:'get'
+            ,url:url
+            ,success:function(data){
+            //   alert(url);
+               $("#mainboard").html(data);
+                if(url=="../member/memberList.jsp"){
+                  var formData = $("#f_insert").serialize();
+                  $.ajax({
+                     method:"POST"
+                     ,data:formData
+                     ,url:"/member/BHSEL.fm"
+                     ,success:function(data){
+                        $("#in_005fcard").html(data);
+                     }
+                  }); 
+                  }
+            /* url=="../member/memberList.jsp" 끝 */    
+                else if(url=="../staff/staffList.jsp") {
+                  var formData = $("#add_coach_form").serialize();
+                     $.ajax({
+                        method:"POST"
+                          ,data:formData
+                          ,url:"/staff/SFSEL.fm"
+                          ,success:function(data){
+                             $("#staff_card").html(data); 
+                             var formData = $("#F_rank").serialize();
+                                   $.ajax({
+                                      method:"POST"
+                                        ,data:formData
+                                        ,url:"/staff/RankSEL.fm"
+                                        ,success:function(data){
+                                           //alert("성공");
+                                           $("#rankNameAdd").html(data);
+                                        }
+                                   }); 
+                          }//end of 전체조회 
+                    });
+               }//end of 직원관리    
+                /* url=="../staff/staffList.jsp" 끝 */
+               else if(url=="../account/profit.jsp"){
+                  $.ajax({
+                          method:"POST"
+                            ,data:formData
+                            ,url:"/account/PROSEL.fm"
+                            ,success:function(data){
+                               //alert("성공");
+                               $("#selectpro").html(data);
+                                   $.ajax({
+                                        method:"POST"
+                                          ,data:formData
+                                          ,url:"/account/PROSEL2.fm"
+                                          ,success:function(data){
+                                             //alert("성공");
+                                             $("#selectpro2").html(data);
+                                       }
+                                     }); 
+                                  }
+                                }); 
+                           }
+         /*  url=="../account/profit.jsp" 끝*/
+               else if(url=="../shop/Good.jsp"){
+                   $.ajax({
+                        method:"POST"
+                        ,url:"/shop/GoodSEL.fm"
+                        ,success:function(data){
+                           //alert("성공");
+                           $("#gdSel").html(data);
+                        }
+                     }); 
+               } 
+                /* url=="../shop/Good.jsp"끝 */
+                else if(url=="../program/TicketMain.jsp"){
+                      var formData = $("#f_insert").serialize();
+                     $.ajax({
+                        method : "POST",
+                        data : formData,
+                        url : "/program/taSEL.fm",
+                        success : function(data) {
+                           $("#tasel").html(data);
+                           $.ajax({
+                              method : "POST",
+                              url : "/program/prornk.fm",
+                              success : function(data) {
+                                 $("#pro_rank").html(data);
+                              }
+                           });
+                        }
+                     });
+                }
+                /* url=="../program/TicketMain.jsp"끝 */
+                else if(url=="../account/BillingHistoryList.jsp"){
+                  $.ajax({
+                     method : "POST",
+                     url : "/account/probuySel.fm",
+                     success : function(data) {
+                        $("#BHLgrid").html(data);
+                     }
+                  });
+                   }
+                /*url=="../account/BillingHistoryList.jsp" 끝*/
+                else if(url=='../account/spending.jsp'){
+                    $.ajax({
+                             method:"POST"
+                               ,data:formData
+                               ,url:"/account/PROSEL2.fm"
+                               ,success:function(data){
+                                  //alert("성공");
+                                  $("#selectpro2").html(data);
+                            }
+                          }); 
+                   
+                }
+                /* url=='../account/spending.jsp' 끝 */
+           }
+         });
+      }
 /* 페이지이동  */
-	function menu(menu){
-		$(".history").hide();
-	    $(".account").hide();
-	    $(".service").hide();
-		$(menu).show();
-	}
+   function menu(menu){
+      $(".history").hide();
+       $(".account").hide();
+       $(".service").hide();
+      $(menu).show();
+   }
 </script>
 
 <body>
@@ -155,8 +175,8 @@
          <div class="row sidemenutitle" onClick="menu(''),pagemove('../staff/staffList.jsp')">직원관리</div>
          <div class="row sidemenutitle" onClick="menu(''),pagemove('../program/TicketMain.jsp')">이용권관리</div>
          <div class="row sidemenutitle" onClick="menu(''),pagemove('../shop/Lock.jsp')">락커관리</div>
-      	 <div class="row sidemenutitle" onClick="menu(''),pagemove('../shop/Good.jsp')">비품관리</div>
-         <div class="row sidemenutitle" onClick="menu(''),pagemove('../shop/Good.jsp')">기구관리</div> 
+          <div class="row sidemenutitle" onClick="menu(''),pagemove('../shop/Good.jsp')">비품관리</div>
+         <div class="row sidemenutitle" onClick="menu(''),pagemove('../shop/Equipment.jsp')">기구관리</div> 
          <div class="row sidemenutitle" onClick="menu('.history'),pagemove('../schedule/reservation.jsp')">내역관리</div>
          <div class="row history">
             <div class="row sidemenu" id="allsalesmanagement" onClick="pagemove('../schedule/reservation.jsp')">예약내역</div>

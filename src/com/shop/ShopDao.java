@@ -326,6 +326,95 @@ public class ShopDao {
 				}
 				return rMap;
 			}
-/*<!--==========================[[민지 끝 ]]=======================================================================  -->*/
+			public int eqINS(Map<String, Object> pMap) {
+			      logger.info("기구관리 insDao");
+			      int result = 0;
+			      try {
+			         sqlSession = sqlSessionFactory.openSession();
+			         result = sqlSession.update("eqINS", pMap);   
+			         sqlSession.commit();
+			      } catch (Exception e) {
+			         e.printStackTrace();
+			      } finally {
+			          if(sqlSession!=null) {
+			                sqlSession.close(); 
+			         }
+			      }
+			      
+			      return result;
+			   
+			   }
+			   public List<Map<String, Object>> eqSEL() {
+			      logger.info("기구관리SelDao 호출성공");
+			      List<Map<String, Object>> eqSelList = new ArrayList<>();
+			      try {
+			         
+			         sqlSession = sqlSessionFactory.openSession();
+			         eqSelList = sqlSession.selectList("eqSEL");
+			      } catch (Exception e) {
+			         e.printStackTrace();
+			      } finally {
+			         if(sqlSession!=null) {
+			            sqlSession.close(); 
+			         }
+			         
+			      }
+			      return eqSelList;
+			   }
+			   public int eqUPD(Map<String, Object> pMap) {
+			      logger.info("기구관리 updDao");
+			         int result = 0;
+			         try {
+			            sqlSession = sqlSessionFactory.openSession();
+			            result = sqlSession.update("eqUPD", pMap);   
+			            sqlSession.commit();
+			         } catch (Exception e) {
+			            e.printStackTrace();
+			         } finally {
+			             if(sqlSession!=null) {
+			                   sqlSession.close(); 
+			            }
+			         }
+			         
+			         return result;
+			   }
+			   public int eqDEL(Map<String, Object> pMap) {
+			      logger.info("기구관리 delDao");
+			         int result = 0;
+			         try {
+			            sqlSession = sqlSessionFactory.openSession();
+			            result = sqlSession.update("eqDEL", pMap);   
+			            sqlSession.commit();
+			         } catch (Exception e) {
+			            e.printStackTrace();
+			         } finally {
+			             if(sqlSession!=null) {
+			                   sqlSession.close(); 
+			            }
+			         }
+			         
+			         return result;
+			   }
+			public List<Map<String, Object>> eqdetSEL(Map<String, Object> pMap) {
+				logger.info("사무용품조회 Dao 호출 성공");
+				List<Map<String,Object>> rMap = new ArrayList<>();
+				logger.info(pMap);
+				try {
+					sqlSession = sqlSessionFactory.openSession();
+					rMap = sqlSession.selectList("eqdetSEL",pMap);
+					logger.info(rMap);
+					sqlSession.commit();
+					logger.info("ListSize"+rMap.size());
+					logger.info(rMap.size());
+				} catch (Exception e) {
+					e.printStackTrace();
+				} finally {
+					if(sqlSession!=null) {
+						sqlSession.close(); 
+					}
+				}
+				return rMap;
+			}
+			/*<!--==========================[[민지 끝 ]]=======================================================================  -->*/
 
 }

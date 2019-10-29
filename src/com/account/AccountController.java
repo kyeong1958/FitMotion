@@ -287,6 +287,31 @@ public class AccountController implements Controller {
 		mav.addObject("publicProg", publicProg);
 		}
 /////////////////////////// 수근끝/////////////////////////////////
+
+/////////////////////////// 준호 시작/////////////////////////////////
+		else if("expendINS".equals(crud)) {		
+//			int result = 0;
+//			logger.info("Controller");
+//			Map<String,Object> pMap = new HashMap<>();
+//			HashMapBinder hmb = new HashMapBinder(req);
+			
+			System.out.println(req.getParameter("exb_num"));
+			System.out.println(req.getParameter("exb_num"));
+			System.out.println(req.getParameter("exb_num"));
+			System.out.println(req.getParameter("exb_num"));
+			System.out.println(req.getParameter("exb_num"));
+			System.out.println(req.getParameter("exb_num"));
+			System.out.println(req.getParameter("exb_num"));
+			
+//			hmb.bindPost(pMap);
+//			result = accountLogic.expendINS(pMap);
+//			logger.info(pMap);
+//			logger.info(result);
+//			mav.pageMove("redirect");
+//			mav.setViewName("/");
+		}
+		
+/////////////////////////// 준호 끝/////////////////////////////////
 		return mav;
 	}
 

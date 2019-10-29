@@ -304,5 +304,27 @@ public class AccountDao {
 		return publicProg;
 		}
 /////////////////////////수근끝/////////////////////////
+		
+/////////////////////////준호 시작/////////////////////////
+		public int expendINS(Map<String, Object> pMap) {
+			int result = 0;
+			logger.info("Dao");
+			try {
+				sqlSession = sqlSessionFactory.openSession();
+				logger.info("pMap");
+				result = sqlSession.update("expendins",pMap);
+				logger.info("타냐????");
+				sqlSession.commit();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}finally {
+				 if(sqlSession!=null) {
+					 	sqlSession.close(); 
+				}
+			}
+			return result; 
+		}
+		
+/////////////////////////준호 끝/////////////////////////
 
 }
