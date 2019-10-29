@@ -218,7 +218,7 @@ public class AccountController implements Controller {
 			logger.info(result);
 			result = accountLogic.spendingInsert(pMap);
 			mav.pageMove("redirect");
-			//mav.setViewName("/account/profit.jsp");
+			mav.setViewName("/account/spending.jsp");
 			
 		}
 /*

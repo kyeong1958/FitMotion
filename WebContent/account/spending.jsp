@@ -171,7 +171,7 @@ body {
 			data : formData,
 			url : "/account/spendingInsert.fm",
 			success : function(data) {
-				//$("#memsearch").html(data);
+				$("#spending").html(data);
 			}
 		});
 	}
@@ -206,7 +206,7 @@ body {
 
 
 
-
+<div id="spending">
 <!-- ================================= [[ 화면전환 ]] =================================================== -->
 <div class="bar_area">
 	<a class="bar_menu" href="#">홈</a> <img
@@ -378,3 +378,4 @@ body {
 </div>
 
 <!-- ================================= [[ 화면전환 ]] =================================================== -->
+</div>
