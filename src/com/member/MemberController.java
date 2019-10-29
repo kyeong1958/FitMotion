@@ -79,22 +79,24 @@ public class MemberController implements Controller {
 		}
 		else if("BHSEL".equals(crud)) {
 			logger.info("회원조회 창 ");
-			List<Map<String,Object>> bhSelList = null;
-			bhSelList = memberLogic.bhsel();
+			String keyword = req.getParameter("keyword");
+			Map<String,String> pMap = new HashMap<String, String>();
+			pMap.put("keyword", keyword);
+	        List<HashMap> bhSelList = memberLogic.bhsel(pMap); 
 			mav.addObject("bhSelList", bhSelList);
 			mav.pageMove("forward");
 			mav.setViewName("/member/in_005fcard.jsp");
 			
 		}else if("bhUPD".equals(crud)) {
-	         logger.info("기구관리수정");
 	         int result =0;
 	         Map<String,Object> pMap = new HashMap<>();
 	         HashMapBinder hmb = new HashMapBinder(req);
 	         hmb.bindPost(pMap);
+	         pMap.put("mem_num",req.getParameter("mem_num"));
 	         result = memberLogic.bhUPD(pMap);
 	         logger.info(result);
 	         mav.pageMove("forward");
-	         mav.setViewName("/member/memberManagementDetail.fm");
+	         mav.setViewName("/member/memberManagementDetail.jsp");
 	      }
 	      else if("bhDEL".equals(crud)) {
 	         logger.info("회원관리 삭제 ");
@@ -106,14 +108,25 @@ public class MemberController implements Controller {
 	         mav.pageMove("redirect");
 	         mav.setViewName("/member/BHSEL.fm");
 	      }
+		//매출등록 회원검색
 	      else if("BHMSEL".equals(crud)) {
 				logger.info("회원조회 창 ");
 				List<Map<String,Object>> bhSelList = null;
-				bhSelList = memberLogic.bhsel();
+				bhSelList = memberLogic.bhsel2();
 				mav.addObject("bhSelList", bhSelList);
 				mav.pageMove("forward");
 				mav.setViewName("/account/profitMemSearch.jsp");
 	      }
+		//billing 회원 검색
+	      else if("BIMSEL".equals(crud)) {
+	    	  logger.info("회원조회 창 ");
+	    	  List<Map<String,Object>> bhSelList = null;
+	    	  bhSelList = memberLogic.bhsel2();
+	    	  mav.addObject("bhSelList", bhSelList);
+	    	  mav.pageMove("forward");
+	    	  mav.setViewName("/account/BillingHistoryMemberSearch.jsp");
+	      }
+	     
 		/*================================[[민지 Mcontroller 끝 ]]=======================================*/
 	      /*=====================================[[주노 시작 ]]====================================*/
 	         else if("bhDET".equals(crud)) {

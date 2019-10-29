@@ -1,20 +1,39 @@
+<%@page import="java.util.Map"%>
+<%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <!-- ============================ [[ 회원결제내역모달 ]] ======================================== -->
-<%@ include file="/common/JEasyUICommon.jsp"%>
-<link rel="stylesheet" type="text/css" href="../NewCSS/main.css">
 <link rel="stylesheet" type="text/css" href="../NewCSS/BillingHistoryListModal.css">
+<link rel="stylesheet" type="text/css" href="../NewCSS/MemberSearch.css">
+
+
+
+
 <style type="text/css">
+
 body{
 	padding:0%;
 }
 </style>
-<!-- 확인용 버튼 -->
-<!-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#ST-Modal">
-  Open modal
-</button>
 
- -->
+<script>
+	function progive(){
+		var formData = $("#f_give").serialize();
+		 $.ajax({
+			method:"POST"
+			,data:formData
+			,url:"/account/progive.fm"
+			,success:function(data){
+				$("#BHLgrid").html(data);
+			}
+		}); 
+   	}
+
+
+</script>
+ 
+ 
+ 
 <!--===========================[[ 양도 모달 시작 ]]================================ -->
 <!-- The Modal -->
 <div class="modal" id="YD-Modal">
@@ -25,54 +44,23 @@ body{
       <div class="modal-header" id="YD-header">
         <h2 class="modal-title" id="YD-title">양도할 회원 검색</h2>
       </div>
-
+		<form id="f_give">
+		<input type="hidden" id="mticp_num" name="tcip_num">
       <!-- Modal body -->
       <div class="modal-body" id="YD-body">
       		 <div class="search">
                     <fieldset >
                         <p class="btn_plus">
-                        	<label style="width: 120px;">회원검색</label>
                              <span>
-                                <select  id="YD-search" style="width:100px;">
-                                    <option value="">양도 담당자</option>
-                                    
-                                        <option value="5849">강민호 강사</option>
-                                    
-                                        <option value="4435">기본 관리자</option>
-                                    
-                                        <option value="6592">김경순 강사 (테스트)</option>
-                                    
-                                        <option value="6862">달라스짐 강사 (테스트)</option>
-                                    
-                                        <option value="6866">리커버리 강사 (테스트)</option>
-                                    
-                                        <option value="5886">박하은</option>
-                                    
-                                        <option value="6413">서민혜 매니저 (독핏)</option>
-                                    
-                                        <option value="6837">이서인 강사 (테스트)</option>
-                                    
-                                        <option value="6575">이석 강사 (테스트)</option>
-                                    
-                                        <option value="4444">이석훈</option>
-                                    
-                                        <option value="6593">이혜원 강사 (테스트)</option>
-                                    
-                                        <option value="6864">조이바디랩 강사 (테스트)</option>
-                                    
-                                        <option value="5919">추성훈</option>
-                                    
-                                        <option value="5421">테스트</option>
-                                    
-                                        <option value="4436">홍준선 강사</option>
-                                    
+                                <select  id="selectpro2" style="height: 39px;border-radius: 5px;">
                                 </select>
                             </span>
                             <span>
-                                <input  placeholder="이름 또는 휴대전화번호" type="text"  style="width:170px;">
+                                <input  placeholder="이름 또는 휴대전화번호" type="text" id="sm_memname"  style="width: 272px;">
+                                <input  placeholder="이름 또는 휴대전화번호" type="hidden" id="sm_mem_num" name="mem_num"  style="width: 272px;">
                             </span>
                         </p>
-                        <button type="button" class="btn dark block_btn" >검색</button>
+                        <button type="button" class="btn_cancle search_mem" style="margin-left:10px" data-toggle="modal" data-target="#search_member" >검색</button>
                     </fieldset>
                 </div>
                 
@@ -86,9 +74,10 @@ body{
 		      
 	 </div>
 
+		</form>
       <!-- Modal footer -->
       <div class="modal-footer" id="YD-footer">
-            <button type="button" class="btn red align_right" >수수료 없이 양도</button>
+            <button type="button" class="btn red align_right" data-dismiss="modal" onclick="progive()" >양도</button>
 			<button type="button" class="btn gray" data-dismiss="modal" >취소</button>
       </div>
 
@@ -98,7 +87,7 @@ body{
 
 
 <!--=============================[[양도 모달 끝]]==================================  -->
-<!--=============================[[중지 모달 시작]]==================================  -->
+<!--==============================[[중지 모달 시작]]==================================  -->
 		<!-- The Modal -->
 		<div class="modal" id="ST-Modal">
 		  <div class="modal-dialog" >
@@ -182,3 +171,88 @@ body{
 		
 
 <!--=============================[[중지 모달 끝]]==================================  -->
+	<!--===============================[[회원찾기 모달 창 ]]=======================================================  -->
+													
+													
+	
+	
+	<script>
+			function memberSearch(){
+			//	alert("검색버튼 눌림?");
+				var formData = $("#MemSearch").serialize();
+			//	alert(formData);
+				 $.ajax({
+					method:"POST"
+					,data:formData
+					,url:"/member/BIMSEL.fm"
+					,success:function(data){
+						$("#memsearch").html(data);
+						
+						
+					}
+				}); 
+				
+				
+			
+			}
+	
+	</script>
+<!--================================ [[ 회원검색 모달 시작 ]] ====================================== -->												
+												
+	<!--   The Modal -->												
+	<div class="modal fade" id="search_member">												
+		<div class="modal-dialog modal-sm-6">												
+			<div class="modal-content">												
+															
+			<!-- Modal Header -->												
+			<div class="modal-header">												
+				<span class="modal-title">회원 검색</span>												
+				<button type="button" class="close" data-dismiss="modal">&times;</button>												
+			</div>												
+															
+			<!-- Modal body -->		
+	
+			<div class="modal-body" style="padding-left: 5%;height: 240px;">												
+						<div style="padding:0 0 5px">									
+							<label class="spend-box-right-column" style="text-align:center">회원명</label>								
+							<span>								
+								<input type="text" class="spending-text" id="d_memname" style="width:260px;">							
+							</span>								
+							<span>								
+								<button type="button" id="memberSearch" onClick="memberSearch()" class="btn-schedule-memsearch" style="margin-left:10px;">검색</button>							
+							</span>								
+						</div>									
+						<div class="search-mem-modal" id="memberSearchModalTable">	
+							<form id="MemSearch">
+							<div id="memsearch">
+						<!-- 	<table id="tb_membersearch" class="table table-bordered  table-striped">
+							  <thead class="thead-dark">
+									<tr>						
+										<th class="tableheader">회원명</th>					
+										<th class="tableheader">생년월일</th>					
+										<th class="tableheader">핸드폰번호</th>					
+									</tr>	
+							  </thead>   
+							  <tbody id="imsi_change">
+									
+							  </tbody>
+							</table>		 -->						
+							</div>
+							</form>								
+						</div>									
+			<!-- BODY -->												
+				</div>		
+		
+														
+			<!-- Modal footer -->												
+				<div class="modal-footer">												
+					<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>												
+				</div>												
+			</div>												
+		</div>												
+	</div>												
+<!--  ================================ [[ 회원검색 모달 끝 ]] ====================================== -->												
+												
+												
+												
+	

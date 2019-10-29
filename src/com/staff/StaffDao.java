@@ -65,9 +65,19 @@ public class StaffDao {
    
    public List<HashMap> sfSel(Map<String, String> pMap) {
       logger.info("직원목록 조회부분 Dao 호출성공");
-         sqlSession = sqlSessionFactory.openSession();
-         List<HashMap> sfSelList= sqlSession.selectList("proc_name",pMap);
-         logger.info("sfSelList : "+sfSelList);
+      List<HashMap> sfSelList = new ArrayList<>();
+      try {
+    	  sqlSession = sqlSessionFactory.openSession();
+    	  sfSelList= sqlSession.selectList("proc_name",pMap);
+    	  logger.info("sfSelList : "+sfSelList);
+		
+	} catch (Exception e) {
+		e.printStackTrace();
+	}finally {
+		if(sqlSession!=null) {
+			sqlSession.close();
+		}
+	}
 	return sfSelList; 
     		
    }
@@ -81,7 +91,7 @@ public class StaffDao {
 	         logger.info(result);
 	         sqlSession.commit();
 	} catch (Exception e) {
-		e.printStackTrace();
+		
 	}finally {
 		if(sqlSession!=null) {
 			sqlSession.close();

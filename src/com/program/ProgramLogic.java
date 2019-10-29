@@ -41,5 +41,28 @@ public class ProgramLogic {
 		logger.info("proList"+proList.size());
 		return proList;
 	}
-	/*====================================[[민지끝 ]]=================================*/
+	public int proIns(Map<String, Object> pMap) {
+		int result = 0;
+		result = programDao.proIns(pMap);
+		return result;
+	}
+	public Map<String, Object> probuyDTL(Map<String, Object> pMap) {
+		logger.info("회원등록상세보기로직");
+	      Map<String, Object> rMap = new HashMap<>();
+	      rMap = programDao.probuyDTL(pMap);
+		return rMap;
+	}
+	public void prodelete(Map<String, Object> pMap) {
+		programDao.prodelete(pMap);
+		logger.info(pMap);
+		
+	}
+	public int probuy(Map<String, Object> pMap) {
+		int result =0;
+		logger.info(pMap);
+		result = programDao.probuy(pMap);
+		logger.info(result);
+		return result;
+	}
 }
+	/*====================================[[민지끝 ]]=================================*/

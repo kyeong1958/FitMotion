@@ -379,15 +379,77 @@
   	</select>
   	
 	 <select id="promobuysel" parameterType="map" resultType="map">
-			select  PROMOTION .PROM_NAME, PROMOTION .PROM_NUM, PROMOTION .PROM_DIS_PRICE,
-	                 PROMOTION .PROM_START_DATE, PROMOTION .PROM_END_DATE,TIC_PURCHASE.TICP_REG_DATE,TIC_PURCHASE.TICP_PAYMENT
-	                 ,MEMBER.MEM_NAME,MEMBER.MEM_NUM
-             from PROMOTION ,TIC_PURCHASE,MEMBER
-             where   TIC_PURCHASE.mem_num = MEMBER.mem_num
-             and  TIC_PURCHASE.PROM_NUM = PROMOTION.PROM_NUM 
+		            select  PROMOTION .PROM_NAME, PROMOTION .PROM_NUM, PROMOTION .PROM_DIS_PRICE,
+                     PROMOTION .PROM_START_DATE, PROMOTION .PROM_END_DATE,TIC_PURCHASE.TICP_REG_DATE,TIC_PURCHASE.TICP_PAYMENT
+                     ,MEMBER.MEM_NAME,MEMBER.MEM_NUM,TIC_PURCHASE.TICP_STATE,TIC_PURCHASE.TICP_NUM,MEMBER.mem_hp,MEMBER.mem_birth
+                    from PROMOTION ,TIC_PURCHASE,MEMBER
+                    where   TIC_PURCHASE.mem_num = MEMBER.mem_num
+                    and  TIC_PURCHASE.PROM_NUM = PROMOTION.PROM_NUM 
+	
 	 </select>
-	<!--==========================================================[[민지 끝 ]]===========================================================  -->
-   
+	 
+	 <!-- 매출등록 콤보 박스 -->
+	<!--  <select id="promcomdo" parameterType="map" resultType="map" >
+			SELECT 
+                PROM_NAME AS P_NAME
+                , PROM_NUM ||'↑PRO' AS P_NUM
+                , PROM_DIS_PRICE  AS P_PRICE 
+                , 'PRO' AS GUBUN
+			FROM PROMOTION
+			UNION
+			SELECT 
+                TICKET_NAME AS P_NAME
+                , TICKET_NUM || '↑TIC'  AS P_NUM
+                , TICKET_PRICE  AS P_PRICE 
+                 , 'TIC' AS GUBUN
+			FROM TICKET
+			ORDER BY GUBUN ASC , P_NUM
+	 </select>
+	  -->
+	 
+	 
+	 <!-- 양도  -->
+	 <update id="progive" parameterType="map">
+                update tic_purchase set 
+                ticp_state = '양도'
+                , mem_num = #{mem_num}
+                where
+                ticp_num = #{tcip_num}
+	 </update>
+	 <!-- 환불  -->
+	 <update id="proback" parameterType="map">
+	 	 update tic_purchase set 
+                ticp_state = '환불'
+                where
+                ticp_num = #{tcip_num}
+	 </update>
+	 
+	 
+	 <!-- 환불  -->
+	 
+	 
+	 <!-- 지출 분류 콤보박스  -->
+	 <select id="spendingcombo" parameterType="map" resultType="map">
+	 		select EXB_NUM,EXB_KINDS from EX_BREAKDOWN 
+	 </select>
+	 <!-- 지출 분류 콤보박스  -->
+	 <!-- 지출 insert문  -->
+	 <insert id="speningInsert" parameterType="map">
+	 		insert into GYM_EXPENDITURE(GE_BILLING_NUM,GE_DATE,
+	 									GE_BILLER,GE_STORY
+	 									,GE_PRICE,GE_STATE
+	 									,GE_REF_AMOUNT,EXB_NUM
+	 									,GE_PAY_METHOD,GE_TOTPRICE,GE_COUNT)
+                  values(SEQ_SPENDING.NEXTVAL,#{ge_date}
+                  			,#{ge_biller},#{ge_story}
+                  			,#{ge_price},#{ge_state}
+                  			,#{ge_ref_amount},to_number(#{exb_num}),#{ge_pay_method}
+                  			,#{ge_totprice},#{ge_count})
+	 </insert>
+	 
+	 <!-- 지출 insert문  -->
+<!--==========================================================[[민지 끝 ]]===========================================================  -->
+     
   	
 </mapper>
 

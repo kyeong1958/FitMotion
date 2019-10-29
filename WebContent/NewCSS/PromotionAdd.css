@@ -1,5 +1,36 @@
 
 <style>
+
+
+
+#start input[type="text"]{
+	
+	margin-left: 76px;
+	cursor: default;
+    padding-left: 10px;
+    height: 34px;
+    border: 1px solid #BABBC2;
+    border-radius: 5px;
+    width: 150px !important;
+    margin-bottom: 9px;
+	
+}
+
+#end input[type="text"]{
+	margin-left: 63px;
+	cursor: default;
+    padding-left: 10px;
+    height: 34px;
+    border: 1px solid #BABBC2;
+    border-radius: 5px;
+    width: 150px !important;
+    margin-bottom: 9px;
+	
+	
+	
+}
+
+
 .bar_area {
    padding: 10px 66px;
    height: 54px;

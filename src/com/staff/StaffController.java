@@ -26,6 +26,7 @@ public class StaffController implements Controller {
 		staffLogic = new StaffLogic();
 	}
 
+
 	@Override
 	public ModelAndView execute(HttpServletRequest req, HttpServletResponse res) throws Exception {
 		ModelAndView mav = new ModelAndView();
@@ -119,3 +120,4 @@ public class StaffController implements Controller {
 		return json;
 	}
 }
+

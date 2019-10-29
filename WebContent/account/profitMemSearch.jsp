@@ -15,13 +15,7 @@
       $("#search_member").modal("hide");
       $("#sm_memname").val(mem_name);
       $("#sm_mem_num").val(mem_num);
-      $.ajax({
-         method:'get'
-         ,url:'/schedule/scheduleModal.fm?sm_memname='+mem_name
-         ,success:function(data){
-            $("#sm_combobox").html(data);
-         }
-      });
+
    } 
 </script>
    <table id="tb_membersearch" class="table table-bordered  table-striped" style="text-align:center">

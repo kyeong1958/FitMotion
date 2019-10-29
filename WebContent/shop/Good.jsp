@@ -35,10 +35,8 @@ body{
 
 
  function gdDel(){
-	//	alert("삭제버튼눌림");
 		var go_num = null;
 		go_num = $("#checkbox_id").val();
-	//	alert(go_num);
 			  $.ajax({
 				method:"POST"
 				,url:"/shop/GoodDEL.fm?go_num="+go_num
@@ -91,7 +89,7 @@ body{
 <div class="bar_area">
     <div class="homefl">
         <a href="/home/" id="home">홈</a>
-        <a href="#" id="management">기구 관리</a>
+        <a href="#" id="management">비품 관리</a>
     </div>
        <div class="homefr" style="padding-right:10px;">
               <a class="btn dark" id="MIns-B"   data-toggle="modal" data-target="#gd_modal">비품등록</a>

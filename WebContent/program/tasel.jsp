@@ -30,6 +30,27 @@ legend {
 			}); 
 		}
 
+	
+	function probuy(ticket_num){
+		alert(ticket_num)
+		 $.ajax({
+				method:"get"
+				,url:"/program/tabuyDTL.fm?ticket_num="+ticket_num
+				,success:function(data){
+					$("#ticketmain").html(data);
+						 $.ajax({
+		  			    		  method:"POST"
+		  			  				,url:"/account/PROSEL2.fm"
+		  			  				,success:function(data){
+		  			  					//alert("성공");
+		  			  					$("#selectpro2").html(data);
+		  			  			}
+		  			    	  }); 
+				}
+			}); 
+		
+	}
+	
 
 </script>
 
@@ -66,8 +87,8 @@ legend {
                   <div class="service_price">
                      <p><%=rMap.get("TICKET_PRICE")%></p>
                      <p style="display: block;">
-                        <a  class="btn green" onclick="prodetail('<%=rMap.get("TICKET_NUM") %>')">상세</a>
-                        <a  class="btn blue">결제하기</a>
+                        <a  class="btn green" onclick="prodetail('<%=rMap.get("TICKET_NUM") %>')">프로모션만들기</a>
+                        <a  class="btn blue" onclick="probuy('<%=rMap.get("TICKET_NUM") %>')">결제하기</a>
                      </p>
                   </div>
                </div>

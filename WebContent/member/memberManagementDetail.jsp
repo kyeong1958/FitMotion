@@ -22,7 +22,6 @@
 	 $("#umem_num").val(mem_num);
 	 $("#umem_name").val(mem_name);
 	 $("#umem_barcode_num").val(mem_barcode_num);
-	 $("#umem_gender").val(mem_gender);
 	 $("#umem_address").val(mem_address);
 	 $("#umem_memo").val(mem_memo);
 	 $("#umem_app_availability").val(mem_app_availability);
@@ -31,17 +30,17 @@
 	 $("#umem_birth").val(mem_birth);
 	 $("#umem_hp").val(mem_hp);
  }
- function memUdate(){
-		/* var formData = $("#f_update").serialize();
+ function memUdate(mem_num){
+		 var formData = $("#f_update").serialize();
 		 $.ajax({
 			method:"POST"
 			,data:formData
-			,url:"/member/bhUPD.fm"
+			,url:'/member/bhUPD.fm?mem_num='+mem_num
 			,success:function(data){
 				alert("성공");
-				$("#memupdate").html(data);
+				//$("#memupdate").html(data);
 			}
-		});  */
+		});  
 	} 
   </script>
     
@@ -51,6 +50,7 @@ body{
 }
 </style>
 <div id="memupdate">
+
 	<!-- ================================= [[ 화면전환 ]] =================================================== -->
 		<div class="bar_area">
 			<a class="bar_menu" href="#">홈</a>
@@ -59,9 +59,9 @@ body{
 			<img src="../images/location_arrow.png">
 			<a class="bar_menu" href="#">회원상세</a>
 		<div class="homefr" style="padding-right:10px;float: right;">
-		  	<a href="#" class="btn dark" id="MIns-B" data-toggle="modal" onclick="mUPD('<%=bhDetList.get("MEM_NUM") %>'
+		  	<a class="btn dark" id="MIns-B" data-toggle="modal" onclick="mUPD('<%=bhDetList.get("MEM_NUM") %>'
 												  	,'<%=bhDetList.get("MEM_NAME") %>','<%=bhDetList.get("MEM_BARCODE_NUM") %>',
-												  	'<%=bhDetList.get("MEM_MEM_GENDER") %>','<%=bhDetList.get("MEM_ADDRESS") %>',
+												  	'<%=bhDetList.get("MEM_ADDRESS") %>',
 												  	'<%=bhDetList.get("MEM_MEMO") %>','<%=bhDetList.get("MEM_APP_AVAILABILITY") %>',
 												  	'<%=bhDetList.get("MEM_MANAGER") %>','<%=bhDetList.get("MEM_REGISTRATION_DATE") %>',
 												 		'<%=bhDetList.get("MEM_BIRTH") %>','<%=bhDetList.get("MEM_HP") %>')">정보수정</a>
@@ -281,10 +281,10 @@ body{
 									</label>
 									<input type="text" id="umem_name" name="mem_name" placeholder="이름 입력" style="width: 200px; margin-right: 25px;">
 			
-									<input type="radio" value="남성" checked="checked" id="umem_gender" name="mem_gender">
-									<label for="male">남성</label>
-									<input type="radio"  value="여성" id="umem_gender"  name="mem_gender">
-									<label for="female">여성</label>
+									<input type="radio" value="남자" name="mem_gender">
+									<label >남성</label>
+									<input type="radio"  value="여자"  name="mem_gender">
+									<label >여성</label>
 								</p>
 								 <p>
 									<span class="label" style="margin-left: 12px;margin-right: 4%">
@@ -326,7 +326,7 @@ body{
 								 <p>
 									<label style="margin-right:3%;">고객관리 담당자</label>
 									
-									<select id="MI-select" onchange="mode_Select()"  title="상담 담당자 선택" id="umem_manager" name="mem_manager">
+									<select id="MI-select"  title="상담 담당자 선택" id="umem_manager" name="mem_manager">
 									<option value="">선택해주세요</option>
 									<option value="강민호">강민호 강사</option>
 									<option value="손준호">손준호 강사</option>
@@ -362,7 +362,7 @@ body{
 				      <!-- Modal footer -->
 				      <div class="modal-footer" id="MI-footer">	      
 						      <div class="pop_btn" data-function-group="regist" style="display: block;">
-								<button data-dismiss="modal" type="button" class="btn blue" onclick="memUdate()">수정 </button>
+								<button data-dismiss="modal" type="button" class="btn blue" onclick="memUdate(<%=bhDetList.get("MEM_NUM")%>)">수정 </button>
 								<button data-dismiss="modal"  type="button" class="btn gray">닫기</button>
 							</div>
 				

@@ -28,10 +28,9 @@ public class MemberLogic {
 		result = memberDao.bfIns(pMap);
 		return result;
 	}
-	public List<Map<String, Object>> bhsel() {
+	public List<HashMap> bhsel(Map<String, String> pMap) {
 		logger.info("멤버등록조회로직");
-		List<Map<String,Object>> bhSelList =null;
-		bhSelList = memberDao.bhSel();
+		List<HashMap> bhSelList  = memberDao.bhsel(pMap);
 		return bhSelList;
 	}
 	public int bhUPD(Map<String, Object> pMap) {
@@ -48,7 +47,12 @@ public class MemberLogic {
 	      return result;
 	   }
 
-
+	   public List<Map<String, Object>> bhsel2() {
+			logger.info("멤버등록조회로직");
+			List<Map<String,Object>> bhSelList =null;
+			bhSelList = memberDao.bhSel2();
+			return bhSelList;
+		}
 	/*============================[[민지 끝 ]]====================================================*/
 	/*==================================[[주노 시작 ]]=================================================*/
 	 public Map<String, Object> bhDET(Map<String, Object> pMap) {
@@ -58,5 +62,4 @@ public class MemberLogic {
 	      return rMap;
 	   }
 	 /*==================================[[주노끝 ]]=================================================*/
-
 }

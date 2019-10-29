@@ -25,7 +25,7 @@ body{
       <script type="text/javascript">
       
       
-      function a(){
+      function staffkeyword(){
     	  $.ajax({
        		  method:"POST"
 				,url:"/staff/SFSEL.fm?keyword="+$("#keyword").val()
@@ -35,25 +35,6 @@ body{
        	  	});
     	  
       }
-      
-     /*  $(document).ready(function(){
-	      $("#keyword").keydown(function(e){
-		         //if(e.keyCode == 13){
-		        	 alert("엔턴눌림?");
-		        	 $("#staff_card").html("1111111");
-		        	 /*
-		        	 $.ajax({
-		       		  method:"POST"
-	    				,url:"/staff/SFSEL.fm?keyword="+$("#keyword").val()
-	    				,success:function(data){
-	    					alert("성공"+data);
-	    					$("#staff_card").html(data);
-		     			}
-		       	  	});
-		        	 
-		         //}
-		  });
-      }) */
        
   /* 임직원 등록   */    
        function staffInser(){
@@ -156,7 +137,7 @@ body{
             <span class="search_box">
                <form name="searchFrm">
                   <input type="text" name="keyword" id="keyword">
-                  <button type="button"  class="search" onclick="a()">검색</button>
+                  <button type="button"  class="search" onclick="staffkeyword()">검색</button>
                </form>
             </span>
          </fieldset> 

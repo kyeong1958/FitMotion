@@ -33,27 +33,55 @@
                    mem_id = #{mem_id},
              WHERE mem_num = #{mem_num}      
    </update>
-   <select id="MemSel" parameterType="map" resultType="map">
+   <select id="MemSelkek" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+         select mem_num,mem_name,mem_birth
+                       ,mem_gender,mem_address
+                               ,mem_hp,mem_registration_date,mem_manager,mem_app_availability
+                               ,mem_barcode_num,mem_memo,mem_id,mem_pw
+                                           from Member
+                    where 1 = 1 
+            <if test=' keyword != "" and keyword != null'>
+              AND mem_name LIKE '%'||#{keyword}||'%'
+              </if>
+                    
+                    
+   </select>
+   
+   <select id="MemSel" parameterType="java.util.HashMap" resultType="java.util.HashMap">
          select rownum rno,mem_num,mem_name,mem_birth
                        ,mem_gender,mem_address
                                ,mem_hp,mem_registration_date,mem_manager,mem_app_availability
                                ,mem_barcode_num,mem_memo,mem_id,mem_pw
                                            from Member
-                    order by rno asc
+                    order by rno asc                
    </select>
    <delete id="MemDEL" parameterType="map">
       delete from member where mem_num=#{mem_num}
    </delete>
+   
+<!--    <select id="MemberSerch" parameterType="map" resultType="map">  
+      select MEM_NAME,MEM_BIRTH,MEM_HP from member
+              where 1 =1 
+              <if test="keyword!=null">
+              AND mem_name LIKE '%'||#{keyword}||'%'
+              </if>
+	</select> -->
+   
+   
 	<!--==================================[[민지 끝]]==============================================================  -->
 	<!--========================================[[주노시작 ]]===============================================================  -->
 	<select id="memDET" parameterType="map" resultType="map">
-  		 select MEMBER.MEM_BARCODE_NUM,MEMBER.MEM_ID , MEMBER.MEM_ADDRESS, MEMBER.MEM_APP_AVAILABILITY
-    		  , MEMBER.MEM_BIRTH, MEMBER.MEM_GENDER, MEMBER.MEM_HP, MEMBER.MEM_IMAGE, MEMBER.MEM_MANAGER
-    		  , MEMBER.MEM_MEMO, MEMBER.MEM_NAME, MEMBER.MEM_NUM, MEMBER.MEM_PW, MEMBER.MEM_REGISTRATION_DATE
-     		  , LOCKER .LOCKER_NUM  from member,LOCKER_RENTAL,LOCKER  
-		 where MEMBER.MEM_NUM = LOCKER_RENTAL.MEM_NUM 
-		 AND LOCKER_RENTAL.LOCKER_NUM = LOCKER.LOCKER_NUM 
-		 AND MEMBER.MEM_NUM = #{mem_num}
+  		select  MEMBER.MEM_BARCODE_NUM,MEMBER.MEM_ID, MEMBER.MEM_ADDRESS, MEMBER.MEM_APP_AVAILABILITY
+            , MEMBER.MEM_BIRTH, MEMBER.MEM_GENDER, MEMBER.MEM_HP, MEMBER.MEM_IMAGE, MEMBER.MEM_MANAGER
+            , MEMBER.MEM_MEMO, MEMBER.MEM_NAME, MEMBER.MEM_NUM, MEMBER.MEM_PW, MEMBER.MEM_REGISTRATION_DATE
+             , LOCKER.LOCKER_NUM  
+       from member,LOCKER,(select LOCKER_NUM,MEM_NUM
+                           from locker_rental
+                           where to_number(substr(replace(lrent_end_day,'/',''),3,6)) > 
+                           substr(replace(sysdate,'/',''),0,8)) LOC   
+       where MEMBER.MEM_NUM = LOC.MEM_NUM 
+       AND LOC.LOCKER_NUM = LOCKER.LOCKER_NUM 
+       AND MEMBER.MEM_NUM = #{mem_num}
                            
    </select>
    
