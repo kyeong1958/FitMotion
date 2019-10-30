@@ -18,7 +18,7 @@
   		%>
 	         <li>
 			   <button type="button" class="btn btn-block gray">
-			      <span class="btn-label" style="color: #000" ><%=rMap.get("RANK_NAME") %></span>
+			      <span class="btn-label" style="color: #000;" onclick="rankdet('<%=rMap.get("RANK_NAME") %>')"> <%=rMap.get("RANK_NAME") %></span>
 			   </button>
 		   </li>
 		   <%

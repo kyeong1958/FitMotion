@@ -13,9 +13,7 @@
 	
  %>
 <!-- ============================ [[ 회원목록  ]] ======================================== -->
-<%@ include file="../common/JEasyUICommon.jsp"%>
 <%@ include file="../member/memberListModal.jsp"%>
-<link rel="stylesheet" type="text/css" href="../NewCSS/main.css">
 <link rel="stylesheet" type="text/css" href="../NewCSS/Member.css">
 <link rel="stylesheet" type="text/css" href="../NewCSS/Modal.css">
 <style type="text/css">
@@ -116,6 +114,17 @@ body{
     			}
       	  	});
 	}
+	
+	function gender(mem_gender){
+		 $.ajax({
+     		  method:"POST"
+				,url:"/member/Memgender.fm?mem_gender="+mem_gender
+				,success:function(data){
+					$("#in_005fcard").html(data);
+   			}
+     	 });
+	}
+	
 	    
 </script>
 <div id="memList">
@@ -166,23 +175,6 @@ body{
 				
 			</ul>
         </div>
-     <!--    <div class="Menufr">
-            
-            <select class="select_month">
-	            <option value="201909">2019년 11월</option>
-	            <option value="201908">2019년 10월</option>
-	            <option value="201907">2019년 09월</option>
-	            <option value="201906">2019년 08월</option>
-	            <option value="201905">2019년 07월</option>
-	            <option value="201904">2019년 06월</option>
-	            <option value="201903">2019년 05월</option>
-	            <option value="201902">2019년 04월</option>
-	            <option value="201901">2019년 03월</option>
-	            <option value="201812">2019년 02월</option>
-	            <option value="201811">2019년 01월</option>
-	            <option value="201810">2018년 12월</option>
-        	</select>
-        </div> -->
     </div>
 </div>
 
@@ -204,24 +196,11 @@ body{
                         <option value="mem_name">이름 순(가나다)</option>
                         <option value="age">나이 순</option>
                     </select> 
-              
-              
-                  
-                  <!--   <select  class="selectBox"  >
-                        <option value="">연령대</option>
-                        <option value="10">10대</option>
-                        <option value="20">20대</option>
-                        <option value="30">30대</option>
-                        <option value="40">40대</option>
-                        <option value="50">50대</option>
-                        <option value="60">60대</option>
-                        <option value="70">70대 이상</option>
-                    </select>  -->
-                    
-                	<select  class="selectBox" id="genderSearch" name="genderSearch" >
+
+                	<select  class="selectBox" onchange="gender(this.value)" id="genderSearch"  >
                         <option value="">성별</option>
-                        <option value="남성">남</option>
-                        <option value="여성">여</option>
+                        <option value="남자">남</option>
+                        <option value="여자">여</option>
                     </select>
                  
                     <!-- <select  class="selectBox" >
@@ -290,12 +269,6 @@ body{
 	
 	<!--=========================================[[버튼 부붙 시작 ]]======================  -->
 	<div class="select_option" id="selectoption">
-        
-        <div class="B_fl">
-            <h4><%=size %>명의 회원 중 0명이 선택되었습니다.</h4>
-            
-        </div>
-        
         <div class="B_fr">
             <input type="checkbox" id="checkall">
             <label class="all">전체 선택</label>	

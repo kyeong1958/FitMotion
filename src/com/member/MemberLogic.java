@@ -1,5 +1,6 @@
 package com.member;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -31,6 +32,7 @@ public class MemberLogic {
 	public List<HashMap> bhsel(Map<String, String> pMap) {
 		logger.info("멤버등록조회로직");
 		List<HashMap> bhSelList  = memberDao.bhsel(pMap);
+		
 		return bhSelList;
 	}
 	public int bhUPD(Map<String, Object> pMap) {
@@ -53,6 +55,37 @@ public class MemberLogic {
 			bhSelList = memberDao.bhSel2();
 			return bhSelList;
 		}
+	  ///////////////////////////2019-10-30 추가//////////////////////////////////
+	   //이용권관리 
+	   public List<Map<String, Object>> probil(Map<String, Object> pMap) {
+		   List<Map<String, Object>> probilList = new ArrayList<>();
+		   probilList = memberDao.probil(pMap);
+			return probilList;
+		}
+	   
+	   //이용권관리 
+		public List<Map<String, Object>> ticketbil(Map<String, Object> pMap) {
+			 List<Map<String, Object>> ticbilList = new ArrayList<>();
+			 ticbilList = memberDao.ticketbil(pMap);
+			 logger.info(pMap);
+			return ticbilList;
+		}
+		//성별 검색조건
+		public List<Map<String, Object>> Memgender(Map<String, Object> pMap) {
+			List<Map<String, Object>> genderList = new ArrayList<>();
+			genderList = memberDao.Memgender(pMap);
+			 logger.info(pMap);
+			return genderList;
+		}
+		//이용권입장관리 
+	    public List<Map<String, Object>> memAttSEL(Map<String, Object> pMap) {
+	        logger.info("회원출결목록로직");
+	          List<Map<String,Object>> mAttSELList =new ArrayList<Map<String,Object>>();
+	          mAttSELList = memberDao.memAttSEL(pMap);
+	          return mAttSELList;
+	     }
+	     
+		
 	/*============================[[민지 끝 ]]====================================================*/
 	/*==================================[[주노 시작 ]]=================================================*/
 	 public Map<String, Object> bhDET(Map<String, Object> pMap) {
@@ -62,4 +95,6 @@ public class MemberLogic {
 	      return rMap;
 	   }
 	 /*==================================[[주노끝 ]]=================================================*/
+
+
 }

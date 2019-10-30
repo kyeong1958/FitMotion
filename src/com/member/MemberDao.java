@@ -157,6 +157,89 @@ public class MemberDao {
 			
 			return bhSelList;
 		}
+		
+		////////////////////////////2019-10-30추가/////////////////////////////
+		//이용권관리 - 프로모션
+		public List<Map<String, Object>> probil(Map<String, Object> pMap) {
+			List<Map<String, Object>> probilList = new ArrayList<Map<String,Object>>();
+			logger.info(pMap);
+			try {
+				sqlSession = sqlSessionFactory.openSession();
+				probilList = sqlSession.selectList("memprobil",pMap);
+				logger.info(probilList);
+				 
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				if(sqlSession!=null) {
+					sqlSession.close(); 
+				}
+				
+			}
+			
+			return probilList;
+		}
+		
+		//이용권관리 - 티켓
+		public List<Map<String, Object>> ticketbil(Map<String, Object> pMap) {
+			List<Map<String, Object>> ticbilList = new ArrayList<Map<String,Object>>();
+			logger.info(pMap);
+			try {
+				sqlSession = sqlSessionFactory.openSession();
+				ticbilList = sqlSession.selectList("memtickbil",pMap);
+				
+				logger.info(ticbilList);
+				 
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				if(sqlSession!=null) {
+					sqlSession.close(); 
+				}
+				
+			}
+			
+			return ticbilList;
+		}
+		
+		//성별조건검색
+		public List<Map<String, Object>> Memgender(Map<String, Object> pMap) {
+			List<Map<String, Object>> genderList = new ArrayList<Map<String,Object>>();
+			logger.info(pMap);
+			try {
+				sqlSession = sqlSessionFactory.openSession();
+				genderList = sqlSession.selectList("memgender",pMap);
+				
+				logger.info(genderList);
+				 
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				if(sqlSession!=null) {
+					sqlSession.close(); 
+				}
+			}
+			return genderList;
+		}
+		
+		//이용권 입장관리 
+		public List<Map<String, Object>> memAttSEL(Map<String, Object> pMap) {
+		      logger.info("회원출결목록 Dao 호출성공");
+		      List<Map<String,Object>> mAttSELList = new ArrayList<>();
+		   try {
+		         sqlSession = sqlSessionFactory.openSession();
+		         mAttSELList = sqlSession.selectList("memAttSEL",pMap);
+		          logger.info(mAttSELList.size()); 
+		      } catch (Exception e) {
+		         e.printStackTrace();
+		      } finally {
+		         if(sqlSession!=null) {
+		            sqlSession.close(); 
+		         }
+		      }
+		      return mAttSELList;
+		   }
+		
 
 	/*===============================[[민지 끝 ]]===========================================*/
 	/*===============================[[주노시작]]================================================*/
@@ -180,5 +263,8 @@ public class MemberDao {
 	      return rMap;
 	}
 	/*===============================[[주노끝]]================================================*/
+
+
+
 
 }

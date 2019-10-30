@@ -309,27 +309,6 @@
                     and  TIC_PURCHASE.PROM_NUM = PROMOTION.PROM_NUM 
 	
 	 </select>
-	 
-	 <!-- 매출등록 콤보 박스 -->
-	<!--  <select id="promcomdo" parameterType="map" resultType="map" >
-			SELECT 
-                PROM_NAME AS P_NAME
-                , PROM_NUM ||'↑PRO' AS P_NUM
-                , PROM_DIS_PRICE  AS P_PRICE 
-                , 'PRO' AS GUBUN
-			FROM PROMOTION
-			UNION
-			SELECT 
-                TICKET_NAME AS P_NAME
-                , TICKET_NUM || '↑TIC'  AS P_NUM
-                , TICKET_PRICE  AS P_PRICE 
-                 , 'TIC' AS GUBUN
-			FROM TICKET
-			ORDER BY GUBUN ASC , P_NUM
-	 </select>
-	  -->
-	 
-	 
 	 <!-- 양도  -->
 	 <update id="progive" parameterType="map">
                 update tic_purchase set 
@@ -345,11 +324,6 @@
                 where
                 ticp_num = #{tcip_num}
 	 </update>
-	 
-	 
-	 <!-- 환불  -->
-	 
-	 
 	 <!-- 지출 분류 콤보박스  -->
 	 <select id="spendingcombo" parameterType="map" resultType="map">
 	 		select EXB_NUM,EXB_KINDS from EX_BREAKDOWN 
