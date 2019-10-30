@@ -23,6 +23,7 @@ public class ShopController implements Controller {
 	ShopLogic shopLogic = null;
 	Gson gson = null;
 	String login_id = null;
+	String rank = null;
 	public ShopController(String crud) {
 		this.crud = crud;
 		shopLogic = new ShopLogic();
@@ -159,6 +160,11 @@ public class ShopController implements Controller {
 			if(rMap.get("rank") != null && rMap.get("rid") != null) {
 				logger.info("if");
 				login_id = (String)rMap.get("rid");
+				rank = (String)rMap.get("rank");
+//				HttpSession session = req.getSession();
+//				session.setAttribute("login_id", login_id);
+//				session.setAttribute("login_rank", rank);
+//				logger.info("로그인"+session.getAttribute("login_id"));
 				mav.pageMove("forward");
 				mav.setViewName("/shop/main.jsp");
 				mav.addObject("login", rMap);
@@ -180,6 +186,76 @@ public class ShopController implements Controller {
 		}
 
 /*================================[[정은 끝 -> 경애 끝]]======================================================*/
+		/*<!--==========================[[준호 시작 ]]=======================================================================  -->*/
+	      else if("officegdSEL".equals(crud)) {
+	         logger.info("사무용품조회 Controller 호출 성공");
+	         List<Map<String,Object>> rMap = null;
+	         Map<String,Object> pMap = new HashMap<>();
+	         pMap.put("go_type",req.getParameter("go_type"));
+	         rMap = shopLogic.officegdSEL(pMap);
+	         logger.info(rMap);
+	         logger.info("controller"+pMap);
+	         mav.addObject("gdSelList", rMap);
+	         mav.pageMove("forward");
+	         mav.setViewName("/shop/GoodAjax.jsp");
+	      }
+	      else if("eqINS".equals(crud)) {
+	            logger.info("기구관리입력");
+	            int result = 0;
+	            Map<String,Object> pMap = new HashMap<>();
+	            HashMapBinder hmb = new HashMapBinder(req);
+	            hmb.bindPost(pMap);
+	            logger.info(pMap);
+	            logger.info("기구이름:"+pMap.get("se_name"));
+	            result = shopLogic.eqINS(pMap);
+	            logger.info(result);
+	            mav.pageMove("redirect");
+	            mav.setViewName("/shop/eqSEL.fm");
+	         }
+	         
+	         else if("eqSEL".equals(crud)) {
+	            logger.info("기구관리조회");
+	            List<Map<String,Object>> eqSelList = null;
+	            eqSelList = shopLogic.eqSEL();
+	            mav.addObject("eqSelList", eqSelList);
+	            mav.pageMove("forward");
+	            mav.setViewName("/shop/EqCard.jsp");            
+	         }
+	         else if("eqUPD".equals(crud)) {
+	            logger.info("기구관리수정");
+	            int result =0;
+	            Map<String,Object> pMap = new HashMap<>();
+	            HashMapBinder hmb = new HashMapBinder(req);
+	            hmb.bindPost(pMap);
+	            result = shopLogic.eqUPD(pMap);
+	            logger.info(result);
+	            //mav.setViewName("/both/cccc");
+	            mav.pageMove("redirect");
+	            mav.setViewName("/shop/eqSEL.fm");
+	         }
+	         else if("eqDEL".equals(crud)) {
+	            logger.info("기구관리 삭제 ");
+	            int result = 0;
+	            Map<String,Object> pMap = new HashMap<>();
+	            HashMapBinder hmb = new HashMapBinder(req);
+	            hmb.bindPost(pMap);
+	            result = shopLogic.eqDEL(pMap);
+	            mav.pageMove("redirect");
+	            mav.setViewName("/shop/eqSEL.fm");
+	         }
+	         else if("eqdetSEL".equals(crud)) {
+	            logger.info("기구사용여부조회 Controller 호출 성공");
+	            List<Map<String,Object>> rMap = null;
+	            Map<String,Object> pMap = new HashMap<>();
+	            pMap.put("se_operating_mode",req.getParameter("se_operating_mode"));
+	            rMap = shopLogic.eqdetSEL(pMap);
+	            logger.info(rMap);
+	            logger.info("controller"+pMap);
+	            mav.addObject("eqSelList", rMap);
+	            mav.pageMove("forward");
+	            mav.setViewName("/shop/EqCard.jsp");
+	         }
+	/*<!--==========================[[준호 끝 ]]=======================================================================  -->*/
 
 		return mav;
 	}

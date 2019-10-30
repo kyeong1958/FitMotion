@@ -65,6 +65,13 @@ body{
 	            $("input[name=check]").prop("checked",false);
 	        } 
 	    })
+	    $.ajax({
+            method:"POST"
+            ,url:"/member/BHSEL.fm"
+            ,success:function(data){
+               $("#in_005fcard").html(data);
+            }
+         }); 
 	});
 	
 	

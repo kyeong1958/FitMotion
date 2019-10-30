@@ -54,6 +54,11 @@ public class ScheduleLogic {
 		result = scheduleDao.reservationUPD(pMap);
 		return result;
 	}
+	public List<Map<String, Object>> staffList() {
+		List<Map<String, Object>> staffList = new ArrayList<Map<String,Object>>();
+		staffList = scheduleDao.staffList();
+		return staffList;
+	}
 
 
 	

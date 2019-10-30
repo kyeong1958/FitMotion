@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <!-- ============================ [[ 예약테이블 ]] ======================================== -->
-<%@ include file="../common/JEasyUICommon.jsp"%>
+<%-- <%@ include file="../common/JEasyUICommon.jsp"%> --%>
 <link rel="stylesheet" type="text/css" href="../NewCSS/main.css">
 <link rel="stylesheet" type="text/css" href="../NewCSS/table.css">
 <link rel="stylesheet" type="text/css" href="../NewCSS/reservation.css">

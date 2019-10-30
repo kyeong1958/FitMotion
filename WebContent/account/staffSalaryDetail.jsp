@@ -46,8 +46,6 @@ body{
 </script>
 <script type="text/javascript">
 	$(document).ready(function(){
-		alert(<%=year%>);
-		alert(<%=month+1%>);
 		$.ajax({
 			url:'/staff/staffSalaryDetail.fm?login_id=<%=login_id%>&year=<%=year%>&month=<%=month+1%>'
 			,success:function(data){

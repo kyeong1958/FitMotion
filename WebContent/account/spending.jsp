@@ -9,6 +9,27 @@ body {
 }
 </style>
 <script type="text/javascript">
+	$(document).ready(function(){
+		 $.ajax({
+             method:"POST"
+               ,url:"/account/spendingcombo.fm"
+               ,success:function(data){
+                  //alert("성공");
+                  $("#breakcombo").html(data);
+                      $.ajax({
+                           method:"POST"
+                             ,url:"/account/PROSEL2.fm"
+                             ,success:function(data){
+                                //alert("성공");
+                                $("#selectpro2").html(data);
+                          }
+                     }); 
+          		}
+          });  
+		
+	});
+</script>
+<script type="text/javascript">
 	//데이트박스 
 	//datebox 날짜형식 YYYY-MM-DD로 설정
 	$.fn.datebox.defaults.formatter = function(date) {

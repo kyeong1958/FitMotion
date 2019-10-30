@@ -139,5 +139,38 @@
 			)}
 	</select>
 <!--========================================[[ 정은 끝 -> 경애 끝 ]]===============================================================  -->
+<!--===========================================[[주노시작 ]]=================================================  -->
+    <insert id="eqINS" parameterType="map">
+         insert into SPORTS_EQUIPMENT(se_num, se_name, se_operating_mode, se_repair_datail, se_repairs, se_buy_date, se_buy_price, gym_num)
+                    values (FM.EQ_INS.NEXTVAL,#{se_name},#{se_operating_mode},#{se_repair_datail},#{se_repairs},#{se_buy_date},#{se_buy_price},'1')              
+   </insert>
+   <select id="eqSEL" parameterType="map" resultType="map"> 
+          select se_num,se_name,se_operating_mode,se_repair_datail,se_repairs,se_buy_date,se_buy_price,SPORTS_EQUIPMENT.gym_num
+           from SPORTS_EQUIPMENT , GYM
+           where SPORTS_EQUIPMENT.gym_num = GYM.gym_num  
+   </select>
+   <update id="eqUPD" parameterType="map">
+       update SPORTS_EQUIPMENT
+         set se_name = #{se_name}
+                ,se_operating_mode = #{se_operating_mode}
+              ,se_repair_datail = #{se_repair_datail}
+               ,se_repairs = #{se_repairs}
+               ,se_buy_date = #{se_buy_date}
+               ,se_buy_price = #{se_buy_price}
+         where se_num = #{se_num}
+   </update>
+   <delete id="eqDEL" parameterType="map">
+      delete from SPORTS_EQUIPMENT where se_num=#{se_num}
+   </delete>
+   
+   <select id="eqdetSEL" resultType="map" parameterType="map">
+      select se_num, se_name, se_operating_mode, se_repair_datail, se_repairs, se_buy_date, se_buy_price
+        from SPORTS_EQUIPMENT
+       where se_operating_mode = #{se_operating_mode} 
+   </select>
+
+<!--===========================================[[주노끝 ]]=================================================  -->
+
+
 </mapper> 
  

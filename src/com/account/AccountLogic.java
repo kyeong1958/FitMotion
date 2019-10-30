@@ -99,37 +99,34 @@ public class AccountLogic {
  * =========================[[민지 끝]]============================================
  */
 ////////////////수근시작/////////////////
-	//전체매출 통계
-	public  Map<String,List<Map<String, String>>> allsales(String date) {
-	logger.info("AccountLogic-allsales 호출성공");
-	Map<String,List<Map<String, String>>> allsales = null;
-	allsales = accountDao.allsales(date);
-	return allsales;
-	}
-	//회원 통계
-	public  Map<String,List<Map<String, String>>> memsales(String date) {
-	logger.info("AccountLogic 호출성공");
-	Map<String,List<Map<String, String>>> memsales = null;
-	memsales = accountDao.memsales(date);
-	return memsales;
-	}
-	//개인레슨 통계
-	public Map<String, List<Map<String, String>>> privateProg(String startDate, String endDate) {
-	logger.info("AccountLogic-privateProg 호출성공");
-	Map<String, List<Map<String, String>>> privateProg = null;
-	privateProg = accountDao.privateProg(startDate, endDate);
-	return privateProg;
-	}
-	//그룹 레슨 통계
-	public Map<String, List<Map<String, String>>> publicProg(String startDate, String endDate) {
-	logger.info("AccountLogic-publicProg 호출성공");
-	Map<String, List<Map<String, String>>> publicProg = null;
-	publicProg = accountDao.publicProg(startDate, endDate);
-	return publicProg;
-	}
+		//전체매출 통계
+		public  Map<String,List<Map<String, String>>> allsales(String date) {
+		logger.info("AccountLogic-allsales 호출성공");
+		Map<String,List<Map<String, String>>> allsales = null;
+		allsales = accountDao.allsales(date);
+		return allsales;
+		}
+		//회원 통계
+		public  Map<String,List<Map<String, String>>> memsales(String date) {
+		logger.info("AccountLogic 호출성공");
+		Map<String,List<Map<String, String>>> memsales = null;
+		memsales = accountDao.memsales(date);
+		return memsales;
+		}
+		//개인레슨 통계
+		public Map<String, List<Map<String, String>>> privateProg(Map<String, Object> data) {
+		logger.info("AccountLogic-privateProg 호출성공");
+		Map<String, List<Map<String, String>>> privateProg = null;
+		privateProg = accountDao.privateProg(data);
+		return privateProg;
+		}
+		//그룹 레슨 통계
+		public Map<String, List<Map<String, String>>> publicProg(Map<String, Object> data) {
+		logger.info("AccountLogic-publicProg 호출성공");
+		Map<String, List<Map<String, String>>> publicProg = null;
+		publicProg = accountDao.publicProg(data);
+		return publicProg;
+		}
 ////////////////수근끝/////////////////
-	
-	
-	
 
 }

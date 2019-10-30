@@ -6,7 +6,7 @@
 <!-- ============================ [[ 매출등록   ]] ======================================== -->
 <link rel="stylesheet" type="text/css" href="../NewCSS/profit.css">
 <link rel="stylesheet" type="text/css" href="../NewCSS/MemberSearch.css">
-
+<%--  <%@ include file="/common/JEasyUICommon.jsp"%> --%>
 <style type="text/css">
 body{
 	padding:0;
@@ -25,19 +25,34 @@ body{
 	   //datebox parser설정
 	    $.fn.datebox.defaults.parser = function(s){
 		var t = Date.parse(s);
-		if (!isNaN(t)){
-			return new Date(t);
-		} else {
-			return new Date();
+			if (!isNaN(t)){
+				return new Date(t);
+			} else {
+				return new Date();
+			}
 		}
-	}
 	   //datebox 한글화
-	    $.fn.datebox.defaults.currentText = '오늘'
+	   $.fn.datebox.defaults.currentText = '오늘'
 	   $.fn.datebox.defaults.closeText = '닫기'
 	   $.fn.calendar.defaults.weeks = ['일','월','화','수','목','금','토']
 	   $.fn.calendar.defaults.months = ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월']
-	   
-	   
+	  
+	   $.ajax({
+           method:"POST"
+             ,url:"/account/PROSEL.fm"
+             ,success:function(data){
+                //alert("성공");
+                $("#selectpro").html(data);
+                    $.ajax({
+                         method:"POST"
+                           ,url:"/account/PROSEL2.fm"
+                           ,success:function(data){
+                              //alert("성공");
+                              $("#selectpro2").html(data);
+                        }
+                      }); 
+                   }
+                 }); 
 	});
 	
 
@@ -276,12 +291,12 @@ function removeComma(str)
                      <div style="padding:0 0 5px">
                         <label class="spend-box-left-column">최근 결제 이력</label>
                         <span>
-                           <label>패키지 레슨</label>
+                           <label></label>
                         </span>
                      </div>
                      <div align="right">
-                        <span style="color: #2196F3 !important;margin-right:20px;">2019-09-30</span>
-                        <span style="color: #2196F3 !important;">1,500,000원</span>
+                        <span style="color: #2196F3 !important;margin-right:20px;"></span>
+                        <span style="color: #2196F3 !important;"></span>
                      </div>
                      <h4 class="spending-box-left" style="margin-top:10px;">결제 상품 정보</h4>
                      <div style="padding:0 0 5px">
@@ -437,9 +452,6 @@ function removeComma(str)
 						
 					}
 				}); 
-				
-				
-			
 			}
 	
 	</script>
@@ -471,18 +483,6 @@ function removeComma(str)
 						<div class="search-mem-modal" id="memberSearchModalTable">	
 							<form id="MemSearch">
 							<div id="memsearch">
-						<!-- 	<table id="tb_membersearch" class="table table-bordered  table-striped">
-							  <thead class="thead-dark">
-									<tr>						
-										<th class="tableheader">회원명</th>					
-										<th class="tableheader">생년월일</th>					
-										<th class="tableheader">핸드폰번호</th>					
-									</tr>	
-							  </thead>   
-							  <tbody id="imsi_change">
-									
-							  </tbody>
-							</table>		 -->						
 							</div>
 							</form>								
 						</div>									

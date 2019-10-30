@@ -10,7 +10,24 @@ body{
    padding:0%;
 }
 </style>
-
+<script type="text/javascript">
+	$(document).ready(function(){
+		$.ajax({
+		    method : "POST",
+		    url : "/program/taSEL.fm",
+		    success : function(data) {
+		       $("#tasel").html(data);
+		       $.ajax({
+		          method : "POST",
+		          url : "/program/prornk.fm",
+		          success : function(data) {
+		             $("#pro_rank").html(data);
+		          }
+		       });
+		    }
+		 });
+	});
+</script>
 <script type="text/javascript">
 	function mempage(url){
 		$.ajax({

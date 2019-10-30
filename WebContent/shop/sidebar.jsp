@@ -16,7 +16,7 @@
          	<a href="main.jsp?pageChange=../schedule/scheduleweekly.jsp" style="color:white;text-decoration:none">스케줄</a>
          </div>
          <div class="row sidemenutitle" onClick="menu('')">
-         	<a href="main.jsp?pageChange=../account/profit.jsp" style="color:white;text-decoration:none">매출등록</a>
+         	<a href="main.jsp?pageChange=../account/profit.jsp" style="color:white;text-decoration:none;border-top:white">매출등록</a>
          </div>
          <div class="row sidemenutitle" onClick="menu('')">
          	<a href="main.jsp?pageChange=../account/spending.jsp" style="color:white;text-decoration:none">지출등록</a>
@@ -34,6 +34,9 @@
          	<a href="main.jsp?pageChange=../shop/Lock.jsp" style="color:white;text-decoration:none">락커관리</a>
          </div>
          <div class="row sidemenutitle" onClick="menu('')">
+         	<a href="main.jsp?pageChange=../shop/Equipment.jsp" style="color:white;text-decoration:none">기구관리</a>
+         </div>
+         <div class="row sidemenutitle" onClick="menu('')">
          	<a href="main.jsp?pageChange=../shop/Good.jsp" style="color:white;text-decoration:none">비품관리</a>
          </div>
          <div class="row sidemenutitle" onClick="menu('.history')">
@@ -41,13 +44,13 @@
          </div>
          <div class="row history">
             <div class="row sidemenu" id="allsalesmanagement">
-            	<a href="main.jsp?pageChange=../schedule/reservation.jsp" style="color:white;text-decoration:none">예약내역</a>
+            	<a href="main.jsp?pageChange=../schedule/reservation.jsp&menu=.histroy" style="color:white;text-decoration:none">예약내역</a>
             </div>
             <div class="row sidemenu" id="allsalesmanagement">
-            	<a href="main.jsp?pageChange=../member/entranceStatement.jsp" style="color:white;text-decoration:none">입장내역</a>
+            	<a href="main.jsp?pageChange=../member/entranceStatement.jsp&menu=.histroy" style="color:white;text-decoration:none">입장내역</a>
             </div>
             <div class="row sidemenu" id="allsalesmanagement">
-            	<a href="main.jsp?pageChange=../account/BillingHistoryList.jsp" style="color:white;text-decoration:none">회원결제내역</a>
+            	<a href="main.jsp?pageChange=../account/BillingHistoryList.jsp&menu=.histroy" style="color:white;text-decoration:none">회원결제내역</a>
             </div>
          </div>
          <div class="row sidemenutitle" onClick="menu('')">
@@ -58,19 +61,19 @@
          </div>
          <div class="row account">
 			<div class="row sidemenu" id="allsalesmanagement">
-            	<a href="main.jsp?pageChange=../account/salesStatement.jsp" style="color:white;text-decoration:none">매출내역</a>
+            	<a href="main.jsp?pageChange=../account/salesStatement.jsp&menu=.account" style="color:white;text-decoration:none">매출내역</a>
             </div>
 			<div class="row sidemenu" id="allsalesmanagement">
-            	<a href="main.jsp?pageChange=../account/expenseStatement.jsp" style="color:white;text-decoration:none">지출내역</a>
+            	<a href="main.jsp?pageChange=../account/expenseStatement.jsp&menu=.account" style="color:white;text-decoration:none">지출내역</a>
             </div>
 			<div class="row sidemenu" id="allsalesmanagement">
-            	<a href="main.jsp?pageChange=../account/staffCalculate.jsp" style="color:white;text-decoration:none">직원정산</a>
+            	<a href="main.jsp?pageChange=../account/staffCalculate.jsp&menu=.account" style="color:white;text-decoration:none">직원정산</a>
             </div>
 			<div class="row sidemenu" id="allsalesmanagement">
-            	<a href="main.jsp?pageChange=../account/staffSalaryDetail.jsp" style="color:white;text-decoration:none">직원별정산</a>
+            	<a href="main.jsp?pageChange=../account/staffSalaryDetail.jsp&menu=.account" style="color:white;text-decoration:none">직원별정산</a>
             </div>
 			<div class="row sidemenu" id="allsalesmanagement">
-            	<a href="main.jsp?pageChange=../account/centerCalculate.jsp" style="color:white;text-decoration:none">센터정산</a>
+            	<a href="main.jsp?pageChange=../account/centerCalculate.jsp&menu=.account" style="color:white;text-decoration:none">센터정산</a>
             </div>
          </div>
          <div class="row sidemenutitle" onClick="menu('.service')">

@@ -2,17 +2,23 @@
     pageEncoding="UTF-8"%>
 <link rel="stylesheet" type="text/css" href="/NewCSS/BillingHistoryList.css">
     <!-- ============================ [[ 회원결제내역 ]] ======================================== -->
-    
-
-
 <style type="text/css">
-
 body{
    padding:0%;
    
 }
-
 </style>
+<script>
+	$(document).ready(function(){
+		 $.ajax({
+             method : "POST",
+             url : "/account/probuySel.fm",
+             success : function(data) {
+                $("#BHLgrid").html(data);
+             }
+          });
+	});
+</script>
 <!-- ================================= [[ 화면전환 ]] =================================================== -->
             <!--=========================[[ 홈바 시작 ]]========================== -->
    		<div class="bar_area">

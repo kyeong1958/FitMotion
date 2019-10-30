@@ -22,9 +22,17 @@ public class ScheduleDao {
 /////////////////////////////// [[ 경애  ]] /////////////////////////////////////
 //예약관리에서 콤보박스에 해당하는 값 가져오기 select
 	public Map<String, Object> scheduleModal(Map<String, Object> scheduleModal) {
-		/* scheduleModal = new HashMap<>(); */
+		if(scheduleModal.get("mem_num") == null) {
+			logger.info("mem_num이 null");
+			scheduleModal.put("mem_num","mem_num");
+		}
+		if(scheduleModal.get("login_id") == null) {
+			logger.info("login_id가 null");
+			scheduleModal.put("login_id","login_id");
+		}
 		try {
 			sqlSession = sqlSessionFactory.openSession();
+			logger.info(scheduleModal);
 		    sqlSession.selectOne("scheduleModal",scheduleModal);
 			logger.info("scheduleModal2 : "+scheduleModal.keySet().toArray().length);
 		} catch (Exception e) {
@@ -112,6 +120,21 @@ public class ScheduleDao {
 			}
 		}
 		return result;
+	}
+	public List<Map<String, Object>> staffList() {
+		List<Map<String, Object>> staffList = new ArrayList<Map<String,Object>>();
+		try {
+			sqlSession = sqlSessionFactory.openSession();
+			staffList = sqlSession.selectList("staffList");
+			sqlSession.commit();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if(sqlSession != null) {
+				sqlSession.close();
+			}
+		}
+		return staffList;
 	}
 	
 	/////////////////////////////// [[ 경애  ]] /////////////////////////////////////

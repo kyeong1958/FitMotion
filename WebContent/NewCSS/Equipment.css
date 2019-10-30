@@ -1,4 +1,5 @@
 @charset "UTF-8";
+
 /* 홈바  시작 */
 .bar_area {
    padding: 10px 66px;
@@ -293,6 +294,5 @@ input[type="checkbox"]+.all{
     border-right: 1px solid #dddae0;
 }
 
-
-
 /* 등록된 카드 끝 */
+

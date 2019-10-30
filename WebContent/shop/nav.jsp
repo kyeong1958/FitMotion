@@ -9,6 +9,9 @@
       <div class="col-sm-1"style="padding: 1%;text-align: right;">
 		<a href="/shop/login.jsp" style="color:white;" onClick="logout()">로그아웃</a>
       </div>
+      <div class="col-sm-1"style="padding: 1%;">
+		<a href="/shop/login.jsp" style="color:white;" onClick="logout()"></a>
+      </div>
      <!--  <div class="col-sm-1"style="padding: 1%;">
 		<a href="/shop/login.jsp" style="color:white;">My Page</a>
       </div> -->

@@ -21,7 +21,25 @@ body{
 </style>
 <!-- ================================= [[ 화면전환 ]] =================================================== -->
     <!--===============================[[스크립트 ]]===========================================  -->
-    
+<script type="text/javascript">
+	$(document).ready(function(){
+		$.ajax({
+            method:"POST"
+              ,url:"/staff/SFSEL.fm"
+              ,success:function(data){
+                 $("#staff_card").html(data); 
+                       $.ajax({
+                          method:"POST"
+                            ,url:"/staff/RankSEL.fm"
+                            ,success:function(data){
+                               //alert("성공");
+                               $("#rankNameAdd").html(data);
+                            }
+                       }); 
+              }//end of 전체조회 
+        });
+	});
+</script>    
       <script type="text/javascript">
       
       

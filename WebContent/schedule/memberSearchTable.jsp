@@ -16,17 +16,17 @@
 %>
 <script type="text/javascript">
 	function memInfoDetail(mem_name,mem_num){
-	//	alert("memDeatil"+mem_name+"memnum"+mem_num);	
+		alert("memDeatil"+mem_name+"memnum"+mem_num);	
 		$("#sm_memname").val(mem_name);
 		$("#sm_mem_num").val(mem_num);
 	//	aa("#search_member").modal("hide");
-		$.ajax({
+		/* $.ajax({
 			method:'get'
-			,url:'/schedule/scheduleModal.fm?sm_memname='+mem_name
+			,url:'/schedule/scheduleModal.fm?mem_num='+mem_num
 			,success:function(data){
 				$("#sm_combobox").html(data);
 			}
-		});
+		}); */
 	}
 </script>
 	<table id="tb_membersearch" class="table table-bordered  table-striped" style="text-align:center">

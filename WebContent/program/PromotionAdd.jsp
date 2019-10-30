@@ -2,7 +2,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 
-<%@ include file="/NewCSS/PromotionAdd.css"%>
+<link rel="stylesheet" type="text/css" href="../NewCSS/PromotionAdd.css">
 <%
 		Map<String,Object> tadtlList = (Map<String,Object>)request.getAttribute("tadtlList");
 		int size = 0;//주의 로우의 수가 아니라 컬럼의 수
@@ -108,7 +108,6 @@ body {
 		}
 		
 		function tickback(){
-			alert("눌림?");
 			$.ajax({
 				methid:'get'
 				,url:"/program/taSEL2.fm"
@@ -128,7 +127,6 @@ body {
 		}
 		////안감
 		function prosave(){
-			alert("저장 버튼 눌림");
 			var formData = $("#f_proinsert").serialize();
 			 $.ajax({
 				method:"POST"
@@ -252,14 +250,7 @@ body {
 							</div>
 						</div>
 					</div>
-					
-					
-					
-					
-					
 					<!--=====================================[[[ 프로모션 추가 생성 끝  ]] ===============================================  -->
-					
-					
 				</div>
 				<!--=============================================[[이용권 버튼부분 시작 ]]=========================================================   -->
 				<div id="probtnarea" class="button_area">

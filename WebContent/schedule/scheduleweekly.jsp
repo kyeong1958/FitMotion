@@ -2,7 +2,7 @@
 <%@page import="java.util.Calendar"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" trimDirectiveWhitespaces="true"%>
-<%@ include file="/common/JEasyUICommon.jsp"%>
+<%-- <%@ include file="/common/JEasyUICommon.jsp"%> --%>
 <link rel="stylesheet" type="text/css" href="../NewCSS/main.css?22">
 <link rel="stylesheet" type="text/css" href="../NewCSS/schedule.css?22">
 <link rel="stylesheet" type="text/css" href="../NewCSS/scheduleModal.css?22">
@@ -12,9 +12,20 @@
 	body{
 		padding:0%;
 	}
+	.container-fluid{
+		padding:0%;
+	}
+	.schebtn{
+		border:1px solid #BABBC2;
+		border-radius:5px;
+		width: 100%;
+		height: 90%;
+		text-align: center;
+	}
 </style>
 <%
 	String login_id = session.getAttribute("login_id").toString();
+	String rank = session.getAttribute("login_rank").toString();
 	Calendar cal = Calendar.getInstance();
 	int day[][][] = new int[12][6][7];
 	DecimalFormat df = new DecimalFormat("00");
@@ -62,25 +73,65 @@
 		   ,success:function(data){
 			   $("#schedule_week").html(data);
 		   }
-			
 		});
-		/* scheduleModal combobox */
-		$.ajax({
-			method:'get'
-			,url:'/schedule/scheduleModal.fm'
-			,success:function(data){
-				$("#sm_combobox").html(data);
-			}
-		}); 
+		var rank = <%=rank%>;
+		if('1' == rank){
+			$.ajax({
+				url:"/schedule/staffList.fm"
+			   ,success:function(data){
+				   $("#sche_staffList").html(data);
+			   }
+			});
+		}
+		
 	});
 </script>
 <body>
 <script type="text/javascript">
+	var rank = '<%= rank%>';
+	var login_id = '<%=login_id%>';
+/* master일 경우 콤보박스 변경 */
+ 
+	$(function(){
+			$("#staffList_combo").change(function(e){
+				alert("변경");
+				 var staff = $("#staffList_combo").val();
+				$.ajax({
+					url:"/schedule/scheduleList.fm?login_id="+staff
+				   ,success:function(data){
+					   $("#schedule_week").html(data);
+				   }
+				}); 
+			});
+		});
+
+
+
+/* master일 경우 콤보박스 변경 */
 /* 모달창 */
- 	function scheduleModal(){
+ 	function scheduleModal(time){
+		alert("여기");
+ 		/* scheduleModal combobox */
+ 		if(rank == '1'){
+			$.ajax({
+				method:'get'
+				,url:'/schedule/scheduleModal.fm?login_id=master'
+				,success:function(data){
+					$("#sm_combobox").html(data);
+				}
+			}); 
+ 		}else{
+ 			$.ajax({
+				method:'get'
+				,url:'/schedule/scheduleModal.fm?login_id='+login_id
+				,success:function(data){
+					$("#sm_combobox").html(data);
+				}
+			});
+ 		}
 		aa("#scheduleModal").modal();
 	} 
-
+	//예약변경
  	function schedulechangeModal(mem_name, mem_num, appli_date, shour, smin, ehour, emin, place, appli_num){
  		$.ajax({
 			method:'get'
@@ -103,12 +154,13 @@
 /* 모달창 */
 /* 출결사항 */
 	function caUPD(appli_num,att_num){
-		$.ajax({
+		alert(appli_num+", "+att_num);
+		 $.ajax({
 			url:'/schedule/caUPD.fm?appli_num='+appli_num+'&att_num='+att_num
 			,success:function(data){
 				$("#schedule_week").html(data);
 			}
-		});
+		}); 
 	}
 /* 출결사항 */
 /* 회원검색모달창 */
@@ -147,12 +199,14 @@
 /* 데이트 박스 */
 /* 수업 예약모달창 */
 	function smreservation(){
+		 alert("smreservation");
 		 var formData = $("#f_sm").serialize();
 		 $.ajax({
 			 method:'get'
 			 ,url:'/schedule/scheduleReservation.fm'
 			 ,data:formData
 			 ,success:function(data){
+				 alert(data);
 				 if(data == '예약불가'){
 					alert('예약된 수업이 존재합니다.');	 
 				 }else{
@@ -165,7 +219,7 @@
 	 }
 /* 수업 예약모달창 */
 /* 예약변경 모달창 */
-	function smreservation(){
+	function smreservationchange(){
 		 var formData = $("#f_scm").serialize();
 		 $.ajax({
 			 method:'get'
@@ -259,7 +313,7 @@
 		<div style="padding:0 0 5px">
 				<label class="spend-box-right-column">수업시간</label>
 				<span>
-					<select name="appli_start_hour" class="spend-combobox schedule-combobox-time">
+					<select name="appli_start_hour" id="appli_start_hour" class="spend-combobox schedule-combobox-time">
 <%	for(int i=8;i<23;i++){	%>
 						<option value="<%=df.format(i) %>"><%=df.format(i) %></option>
 <%	}	%>

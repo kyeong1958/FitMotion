@@ -47,42 +47,42 @@ public class AccountController implements Controller {
 			Map<String,Object> date = new HashMap<String, Object>();
 			HashMapBinder hmb = new HashMapBinder(req);
 			hmb.bind(date);
-			String month = null;
-			int year = 0;
-			int quarter = 0;
-			String startDay = null;
-			String endDay = null;
-			if(req.getParameter("month")!= null) {
-				month = req.getParameter("month").toString();
-				date.put("month", month);
-				//salesStatement = accountLogic.salesStatementList(date);
-			}
-			if(req.getParameter("year") != null) {
-				year = Integer.parseInt(req.getParameter("year").toString());
-				date.put("year", year);
-			//	salesStatement = accountLogic.salesStatementList(date);
-				logger.info(year);
-			}
-			if(req.getParameter("quarter") != null) {
-				quarter = Integer.parseInt(req.getParameter("quarter").toString());
-				date.put("quarter", quarter);
-			//	salesStatement = accountLogic.salesStatementList(date);
-				logger.info(quarter);
-			}
-			if(req.getParameter("startDay") != null || req.getParameter("endDay")  != null) {
-				if(req.getParameter("startDay") != null) {
-					startDay = req.getParameter("startDay").toString();
-					date.put("startDay", startDay);
-					logger.info(startDay);
-				}
-				if(req.getParameter("endDay") != null) {
-					endDay = req.getParameter("endDay").toString();
-					date.put("endDay", endDay);
-					logger.info(endDay);
-				}
-				logger.info(date);
-				
-			}
+//			String month = null;
+//			int year = 0;
+//			int quarter = 0;
+//			String startDay = null;
+//			String endDay = null;
+//			if(req.getParameter("month")!= null) {
+//				month = req.getParameter("month").toString();
+//				date.put("month", month);
+//				//salesStatement = accountLogic.salesStatementList(date);
+//			}
+//			if(req.getParameter("year") != null) {
+//				year = Integer.parseInt(req.getParameter("year").toString());
+//				date.put("year", year);
+//			//	salesStatement = accountLogic.salesStatementList(date);
+//				logger.info(year);
+//			}
+//			if(req.getParameter("quarter") != null) {
+//				quarter = Integer.parseInt(req.getParameter("quarter").toString());
+//				date.put("quarter", quarter);
+//			//	salesStatement = accountLogic.salesStatementList(date);
+//				logger.info(quarter);
+//			}
+//			if(req.getParameter("startDay") != null || req.getParameter("endDay")  != null) {
+//				if(req.getParameter("startDay") != null) {
+//					startDay = req.getParameter("startDay").toString();
+//					date.put("startDay", startDay);
+//					logger.info(startDay);
+//				}
+//				if(req.getParameter("endDay") != null) {
+//					endDay = req.getParameter("endDay").toString();
+//					date.put("endDay", endDay);
+//					logger.info(endDay);
+//				}
+//				logger.info(date);
+//				
+//			}
 			
 			salesStatement = accountLogic.salesStatementList(date);
 			logger.info(date);
@@ -151,7 +151,8 @@ public class AccountController implements Controller {
 			result = accountLogic.pfIns(pMap);
 			mav.pageMove("redirect");
 			mav.setViewName("/account/profit.jsp");
-		} else if ("PROSEL".equals(crud)) {
+		} 
+		else if ("PROSEL".equals(crud)) {
 			logger.info("프로모션 선택시 뿌려주는것컨트롤");
 			Map<String, Object> proSel = new HashMap<String, Object>();
 			proSel = accountLogic.prosel();
@@ -159,7 +160,6 @@ public class AccountController implements Controller {
 			logger.info(proSel);
 			mav.pageMove("forward");
 			mav.setViewName("/account/selectpro.jsp");
-
 		} 
 		/* 직원 콤보 */
 		else if ("PROSEL2".equals(crud)) {
@@ -237,15 +237,14 @@ public class AccountController implements Controller {
 		String date = "";
 		String year = "";
 		String month = "";
-		
 		if(req.getParameter("date") != null) { 
 		date = req.getParameter("date");
 		if(date.length() == 6) {
-			year = date.substring(0,4); 
-			month =	date.substring(4); 
+		year = date.substring(0,4); 
+		month =   date.substring(4); 
 		}else if(date.length() == 5) { 
-			year = date.substring(0,4); 
-			month = "0"+date.substring(4); 
+		year = date.substring(0,4); 
+		month = "0"+date.substring(4); 
 		}
 		date = year + month;
 		
@@ -273,11 +272,11 @@ public class AccountController implements Controller {
 		if(req.getParameter("date") != null) { 
 		date = req.getParameter("date");
 		if(date.length() == 6) {
-			year = date.substring(0,4); 
-			month =	date.substring(4); 
+		year = date.substring(0,4); 
+		month =   date.substring(4); 
 		}else if(date.length() == 5) { 
-			year = date.substring(0,4); 
-			month = "0"+date.substring(4); 
+		year = date.substring(0,4); 
+		month = "0"+date.substring(4); 
 		}
 		date = year + month;
 		
@@ -295,23 +294,34 @@ public class AccountController implements Controller {
 		else if ("privateProg".equals(crud)) {
 		logger.info("OwnerController-privateProg 호출성공");
 		Map<String, List<Map<String, String>>> privateProg = null;
-		
-		/*
-		* if(date.length() == 6) { year = date.substring(0,4); month =
-		* date.substring(4); }else if(date.length() == 5) { year = date.substring(0,4);
-		* month = "0"+date.substring(4); } date = year + month;
-		* logger.info("year = "+year); logger.info("month = "+month);
-		*/
+		Map<String, Object> data = new HashMap<>();
 		String startDate = "";
 		String endDate = "";
-		
+		String pageNumm = "";
+		String search = "";
+		String searchText = "";
+		String hap ="";
 		if(req.getParameter("startDate") != null) { 
 		startDate = req.getParameter("startDate");
 		}
 		if(req.getParameter("endDate") != null) { 
 		endDate = req.getParameter("endDate");
 		}
-		privateProg = accountLogic.privateProg(startDate, endDate);
+		if(req.getParameter("pageNumm") != null) { 
+		pageNumm = req.getParameter("pageNumm");
+		}
+		if(req.getParameter("search") != null) { 
+		search = req.getParameter("search");
+		}
+		if(req.getParameter("searchText") != null) { 
+		searchText = req.getParameter("searchText");
+		}
+		hap = startDate + "," + endDate;
+		data.put("hap", hap);
+		data.put("pageNumm", pageNumm);
+		data.put("search", search);
+		data.put("searchText", searchText);
+		privateProg = accountLogic.privateProg(data);
 		
 		mav.pageMove("forward");
 		mav.setViewName("/account/StatisticsPrivateProg.jsp");
@@ -321,17 +331,34 @@ public class AccountController implements Controller {
 		else if ("publicProg".equals(crud)) {
 		logger.info("OwnerController-publicProg 호출성공");
 		Map<String, List<Map<String, String>>> publicProg = null;
-		
+		Map<String, Object> data = new HashMap<>();
 		String startDate = "";
 		String endDate = "";
-		
+		String pageNumm = "";
+		String search = "";
+		String searchText = "";
+		String hap ="";
 		if(req.getParameter("startDate") != null) { 
 		startDate = req.getParameter("startDate");
 		}
 		if(req.getParameter("endDate") != null) { 
 		endDate = req.getParameter("endDate");
 		}
-		publicProg = accountLogic.publicProg(startDate, endDate);
+		if(req.getParameter("pageNumm") != null) { 
+		pageNumm = req.getParameter("pageNumm");
+		}
+		if(req.getParameter("search") != null) { 
+		search = req.getParameter("search");
+		}
+		if(req.getParameter("searchText") != null) { 
+		searchText = req.getParameter("searchText");
+		}
+		hap = startDate + "," + endDate;
+		data.put("hap", hap);
+		data.put("pageNumm", pageNumm);
+		data.put("search", search);
+		data.put("searchText", searchText);
+		publicProg = accountLogic.publicProg(data);
 		
 		mav.pageMove("forward");
 		mav.setViewName("/account/StatisticsPublicProg.jsp");

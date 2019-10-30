@@ -12,7 +12,7 @@
 <script type="text/javascript">
     function memInfoDetail(mem_name,mem_num){
 //      alert("memDeatil"+mem_name+"memnum"+mem_num);   
-      $("#search_member").modal("hide");
+      aa("#search_member").modal("hide");
       $("#sm_memname").val(mem_name);
       $("#sm_mem_num").val(mem_num);
 

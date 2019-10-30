@@ -13,10 +13,6 @@
 }
 
 </style>    
-       
-    
-    
-    
 <%
 		Map<String,Object> stafflist = (Map<String,Object>)request.getAttribute("proSel");
 		 List<Map<String,Object>> list = (List<Map<String,Object>>)stafflist.get("stafflist");
@@ -34,8 +30,3 @@
           <%
        	} 
           %>
-    
-    
-    
-    
-    

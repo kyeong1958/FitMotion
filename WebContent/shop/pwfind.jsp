@@ -5,7 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <%@ include file="/common/JEasyUICommon.jsp"%>
-<%@ include file="/CSS/pwfind.jsp"%>
+<%@ include file="/NewCSS/pwfind.jsp"%>
 <title>비밀번호 찾기</title>
 </head>
 <body>

@@ -12,32 +12,17 @@
 	
 	}
 %>
-    
-    
-    
-    
-    
-    
-    
-    
        <ul  style="list-style: none" id="TM_ul">
 <%
 	for(int i=0;i<size;i++){
 		Map<String,Object> rMap = taList.get(i); 
-
 %>   
-    
                   <li>
                      <span class="pr_btn btn text-border gray c_gray" style="margin-bottom: 10px; text-align: center;" >
 								<%=rMap.get("TICKET_NAME") %>                        			
                      </span>
                   </li>
-                  
-                  
 <%
-                  
 	}
-                  
 %>
-                 
                </ul>
