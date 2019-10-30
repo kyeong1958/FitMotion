@@ -34,10 +34,8 @@
 				//   alert(url);
 				   $("#mainboard").html(data);
 				    if(url=="../member/memberList.jsp"){
-						var formData = $("#f_insert").serialize();
 					   $.ajax({
 							method:"POST"
-							,data:formData
 							,url:"/member/BHSEL.fm"
 							,success:function(data){
 								$("#in_005fcard").html(data);
@@ -46,17 +44,13 @@
 				 	  }
 				/* url=="../member/memberList.jsp" 끝 */    
 				    else if(url=="../staff/staffList.jsp") {
-					   var formData = $("#add_coach_form").serialize();
 				    	  $.ajax({
 				    		  method:"POST"
-				  				,data:formData
 				  				,url:"/staff/SFSEL.fm"
 				  				,success:function(data){
 				  					$("#staff_card").html(data); 
-					  				var formData = $("#F_rank").serialize();
 					  			    	  $.ajax({
 					  			    		  method:"POST"
-					  			  				,data:formData
 					  			  				,url:"/staff/RankSEL.fm"
 					  			  				,success:function(data){
 					  			  					//alert("성공");
@@ -70,14 +64,12 @@
 				   else if(url=="../account/profit.jsp"){
 					   $.ajax({
 	  			    		  method:"POST"
-	  			  				,data:formData
 	  			  				,url:"/account/PROSEL.fm"
 	  			  				,success:function(data){
 	  			  					//alert("성공");
 	  			  					$("#selectpro").html(data);
 			  			  				 $.ajax({
 			  		  			    		  method:"POST"
-			  		  			  				,data:formData
 			  		  			  				,url:"/account/PROSEL2.fm"
 			  		  			  				,success:function(data){
 			  		  			  					//alert("성공");
@@ -100,10 +92,8 @@
 					} 
 				    /* url=="../shop/Good.jsp"끝 */
 				    else if(url=="../program/TicketMain.jsp"){
-					    	var formData = $("#f_insert").serialize();
 							$.ajax({
 								method : "POST",
-								data : formData,
 								url : "/program/taSEL.fm",
 								success : function(data) {
 									$("#tasel").html(data);

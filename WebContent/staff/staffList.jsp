@@ -23,8 +23,6 @@ body{
     <!--===============================[[스크립트 ]]===========================================  -->
     
       <script type="text/javascript">
-      
-      
       function staffkeyword(){
     	  $.ajax({
        		  method:"POST"
@@ -33,8 +31,7 @@ body{
 					$("#staff_card").html(data);
      			}
        	  	});
-    	  
-      }
+	      }
        
   /* 임직원 등록   */    
        function staffInser(){
@@ -65,24 +62,89 @@ body{
 
 	/*  상세조회  */
 	function staffdetele(staff_id){
-//	alert(staff_id);
     	   var formData = $("#f_sfdetail").serialize();
     	  $.ajax({
     		  method:"POST"
   				,data:formData
   				,url:"/staff/SFDTL.fm?staff_id="+staff_id
   				,success:function(data){
-  				//	alert("성공");
   					$("#staffList").html(data);
-  			}
-    	  });
-		}
-	   //$(document).ready(function (){
-	/* =========== [[textbox 엔터 이벤트 처리]] ============*/   
-
-	   //});//////////////////end of ready(DOM 구성이 끝났을 때-브라우저가)   
+  					//오늘케줄- 프로그램
+  				  $.ajax({
+  		    		  method:"POST"
+  		  				,url:"/staff/Todayschedule.fm?staff_id="+staff_id
+  		  				,success:function(data){
+  		  					$("#today").html(data);
+  		  					//오늘스케줄 - 티켓
+  		  				  $.ajax({
+  		  		    		  method:"POST"
+  		  		  				,url:"/staff/TodayTick.fm?staff_id="+staff_id
+  		  		  				,success:function(data){
+  		  		  					$("#today").html(data);
+  			  		  			}
+  			  		    	  });
+  		  					//그룹레슨--프로그램
+	  		  				  $.ajax({
+	  		  		    		  method:"POST"
+	  		  		  				,url:"/staff/Groupclass.fm?staff_id="+staff_id
+	  		  		  				,success:function(data){
+	  		  		  					$("#group").html(data);
+	  			  		  			}
+	  			  		    	  });
+  		  						//그룸레슨 - 프로모션
+		  		  				  $.ajax({
+		  		  		    		  method:"POST"
+		  		  		  				,url:"/staff/Groupproclass.fm?staff_id="+staff_id
+		  		  		  				,success:function(data){
+		  		  		  					$("#group").html(data);
+		  			  		  			}
+		  			  		    	  });
+  		  					//개인레슨 - 프로그램 
+		  		  				  $.ajax({
+		  		  		    		  method:"POST"
+		  		  		  				,url:"/staff/soloclass.fm?staff_id="+staff_id
+		  		  		  				,success:function(data){
+		  		  		  					$("#solo").html(data);
+		  			  		  			}
+		  			  		    	  });
+	  		  					//개인레슨 - 프로모션
+			  		  				  $.ajax({
+			  		  		    		  method:"POST"
+			  		  		  				,url:"/staff/soloproclass.fm?staff_id="+staff_id
+			  		  		  				,success:function(data){
+			  		  		  					$("#solo").html(data);
+			  			  		  			}
+			  			  		    	  });
+				  		  			}
+				  		    	  });
+					  			}
+					    	  });
+							}
 	
 	
+	
+	
+	
+		//직급 조건 검색 
+		   function rankdet(rank_name){
+		      alert("클릭클릭"+rank_name);
+		       $.ajax({
+		         method:"POST"
+		         ,url:"/staff/rankdetSEL.fm?rank_name="+rank_name
+		         ,success:function(data){
+		            //alert("성공");
+		            $("#staff_card").html(data);
+		                      $.ajax({
+		                         method:"POST"
+		                           ,url:"/staff/RankSEL.fm"
+		                           ,success:function(data){
+		                              //alert("성공");
+		                              $("#rankNameAdd").html(data);
+		                           }
+		                      }); 
+					         }
+					      });   
+					   } 
       </script>
 <div id="staffList">
       <!--=========================[[ 홈바 시작 ]]========================== -->

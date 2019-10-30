@@ -43,9 +43,11 @@
             <if test=' keyword != "" and keyword != null'>
               AND mem_name LIKE '%'||#{keyword}||'%'
               </if>
-                    
+      
                     
    </select>
+
+   
    
    <select id="MemSel" parameterType="java.util.HashMap" resultType="java.util.HashMap">
          select rownum rno,mem_num,mem_name,mem_birth
@@ -59,15 +61,49 @@
       delete from member where mem_num=#{mem_num}
    </delete>
    
-<!--    <select id="MemberSerch" parameterType="map" resultType="map">  
-      select MEM_NAME,MEM_BIRTH,MEM_HP from member
-              where 1 =1 
-              <if test="keyword!=null">
-              AND mem_name LIKE '%'||#{keyword}||'%'
-              </if>
-	</select> -->
+
+
+	<!--===================================2019-10-30 추가 ==========================================================  -->
+	   <!-- 성별 검색조건   -->
+   <select id="memgender" parameterType="map" resultType="map">
+   			 select mem_num,mem_name,mem_birth
+                       ,mem_gender,mem_address
+                               ,mem_hp,mem_registration_date,mem_manager,mem_app_availability
+                               ,mem_barcode_num,mem_memo,mem_id,mem_pw
+                                           from Member
+                                        where mem_gender = #{mem_gender}
    
+   </select>
+
+   <select id="memprobil" parameterType="map" resultType="map">
+           select 
+                   promotion.PROM_NAME,promotion.PROM_NUM,promotion.PROM_START_DATE,promotion.PROM_END_DATE     
+                 ,member.MEM_NUM,tic_purchase.TICP_STATE
+                from promotion, tic_purchase, member
+                where 
+                 promotion.PROM_NUM = tic_purchase.PROM_NUM
+                and tic_purchase.MEM_NUM = member.MEM_NUM
+                and member.mem_num = #{mem_num}         		  
+   </select>
    
+  <select id="memtickbil"  parameterType="map" resultType="map">
+  	    select 
+        tic_purchase.TICP_REG_DATE,ticket.TICKET_NAME,ticket.TICKET_NUM
+        ,tic_purchase.TICP_STATE
+            from ticket, tic_purchase, member
+            where ticket.TICKET_NUM = tic_purchase.TICKET_NUM
+            and member.MEM_NUM = tic_purchase.MEM_NUM
+            and member.MEM_NUM =  #{mem_num}
+  </select> 
+  <!-- 회원 입장관리  -->
+   <select id="memAttSEL" parameterType="map" resultType="map">
+         select ADMISSION_HISTORY.AH_DATE, ADMISSION_HISTORY.AH_ENTRY_TIME, ADMISSION_HISTORY.AH_EXIT_TIME
+                ,member.mem_num
+          from ADMISSION_HISTORY , MEMBER
+         where ADMISSION_HISTORY.mem_num = MEMBER.mem_num
+         and MEMBER.mem_num = #{mem_num}
+   </select>
+
 	<!--==================================[[민지 끝]]==============================================================  -->
 	<!--========================================[[주노시작 ]]===============================================================  -->
 	<select id="memDET" parameterType="map" resultType="map">

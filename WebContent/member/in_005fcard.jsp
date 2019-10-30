@@ -26,8 +26,28 @@ body{
 					,data:formData
 					,url:"/member/bhDET.fm?mem_num="+mem_num
 					,success:function(data){
-						alert("성공");
 						$("#memList").html(data);
+							$.ajax({
+								method:"POST"
+								,url:"/member/PROBIL.fm?mem_num="+mem_num
+								,success:function(data){
+									$("#membil").html(data);
+								 	$.ajax({
+										method:"POST"
+										,url:"/member/TickBIL.fm?mem_num="+mem_num
+										,success:function(data){
+											$("#membil").html(data);
+								 	$.ajax({
+										method:"POST"
+										,url:"/member/memAttSEL.fm?mem_num="+mem_num
+										,success:function(data){
+											$("#MemberAttend").html(data);
+											}
+										}); 
+									}
+								}); 
+							}
+						}); 
 					}
 				}); 
 		     }
