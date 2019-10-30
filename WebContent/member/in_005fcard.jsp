@@ -15,9 +15,6 @@ body{
 }
 </style>
 <script>
-
-
-
 	  function memberdetail(mem_num){
 				alert(mem_num);
 		 		var formData = $("#MDetail").serialize();
