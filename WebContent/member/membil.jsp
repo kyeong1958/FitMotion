@@ -2,7 +2,7 @@
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    
+<!-- =====================================================2019-10-30 추가 jsp 하나 생성=========================================================  -->    
        <style type="text/css">
 body{
    padding:0%;
