@@ -4,7 +4,7 @@
     pageEncoding="UTF-8" trimDirectiveWhitespaces="true"%>
 <%-- <%@ include file="/common/JEasyUICommon.jsp"%> --%>
 <link rel="stylesheet" type="text/css" href="../NewCSS/main.css?22">
-<link rel="stylesheet" type="text/css" href="../NewCSS/schedule.css?22">
+<link rel="stylesheet" type="text/css" href="../NewCSS/schedule.css">
 <link rel="stylesheet" type="text/css" href="../NewCSS/scheduleModal.css?22">
 <!-- ============================ [[ 스케줄러 ]] ======================================== -->
 <!-- ============================ [[ 주간달력날짜추출 ]] ======================================== -->

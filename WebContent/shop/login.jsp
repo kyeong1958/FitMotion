@@ -66,7 +66,7 @@ body{
          	<div class="container">
             <div class="row" style="margin-top: 250px; margin-left:100px">
                <div class="loginlogo" style="font-size: 50px;">
-                  <p>FitMotion</p>
+                  <p style="margin-left: -10px;">FitMotion</p>
                </div>
             </div>
             <div id="loginForm" class="login" style="margin-left: 80px;"> 
