@@ -163,96 +163,29 @@
 			</div>
 		</div>
 		<div class="section" id="section">
+<!--[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[2019-10-30추가 ]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]  -->
 	<!-- ================================= [[ 개인레슨  ]] =================================================== -->
 			<div class="col-lg-4 memcard" style="width: 32%;margin-right: 16px;">
-				<h3 class="memcard-title personal" id="memcard-attendance">개인레슨 이용권 회원 목록
-					<span class="groupmem-card-title-label">총 개인레슨 이용권 회원수</span>
-					<span class="groupmem-card-title-label sum">22명</span>
-				</h3>
-				<div class="memcard-scroll" data-spy="scroll" data-offset="0">
-<%
-	for(int i=0;i<10;i++){
-%>
-					<div class="memcard-title attendance">
-						<div>
-							<label class="groupmem-card-label" style="font-size:16px;">이경애</label>
-							<span>25세 / 여 / 010-1234-1234</span>
-						</div>
-						<div>
-							<label class="groupmem-card-label">수업 참여 횟수</label>
-							<span>3 / 24</span>
-						</div>
-						<div>
-							<label class="groupmem-card-label">이용상품</label>
-							<span>PT 그룹레슨 3개월</span>
-						</div>
-					</div>
-<%
-	}
-%>
+				<div id="solo">
+				<!-- 개인레슨AJAX  -->
 				</div>
 			</div>
 	<!-- ================================= [[ 개인레슨  ]] =================================================== -->
 	<!-- ================================= [[ 그룹레슨 ]] =================================================== -->
 			<div class="col-lg-4 memcard" style="width: 32%;margin-right: 16px;">
-				<h3 class="memcard-title personal" id="memcard-attendance">그룹레슨 이용권 회원 목록
-					<span class="groupmem-card-title-label">총 그룹레슨 이용권 회원수</span>
-					<span class="groupmem-card-title-label sum">22명</span>
-				</h3>
-				<div class="memcard-scroll" data-spy="scroll" data-offset="0">
-<%
-	for(int i=0;i<10;i++){
-%>
-					<div class="memcard-title attendance">
-						<div>
-							<label class="groupmem-card-label" style="font-size:16px;">이경애</label>
-							<span>25세 / 여 / 010-1234-1234</span>
-						</div>
-						<div>
-							<label class="groupmem-card-label">소속그룹</label>
-							<span>월*수 오후7시</span>
-						</div>
-						<div>
-							<label class="groupmem-card-label">이용상품</label>
-							<span>PT 그룹레슨 3개월</span>
-						</div>
-					</div>
-<%
-	}
-%>
+				<div id="group">
+				<!-- 그룹레슨 AJAX -->
 				</div>
 			</div>
 	<!-- ================================= [[ 그룹레슨 ]] =================================================== -->			
 	<!-- ================================= [[ 오늘스케줄 ]] =================================================== -->			
 			<div class="col-lg-4 memcard" style="width: 32%;margin-right: 16px;">
-				<h3 class="memcard-title personal" id="memcard-attendance">오늘 스케줄
-					<span class="groupmem-card-title-label">총 오늘의 스케줄</span>
-					<span class="groupmem-card-title-label sum">3건</span>
-				</h3>
-					<div class="memcard-scroll" data-spy="scroll" data-offset="0">
-<%
-	for(int i=0;i<3;i++){
-%>
-					<div class="memcard-title attendance">
-						<div>
-							<label class="groupmem-card-label" style="font-size:16px;">시간/장소</label>
-							<span>7시 / 그룹레슨1룸</span>
-						</div>
-						<div>
-							<label class="groupmem-card-label">참여인원</label>
-							<span>1명</span>
-						</div>
-						<div>
-							<label class="groupmem-card-label">이용상품</label>
-							<span>PT 그룹레슨 3개월</span>
-						</div>
-					</div>
-<%
-	}
-%>
+				<div id="today">
+				<!-- 오늘스케줄 Ajax -->
 				</div>
 			</div>
 	<!-- ================================= [[ 오늘스케줄 ]] =================================================== -->
+<!--[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[2019-10-30추가 ]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]  -->
 		</div>
 	<!-- ================================= [[ 화면전환 ]] =================================================== -->
 

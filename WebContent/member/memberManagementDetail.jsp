@@ -4,7 +4,6 @@
  <!-- 주노꺼랑 이관 완료 -->
 <!-- ============================ [[ 회원관리상세]] ======================================== -->
 <%@ include file="/common/JEasyUICommon.jsp"%>
-<link rel="stylesheet" type="text/css" href="../NewCSS/main.css">
 <link rel="stylesheet" type="text/css" href="../NewCSS/memberManagement.css">
 <link rel="stylesheet" type="text/css" href="../NewCSS/Modal.css">
 	 <%
@@ -164,30 +163,14 @@ body{
 				</div>
 			</div>
 	<!-- ================================= [[ 개인정보-카드  ]] =================================================== -->
+	<!--[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[2019-10-30 추가  ]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]  -->
 	<!-- ================================= [[ 입장관리 ]] =================================================== -->
 			<div class="col-lg-4 memcard">
 				<h3 class="memcard-title personal" id="memcard-attendance">입장 관리</h3>
 				<div class="memcard-scroll" data-spy="scroll" data-offset="0">
-<%
-	for(int i=0;i<10;i++){
-%>
-					<div class="memcard-title attendance">
-						<div class="col-lg-6">
-							<div>그룹수업 이용권</div>
-							<div>테스트 (리포머)</div>
-						</div>
-						<div class="col-lg-3">
-							<div>입장</div>
-							<div>2019.09.25 10:30</div>
-						</div>
-						<div class="col-lg-3">
-							<div>퇴장</div>
-							<div></div>
-						</div>
-					</div>
-<%
-	}
-%>
+				<div id="MemberAttend">
+					<!-- 입장관리 ajax -->
+				</div>
 				</div>
 			</div>
 	<!-- ================================= [[ 입장 관리 ]] =================================================== -->			
@@ -195,24 +178,13 @@ body{
 			<div class="col-lg-4 memcard">
 				<h3 class="memcard-title personal" id="memcard-attendance">이용권 내역</h3>
 					<div class="memcard-scroll" data-spy="scroll" data-offset="0">
-					<div class="memcard-title attendance">
-						<div class="col-lg-6">
-							<div>그룹수업 이용권</div>
-							<div>테스트 (리포머)</div>
+						<div id="membil">
 						</div>
-						<div class="col-lg-3">
-							<div>입장</div>
-							<div>2019.09.25 10:30</div>
-						</div>
-						<div class="col-lg-3">
-							<div>퇴장</div>
-							<div></div>
-						</div>
-					</div>
 				</div>
 			</div>
 		</div>
 	<!-- ================================= [[ 이용권내역 ]] =================================================== -->
+	<!--[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[2019-10-30 추가  ]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]  -->
 	<!-- ================================= [[ 화면전환 ]] =================================================== -->
 </div>
 

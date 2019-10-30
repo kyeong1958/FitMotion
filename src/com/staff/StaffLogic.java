@@ -67,6 +67,54 @@ public int SFUPD(Map<String, Object> pMap) {
       }
       return result;
 }
+///////////////////2019-10-30추가//////////////////////////////////////////
+//오늘스케줄-프로모션
+public List<Map<String, Object>> sftoday(Map<String, Object> pMap) {
+List<Map<String, Object>> todayschedule = new ArrayList<>();
+todayschedule = staffDao.sftoday(pMap);
+return todayschedule;
+}
+//오늘스케줄 - 이용권
+public List<Map<String, Object>> sftodaytick(Map<String, Object> pMap) {
+List<Map<String, Object>> todayscheduletick = new ArrayList<>();
+todayscheduletick = staffDao.sftodaytick(pMap);
+return todayscheduletick;
+
+}
+//그룹 class --프로그램 
+public List<Map<String, Object>> sfgroup(Map<String, Object> pMap) {
+List<Map<String, Object>> Groupclass = new ArrayList<>();
+Groupclass = staffDao.sfgroup(pMap);
+return Groupclass;
+}
+//그룹 class - 프로모션 
+public List<Map<String, Object>> sfprogroup(Map<String, Object> pMap) {
+List<Map<String, Object>> Grouppoclass = new ArrayList<>();
+Grouppoclass = staffDao.sfprogroup(pMap);
+return Grouppoclass;
+}
+//개인 class -프로그램 
+public List<Map<String, Object>> sfsolo(Map<String, Object> pMap) {
+List<Map<String, Object>> soloclass = new ArrayList<>();
+soloclass = staffDao.sfsolo(pMap);
+return soloclass;
+}
+//개인 class -프로모션 
+public List<Map<String, Object>> sfprosolo(Map<String, Object> pMap) {
+List<Map<String, Object>> soloproclass = new ArrayList<>();
+soloproclass = staffDao.sfprosolo(pMap);
+return soloproclass;
+
+}
+//직급 조건 검색
+public List<Map<String, Object>> rankdetSEL(Map<String, Object> pMap) {
+logger.info("직급조건조회 Logic 호출 성공");
+List<Map<String,Object>> rMap =new ArrayList<>();
+rMap = staffDao.rankdetSEL(pMap);
+logger.info(pMap.size());
+logger.info(rMap);
+return rMap;
+}
 
    //===================================[[민지 Logic 끝]]=====================================
 
