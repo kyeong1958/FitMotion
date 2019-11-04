@@ -31,6 +31,7 @@
 		ticketList = (List<Map<String,Object>>)scheduleModal.get("ticketList");
 		tsize = ticketList.size();
 	}  
+		
 %>
 <script>
 	function sm_staffList(){
@@ -50,9 +51,11 @@
 	<span>
 		<select class="spend-combobox" name="sm_ticket_name" id="sm_ticket_name" style="width: 170px;text-align-last:center">
 <%	for(int i=0;i<tsize;i++){ 
-	Map<String,Object> ticketMap = ticketList.get(i); %>
-			<option value="<%= ticketMap.get("TICKET_NAME")%>"><%= ticketMap.get("TICKET_NAME")%></option>
-<% } %>
+		Map<String,Object> ticketMap = ticketList.get(i); %>
+			<option value="<%= ticketMap.get("PRO_NAME")%>"><%= ticketMap.get("PRO_NAME")%></option>
+<% 		if(ticketList.size() == 0){%>
+			<option value="">구매한 프로그램이 없습니다.</option>
+<% }} %>
 		</select>
 	</span>
 </div>

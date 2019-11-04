@@ -42,7 +42,11 @@ public class ShopLogic {
 		result = shopDao.lockChange(lockNum);
 		return result;
 	}
-
+	public String idFind(Map<String, Object> pMap) {
+		String id = null;
+		id = shopDao.idFind(pMap);
+		return id;
+	}
 //////////////////////////////////[[ 경애끝 ]] /////////////////////////////////////////////	
 //////////////////////////////////[[ 민지시작 ]] /////////////////////////////////////////////
 	public int GoodIns(Map<String, Object> pMap) {
@@ -67,57 +71,23 @@ public class ShopLogic {
 	}
 	
 //////////////////////////////////[[ 민지 끝  ]] /////////////////////////////////////////////	
-//////////////////////////////////[[ 정은 시작  ]] /////////////////////////////////////////////	
-	public String slogin(SupervisorVO sVO) {
-		logger.info("login 호출 성공");
-		String sv_id = null;
-		sv_id = shopDao.sisId(sVO);
-		if("아이디가 존재합니다.".equals(sv_id)) {// 아이디가 존재할 때
-			sv_id = shopDao.slogin(sVO);
-		}
-		else {
-			sv_id="아이디가 존재하지 않습니다.";
-		}
-		return sv_id;
+//////////////////////////////////[[ 정은 시작 -> 경애 시작 ]] /////////////////////////////////////////////	
+	public Map<String,Object> slogin(Map<String, Object> pMap) {
+		Map<String,Object> rMap = new HashMap<String, Object>();
+		rMap = shopDao.slogin(pMap);
+		return rMap;
 	}
-	public SupervisorVO proc_login(SupervisorVO sVO) {
-		logger.info("proc_login 호출 성공");
-		shopDao.proc_login(sVO);
-		return sVO;
-	}
-	public int sINS(Map<String, Object> pMap) {
-		int result =0;
-		logger.info("회원관리 Logic 호출 성공");
-		result = shopDao.sINS(pMap);
+	public String idCheck(String joinid) {
+		String result = null;
+		result = shopDao.idCheck(joinid);
 		return result;
-	
 	}
-	public List<Map<String, Object>> sSEL() {
-		logger.info("회원관리 조회부분 Logic 호출성공");
-		List<Map<String, Object>> joinList =null;		
-		joinList = shopDao.sSEL();
-		return joinList;
-	}
-	public String sisId(SupervisorVO sVO) {
-		logger.info("아이디 검사 호출 성공");
-		String sv_id = null;
-		sv_id = shopDao.sisId(sVO);
-		if("아이디가 존재합니다.".equals(sv_id)) {// 아이디가 존재할 때
-			sv_id = shopDao.slogin(sVO);
-			
-		}
-		else {
-			sv_id="아이디가 존재하지 않습니다.";
-		}
-		return sv_id;
-	}
-	public int slINS(Map<String, Object> pMap) {
-		int result =0;
-		logger.info("회원관리 Logic 호출 성공");
-		result = shopDao.slINS(pMap);
+	public int join(Map<String, Object> pMap) {
+		int result = 0;
+		result = shopDao.join(pMap);
 		return result;
-	
 	}
+<<<<<<< HEAD
 //////////////////////////////////[[ 정은 끝  ]] /////////////////////////////////////////////	
 	
 	/*<!--==========================[[민지 시작 ]]=======================================================================  -->*/
@@ -160,7 +130,52 @@ public class ShopLogic {
 		return rMap;
 	}
 	/*<!--==========================[[민지 끝 ]]=======================================================================  -->*/
+=======
 
+	
+>>>>>>> branch 'kyeong' of https://github.com/kyeong1958/FitMotion
+
+//////////////////////////////////[[ 정은 끝 -> 경애 끝  ]] /////////////////////////////////////////////	
+	/*<!--==========================[[준호 시작 ]]=======================================================================  -->*/
+
+	   public List<Map<String,Object>> officegdSEL(Map<String, Object> pMap) {
+	      logger.info("사무용품조회 Logic 호출 성공");
+	      List<Map<String,Object>> rMap =new ArrayList<>();
+	      rMap = shopDao.officegdSEL(pMap);
+	      logger.info(pMap.size());
+	      logger.info(rMap);
+	      return rMap;
+	   }
+	   public int eqINS(Map<String, Object> pMap) {
+	         int result = 0;
+	         result = shopDao.eqINS(pMap);
+	         return result;
+	      }
+	      public List<Map<String, Object>> eqSEL() {
+	         List<Map<String,Object>> eqSelList = null;
+	         eqSelList = shopDao.eqSEL();
+	         return eqSelList;
+	      }
+	      public int eqUPD(Map<String, Object> pMap) {
+	         int result = 0;
+	         result = shopDao.eqUPD(pMap);
+	         return result;
+	      }
+	      public int eqDEL(Map<String, Object> pMap) {
+	        logger.info("eqDEL Logic 호출성공");
+	         int result = 0;
+	         result = shopDao.eqDEL(pMap);
+	         return result;
+	      }
+	   public List<Map<String, Object>> eqdetSEL(Map<String, Object> pMap) {
+	      logger.info("기구사용여부조회 Logic 호출 성공");
+	      List<Map<String,Object>> rMap =new ArrayList<>();
+	      rMap = shopDao.eqdetSEL(pMap);
+	      logger.info(pMap.size());
+	      logger.info(rMap);
+	      return rMap;
+	   }
+	   /*<!--==========================[[준호 끝 ]]=======================================================================  -->*/
 
 
 }

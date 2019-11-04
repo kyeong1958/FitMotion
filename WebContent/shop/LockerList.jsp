@@ -30,17 +30,17 @@ body{
 		$("#ld_hp").text(hp);
 		$("#datebox1").datebox('setValue',start);
 		$("#datebox2").datebox('setValue',end);
-		$("#lockDetail").modal();
+		aa("#lockDetail").modal();
 	}
 /* 비어있을 때 */
 	function detailModal_n(locknum){
 		$("#locknum").val(locknum);
-		$("#L_Assignment").modal();
+		aa("#L_Assignment").modal();
 	}
 /* 고장 */
 	function detailModal_b(locknum){
 		$("#b_locknum").val(locknum);
-		$("#lockDetail_b").modal();
+		aa("#lockDetail_b").modal();
 	}
 </script>
 
@@ -81,6 +81,14 @@ body{
 	    else if("사용가능".equals(status)){
     	%>   
 			<li onClick="detailModal_n('<%=locMap.get("LOCKER_NUM") %>')">
+		        <div class="locker_box ">
+					<p><%=locMap.get("LOCKER_NUM") %></p>					     		
+				</div>
+            </li>
+	    <%} 
+	    else if("사용만료".equals(status)){
+    	%>   
+			<li class="expiration" onClick="detailModal_n('<%=locMap.get("LOCKER_NUM") %>')">
 		        <div class="locker_box ">
 					<p><%=locMap.get("LOCKER_NUM") %></p>					     		
 				</div>

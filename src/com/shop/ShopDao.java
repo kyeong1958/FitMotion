@@ -113,7 +113,22 @@ public class ShopDao {
 		}
 		return result;
 	}
-	
+	public String idFind(Map<String, Object> pMap) {
+		String id = null;
+		try {
+			sqlSession = sqlSessionFactory.openSession();
+			sqlSession.selectOne("idFind",pMap);
+			logger.info(pMap);
+			id = pMap.get("id").toString();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if(sqlSession != null) {
+				sqlSession.close();
+			}
+		}
+		return id;
+	}
 	
 //////////////////////////////////[[ 경애끝 ]] /////////////////////////////////////////////	
 //////////////////////////////////[[ 민지시작 ]] /////////////////////////////////////////////	
@@ -187,123 +202,75 @@ public class ShopDao {
 		   }
 
 //////////////////////////////////[[ 민지끝 ]] /////////////////////////////////////////////	
-//////////////////////////////////[[ 정은 시작 ]] /////////////////////////////////////////////	
-		   public String sisId(SupervisorVO sVO) {
-				logger.info("아이디조회 호출");
-				String sv_id = null;
+//////////////////////////////////[[ 정은 시작 -> 경애 시작 ]] /////////////////////////////////////////////	
+		   //로그인
+			public Map<String, Object> slogin(Map<String, Object> pMap) {
 				try {
 					SqlSession sqlSession = sqlSessionFactory.openSession();
-					sv_id = sqlSession.selectOne("sisId",sVO);
-					logger.info(sv_id);
+					sqlSession.selectOne("sisId",pMap);
+					logger.info(pMap);
 				} catch (Exception e) {
 					e.printStackTrace();
-				}
-				return sv_id;
-			}
-			public String slogin(SupervisorVO sVO) {
-				String sv_id = null;
-				try {
-					SqlSession sqlSession = sqlSessionFactory.openSession();
-					sv_id = sqlSession.selectOne("sisId",sVO);
-					logger.info(sv_id);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-				return sv_id;
-			}
-			public SupervisorVO proc_login(SupervisorVO sVO) {
-				try {
-					SqlSession sqlSession = sqlSessionFactory.openSession();
-					sqlSession.selectOne("proc_login",sVO);
-					logger.info("이름: "+sVO.getSv_id());
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-				return sVO;
-			}
-			public SupervisorVO MY_PROC(SupervisorVO sVO) {
-				try {
-					SqlSession sqlSession = sqlSessionFactory.openSession();
-					sqlSession.selectOne("MY_PROC",sVO);
-					logger.info(sVO);
-					logger.info(sVO.getClass());
-					logger.info(sVO.getSv_id());
-					logger.info(sVO.getSv_name());
-					logger.info(sVO.getSv_pw());
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-				return sVO;
-			}
-			public Map<String, Object> MY_PROC2(Map<String, Object> pMap) {
-				try {
-					SqlSession sqlSession = sqlSessionFactory.openSession();
-					sqlSession.selectOne("MY_PROC",pMap);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
+				} finally {
+		             if(sqlSession!=null) {
+		                   sqlSession.close(); 
+		            }
+		         }
 				return pMap;
+			}
+			//아이디중복검사
+			public String idCheck(String joinid) {
+				Map<String,Object> pMap = new HashMap<String, Object>();
+				pMap.put("joinid",joinid);
+				String result = null;
+				try {
+					SqlSession sqlSession = sqlSessionFactory.openSession();
+					sqlSession.selectOne("idCheck",pMap);
+					logger.info(pMap);
+					result = pMap.get("result").toString();
+				} catch (Exception e) {
+					e.printStackTrace();
+				} finally {
+		             if(sqlSession!=null) {
+		                   sqlSession.close(); 
+		            }
+		         }
+				return result;
+			}
+			//회원가입
+			public int join(Map<String, Object> pMap) {
+				int result = 0;
+				try {
+					SqlSession sqlSession = sqlSessionFactory.openSession();
+					if ("super".equals(pMap.get("target"))){
+						sqlSession.selectOne("superjoin",pMap);
+						logger.info(pMap);
+						result = Integer.parseInt(pMap.get("result").toString());
+						logger.info(result);
+						if(result == 1) {
+							sqlSession.commit();
+						}
+					}else if ("staff".equals(pMap.get("target"))){
+						sqlSession.update("staffjoin",pMap);
+						result = Integer.parseInt(pMap.get("result").toString());
+						logger.info(result);
+						if(result == 1) {
+							sqlSession.commit();
+						}
+					}
+					logger.info(pMap);
+				} catch (Exception e) {
+					e.printStackTrace();
+				} finally {
+		             if(sqlSession!=null) {
+		                   sqlSession.close(); 
+		            }
+		         }
+				return result;
+			}
 			
-			}
-			public int sINS(Map<String, Object> pMap) {
-				logger.info("sINS: 호출성공");
-				logger.info("pMap.get(sv_id):"+pMap.get("sv_id"));
-				int result = 0;
-				
-				try {
-					sqlSession = sqlSessionFactory.openSession();
-					result = sqlSession.update("sINS", pMap);
-					logger.info(result);
-					sqlSession.commit();
-				} catch (Exception e) {
-					e.printStackTrace();
-				} finally {
-					if(sqlSession!=null) {
-						sqlSession.close();
-				}
-				}
-					return result;
-				}
-			public List<Map<String, Object>> sSEL() {
-				logger.info("memSelDao 호출성공");
-				int result = 0;
-				List<Map<String, Object>> joinList = new ArrayList<>();
-				try {
-					sqlSession = sqlSessionFactory.openSession();
-					joinList = sqlSession.selectList("sSEL");			
-					logger.info(result);    
-					sqlSession.commit();
-				} catch (Exception e) {
-					e.printStackTrace();
-				} finally {
-					if(sqlSession!=null) {
-						sqlSession.close();
-				}
-					
-				}		
-					return joinList;		
-			}
-			public int slINS(Map<String, Object> pMap) {
-				logger.info("slINS: 호출성공");
-				logger.info("pMap.get(staff_id):"+pMap.get("staff_id"));
-				int result = 0;
-				
-				try {
-					sqlSession = sqlSessionFactory.openSession();
-					result = sqlSession.update("slINS", pMap);
-					logger.info(result);
-					sqlSession.commit();
-				} catch (Exception e) {
-					e.printStackTrace();
-				} finally {
-					if(sqlSession!=null) {
-						sqlSession.close();
-				}
-				}
-					return result;
-			} 
-//////////////////////////////////[[ 정은 끝 ]] /////////////////////////////////////////////	
 
+<<<<<<< HEAD
 /*<!--==========================[[민지 시작 ]]=======================================================================  -->*/
 
 			public List<Map<String,Object>> officegdSEL(Map<String, Object> pMap) {
@@ -417,4 +384,121 @@ public class ShopDao {
 			}
 			/*<!--==========================[[민지 끝 ]]=======================================================================  -->*/
 
+=======
+//////////////////////////////////[[ 정은 끝 -> 경애 끝 ]] /////////////////////////////////////////////	
+			/*<!--==========================[[준호 시작 ]]=======================================================================  -->*/
+
+	         public List<Map<String,Object>> officegdSEL(Map<String, Object> pMap) {
+	            logger.info("사무용품조회 Dao 호출 성공");
+	            List<Map<String,Object>> rMap = new ArrayList<>();
+	            logger.info(pMap);
+	            try {
+	               sqlSession = sqlSessionFactory.openSession();
+	               rMap = sqlSession.selectList("officegdSEL",pMap);
+	               logger.info(rMap);
+	               sqlSession.commit();
+	               logger.info("ListSize"+rMap.size());
+	               logger.info(rMap.size());
+	            } catch (Exception e) {
+	               e.printStackTrace();
+	            } finally {
+	               if(sqlSession!=null) {
+	                  sqlSession.close(); 
+	               }
+	            }
+	            return rMap;
+	         }
+	         public int eqINS(Map<String, Object> pMap) {
+	               logger.info("기구관리 insDao");
+	               int result = 0;
+	               try {
+	                  sqlSession = sqlSessionFactory.openSession();
+	                  result = sqlSession.update("eqINS", pMap);   
+	                  sqlSession.commit();
+	               } catch (Exception e) {
+	                  e.printStackTrace();
+	               } finally {
+	                   if(sqlSession!=null) {
+	                         sqlSession.close(); 
+	                  }
+	               }
+	               
+	               return result;
+	            
+	            }
+	            public List<Map<String, Object>> eqSEL() {
+	               logger.info("기구관리SelDao 호출성공");
+	               List<Map<String, Object>> eqSelList = new ArrayList<>();
+	               try {
+	                  
+	                  sqlSession = sqlSessionFactory.openSession();
+	                  eqSelList = sqlSession.selectList("eqSEL");
+	               } catch (Exception e) {
+	                  e.printStackTrace();
+	               } finally {
+	                  if(sqlSession!=null) {
+	                     sqlSession.close(); 
+	                  }
+	                  
+	               }
+	               return eqSelList;
+	            }
+	            public int eqUPD(Map<String, Object> pMap) {
+	               logger.info("기구관리 updDao");
+	                  int result = 0;
+	                  try {
+	                     sqlSession = sqlSessionFactory.openSession();
+	                     result = sqlSession.update("eqUPD", pMap);   
+	                     sqlSession.commit();
+	                  } catch (Exception e) {
+	                     e.printStackTrace();
+	                  } finally {
+	                      if(sqlSession!=null) {
+	                            sqlSession.close(); 
+	                     }
+	                  }
+	                  
+	                  return result;
+	            }
+	            public int eqDEL(Map<String, Object> pMap) {
+	               logger.info("기구관리 delDao");
+	                  int result = 0;
+	                  try {
+	                     sqlSession = sqlSessionFactory.openSession();
+	                     result = sqlSession.update("eqDEL", pMap);   
+	                     sqlSession.commit();
+	                  } catch (Exception e) {
+	                     e.printStackTrace();
+	                  } finally {
+	                      if(sqlSession!=null) {
+	                            sqlSession.close(); 
+	                     }
+	                  }
+	                  
+	                  return result;
+	            }
+	         public List<Map<String, Object>> eqdetSEL(Map<String, Object> pMap) {
+	            logger.info("사무용품조회 Dao 호출 성공");
+	            List<Map<String,Object>> rMap = new ArrayList<>();
+	            logger.info(pMap);
+	            try {
+	               sqlSession = sqlSessionFactory.openSession();
+	               rMap = sqlSession.selectList("eqdetSEL",pMap);
+	               logger.info(rMap);
+	               sqlSession.commit();
+	               logger.info("ListSize"+rMap.size());
+	               logger.info(rMap.size());
+	            } catch (Exception e) {
+	               e.printStackTrace();
+	            } finally {
+	               if(sqlSession!=null) {
+	                  sqlSession.close(); 
+	               }
+	            }
+	            return rMap;
+	         }
+	         /*<!--==========================[[준호 끝 ]]=======================================================================  -->*/
+			
+			
+>>>>>>> branch 'kyeong' of https://github.com/kyeong1958/FitMotion
 }

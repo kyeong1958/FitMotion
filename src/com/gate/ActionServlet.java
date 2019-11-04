@@ -52,7 +52,7 @@ public class ActionServlet extends HttpServlet {
 				logger.info("json");
 				req.setAttribute("json", json);
 				logger.info(req.getAttribute("json"));
-				RequestDispatcher view = req.getRequestDispatcher("../schedule/jsonResult.jsp");
+				RequestDispatcher view = req.getRequestDispatcher("/shop/jsonResult.jsp");
 				view.forward(req, res);
 			}
 		}catch (Exception e) {

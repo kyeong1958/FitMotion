@@ -43,6 +43,7 @@ public class ProgramController implements Controller {
 			mav.setViewName("/program/example.jsp");
 			mav.addObject("제발", "잘됨??");
 		}
+
 /*=======================================[[민지 시작 ]]==============================================*/
 		else if("taDTL".equals(crud)) {
 			Map<String,Object> pMap = new HashMap<>();
@@ -65,6 +66,100 @@ public class ProgramController implements Controller {
 			mav.pageMove("forward");
 			mav.setViewName("/program/prosel.jsp");
 		}
+		else if("proIns".equals(crud)) {
+			int result = 0;
+			Map<String,Object> pMap = new HashMap<>();
+			HashMapBinder hmb = new HashMapBinder(req);
+			hmb.bindPost(pMap);
+			logger.info(pMap);
+			result = programLogic.proIns(pMap);
+			logger.info(pMap);
+			mav.pageMove("redirect");
+			mav.setViewName("/program/TicketMain.jsp");
+		}
+		else if("taSEL2".equals(crud)) {
+			logger.info("이용권등록조회 Controller 호출 성공");
+			List<Map<String,Object>> taList = null;
+			taList = programLogic.taSEL();
+			mav.addObject("taList", taList);
+			mav.pageMove("forward");
+			mav.setViewName("/program/TicketMain.jsp");
+		}
+		else if("prornk".equals(crud)) {
+			logger.info("이용권등록조회 Controller 호출 성공");
+			List<Map<String,Object>> taList = null;
+			taList = programLogic.taSEL();
+			mav.addObject("taList", taList);
+			mav.pageMove("forward");
+			mav.setViewName("/program/pro_rank.jsp");
+		}
+		
+		else if("tabuyDTL".equals(crud)) {
+			Map<String,Object> pMap = new HashMap<>();
+			    pMap.put("ticket_num",req.getParameter("ticket_num"));
+	            Map<String, Object> rMap = new HashMap<>();
+	            rMap = programLogic.taDTL(pMap);
+	            logger.info(rMap);
+	            mav.addObject("tadtlList", rMap);
+	            logger.info(pMap);
+	            logger.info(pMap);
+	            logger.info(pMap.size());
+	            mav.pageMove("forward");
+	            mav.setViewName("/program/taprofit.jsp");
+		} 
+		
+
+		else if("probuyDTL".equals(crud)) {
+				Map<String,Object> pMap = new HashMap<>();
+			    pMap.put("prom_num",req.getParameter("prom_num"));
+	            Map<String, Object> rMap = new HashMap<>();
+	            rMap = programLogic.probuyDTL(pMap);
+	            logger.info(rMap);
+	            mav.addObject("probuylist", rMap);
+	            logger.info(pMap);
+	            logger.info(pMap);
+	            logger.info(pMap.size());
+	            mav.pageMove("forward");
+	            mav.setViewName("/program/proprofit.jsp");
+		} 
+		else if("prodelete".equals(crud)) {
+			Map<String,Object> pMap = new HashMap<>();
+		    pMap.put("prom_num",req.getParameter("prom_num"));
+            programLogic.prodelete(pMap);
+            logger.info(pMap);
+            logger.info(pMap.size());
+            mav.pageMove("redirect");
+            mav.setViewName("/program/TicketMain.jsp");
+		}
+		/*이용권관리에서 티켓구매*/
+		else if("probuy".equals(crud)) {
+			int result =0;
+			logger.info("Controller");
+			Map<String,Object> pMap = new HashMap<>();
+			HashMapBinder hmb = new HashMapBinder(req);
+			hmb.bindPost(pMap);
+			logger.info("start"+pMap);
+		    result =  programLogic.probuy(pMap);
+			logger.info(pMap);
+			logger.info(result);
+			mav.pageMove("redirect");
+			mav.setViewName("/program/TicketMain.jsp");
+		}
+		/*매출등록창에서 티켓구매*/
+		else if("profitIns".equals(crud)) {
+			int result =0;
+			logger.info("Controller");
+			Map<String,Object> pMap = new HashMap<>();
+			HashMapBinder hmb = new HashMapBinder(req);
+			hmb.bindPost(pMap);
+			logger.info("start"+pMap);
+			result =  programLogic.probuy(pMap);
+			logger.info(pMap);
+			logger.info(result);
+			mav.pageMove("redirect");
+			mav.setViewName("/account/profit.jsp");
+		}
+		
 /*=======================================[[민지 끝 ]]==============================================*/
 //--------------------------------------- 준호 시작 -----------------------------------------------//
 		else if("taINS".equals(crud)) {
@@ -87,6 +182,8 @@ public class ProgramController implements Controller {
 			mav.pageMove("forward");
 			mav.setViewName("/program/tasel.jsp");
 		}
+		
+	
 //--------------------------------------- 준호 끝 -----------------------------------------------//
 		return mav;
 	}
@@ -103,6 +200,16 @@ public class ProgramController implements Controller {
 			gson = new Gson();
 			json = gson.toJson(list);
 		}
+/*=======================================[[경애 시작 ]]==============================================*/
+		else if("ticketList".equals(crud)) {
+			logger.info("ticketList=============================");
+			List<Map<String,Object>> ticketList = new ArrayList<>();
+			ticketList = programLogic.ticketList();
+			gson = new Gson();
+			json = gson.toJson(ticketList);
+			logger.info(json);
+		}
+/*=======================================[[경애 끝 ]]==============================================*/
 		return json;
 	}
 

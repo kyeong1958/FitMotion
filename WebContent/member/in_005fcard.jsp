@@ -15,23 +15,42 @@ body{
 }
 </style>
 <script>
-
-
-
-	/* 	  function memberdetail(mem_num){
-				alert(mem_num);
+/* ====================================================2019-10-30 추가 ============================================================================ */
+	  function memberdetail(mem_num){
+			//	alert(mem_num);
 		 		var formData = $("#MDetail").serialize();
 				 $.ajax({
 					method:"POST"
 					,data:formData
 					,url:"/member/bhDET.fm?mem_num="+mem_num
 					,success:function(data){
-						alert("성공");
 						$("#memList").html(data);
+							$.ajax({
+								method:"POST"
+								,url:"/member/PROBIL.fm?mem_num="+mem_num
+								,success:function(data){
+									$("#membil").html(data);
+								 	$.ajax({
+										method:"POST"
+										,url:"/member/TickBIL.fm?mem_num="+mem_num
+										,success:function(data){
+											$("#membil").html(data);
+								 	$.ajax({
+										method:"POST"
+										,url:"/member/memAttSEL.fm?mem_num="+mem_num
+										,success:function(data){
+											$("#MemberAttend").html(data);
+											}
+										}); 
+									}
+								}); 
+							}
+						}); 
 					}
 				}); 
 		     }
-		    */
+/* ====================================================2019-10-30 추가 ============================================================================ */
+		    
 	
 </script> 
 	<form id="MDetail">

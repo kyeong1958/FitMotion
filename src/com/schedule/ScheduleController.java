@@ -5,14 +5,17 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.mail.Session;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
 
 import com.gate.Controller;
 import com.gate.ModelAndView;
 import com.google.gson.Gson;
+import com.util.HangulConversion;
 import com.util.HashMapBinder;
 
 public class ScheduleController implements Controller {
@@ -44,16 +47,14 @@ public class ScheduleController implements Controller {
 		//예약관리에서  콤보박스에 해당하는 값 가져오기
 		else if("scheduleModal".equals(crud)) {
 			Map<String,Object> scheduleModal = new HashMap<String, Object>();
-			String mem_name = "회원명";
-			if(req.getParameter("sm_memname") != null) {
-				mem_name = req.getParameter("sm_memname");
-			}
-			scheduleModal.put("mem_name",mem_name);
-			scheduleModal = scheduleLogic.scheduleModal(scheduleModal);
+			Map<String,Object> rMap = new HashMap<String, Object>();
+			HashMapBinder hmb = new HashMapBinder(req);
+			hmb.bind(scheduleModal);
+			rMap = scheduleLogic.scheduleModal(scheduleModal);
 			logger.info(scheduleModal.keySet().toArray().length);
 			mav.pageMove("forward");
 			mav.setViewName("/schedule/modalcombobox.jsp");
-			mav.addObject("scheduleModal", scheduleModal);
+			mav.addObject("scheduleModal", rMap);
 		}
 			
 		//수업 예약했을 시 insert
@@ -94,7 +95,16 @@ public class ScheduleController implements Controller {
 		else if("scheduleList".equals(crud)) {
 			List<Map<String,Object>> scheduleList = new ArrayList<Map<String,Object>>();
 			Map<String,Object> pMap = new HashMap<String, Object>();
-			scheduleList = scheduleLogic.scheduleList();
+			String login_id = null;
+			if(req.getParameter("login_id") != null) {
+				login_id = req.getParameter("login_id");
+			}else {
+				HttpSession session = req.getSession();
+				login_id = session.getAttribute("login_id").toString();
+			}
+			
+			logger.info(login_id);
+			scheduleList = scheduleLogic.scheduleList(login_id);
 			if(req.getParameter("year") != null) {
 				logger.info(req.getParameter("year"));
 				logger.info(req.getParameter("month"));
@@ -118,14 +128,45 @@ public class ScheduleController implements Controller {
 			if(req.getParameter("appli_num") != null && req.getParameter("att_num") != null) {
 				appli_num = Integer.parseInt(req.getParameter("appli_num").toString());
 				att_num = Integer.parseInt(req.getParameter("att_num").toString());
-				attendMap.put("appli_num",appli_num);
-				attendMap.put("att_num",att_num);
 			}
+			attendMap.put("appli_num",appli_num);
+			attendMap.put("att_num",att_num);
 			result = scheduleLogic.caUPD(attendMap);
 			if(result == 1) {
 				mav.pageMove("redirect");
 				mav.setViewName("/schedule/scheduleList.fm");
 			}
+		}
+		else if("staffList".equals(crud)) {
+			List<Map<String,Object>> staffList = new ArrayList<Map<String,Object>>();
+			staffList = scheduleLogic.staffList();
+			mav.pageMove("forward");
+			mav.setViewName("/schedule/staffList.jsp");
+			mav.addObject("staffList", staffList);
+		}
+		else if("reservation".equals(crud)) {
+			logger.info("예약컨트롤");
+			List<Map<String,Object>> reservation = new ArrayList<>();
+			Map<String,Object> pMap = new HashMap<>();
+			HashMapBinder hmb = new HashMapBinder(req);
+			hmb.bind(pMap);
+			String staff_id = null;
+			if(pMap.get("staff_id") == null) {
+				HttpSession session = req.getSession();
+				staff_id = session.getAttribute("login_id").toString();
+				pMap.put("staff_id",staff_id);
+			}
+			logger.info("스케줄컨트럴예약내역 ======= " +pMap);
+			logger.info("스케줄컨트럴예약내역 ======= " +pMap.get("keyword"));
+			reservation = scheduleLogic.reservation(pMap);
+			Gson gson = new Gson();
+			String reservationTable = gson.toJson(reservation);
+			pMap.put("reservationTable",reservationTable);
+			logger.info("reservation  "+reservation);
+			logger.info("예약컨트롤mav");
+			mav.addObject("reservation", pMap);
+			mav.pageMove("forward");
+		    mav.setViewName("/schedule/reservationTable.jsp");
 		}
 /////////////////////////////// [[ 경애 끝 ]] /////////////////////////////////////
 		return mav;
@@ -134,9 +175,6 @@ public class ScheduleController implements Controller {
 	@Override
 	public String jsonexecute(HttpServletRequest req, HttpServletResponse res) throws Exception {
 		String json = null;
-
 		return json;
 	}
-
-
 }

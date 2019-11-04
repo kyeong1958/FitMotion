@@ -10,6 +10,7 @@
 		      ,NVL(SUM (gs_pay_amount),0) as "sales"
 		      ,NVL(SUM (GS_REF_AMOUNT),0) as "refund"
 		      ,NVL(SUM (gs_account_due),0)  as "receivable"
+              ,NVL(COUNT(DECODE(gs_account_due,0,NULL,gs_account_due)),0)  as "receivablecnt"
 		      ,NVL(COUNT(DECODE(gs_pay_method,'카드',gs_pay_amount)),0)  as "cardsalescnt"
 		      ,NVL(SUM(DECODE(gs_pay_method,'카드',gs_pay_amount)),0)  as "cardsales"
 		      ,NVL(COUNT(DECODE(gs_pay_method,'현금',gs_pay_amount)),0)  as "cashsalescnt" 
@@ -56,10 +57,49 @@
       <if test="endDay != null">
 <![CDATA[ AND to_date(gs_dep_date) <= to_date(#{endDay}) ]]>
      </if> 
-	</select>
-
-	<select id="ssTableList" parameterType="java.lang.Integer">
-	
+    </select>
+	<resultMap type="map" id="ssTableList"></resultMap>
+	<select id="ssTableList" parameterType="map" resultMap="ssTableList">
+		SELECT rno, gs_dep_num, gs_dep_date, gs_dep_mem, mem_hp, gs_pay_method, ticket_price, sale, ticp_payment
+		      ,gs_account_due, gs_ref_amount
+		FROM (SELECT rownum as rno, gs_dep_num, gs_dep_date, gs_dep_mem, mem_hp, gs_pay_method, ticket_price, (ticket_price - ticp_payment ) as sale, ticp_payment
+			      ,gs_account_due, gs_ref_amount
+			  FROM gym_sales gs, member m, ticket t, tic_purchase tp
+			 WHERE gs_dep_mem = m.mem_num
+			   AND m.mem_num = tp.mem_num
+			   AND ticp_num = gs_ticp_num
+			   AND tp.ticket_num = t.ticket_num
+			    <if test="month != null">
+				 AND SUBSTR (gs_dep_date, 0, 7) = #{month}
+			     </if>
+			     <if test="year != null">
+				 AND SUBSTR (gs_dep_date, 0, 4) = #{year}
+			     </if> 
+			      <if test="quarter != null and quarter == 1">
+			<![CDATA[ AND SUBSTR (gs_dep_date, INSTR (gs_dep_date, '-', 1) + 1, 2) >= '01'
+				 	  AND SUBSTR (gs_dep_date, INSTR (gs_dep_date, '-', 1) + 1, 2) <= '03' ]]>
+			     </if> 
+			     <if test="quarter != null and quarter == 2">
+			<![CDATA[ AND SUBSTR (gs_dep_date, INSTR (gs_dep_date, '-', 1) + 1, 2) >= '04'
+				 	  AND SUBSTR (gs_dep_date, INSTR (gs_dep_date, '-', 1) + 1, 2) <= '06' ]]>
+			     </if> 
+			     <if test="quarter != null and quarter == 3">
+			<![CDATA[ AND SUBSTR (gs_dep_date, INSTR (gs_dep_date, '-', 1) + 1, 2) >= '07'
+				 	  AND SUBSTR (gs_dep_date, INSTR (gs_dep_date, '-', 1) + 1, 2) <= '09' ]]>
+			     </if> 
+			     <if test="quarter != null and quarter == 4">
+			<![CDATA[ AND SUBSTR (gs_dep_date, INSTR (gs_dep_date, '-', 1) + 1, 2) >= '10'
+				 	  AND SUBSTR (gs_dep_date, INSTR (gs_dep_date, '-', 1) + 1, 2) <= '12' ]]>
+			     </if> 
+			      <if test="startDay != null">
+			<![CDATA[ AND to_date(gs_dep_date) >= to_date(#{startDay}) ]]>
+			     </if> 
+			      <if test="endDay != null">
+			<![CDATA[ AND to_date(gs_dep_date) <= to_date(#{endDay}) ]]>
+			     </if> 
+		     )
+		     ORDER BY rno desc
+		 
 	</select>
 <!-- 지출관리 페이지에서 사용할 값 select -->
 	<select id="expenseStatementMap" parameterType="map" resultMap="ssm_map">
@@ -109,28 +149,67 @@
 <![CDATA[ AND to_date(ge_date) <= to_date(#{endDay}) ]]>
      </if> 
 	</select>
+		<resultMap type="map" id="geTableList"></resultMap>
+	<select id="geTableList" parameterType="java.lang.Integer" resultMap="geTableList">
+	SELECT rno, ge_date, exb_kinds, ge_story, ge_count, ge_price, ge_ref_amount,ge_pay_method,ge_state, ge_biller
+               FROM (  SELECT rownum as rno, ge_date, exb_kinds, ge_story, ge_count, ge_price, ge_ref_amount,ge_pay_method,ge_state, ge_biller
+                       FROM gym_expenditure ge, ex_breakdown eb
+                      WHERE ge.exb_num = eb.exb_num
+			    <if test="month != null">
+				 AND SUBSTR (ge_date, 0, 7) = #{month}
+			     </if>
+			     <if test="year != null">
+				 AND SUBSTR (ge_date, 0, 4) = #{year}
+			     </if> 
+			      <if test="quarter != null and quarter == 1">
+			<![CDATA[ AND SUBSTR (ge_date, INSTR (ge_date, '-', 1) + 1, 2) >= '01'
+				 	  AND SUBSTR (ge_date, INSTR (ge_date, '-', 1) + 1, 2) <= '03' ]]>
+			     </if> 
+			     <if test="quarter != null and quarter == 2">
+			<![CDATA[ AND SUBSTR (ge_date, INSTR (ge_date, '-', 1) + 1, 2) >= '04'
+				 	  AND SUBSTR (ge_date, INSTR (ge_date, '-', 1) + 1, 2) <= '06' ]]>
+			     </if> 
+			     <if test="quarter != null and quarter == 3">
+			<![CDATA[ AND SUBSTR (ge_date, INSTR (ge_date, '-', 1) + 1, 2) >= '07'
+				 	  AND SUBSTR (ge_date, INSTR (ge_date, '-', 1) + 1, 2) <= '09' ]]>
+			     </if> 
+			     <if test="quarter != null and quarter == 4">
+			<![CDATA[ AND SUBSTR (ge_date, INSTR (ge_date, '-', 1) + 1, 2) >= '10'
+				 	  AND SUBSTR (ge_date, INSTR (ge_date, '-', 1) + 1, 2) <= '12' ]]>
+			     </if> 
+			      <if test="startDay != null">
+			<![CDATA[ AND to_date(ge_date) >= to_date(#{startDay}) ]]>
+			     </if> 
+			      <if test="endDay != null">
+			<![CDATA[ AND to_date(ge_date) <= to_date(#{endDay}) ]]>
+			     </if> 
+		     )
+		     ORDER BY rno desc
+		 
+	</select>
 <!-- //////////////////////////////////[[ 경애 끝 ]] ///////////////////////////////////////////////////////////////////-->
-<!--    ======================= 수근시작 ================================== //-->
-	<!-- 1page 회원 연령별 비율 (누적 ) //-->
-	<select id="memAge" parameterType="map" resultType="map">
-		select m.age as 연령, count(m.age) as 인원수
-		from (select CASE WHEN substr(mem_birth,1,4) between 2000 and 2009 THEN '10대'
-		                 WHEN substr(mem_birth,1,4) between 1990 and 1999 THEN '20대'
-		                 WHEN substr(mem_birth,1,4) between 1980 and 1989 THEN '30대'
-		                 WHEN substr(mem_birth,1,4) between 1970 and 1979 THEN '40대'
-		                 WHEN substr(mem_birth,1,4) between 1960 and 1969 THEN '50대'
-		                 WHEN substr(mem_birth,1,4) between 1950 and 1959 THEN '60대'
-		                 WHEN substr(mem_birth,1,4) between 1940 and 1949 THEN '70대'
-		                 WHEN substr(mem_birth,1,4) between 1930 and 1939 THEN '80대'
-		                 ELSE '10대 미만'
-		             END AS age
-		      from member) m
-		group by m.age
-		order by age asc
-	</select>	
-	<!--   1page 회원 연령별 비율 ( 변동 )-->
-	<select id="memAge2" parameterType="String" resultType="map">
-		select m.age as 연령, count(distinct m.mem_num) as 인원수
+   <!--    ======================= 수근시작 ================================== //-->
+   <!-- 1page 회원 연령별 비율 (누적 ) //-->
+   <select id="memAge" parameterType="map" resultType="map">
+      select m.age as 연령, count(m.age) as 인원수
+      from (select CASE WHEN substr(mem_birth,1,4) between 2000 and 2009 THEN '10대'
+                       WHEN substr(mem_birth,1,4) between 1990 and 1999 THEN '20대'
+                       WHEN substr(mem_birth,1,4) between 1980 and 1989 THEN '30대'
+                       WHEN substr(mem_birth,1,4) between 1970 and 1979 THEN '40대'
+                       WHEN substr(mem_birth,1,4) between 1960 and 1969 THEN '50대'
+                       WHEN substr(mem_birth,1,4) between 1950 and 1959 THEN '60대'
+                       WHEN substr(mem_birth,1,4) between 1940 and 1949 THEN '70대'
+                       WHEN substr(mem_birth,1,4) between 1930 and 1939 THEN '80대'
+                       ELSE '10대 미만'
+                   END AS age
+            from member) m
+      group by m.age
+      order by age asc
+   </select>
+   
+   <!--   1page 회원 연령별 비율 ( 변동 )-->
+   <select id="memAge2" parameterType="String" resultType="map">
+      select m.age as 연령, count(distinct m.mem_num) as 인원수
         from (select CASE WHEN substr(mem_birth,1,4) between 2000 and 2009 THEN '10대'
                          WHEN substr(mem_birth,1,4) between 1990 and 1999 THEN '20대'
                          WHEN substr(mem_birth,1,4) between 1980 and 1989 THEN '30대'
@@ -146,142 +225,187 @@
         and substr(replace(GS_DEP_DATE,'/',''),1,6) = #{date}
         group by m.age
         order by age asc
-	</select>	
-	<!-- 1page 회원 남자, 여자 회원수 ( 누적 ) -->
-	<select id="memCount" parameterType="map" resultType="map">
-		select mem_gender as 자별, count(mem_num) as 명
-		from member
-		group by mem_gender
-	</select>
-	<!--1page 회원 남자, 여자 회원수 ( 변동 ) -->
-	<select id="memCount2" parameterType="String" resultType="map">
-		select mem_gender as 자별, count(mem_num) as 명
-		from member m, gym_sales g
-		where m.mem_num = g.gs_dep_mem and GS_STATE in ('이용중', '만료')
-		and substr(replace(GS_DEP_DATE,'/',''),1,6) = #{date}
-		group by(mem_gender)
-	</select>	
-	<!-- 1page 월별 매출 금액, 횟수  신규구매-->
-	<select id="salespcNew" parameterType="String" resultType="map">
-		select substr(GS_DEP_DATE,1,7) as 월, sum(GS_PAY_AMOUNT) as 총액, count(GS_PAY_AMOUNT) as 건수
-		from GYM_SALES a
-		where GS_STATE in ('이용중', '만료')
-		and substr(replace(GS_DEP_DATE,'/',''),1,6) between to_number(#{date})-3 and to_number(#{date}) and gs_newandRepay = '신규결제'
-		group by substr(GS_DEP_DATE,1,7)
-		order by substr(GS_DEP_DATE,1,7) asc
-	</select>	
-	<!-- 1page 월별 매출 금액, 횟수 재구매 -->
-	<select id="salespcRe" parameterType="String" resultType="map">
-		select substr(GS_DEP_DATE,1,7) as 월, sum(GS_PAY_AMOUNT) as 총액, count(GS_PAY_AMOUNT) as 건수
-		from GYM_SALES a
-		where GS_STATE in ('이용중', '만료')
-		and substr(replace(GS_DEP_DATE,'/',''),1,6) between to_number(#{date})-3 and to_number(#{date}) and gs_newandRepay = '재결제'
-		group by substr(GS_DEP_DATE,1,7)
-		order by substr(GS_DEP_DATE,1,7) asc
-	</select>	
-	<!-- 2page 방문회원 자별-->
-	<select id="visitmem" parameterType="String" resultType="map">
-		select mem_gender as 자별, count(a.mem_num) as 명
-		from ADMISSION_HISTORY a, MEMBER m
-		where a.mem_num = M.MEM_NUM and substr(replace(a.ah_date,'/',''),1,6) between to_number(#{date})-3 and to_number(#{date})
-		group by mem_gender
-	</select>	
-	<!-- 2page 방문회원  시간대별, (서비스분류별)-->
-	<select id="visittime" parameterType="String" resultType="map">
-		select a.time as time, count(a.mem_num) as mcount
-        from (select CASE WHEN substr(ah_entry_time,1,2) between 00 and 11 THEN '오전'
+   </select>   
+   <!-- 1page 회원 남자, 여자 회원수 ( 누적 ) -->
+   <select id="memCount" parameterType="map" resultType="map">
+      select mem_gender as 자별, count(mem_num) as 명
+      from member
+      group by mem_gender
+   </select>
+   <!--1page 회원 남자, 여자 회원수 ( 변동 ) -->
+   <select id="memCount2" parameterType="String" resultType="map">
+      select mem_gender as 자별, count(mem_num) as 명
+      from member m, gym_sales g
+      where m.mem_num = g.gs_dep_mem and GS_STATE in ('이용중', '만료')
+      and substr(replace(GS_DEP_DATE,'/',''),1,6) = #{date}
+      group by(mem_gender)
+   </select>   
+   <!-- 1page 월별 매출 금액, 횟수  신규구매-->
+   <select id="salespcNew" parameterType="String" resultType="map">
+      select substr(GS_DEP_DATE,1,7) as 월, sum(GS_PAY_AMOUNT) as 총액, count(GS_PAY_AMOUNT) as 건수
+      from GYM_SALES a
+      where GS_STATE in ('이용중', '만료')
+      and substr(replace(GS_DEP_DATE,'/',''),1,6) between to_number(#{date})-3 and to_number(#{date}) and gs_newandRepay = '신규결제'
+      group by substr(GS_DEP_DATE,1,7)
+      order by substr(GS_DEP_DATE,1,7) asc
+   </select>   
+   <!-- 1page 월별 매출 금액, 횟수 재구매 -->
+   <select id="salespcRe" parameterType="String" resultType="map">
+      select substr(GS_DEP_DATE,1,7) as 월, sum(GS_PAY_AMOUNT) as 총액, count(GS_PAY_AMOUNT) as 건수
+      from GYM_SALES a
+      where GS_STATE in ('이용중', '만료')
+      and substr(replace(GS_DEP_DATE,'/',''),1,6) between to_number(#{date})-3 and to_number(#{date}) and gs_newandRepay = '재결제'
+      group by substr(GS_DEP_DATE,1,7)
+      order by substr(GS_DEP_DATE,1,7) asc
+   </select>   
+   <!-- 2page 방문회원 자별-->
+   <select id="visitmem" parameterType="String" resultType="map">
+      select mem_gender as 자별, count(a.mem_num) as 명
+      from ADMISSION_HISTORY a, MEMBER m
+      where a.mem_num = M.MEM_NUM and substr(replace(a.ah_date,'/',''),1,6) between to_number(#{date})-3 and to_number(#{date})
+      group by mem_gender
+   </select>   
+   <!-- 2page 방문회원  시간대별, (서비스분류별)-->
+   <select id="visittime" parameterType="String" resultType="map">
+      select a.time as time, count(a.mem_num) as mcount
+        from (select CASE WHEN substr(ah_entry_time,1,2) between 01 and 11 THEN '오전'
                     WHEN substr(ah_entry_time,1,2) between 12 and 24 THEN '오후'
                END AS time , mem_num, ah_date
             from ADMISSION_HISTORY) a , MEMBER m
-		where a.mem_num = m.mem_num and substr(replace(a.ah_date,'/',''),1,6) between to_number(#{date})-3 and to_number(#{date})
+      where a.mem_num = m.mem_num and substr(replace(a.ah_date,'/',''),1,6) between to_number(#{date})-3 and to_number(#{date})
         group by a.time
         order by time asc
-	</select>	
-	<!-- 2page 방문회원 결제와 만료 회원-->
-	<select id="visitpay" parameterType="String" resultType="map">
-		select count(GS_PAY_AMOUNT) as newpay
-		from GYM_SALES a 
-		where GS_STATE in ('이용중', '만료')
-		and substr(replace(GS_DEP_DATE,'/',''),1,6) between to_number(#{date})-3 and to_number(#{date}) and nvl(gs_newandRepay,3) = '1'
-		group by substr(GS_DEP_DATE,1,1)
-		union all
-		select count(GS_PAY_AMOUNT)
-		from GYM_SALES a
-		where GS_STATE in ('이용중', '만료') 
-		and substr(replace(GS_DEP_DATE,'/',''),1,6) between to_number(#{date})-3 and to_number(#{date}) and nvl(gs_newandRepay,3) = '2'
-		group by substr(GS_DEP_DATE,1,1)
-	</select>
-	<!--3page 개인레슨 통계 -->
-	<select id="privateProg" parameterType="String" resultType="map">             	
-         select distinct gs_dep_num,gs_dep_date,gs_pay_amount,gs_account_due,gs_ref_amount, m.mem_name ,m.mem_hp,gs_dep_history,gs_state,gs_pay_method,gs_billing_person
-         from GYM_SALES gs, member m, TIC_PURCHASE tp
-         where GS.GS_DEP_MEM = M.mem_num and M.MEM_NUM = TP.MEM_NUM and gs.gs_public_private = 1
-         and replace(GS.GS_DEP_DATE,'/','') between to_number(substr('20190701,20191001',1,8)) and to_number(substr('20190701,20191001',10,17))
-         order by gs_dep_num
-	</select>	
-	<!-- 3page 페이지네이션 count값 가져오기-->
-	<select id="getCount" parameterType="String" resultType="int">
-		select nvl(max(rownum),0) as rowmax
-		from (select gs_dep_num,gs_dep_date,gs_pay_amount,gs_account_due,gs_ref_amount,gs_dep_mem
-		    ,m.mem_hp,gs_dep_history,gs_state,GS.GS_NEWANDREPAY,gs_billing_person
-		from GYM_SALES gs, member m, TIC_PURCHASE tp
-		where GS.GS_DEP_MEM = M.mem_num and M.MEM_NUM = TP.MEM_NUM and gs.gs_public_private = 1
-		and replace(GS.GS_DEP_DATE,'/','') between to_number(substr(#{hap},1,8)) and to_number(substr(#{hap},10,17))
-		order by gs_dep_num) a		
-	</select>	
-	<!--3page 총 건수, 총매출, 총 회원수 .. -->
-	<select id="privatehap" parameterType="String" resultType="map">
-		select  count(gs_dep_num) as num, sum(gs_pay_amount) as amount, count(distinct m.mem_num) as mem
-		from GYM_SALES gs, member m
-		where GS.GS_DEP_MEM = M.mem_num and gs.gs_public_private = 1 and GS.GS_STATE in ('이용중', '만료') 
-		and replace(GS.GS_DEP_DATE,'/','') between to_number(substr(#{hap},1,8)) and to_number(substr(#{hap},10,17))	
-	</select>
-	<!--3page 여자 -->
-	<select id="privategender" parameterType="String" resultType="map">
-		select count(distinct mem_num) as count
-		from GYM_SALES gs, member m2
-		where GS.GS_DEP_MEM = M2.mem_num and mem_gender = '여자'
-		and gs.gs_public_private = 1 and GS.GS_STATE in ('이용중', '만료')
-		and replace(GS.GS_DEP_DATE,'/','') between to_number(substr(#{hap},1,8)) and to_number(substr(#{hap},10,17))
-	</select>
-	<!--3page 남자 .. -->
-	<select id="privategender2" parameterType="String" resultType="map">
-		select count(distinct mem_num) as count
-		from GYM_SALES gs, member m2
-		where GS.GS_DEP_MEM = M2.mem_num and mem_gender = '남자'
-		and gs.gs_public_private = 1 and GS.GS_STATE in ('이용중', '만료')
-		and replace(GS.GS_DEP_DATE,'/','') between to_number(substr(#{hap},1,8)) and to_number(substr(#{hap},10,17))
-	</select>
-	<!--4page 그룹레슨 통계  -->
-	<select id="publicProg" parameterType="String" resultType="map">
-		select gs_dep_num,gs_dep_date,gs_dep_mem,m.mem_hp,gs_dep_history,gs_state
-		      ,gs_pay_amount,gs_account_due,gs_ref_amount,gs_billing_person,gs_pay_method
-        from GYM_SALES gs, member m, TIC_PURCHASE tp
-        where GS.GS_DEP_MEM = M.mem_num and M.MEM_NUM = TP.MEM_NUM and gs.gs_public_private = 2 and GS.GS_STATE in ('이용중', '만료') 
-        and replace(GS.GS_DEP_DATE,'/','') between to_number('20190701') and to_number('20191001')
-	</select>		
-	<!--4page 총 건수, 총매출, 총 회원수 .. 평균 강의듣는 사람숫자??-->
-	<select id="publichap" parameterType="String" resultType="map">
-		select  count(gs_dep_num) as num, sum(gs_pay_amount) as amount, count(distinct m.mem_num) as mem
-		from GYM_SALES gs, member m
-		where GS.GS_DEP_MEM = M.mem_num and gs.gs_public_private = 2 and GS.GS_STATE in ('이용중', '만료') 
-	</select>
-	<!--4page 여자 -->
-	<select id="publicgender" parameterType="String" resultType="map">
-		select count(mem_num) as count
+   </select>   
+   <!-- 2page 장소별 회원이용-->
+   <select id="visitplace" parameterType="String" resultType="map">
+   select ca.pro_place as 장소, count(m.mem_name) as 명
+   from staff s, class_application ca, member m
+   where s.STAFF_ID = ca.staff_id and ca.mem_num = m.mem_num
+   and ca.att_num = 1 and substr(replace(ca.appli_date,'/',''),1,6) = #{date}
+   group by ca.pro_place
+   </select>
+   <!-- 2page 방문회원 결제와 만료 회원-->
+   <select id="visitpay" parameterType="String" resultType="map">
+      select count(GS_PAY_AMOUNT) as newpay
+      from GYM_SALES a 
+      where GS_STATE in ('이용중', '만료')
+      and substr(replace(GS_DEP_DATE,'/',''),1,6) between to_number(#{date})-3 and to_number(#{date}) and gs_public_private = '1'
+      group by substr(GS_DEP_DATE,1,1)
+      union all
+      select count(GS_PAY_AMOUNT)
+      from GYM_SALES a
+      where GS_STATE in ('이용중', '만료') 
+      and substr(replace(GS_DEP_DATE,'/',''),1,6) between to_number(#{date})-3 and to_number(#{date}) and gs_public_private = '2'
+      group by substr(GS_DEP_DATE,1,1)
+      union all
+      select count(a.ticp_num)
+      from ( select distinct tp.ticp_num , substr(replace(tp.ticp_reg_date,'/',''),3,4) as day,substr(replace(#{date},'/',''),2,6) as today,
+       p.ticket_num, m.mem_name, p.pro_name, p.pro_months
+      from tic_purchase tp, program p, member m
+      where TP.TICKET_NUM = p.ticket_num and tp.mem_num = m.mem_num
+      and  to_number(substr(replace(tp.ticp_reg_date,'/',''),3,4)) + to_number(p.pro_months) = substr(replace(#{date},'/',''),2,6) 
+      ) a
+      union all
+      select count(a.ticp_num)
+      from ( select distinct tp.ticp_num , substr(replace(tp.ticp_reg_date,'/',''),3,4) as day,substr(replace(#{date},'/',''),2,6) as today,
+       p.ticket_num, m.mem_name, p.pro_name, p.pro_months
+      from tic_purchase tp, program p, member m
+      where TP.TICKET_NUM = p.ticket_num and tp.mem_num = m.mem_num
+      and  to_number(substr(replace(tp.ticp_reg_date,'/',''),3,4)) + to_number(p.pro_months) = substr(replace(#{date},'/',''),2,6) - 1
+      ) a
+   </select>
+   <!--3page 개인레슨 통계 -->
+   <select id="privateProg" parameterType="map" resultType="map">    
+       select rownum,gs_dep_date,mem_name ,mem_hp,gs_dep_history,gs_state,gs_pay_amount,gs_account_due,gs_ref_amount,gs_billing_person,gs_pay_method
+      from ( select distinct gs_dep_num, gs_dep_date,m.mem_name ,m.mem_hp,gs_dep_history,gs_state,gs_pay_amount,gs_account_due,gs_ref_amount,gs_billing_person,gs_pay_method
+              from GYM_SALES gs, member m, TIC_PURCHASE tp
+              where GS.GS_DEP_MEM = M.mem_num and M.MEM_NUM = TP.MEM_NUM and gs.gs_public_private = 1 
+              and GS.GS_STATE in ('이용중', '만료') and replace(GS.GS_DEP_DATE,'/','') between to_number(substr(replace(#{hap},'-',''),1,8)) 
+              and to_number(substr(replace(#{hap},'-',''),10,17))
+              order by  replace(GS.GS_DEP_DATE,'/','') ) a
+         <if test = 'search == "결제내역"'>
+            where gs_dep_history like #{searchText}||'%'         
+         </if>
+         <if test = 'search == "구매회원"'>
+            where MEM_NAME like '%'||#{searchText}||'%' 
+         </if>
+         order by replace(GS_DEP_DATE,'/','') desc
+   </select>   
+   <!-- 3page 페이지네이션 count값 가져오기-->
+   <select id="getCount" parameterType="map" resultType="int">
+      select nvl(max(rownum),0) as rowmax
+      from (select gs_dep_num,gs_dep_date,gs_pay_amount,gs_account_due,gs_ref_amount,gs_dep_mem
+          ,m.mem_hp,gs_dep_history,gs_state,GS.GS_NEWANDREPAY,gs_billing_person
+      from GYM_SALES gs, member m, TIC_PURCHASE tp
+      where GS.GS_DEP_MEM = M.mem_num and M.MEM_NUM = TP.MEM_NUM and gs.gs_public_private = 1
+      and replace(GS.GS_DEP_DATE,'/','') between to_number(substr(replace(#{hap},'-',''),1,8)) and to_number(substr(replace(#{hap},'-',''),10,17))
+      order by gs_dep_num) a      
+   </select>   
+   <!--3page 총 건수, 총매출, 총 회원수 .. -->
+   <select id="privatehap" parameterType="map" resultType="map">
+      select  count(gs_dep_num) as num, sum(gs_pay_amount) as amount, count(distinct m.mem_num) as mem
+      from GYM_SALES gs, member m
+      where GS.GS_DEP_MEM = M.mem_num and gs.gs_public_private = 1 and GS.GS_STATE in ('이용중', '만료') 
+      and replace(GS.GS_DEP_DATE,'/','') between to_number(substr(replace(#{hap},'-',''),1,8)) and to_number(substr(replace(#{hap},'-',''),10,17))   
+   </select>
+   <!--3page 여자 -->
+   <select id="privategender" parameterType="map" resultType="map">
+      select count(distinct mem_num) as count
+      from GYM_SALES gs, member m2
+      where GS.GS_DEP_MEM = M2.mem_num and mem_gender = '여자'
+      and gs.gs_public_private = 1 and GS.GS_STATE in ('이용중', '만료')
+      and replace(GS.GS_DEP_DATE,'/','') between to_number(substr(replace(#{hap},'-',''),1,8)) and to_number(substr(replace(#{hap},'-',''),10,17))
+   </select>
+   <!--3page 남자 .. -->
+   <select id="privategender2" parameterType="map" resultType="map">
+      select count(distinct mem_num) as count
+      from GYM_SALES gs, member m2
+      where GS.GS_DEP_MEM = M2.mem_num and mem_gender = '남자'
+      and gs.gs_public_private = 1 and GS.GS_STATE in ('이용중', '만료')
+      and replace(GS.GS_DEP_DATE,'/','') between to_number(substr(replace(#{hap},'-',''),1,8)) and to_number(substr(replace(#{hap},'-',''),10,17))
+   </select>
+   <!--4page 그룹레슨 통계  -->
+   <select id="publicProg" parameterType="map" resultType="map">
+        select rownum,gs_dep_date,mem_name ,mem_hp,gs_dep_history,gs_state
+              ,gs_pay_amount,gs_account_due,gs_ref_amount,gs_billing_person,gs_pay_method
+      from ( select distinct gs_dep_num, gs_dep_date,m.mem_name ,m.mem_hp,gs_dep_history,gs_state,gs_pay_amount,gs_account_due,gs_ref_amount,gs_billing_person,gs_pay_method
+              from GYM_SALES gs, member m, TIC_PURCHASE tp
+              where GS.GS_DEP_MEM = M.mem_num and M.MEM_NUM = TP.MEM_NUM and gs.gs_public_private = 2 
+              and GS.GS_STATE in ('이용중', '만료') and replace(GS.GS_DEP_DATE,'/','') between to_number(substr(replace(#{hap},'-',''),1,8)) 
+              and to_number(substr(replace(#{hap},'-',''),10,17))
+              order by  replace(GS.GS_DEP_DATE,'/','') ) a   
+        <if test = 'search == "결제내역"'>
+            where gs_dep_history like #{searchText}||'%'         
+         </if>
+         <if test = 'search == "구매회원"'>
+            where MEM_NAME like '%'||#{searchText}||'%' 
+         </if>
+         order by replace(GS_DEP_DATE,'/','') desc
+   </select>      
+   <!--4page 총 건수, 총매출, 총 회원수 .. 평균 강의듣는 사람숫자??-->
+   <select id="publichap" parameterType="map" resultType="map">
+      select  count(gs_dep_num) as num, sum(gs_pay_amount) as amount, count(distinct m.mem_num) as mem
+      from GYM_SALES gs, member m
+      where GS.GS_DEP_MEM = M.mem_num and gs.gs_public_private = 2 and GS.GS_STATE in ('이용중', '만료')
+      and replace(GS.GS_DEP_DATE,'/','') between to_number(substr(replace(#{hap},'-',''),1,8)) and to_number(substr(replace(#{hap},'-',''),10,17)) 
+   </select>
+   <!--4page 여자 -->
+   <select id="publicgender" parameterType="map" resultType="map">
+      select count(mem_num) as count
         from GYM_SALES gs, member m2
         where GS.GS_DEP_MEM = M2.mem_num and mem_gender = '여자'
         and gs.gs_public_private = 2 and GS.GS_STATE in ('이용중', '만료')
-	</select>
-	<!--4page 남자 .. -->
-	<select id="publicgender2" parameterType="String" resultType="map">
-		select count(mem_num) as count
+        and replace(GS.GS_DEP_DATE,'/','') between to_number(substr(replace(#{hap},'-',''),1,8)) and to_number(substr(replace(#{hap},'-',''),10,17))
+   </select>
+   <!--4page 남자 .. -->
+   <select id="publicgender2" parameterType="map" resultType="map">
+      select count(mem_num) as count
         from GYM_SALES gs, member m2
         where GS.GS_DEP_MEM = M2.mem_num and mem_gender = '남자'
         and gs.gs_public_private = 2 and GS.GS_STATE in ('이용중', '만료')
-	</select>
-<!--   ======================= 수근끝 ================================== -->	
-
+        and replace(GS.GS_DEP_DATE,'/','') between to_number(substr(replace(#{hap},'-',''),1,8)) and to_number(substr(replace(#{hap},'-',''),10,17))
+   </select>
+   <!--   ======================= 수근끝 ================================== -->
 <!--==========================================================[[민지 시작 ]]===========================================================  -->
 	<insert id="pfIns" parameterType="map">
 		INSERT INTO TIC_PURCHASE(TICP_NUM,
@@ -301,16 +425,50 @@
   	</select>
   	
 	 <select id="promobuysel" parameterType="map" resultType="map">
-			select  PROMOTION .PROM_NAME, PROMOTION .PROM_NUM, PROMOTION .PROM_DIS_PRICE,
-	                 PROMOTION .PROM_START_DATE, PROMOTION .PROM_END_DATE,TIC_PURCHASE.TICP_REG_DATE,TIC_PURCHASE.TICP_PAYMENT
-	                 ,MEMBER.MEM_NAME,MEMBER.MEM_NUM
-	                from PROMOTION ,TIC_PURCHASE,MEMBER
-	                where   TIC_PURCHASE.mem_num = MEMBER.mem_num
-	                and  TIC_PURCHASE.PROM_NUM = PROMOTION.PROM_NUM 
-	
+		            select  PROMOTION .PROM_NAME, PROMOTION .PROM_NUM, PROMOTION .PROM_DIS_PRICE,
+                     PROMOTION .PROM_START_DATE, PROMOTION .PROM_END_DATE,TIC_PURCHASE.TICP_REG_DATE,TIC_PURCHASE.TICP_PAYMENT
+                     ,MEMBER.MEM_NAME,MEMBER.MEM_NUM,TIC_PURCHASE.TICP_STATE,TIC_PURCHASE.TICP_NUM,MEMBER.mem_hp,MEMBER.mem_birth
+                    from PROMOTION ,TIC_PURCHASE,MEMBER
+                    where   TIC_PURCHASE.mem_num = MEMBER.mem_num
+                    and  TIC_PURCHASE.PROM_NUM = PROMOTION.PROM_NUM 
 	 </select>
-	<!--==========================================================[[민지 끝 ]]===========================================================  -->
-   
+	 <!-- 양도  -->
+	 <update id="progive" parameterType="map">
+                update tic_purchase set 
+                ticp_state = '양도'
+                , mem_num = #{mem_num}
+                where
+                ticp_num = #{tcip_num}
+	 </update>
+	 <!-- 환불  -->
+	 <update id="proback" parameterType="map">
+	 	 update tic_purchase set 
+                ticp_state = '환불'
+                where
+                ticp_num = #{tcip_num}
+	 </update>
+	 <!-- 지출 분류 콤보박스  -->
+	 <select id="spendingcombo" parameterType="map" resultType="map">
+	 		select EXB_NUM,EXB_KINDS from EX_BREAKDOWN 
+	 </select>
+	 <!-- 지출 분류 콤보박스  -->
+	 <!-- 지출 insert문  -->
+	 <insert id="speningInsert" parameterType="map">
+	 		insert into GYM_EXPENDITURE(GE_BILLING_NUM,GE_DATE,
+	 									GE_BILLER,GE_STORY
+	 									,GE_PRICE,GE_STATE
+	 									,GE_REF_AMOUNT,EXB_NUM
+	 									,GE_PAY_METHOD,GE_TOTPRICE,GE_COUNT)
+                  values(SEQ_SPENDING.NEXTVAL,#{ge_date}
+                  			,#{ge_biller},#{ge_story}
+                  			,#{ge_price},#{ge_state}
+                  			,#{ge_ref_amount},to_number(#{exb_num}),#{ge_pay_method}
+                  			,#{ge_totprice},#{ge_count})
+	 </insert>
+	 
+	 <!-- 지출 insert문  -->
+<!--==========================================================[[민지 끝 ]]===========================================================  -->
+     
   	
 </mapper>
 

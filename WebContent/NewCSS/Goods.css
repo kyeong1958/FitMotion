@@ -1,4 +1,4 @@
-<style>
+@charset "UTF-8";
 /* 홈바  시작 */
 .bar_area {
    padding: 10px 66px;
@@ -296,6 +296,3 @@ input[type="checkbox"]+.all{
 
 
 /* 등록된 카드 끝 */
-
-
-</style>

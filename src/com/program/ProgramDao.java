@@ -19,6 +19,22 @@ public class ProgramDao {
 	public ProgramDao() {
 		sqlSessionFactory = MyBatisCommonFactory.getSqlSessionFactory();
 	}
+	/*=============================[[경애 시작]]========================================================*/
+	public List<Map<String, Object>> ticketList() {
+		List<Map<String, Object>> ticketList = new ArrayList<>();
+		try {
+			sqlSession = sqlSessionFactory.openSession();
+			ticketList = sqlSession.selectList("ticketList");
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			 if(sqlSession!=null) {
+				 	sqlSession.close(); 
+			}
+		}
+		return ticketList;
+	}
+	/*=============================[[경애 끝]]========================================================*/
 	/*=============================[[주노 시작]]========================================================*/
 	public int taINS(Map<String, Object> pMap) {
 		logger.info("이용권등록입력 Dao 호출 성공");
@@ -98,5 +114,76 @@ public class ProgramDao {
 		}
 		return proList;
 	}
+	public int proIns(Map<String, Object> pMap) {
+		logger.info("이용권등록입력 Dao 호출 성공");
+		int result = 0;
+		try {
+			sqlSession = sqlSessionFactory.openSession();
+			result = sqlSession.update("proIns", pMap);	
+			logger.info(pMap);
+			logger.info(result);
+			logger.info(pMap);
+			logger.info(pMap.size());
+			sqlSession.commit();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if(sqlSession!=null) {
+				sqlSession.close(); 
+			}
+		}
+		return result; 
+	}
+	public Map<String, Object> probuyDTL(Map<String, Object> pMap) {
+		Map<String,Object> rMap = new HashMap<>();
+		   try {
+		         sqlSession = sqlSessionFactory.openSession();
+		          rMap = sqlSession.selectOne("probuydetail",pMap);
+		          logger.info(rMap);
+		          logger.info(rMap.size()); 
+		      } catch (Exception e) {
+		         e.printStackTrace();
+		      } finally {
+		         if(sqlSession!=null) {
+		            sqlSession.close(); 
+		         }
+		         
+		      }
+		      return rMap;
+	}
+	public void prodelete(Map<String, Object> pMap) {
+		try {
+			sqlSession = sqlSessionFactory.openSession();
+			sqlSession.selectOne("prodelete",pMap);
+			logger.info(pMap);
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if(sqlSession!=null) {
+				sqlSession.close(); 
+			}
+			
+		}
+		
+	}
+	
+	public int probuy(Map<String, Object> pMap) {
+		int result = 0;
+		logger.info("Dao");
+		pMap.put("result_value", "inputValue");
+		try {
+			sqlSession = sqlSessionFactory.openSession();
+			logger.info(pMap);
+			 result = sqlSession.update("probuyinsert",pMap);
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if(sqlSession!=null) {
+				sqlSession.close(); 
+			}
+		}
+		return result;
+	}
 	/*=============================[[민지 끝]]========================================================*/
+
 }

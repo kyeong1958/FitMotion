@@ -1,5 +1,6 @@
 package com.program;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -12,6 +13,13 @@ public class ProgramLogic {
 	public ProgramLogic () {
 		programDao = new ProgramDao();
 	}
+	/*====================================[[경애 시작 ]]=================================*/
+	public List<Map<String, Object>> ticketList() {
+		List<Map<String, Object>> ticketList = new ArrayList<>();
+		ticketList = programDao.ticketList();
+		return ticketList;
+	}
+	/*====================================[[경애 끝 ]]=================================*/
 	/*====================================[[주노 시작 ]]=================================*/
 	public int taINS(Map<String, Object> pMap) {
 		logger.info("이용권등록입력 Logic 호출 성공");
@@ -41,5 +49,29 @@ public class ProgramLogic {
 		logger.info("proList"+proList.size());
 		return proList;
 	}
-	/*====================================[[민지끝 ]]=================================*/
+	public int proIns(Map<String, Object> pMap) {
+		int result = 0;
+		result = programDao.proIns(pMap);
+		return result;
+	}
+	public Map<String, Object> probuyDTL(Map<String, Object> pMap) {
+		logger.info("회원등록상세보기로직");
+	      Map<String, Object> rMap = new HashMap<>();
+	      rMap = programDao.probuyDTL(pMap);
+		return rMap;
+	}
+	public void prodelete(Map<String, Object> pMap) {
+		programDao.prodelete(pMap);
+		logger.info(pMap);
+		
+	}
+	public int probuy(Map<String, Object> pMap) {
+		int result =0;
+		logger.info(pMap);
+		result = programDao.probuy(pMap);
+		logger.info(result);
+		return result;
+	}
+	
 }
+	/*====================================[[민지끝 ]]=================================*/

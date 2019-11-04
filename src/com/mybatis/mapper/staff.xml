@@ -2,9 +2,25 @@
 <!DOCTYPE mapper     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.mybatis.mapper.StaffMapper">
 <!-- 주노랑 이관완료 -->
-   <select id="test6">
-      SELECT 1 FROM dual
-   </select>
+
+<!--========================================[[ 경애 시작 ]]=========================================================  -->
+<!-- 직원별 정산 페이지 -->
+	<resultMap id="staffpi" type="map"/>
+	<resultMap id="personallesson" type="map"/>
+	<resultMap id="grouplesson" type="map"/>
+	<select id="staffSalaryDetail" parameterType="map" statementType="CALLABLE">
+		{call proc_staffsalarydetail(
+						 #{login_id, mode=IN, jdbcType=VARCHAR, javaType=java.lang.String}
+					   , #{todate, mode=IN, jdbcType=VARCHAR, javaType=java.lang.String}
+				       , #{sp, mode=OUT, jdbcType=CURSOR, javaType=java.sql.ResultSet, resultMap=staffpi}
+				       , #{pl, mode=OUT, jdbcType=CURSOR, javaType=java.sql.ResultSet, resultMap=personallesson}
+					   , #{gl, mode=OUT, jdbcType=CURSOR, javaType=java.sql.ResultSet, resultMap=grouplesson}
+				      
+		)}
+	</select>
+<!--========================================[[ 경애 끝 ]]=========================================================  -->
+   
+   
    <!--========================================[[민지 xml 시작 ]]=========================================================  -->
    <insert id="Staffinsert" parameterType="map">
       insert into staff(staff_id,staff_name,staff_gender,staff_hp,staff_introduce
@@ -24,12 +40,7 @@
               <if test=' keyword != "" and keyword != null '>
                     AND STAFF_NAME LIKE '%'||#{keyword}||'%'
                </if>
-             <!--  <if test=' keyword != "" and keyword != null '>
-                    AND STAFF_HP LIKE '%'||#{keyword}||'%'
-               </if>
-              <if test=' keyword != "" and keyword != null '>
-                    AND STAFF_BIRTH LIKE '%'||#{keyword}||'%'
-               </if> -->
+
    </select>
    <select id="rankname" parameterType="map" resultType="map">
    			select rank_name from rank 
@@ -57,14 +68,94 @@
 	 		pi_group_pay = #{pi_group_pay}
 	  where	pi_num = #{pi_num}
 	</update>
-		<select id="staffSerch" parameterType="map" resultType="map">  
-       select staff_name,staff_hp,staff_birth
-                        from staff
-              where 1 =1 
-              <if test="keyword!=null">
-              AND staff_name LIKE '%'||#{keyword}||'%'
-              </if>
+<!--===================================2019-10-30추가=============================================================  -->
+	<select id="todaypro" parameterType="map" resultType="map">	
+			select CA.APPLI_NUM ,CA.APPLI_DATE ,ca.appli_start_time, ca.pro_place, m.mem_name, TP.PROM_NUM
+				,P.PRO_NAME ,P.PRO_LIMIT_PEOPLE
+				from class_application ca, member m, tic_purchase tp, promotion pm, promotion_prog pp, program p
+				where CA.MEM_NUM = M.MEM_NUM and M.MEM_NUM = TP.MEM_NUM
+				and nvl(TP.PROM_NUM,0) <![CDATA[>]]> 0 and TP.PROM_NUM = PM.PROM_NUM
+				and PM.PROM_NUM = PP.PROM_NUM and PP.PRO_NUM = P.PRO_NUM and P.STAFF_ID = CA.STAFF_ID
+				and substr(replace(ca.appli_date,'/',''),3,6) = substr(replace(sysdate,'/',''),0,6)
+				and ca.staff_id = #{staff_id}
+				order by CA.APPLI_NUM						
 	</select>
+	
+	
+	<select id="todaytic" parameterType="map" resultType="map">	
+				select CA.APPLI_NUM ,CA.APPLI_DATE ,ca.appli_start_time, ca.pro_place,m.mem_name, TP.TICKET_NUM
+				,P.PRO_NAME ,P.PRO_LIMIT_PEOPLE, CA.STAFF_ID
+				from class_application ca, member m, tic_purchase tp, ticket t, program p
+				where CA.MEM_NUM = M.MEM_NUM and M.MEM_NUM = TP.MEM_NUM
+				and nvl(TP.TICKET_NUM,0) <![CDATA[>]]> 0 and TP.TICKET_NUM = T.TICKET_NUM
+				and T.TICKET_NUM = P.TICKET_NUM and P.STAFF_ID = CA.STAFF_ID
+				and substr(replace(ca.appli_date,'/',''),3,6) = substr(replace(sysdate,'/',''),0,6)
+				and ca.staff_id = #{staff_id}
+				order by CA.APPLI_NUM
+				
+				
+	</select>
+	
+	<select id="programgroup" parameterType="map" resultType="map">
+		select m.mem_name,P.PRO_NAME , p.STAFF_ID
+		 ,m.mem_hp,m.mem_gender,A.ATT_CHECK, CA.APPLI_NUM,p.PRO_LIMIT_PEOPLE
+		from member m,tic_purchase tp, ticket t, program p,CLASS_APPLICATION ca,ATTENDANCE a
+		where M.MEM_NUM = TP.MEM_NUM
+		and TP.TICKET_NUM = T.TICKET_NUM
+		and T.TICKET_NUM = P.TICKET_NUM  
+		and CA.MEM_NUM = M.MEM_NUM
+		and CA.ATT_NUM =A.ATT_NUM
+		and nvl(p.PRO_LIMIT_PEOPLE,0)  <![CDATA[>]]> 1 
+		and p.staff_id = #{staff_id}
+	</select>
+	
+	<select id="promogroup" parameterType="map" resultType="map">
+		select m.mem_name,P.PRO_NAME , p.STAFF_ID
+		 ,m.mem_hp,m.mem_gender,A.ATT_CHECK, CA.APPLI_NUM, p.PRO_LIMIT_PEOPLE
+		from member m,tic_purchase tp, promotion pm, promotion_prog pp, program p,CLASS_APPLICATION ca,ATTENDANCE a
+		where M.MEM_NUM = TP.MEM_NUM
+		and nvl(TP.PROM_NUM,0) > 0 and TP.PROM_NUM = PM.PROM_NUM
+		and PM.PROM_NUM = PP.PROM_NUM and PP.PRO_NUM = P.PRO_NUM 
+		and CA.MEM_NUM = M.MEM_NUM
+		and CA.ATT_NUM =A.ATT_NUM
+		and nvl(p.PRO_LIMIT_PEOPLE,0) <![CDATA[>]]> 1 
+		and p.staff_id = #{staff_id}
+	</select>
+		
+		
+	<select id="programsolo" parameterType="map" resultType="map">
+         select m.mem_name,P.PRO_NAME , p.STAFF_ID
+		 ,m.mem_hp,m.mem_gender,A.ATT_CHECK, CA.APPLI_NUM
+		from member m,tic_purchase tp, ticket t, program p,CLASS_APPLICATION ca,ATTENDANCE a
+		where M.MEM_NUM = TP.MEM_NUM
+		and TP.TICKET_NUM = T.TICKET_NUM
+		and T.TICKET_NUM = P.TICKET_NUM  
+		and CA.MEM_NUM = M.MEM_NUM
+		and CA.ATT_NUM =A.ATT_NUM
+		and nvl(p.PRO_LIMIT_PEOPLE,0) <![CDATA[<]]> 1 
+		and p.staff_id = #{staff_id}
+	</select>
+	
+	<select id="promosolo" parameterType="map" resultType="map">
+         select m.mem_name,P.PRO_NAME , p.STAFF_ID
+		 ,m.mem_hp,m.mem_gender,A.ATT_CHECK, CA.APPLI_NUM
+		from member m,tic_purchase tp, promotion pm, promotion_prog pp, program p,CLASS_APPLICATION ca,ATTENDANCE a
+		where M.MEM_NUM = TP.MEM_NUM
+		and nvl(TP.PROM_NUM,0) > 0 and TP.PROM_NUM = PM.PROM_NUM
+		and PM.PROM_NUM = PP.PROM_NUM and PP.PRO_NUM = P.PRO_NUM 
+		and CA.MEM_NUM = M.MEM_NUM
+		and CA.ATT_NUM =A.ATT_NUM
+		and nvl(p.PRO_LIMIT_PEOPLE,0)  <![CDATA[<]]> 1 
+		and p.staff_id = #{staff_id}
+	</select>
+	
+	   <select id="rankdetSEL" parameterType="map" resultType="map">  
+            SELECT staff_name, staff_hp, staff_birth, rank_name 
+               FROM RANK, STAFF, PERSNEL_INFO 
+            WHERE PERSNEL_INFO.RANK_NUM = RANK.RANK_NUM
+            AND STAFF.PI_NUM = PERSNEL_INFO.PI_NUM
+            AND RANK.RANK_NAME = #{rank_name}
+      </select>
    <!--========================================[[민지 xml 끝]]=========================================================  -->
 </mapper> 
  

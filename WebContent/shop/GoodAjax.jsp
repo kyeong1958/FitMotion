@@ -3,35 +3,24 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
-		
-
-			List<Map<String,Object>> gdSelList = (List<Map<String,Object>>)request.getAttribute("gdSelList");
-			int size=0;
-			if(gdSelList!=null){
-			size = gdSelList.size();
-				}
-			
-
-
+         List<Map<String,Object>> gdSelList = (List<Map<String,Object>>)request.getAttribute("gdSelList");
+         int size=0;
+         if(gdSelList!=null){
+         size = gdSelList.size();
+            }
 %>
-
-			<%
-							for(int i=0; i<size; i++){
-									Map<String,Object> rMap = gdSelList.get(i);
-			%>	
-							
-		
-   			 <div class="row" id="meminfo" >
-	 			<div class="row"  >
+         <%
+                     for(int i=0; i<size; i++){
+                           Map<String,Object> rMap = gdSelList.get(i);
+         %>   
+             <div class="row" id="meminfo" >
+             <div class="row"  >
                      <div class="row meminfo-top">
                         <div class="col-sm-3 col-lg-3" onclick="'<%=rMap.get("GO_NUM") %>','<%=rMap.get("PURCHASE_DATE") %>',
                         '<%=rMap.get("GO_NAME") %>','<%=rMap.get("GO_TYPE") %>',
                         '<%=rMap.get("PURCHASE_PRICE") %>','<%=rMap.get("GO_STOCK") %>')">
                            <input type="checkbox" id="checkbox_id" name="check"/>
-                           
                            <span><%=rMap.get("GO_NUM") %></span>
-                           
-   
                         </div>
                         <div class="col-sm-5 col-lg-5"></div>
                         <div class="col-sm-4 col-lg-4">
@@ -39,8 +28,6 @@
                            <div class="col-sm-7 col-lg-7" ><%=rMap.get("PURCHASE_DATE") %></div>
                         </div>
                      </div>
-                     
-                     
                      <div class="row meminfo-second">
                                  <table class="meminfo-table">
                            <tr>
@@ -60,6 +47,6 @@
                    </div>
                   </div>
                 <%
-				} 
-				%>
+            } 
+            %>
                 

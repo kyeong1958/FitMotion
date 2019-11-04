@@ -17,6 +17,7 @@ body{
 	padding-left:0%;
 }
 #sidebar{
+    margin-top: 60px;
 	background-color: #42485A;
     font-size: 18px;
     color: white;
@@ -48,6 +49,7 @@ body{
 
 .sidemenu{
 	height:50px;
+	cursor: pointer;
 }
 .sidemenutitle {
     height: 50px;
@@ -55,6 +57,7 @@ body{
     padding: 6% 15%;
     border-top: 1px solid;
     text-align: left;
+    cursor: pointer;
 }
 .titleservice{
 	border-bottom: 1px solid;

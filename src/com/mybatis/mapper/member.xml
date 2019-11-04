@@ -10,50 +10,135 @@
 	</select>
 		<!--==================================[[민지 시작]]==============================================================  -->
 	<insert id="MemModal" parameterType="map">
-			insert into Member(mem_num,mem_name,mem_birth,mem_gender,mem_address,mem_hp,
-                                    mem_registration_date,mem_manager,mem_app_availability,mem_barcode_num
-                                      ,mem_memo,mem_pw,mem_id,mem_image)
-                                   values(#{mem_num},#{mem_name},#{mem_birth},#{mem_gender},#{mem_address},
-                                   #{mem_hp},#{mem_registration_date},#{mem_manager},#{mem_app_availability},#{mem_barcode_num},
-                                   #{mem_memo},'abc','1234','png')
+	INSERT INTO Member(mem_num, mem_name, mem_birth, mem_gender,mem_postal_code, mem_address, mem_hp,
+                                    mem_registration_date, mem_app_availability, mem_memo )
+	VALUES( seq_memnum.nextval, #{mem_name}, #{mem_birth}, #{mem_gender}, #{zipCode},#{mem_address}||#{mem_addressdetail},
+                              #{mem_hp}, #{mem_registration_date},#{mem_app_availability}, #{mem_memo})
 	</insert>
    <update  id="MemUpd" parameterType="map">
          UPDATE member
-               SET mem_name = #{mem_name},
-                   mem_birth = #{mem_birth},
-                   mem_gender = #{mem_gender},
-                     mem_address =#{mem_address},
-                   mem_hp = #{mem_hp},
-                   mem_registration_date = #{mem_registration_date},
-                   mem_manager = #{mem_manager},
-                   mem_app_availability = #{mem_app_availability},
-                   mem_barcode_num = #{mem_barcode_num},
-                   mem_memo = #{mem_memo},
-                   mem_pw = #{mem_pw},
-                   mem_id = #{mem_id},
-             WHERE mem_num = #{mem_num}      
+            SET mem_name = #{mem_name},
+                mem_birth = #{mem_birth},
+                mem_gender = #{mem_gender},
+                  mem_address =#{mem_address},
+                mem_hp = #{mem_hp},
+                mem_registration_date = #{mem_registration_date},
+                mem_manager = #{mem_manager},
+                mem_app_availability = #{mem_app_availability},
+                mem_barcode_num = #{mem_barcode_num},
+                mem_memo = #{mem_memo},
+                mem_pw = #{mem_pw},
+                mem_id = #{mem_id},
+          WHERE mem_num = #{mem_num}      
    </update>
-   <select id="MemSel" parameterType="map" resultType="map">
+   <select id="MemSelkek" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+         select mem_num,mem_name,mem_birth
+                       ,mem_gender,mem_address
+                               ,mem_hp,mem_registration_date,mem_manager,mem_app_availability
+                               ,mem_barcode_num,mem_memo,mem_id,mem_pw
+                                           from Member
+                    where 1 = 1 
+            <if test=' keyword != "" and keyword != null'>
+              AND mem_name LIKE '%'||#{keyword}||'%'
+              </if>
+      
+                    
+   </select>
+
+   
+   
+   <select id="MemSel" parameterType="java.util.HashMap" resultType="java.util.HashMap">
          select rownum rno,mem_num,mem_name,mem_birth
                        ,mem_gender,mem_address
                                ,mem_hp,mem_registration_date,mem_manager,mem_app_availability
                                ,mem_barcode_num,mem_memo,mem_id,mem_pw
                                            from Member
-                    order by rno asc
+                    order by rno asc                
+   </select>
+   <select id="MemSelTable" parameterType="string" resultType="map">
+         SELECT m.mem_num, mem_name, mem_birth, mem_hp, ticp_num, ticket_name, ticp_payment, ticp_reg_date
+	       FROM tic_purchase tp, ticket t, member m           
+	      WHERE ticp_num IN ( SELECT max(ticp_num)
+	                             FROM Member m, tic_purchase tp
+	                            WHERE m.mem_num = tp.mem_num
+	                           GROUP BY m.mem_num)  
+	        AND t.ticket_num = tp.ticket_num      
+	        AND TP.MEM_NUM = m.mem_num 
+	        AND mem_name LIKE '%'||#{mem_name}||'%'
+	      UNION 
+	     SELECT m.mem_num, mem_name, mem_birth, mem_hp, ticp_num, prom_name, ticp_payment, ticp_reg_date
+	       FROM tic_purchase tp, promotion p, member m           
+	      WHERE ticp_num IN ( SELECT max(ticp_num)
+	                             FROM Member m, tic_purchase tp
+	                            WHERE m.mem_num = tp.mem_num
+	                           GROUP BY m.mem_num)  
+	        AND tp.prom_num = p.prom_num      
+	        AND TP.MEM_NUM = m.mem_num   
+	        AND mem_name LIKE '%'||#{mem_name}||'%'
+	   ORDER BY mem_num
+	   
    </select>
    <delete id="MemDEL" parameterType="map">
       delete from member where mem_num=#{mem_num}
    </delete>
+   
+
+
+	<!--===================================2019-10-30 추가 ==========================================================  -->
+	   <!-- 성별 검색조건   -->
+   <select id="memgender" parameterType="map" resultType="map">
+   			 select mem_num,mem_name,mem_birth
+                       ,mem_gender,mem_address
+                               ,mem_hp,mem_registration_date,mem_manager,mem_app_availability
+                               ,mem_barcode_num,mem_memo,mem_id,mem_pw
+                                           from Member
+                                        where mem_gender = #{mem_gender}
+   
+   </select>
+
+   <select id="memprobil" parameterType="map" resultType="map">
+           select 
+                   promotion.PROM_NAME,promotion.PROM_NUM,promotion.PROM_START_DATE,promotion.PROM_END_DATE     
+                 ,member.MEM_NUM,tic_purchase.TICP_STATE
+                from promotion, tic_purchase, member
+                where 
+                 promotion.PROM_NUM = tic_purchase.PROM_NUM
+                and tic_purchase.MEM_NUM = member.MEM_NUM
+                and member.mem_num = #{mem_num}         		  
+   </select>
+   
+  <select id="memtickbil"  parameterType="map" resultType="map">
+  	    select 
+        tic_purchase.TICP_REG_DATE,ticket.TICKET_NAME,ticket.TICKET_NUM
+        ,tic_purchase.TICP_STATE
+            from ticket, tic_purchase, member
+            where ticket.TICKET_NUM = tic_purchase.TICKET_NUM
+            and member.MEM_NUM = tic_purchase.MEM_NUM
+            and member.MEM_NUM =  #{mem_num}
+  </select> 
+  <!-- 회원 입장관리  -->
+   <select id="memAttSEL" parameterType="map" resultType="map">
+         select ADMISSION_HISTORY.AH_DATE, ADMISSION_HISTORY.AH_ENTRY_TIME, ADMISSION_HISTORY.AH_EXIT_TIME
+                ,member.mem_num
+          from ADMISSION_HISTORY , MEMBER
+         where ADMISSION_HISTORY.mem_num = MEMBER.mem_num
+         and MEMBER.mem_num = #{mem_num}
+   </select>
+
 	<!--==================================[[민지 끝]]==============================================================  -->
 	<!--========================================[[주노시작 ]]===============================================================  -->
 	<select id="memDET" parameterType="map" resultType="map">
-  		 select MEMBER.MEM_BARCODE_NUM,MEMBER.MEM_ID , MEMBER.MEM_ADDRESS, MEMBER.MEM_APP_AVAILABILITY
-    		  , MEMBER.MEM_BIRTH, MEMBER.MEM_GENDER, MEMBER.MEM_HP, MEMBER.MEM_IMAGE, MEMBER.MEM_MANAGER
-    		  , MEMBER.MEM_MEMO, MEMBER.MEM_NAME, MEMBER.MEM_NUM, MEMBER.MEM_PW, MEMBER.MEM_REGISTRATION_DATE
-     		  , LOCKER .LOCKER_NUM  from member,LOCKER_RENTAL,LOCKER  
-		 where MEMBER.MEM_NUM = LOCKER_RENTAL.MEM_NUM 
-		 AND LOCKER_RENTAL.LOCKER_NUM = LOCKER.LOCKER_NUM 
-		 AND MEMBER.MEM_NUM = #{mem_num}
+  		select  MEMBER.MEM_BARCODE_NUM,MEMBER.MEM_ID, MEMBER.MEM_ADDRESS, MEMBER.MEM_APP_AVAILABILITY
+            , MEMBER.MEM_BIRTH, MEMBER.MEM_GENDER, MEMBER.MEM_HP, MEMBER.MEM_IMAGE, MEMBER.MEM_MANAGER
+            , MEMBER.MEM_MEMO, MEMBER.MEM_NAME, MEMBER.MEM_NUM, MEMBER.MEM_PW, MEMBER.MEM_REGISTRATION_DATE
+             , LOCKER.LOCKER_NUM  
+       from member,LOCKER,(select LOCKER_NUM,MEM_NUM
+                           from locker_rental
+                           where to_number(substr(replace(lrent_end_day,'/',''),3,6)) > 
+                           substr(replace(sysdate,'/',''),0,8)) LOC   
+       where MEMBER.MEM_NUM = LOC.MEM_NUM 
+       AND LOC.LOCKER_NUM = LOCKER.LOCKER_NUM 
+       AND MEMBER.MEM_NUM = #{mem_num}
                            
    </select>
    
@@ -75,6 +160,7 @@
    </update>
 	
 <!--========================================[[주노끝 ]]===============================================================  -->
+
 	
 </mapper> 
  

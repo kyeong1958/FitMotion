@@ -22,9 +22,17 @@ public class ScheduleDao {
 /////////////////////////////// [[ 경애  ]] /////////////////////////////////////
 //예약관리에서 콤보박스에 해당하는 값 가져오기 select
 	public Map<String, Object> scheduleModal(Map<String, Object> scheduleModal) {
-		/* scheduleModal = new HashMap<>(); */
+		if(scheduleModal.get("mem_num") == null) {
+			logger.info("mem_num이 null");
+			scheduleModal.put("mem_num","mem_num");
+		}
+		if(scheduleModal.get("login_id") == null) {
+			logger.info("login_id가 null");
+			scheduleModal.put("login_id","login_id");
+		}
 		try {
 			sqlSession = sqlSessionFactory.openSession();
+			logger.info(scheduleModal);
 		    sqlSession.selectOne("scheduleModal",scheduleModal);
 			logger.info("scheduleModal2 : "+scheduleModal.keySet().toArray().length);
 		} catch (Exception e) {
@@ -59,14 +67,12 @@ public class ScheduleDao {
 		return result;
 	}
 	//스케줄내역 출력
-	public List<Map<String, Object>> scheduleList() {
+	public List<Map<String, Object>> scheduleList(String login_id) {
 		List<Map<String, Object>> scheduleList = new ArrayList<Map<String,Object>>();
 		try {
 			sqlSession = sqlSessionFactory.openSession();
-			scheduleList = sqlSession.selectList("scheduleList");
-//			for(int i=0; i<scheduleList.size();i++) {
-//				logger.info(scheduleList.get(i));
-//			}
+			scheduleList = sqlSession.selectList("scheduleList",login_id);
+				logger.info(scheduleList.size());
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -114,6 +120,36 @@ public class ScheduleDao {
 			}
 		}
 		return result;
+	}
+	public List<Map<String, Object>> staffList() {
+		List<Map<String, Object>> staffList = new ArrayList<Map<String,Object>>();
+		try {
+			sqlSession = sqlSessionFactory.openSession();
+			staffList = sqlSession.selectList("staffList");
+			sqlSession.commit();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if(sqlSession != null) {
+				sqlSession.close();
+			}
+		}
+		return staffList;
+	}
+//직원상세정보테이블에서 직원스케줄 가져오기 
+	public List<Map<String, Object>> reservation(Map<String, Object> pMap) {
+		List<Map<String, Object>> reservation = new ArrayList<>();
+		try {
+			sqlSession = sqlSessionFactory.openSession();
+			reservation = sqlSession.selectList("reservation",pMap);
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if(sqlSession != null) {
+				sqlSession.close();
+			}
+		}
+		return reservation;
 	}
 	
 	/////////////////////////////// [[ 경애  ]] /////////////////////////////////////

@@ -33,9 +33,9 @@ public class ScheduleLogic {
 		result = scheduleDao.reservationINS(pMap);
 		return result;
 	}
-	public List<Map<String, Object>> scheduleList() {
+	public List<Map<String, Object>> scheduleList(String login_id) {
 		List<Map<String, Object>> scheduleList = new ArrayList<Map<String,Object>>();
-		scheduleList = scheduleDao.scheduleList();
+		scheduleList = scheduleDao.scheduleList(login_id);
 		return scheduleList;
 	}
 	public int caUPD(Map<String,Object> attendMap ) {
@@ -53,6 +53,16 @@ public class ScheduleLogic {
 		pMap.put("appli_end_time",endtime);
 		result = scheduleDao.reservationUPD(pMap);
 		return result;
+	}
+	public List<Map<String, Object>> staffList() {
+		List<Map<String, Object>> staffList = new ArrayList<Map<String,Object>>();
+		staffList = scheduleDao.staffList();
+		return staffList;
+	}
+	public List<Map<String, Object>> reservation(Map<String, Object> pMap) {
+		 List<Map<String, Object>> reservation = new ArrayList<>();
+		 reservation = scheduleDao.reservation(pMap);
+		return reservation;
 	}
 
 

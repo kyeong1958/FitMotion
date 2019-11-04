@@ -42,7 +42,7 @@ public class MemberController implements Controller {
 			mav.addObject("제발", "잘됨??");
 		}
 	/////////////////////////////// [[ 경애  ]] /////////////////////////////////////
-		//예약관리의 회원검색모달창
+		//스케줄관리의 회원검색모달창
 		else if("memInfoList".equals(crud)) {
 			logger.info("memberSearch 호출성공");
 			String mem_name = req.getParameter("mem_name");
@@ -64,6 +64,16 @@ public class MemberController implements Controller {
 			mav.setViewName("/shop/lockMemSearchTable.jsp");
 			mav.addObject("memInfoList", memInfoList);
 		}
+		//매출등록 회원검색
+	      else if("BHMSEL".equals(crud)) {
+				logger.info("회원조회 창 ");
+				List<Map<String,Object>> bhSelList = null;
+				String mem_name = req.getParameter("mem_name").toString();
+				bhSelList = memberLogic.bhmSel(mem_name);
+				mav.addObject("bhSelList", bhSelList);
+				mav.pageMove("forward");
+				mav.setViewName("/account/profitMemSearch.jsp");
+	      }
 	/////////////////////////////// [[ 경애  ]] /////////////////////////////////////
 		/*================================[[민지 Mcontroller 시작 ]]=======================================*/
 		else if("BHINS".equals(crud)) {
@@ -72,29 +82,32 @@ public class MemberController implements Controller {
 			Map<String,Object> pMap = new HashMap<>();
 			HashMapBinder hmb = new HashMapBinder(req);
 			hmb.bindPost(pMap);
-			logger.info(result);
+			logger.info(pMap);
 			result = memberLogic.bhIns(pMap);
+			logger.info(result);
 			mav.pageMove("redirect");
 			mav.setViewName("/member/BHSEL.fm");
 		}
 		else if("BHSEL".equals(crud)) {
 			logger.info("회원조회 창 ");
-			List<Map<String,Object>> bhSelList = null;
-			bhSelList = memberLogic.bhsel();
+			String keyword = req.getParameter("keyword");
+			Map<String,String> pMap = new HashMap<String, String>();
+			pMap.put("keyword", keyword);
+	        List<HashMap> bhSelList = memberLogic.bhsel(pMap); 
 			mav.addObject("bhSelList", bhSelList);
 			mav.pageMove("forward");
 			mav.setViewName("/member/in_005fcard.jsp");
 			
 		}else if("bhUPD".equals(crud)) {
-	         logger.info("기구관리수정");
 	         int result =0;
 	         Map<String,Object> pMap = new HashMap<>();
 	         HashMapBinder hmb = new HashMapBinder(req);
 	         hmb.bindPost(pMap);
+	         pMap.put("mem_num",req.getParameter("mem_num"));
 	         result = memberLogic.bhUPD(pMap);
 	         logger.info(result);
 	         mav.pageMove("forward");
-	         mav.setViewName("/member/memberManagementDetail.fm");
+	         mav.setViewName("/member/memberManagementDetail.jsp");
 	      }
 	      else if("bhDEL".equals(crud)) {
 	         logger.info("회원관리 삭제 ");
@@ -106,14 +119,69 @@ public class MemberController implements Controller {
 	         mav.pageMove("redirect");
 	         mav.setViewName("/member/BHSEL.fm");
 	      }
-	      else if("BHMSEL".equals(crud)) {
-				logger.info("회원조회 창 ");
-				List<Map<String,Object>> bhSelList = null;
-				bhSelList = memberLogic.bhsel();
-				mav.addObject("bhSelList", bhSelList);
-				mav.pageMove("forward");
-				mav.setViewName("/account/profitMemSearch.jsp");
+		
+		//billing 회원 검색
+	      else if("BIMSEL".equals(crud)) {
+	    	  logger.info("회원조회 창 ");
+	    	  List<Map<String,Object>> bhSelList = null;
+	    	  bhSelList = memberLogic.bhsel2();
+	    	  mav.addObject("bhSelList", bhSelList);
+	    	  mav.pageMove("forward");
+	    	  mav.setViewName("/account/BillingHistoryMemberSearch.jsp");
 	      }
+	    //////////////////////////2019-10-30 추가//////////////////////////////////
+		//이용권 내력 프로모션
+	      else if("PROBIL".equals(crud)) {
+	    	  logger.info("탐?");
+	    	  List<Map<String,Object>> probilList = null;
+	    	  Map<String, Object> pMap = new HashMap<>();
+	          pMap.put("mem_num",req.getParameter("mem_num"));
+	          probilList = memberLogic.probil(pMap);
+	          mav.addObject("probilList", probilList);
+	          logger.info(probilList);
+	          mav.pageMove("forward");
+	          mav.setViewName("/member/membil.jsp");
+	    	  
+	      }
+		//이용권 내역 티켓 
+	      else if("TickBIL".equals(crud)) {
+	    	  List<Map<String,Object>> ticketList = null;
+	    	  Map<String, Object> pMap = new HashMap<>();
+	          pMap.put("mem_num",req.getParameter("mem_num"));
+	          ticketList = memberLogic.ticketbil(pMap);
+	          mav.addObject("ticketList", ticketList);
+	          logger.info(ticketList);
+	          mav.pageMove("forward");
+	          mav.setViewName("/member/membil.jsp");
+	    	  
+	      }
+		/* 성별 조건 검색 */
+	      else if("Memgender".equals(crud)) {
+	    	  List<Map<String,Object>> genderList = null;
+	    	  Map<String, Object> pMap = new HashMap<>();
+			  pMap.put("mem_gender",req.getParameter("mem_gender"));
+	          logger.info(pMap);
+	          genderList = memberLogic.Memgender(pMap);
+	          mav.addObject("bhSelList", genderList);
+	          logger.info(pMap);
+	          logger.info(genderList);
+	          mav.pageMove("forward");
+	          mav.setViewName("/member/in_005fcard.jsp");
+	    	  
+	      }
+		/* 이용권 입장 관리 */
+	         else if("memAttSEL".equals(crud)) {
+	               logger.info("멤버출결목록컨트롤 ");
+	               List<Map<String,Object>> mAttSELList = new ArrayList<Map<String,Object>>(); 
+	               Map<String,Object> pMap = new HashMap<String, Object>();
+	               pMap.put("mem_num", req.getParameter("mem_num"));
+	               mAttSELList = memberLogic.memAttSEL(pMap);
+	               mav.addObject("mAttSELList", mAttSELList);
+	               mav.pageMove("forward");
+	               mav.setViewName("/member/MemberAttend.jsp");
+	            }
+	      
+		
 		/*================================[[민지 Mcontroller 끝 ]]=======================================*/
 	      /*=====================================[[주노 시작 ]]====================================*/
 	         else if("bhDET".equals(crud)) {

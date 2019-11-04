@@ -20,7 +20,7 @@
 
 	  <session-config>
 <!-- 이 프로젝트에서 세션타임을 분단위로 정할 수 있다 -->
-		  	<session-timeout>30</session-timeout>
+		  	<session-timeout>150</session-timeout>
 	  </session-config>
 <!-- 커넥션 풀 이름 등록하기 -->
 	 <resource-ref>

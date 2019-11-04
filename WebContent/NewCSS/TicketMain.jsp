@@ -180,7 +180,7 @@ select option {
    padding-top: 10px;   
     width: 26px;
     height: 26px;
-    background: url(../img/icon/btn_view.png) no-repeat center 50% #22B2FB;
+    background: url(../img/btn_view.png) no-repeat center 50% #22B2FB;
     background-size: 14px;
     border-radius: 0 5px 5px 0;
 }
