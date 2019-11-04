@@ -36,7 +36,7 @@
 			,data:formData
 			,url:'/member/bhUPD.fm?mem_num='+mem_num
 			,success:function(data){
-				alert("성공");
+				//alert("성공");
 				//$("#memupdate").html(data);
 			}
 		});  

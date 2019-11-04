@@ -136,6 +136,21 @@ public class ScheduleDao {
 		}
 		return staffList;
 	}
+//직원상세정보테이블에서 직원스케줄 가져오기 
+	public List<Map<String, Object>> reservation(Map<String, Object> pMap) {
+		List<Map<String, Object>> reservation = new ArrayList<>();
+		try {
+			sqlSession = sqlSessionFactory.openSession();
+			reservation = sqlSession.selectList("reservation",pMap);
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if(sqlSession != null) {
+				sqlSession.close();
+			}
+		}
+		return reservation;
+	}
 	
 	/////////////////////////////// [[ 경애  ]] /////////////////////////////////////
 }

@@ -11,7 +11,7 @@
 		$(menu).show();
 	}
 </script>
- <div class="col-lg-1" id="sidebar">
+ <div class="col-lg-1" id="sidebar" style="margin-top: 60px;">
          <div class="row sidemenutitle" onClick="menu('')">
          	<a href="main.jsp?pageChange=../schedule/scheduleweekly.jsp" style="color:white;text-decoration:none">스케줄</a>
          </div>
@@ -57,7 +57,7 @@
          	<a href="main.jsp?pageChange=../account/StatisticsSales2.jsp" style="color:white;text-decoration:none">통계분석</a>
          </div>
          <div class="row sidemenutitle" onClick="menu('.account')">
-         	<a href="main.jsp?pageChange=../account/salesStatement.jsp&menu=.account" style="color:white;text-decoration:none">회계관리</a>
+         	<a href="main.jsp?pageChange=../account/staffSalaryDetail.jsp&menu=.account" style="color:white;text-decoration:none">재무관리</a>
          </div>
          <div class="row account">
 			<div class="row sidemenu" id="allsalesmanagement">

@@ -94,7 +94,7 @@
  
 	$(function(){
 			$("#staffList_combo").change(function(e){
-				alert("변경");
+				//alert("변경");
 				 var staff = $("#staffList_combo").val();
 				$.ajax({
 					url:"/schedule/scheduleList.fm?login_id="+staff
@@ -110,7 +110,7 @@
 /* master일 경우 콤보박스 변경 */
 /* 모달창 */
  	function scheduleModal(time){
-		alert("여기");
+		//alert("여기");
  		/* scheduleModal combobox */
  		if(rank == '1'){
 			$.ajax({
@@ -154,7 +154,7 @@
 /* 모달창 */
 /* 출결사항 */
 	function caUPD(appli_num,att_num){
-		alert(appli_num+", "+att_num);
+		//alert(appli_num+", "+att_num);
 		 $.ajax({
 			url:'/schedule/caUPD.fm?appli_num='+appli_num+'&att_num='+att_num
 			,success:function(data){
@@ -199,14 +199,14 @@
 /* 데이트 박스 */
 /* 수업 예약모달창 */
 	function smreservation(){
-		 alert("smreservation");
+		// alert("smreservation");
 		 var formData = $("#f_sm").serialize();
 		 $.ajax({
 			 method:'get'
 			 ,url:'/schedule/scheduleReservation.fm'
 			 ,data:formData
 			 ,success:function(data){
-				 alert(data);
+				// alert(data);
 				 if(data == '예약불가'){
 					alert('예약된 수업이 존재합니다.');	 
 				 }else{

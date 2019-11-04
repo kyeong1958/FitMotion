@@ -99,40 +99,32 @@ body{
   		  		  				,url:"/staff/TodayTick.fm?staff_id="+staff_id
   		  		  				,success:function(data){
   		  		  					$("#today").html(data);
-  			  		  			}
-  			  		    	  });
   		  					//그룹레슨--프로그램
 	  		  				  $.ajax({
 	  		  		    		  method:"POST"
 	  		  		  				,url:"/staff/Groupclass.fm?staff_id="+staff_id
 	  		  		  				,success:function(data){
 	  		  		  					$("#group").html(data);
-	  			  		  			}
-	  			  		    	  });
   		  						//그룸레슨 - 프로모션
 		  		  				  $.ajax({
 		  		  		    		  method:"POST"
 		  		  		  				,url:"/staff/Groupproclass.fm?staff_id="+staff_id
 		  		  		  				,success:function(data){
 		  		  		  					$("#group").html(data);
-		  			  		  			}
-		  			  		    	  });
   		  					//개인레슨 - 프로그램 
 		  		  				  $.ajax({
 		  		  		    		  method:"POST"
 		  		  		  				,url:"/staff/soloclass.fm?staff_id="+staff_id
 		  		  		  				,success:function(data){
 		  		  		  					$("#solo").html(data);
+  			  		  								}
+  			  		    	 					 });
+	  			  		  						}
+	  			  		    	  			});
+		  			  		  				}
+		  			  		    	 	 });
 		  			  		  			}
 		  			  		    	  });
-	  		  					//개인레슨 - 프로모션
-			  		  				  $.ajax({
-			  		  		    		  method:"POST"
-			  		  		  				,url:"/staff/soloproclass.fm?staff_id="+staff_id
-			  		  		  				,success:function(data){
-			  		  		  					$("#solo").html(data);
-			  			  		  			}
-			  			  		    	  });
 				  		  			}
 				  		    	  });
 					  			}

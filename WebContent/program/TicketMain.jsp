@@ -103,7 +103,7 @@ body{
          <div data-display-container="tickets" style="margin-top: 10px; height: 95%; overflow: hidden; overflow-y: auto;">
             <ul style="list-style: none">
                   <li>
-                     <a  class="pr_btn btn dark"  onClick="mempage('../program/TicketAdd.jsp')" style="height: inherit; text-align: center; padding: 5px;">상품 등록</a>
+                     <a  class="pr_btn btn dark"  onClick="mempage('../program/PromotionAdd.jsp')" style="height: inherit; text-align: center; padding: 5px;">상품 등록</a>
                   </li>
             </ul>
             <div id="pro_rank">

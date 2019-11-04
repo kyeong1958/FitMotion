@@ -131,17 +131,8 @@ function removeComma(str)
 		n = parseInt(str.replace(/,/g,""));
 		return n;
 	}
-	
-	
-	
-	
-	
-	
 	function card(){
-		
-			  g_card = $("#etextname").val(); 
-	
-			//alert(g_card);
+	 	g_card = $("#etextname").val(); 
 		if($("#t_card").text()==""){
  			document.getElementById("t_card").value = g_card;
  			if($("#total_buy").text()==""){
@@ -157,12 +148,9 @@ function removeComma(str)
 		}  
 	 
 	}	
-
-  
  /* 현금 눌렀을때 */
  function money(){ 
 	 g_money = $("#etextname").val(); 
-		
 		//alert(g_card);
 	if($("#t_money").text()==""){
 		document.getElementById("t_money").value = g_money;
@@ -227,7 +215,7 @@ function removeComma(str)
  		formData+="&ticp_pay_period=이체"
  		 }
  		console.log(formData);
- 		alert(formData);
+ 		//alert(formData);
  		 $.ajax({
  			method:"POST"
  			,data:formData

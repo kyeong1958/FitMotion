@@ -223,7 +223,7 @@ commatogeter(document.getElementById("total_buy").value) =
 	 		 else if($("t_fund").val()!=0){
 	 		formData+="&ticp_pay_period=이체"
 	 		 }
-		alert(formData);
+	//	alert(formData);
 		 $.ajax({
 			method:"POST"
 			,data:formData

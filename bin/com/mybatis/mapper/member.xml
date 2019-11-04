@@ -10,28 +10,26 @@
 	</select>
 		<!--==================================[[민지 시작]]==============================================================  -->
 	<insert id="MemModal" parameterType="map">
-			insert into Member(mem_num,mem_name,mem_birth,mem_gender,mem_address,mem_hp,
-                                    mem_registration_date,mem_manager,mem_app_availability,mem_barcode_num
-                                      ,mem_memo,mem_pw,mem_id,mem_image)
-                                   values(#{mem_num},#{mem_name},#{mem_birth},#{mem_gender},#{mem_address},
-                                   #{mem_hp},#{mem_registration_date},#{mem_manager},#{mem_app_availability},#{mem_barcode_num},
-                                   #{mem_memo},'abc','1234','png')
+	INSERT INTO Member(mem_num, mem_name, mem_birth, mem_gender,mem_postal_code, mem_address, mem_hp,
+                                    mem_registration_date, mem_app_availability, mem_memo )
+	VALUES( seq_memnum.nextval, #{mem_name}, #{mem_birth}, #{mem_gender}, #{zipCode},#{mem_address}||#{mem_addressdetail},
+                              #{mem_hp}, #{mem_registration_date},#{mem_app_availability}, #{mem_memo})
 	</insert>
    <update  id="MemUpd" parameterType="map">
          UPDATE member
-               SET mem_name = #{mem_name},
-                   mem_birth = #{mem_birth},
-                   mem_gender = #{mem_gender},
-                     mem_address =#{mem_address},
-                   mem_hp = #{mem_hp},
-                   mem_registration_date = #{mem_registration_date},
-                   mem_manager = #{mem_manager},
-                   mem_app_availability = #{mem_app_availability},
-                   mem_barcode_num = #{mem_barcode_num},
-                   mem_memo = #{mem_memo},
-                   mem_pw = #{mem_pw},
-                   mem_id = #{mem_id},
-             WHERE mem_num = #{mem_num}      
+            SET mem_name = #{mem_name},
+                mem_birth = #{mem_birth},
+                mem_gender = #{mem_gender},
+                  mem_address =#{mem_address},
+                mem_hp = #{mem_hp},
+                mem_registration_date = #{mem_registration_date},
+                mem_manager = #{mem_manager},
+                mem_app_availability = #{mem_app_availability},
+                mem_barcode_num = #{mem_barcode_num},
+                mem_memo = #{mem_memo},
+                mem_pw = #{mem_pw},
+                mem_id = #{mem_id},
+          WHERE mem_num = #{mem_num}      
    </update>
    <select id="MemSelkek" parameterType="java.util.HashMap" resultType="java.util.HashMap">
          select mem_num,mem_name,mem_birth
@@ -56,6 +54,29 @@
                                ,mem_barcode_num,mem_memo,mem_id,mem_pw
                                            from Member
                     order by rno asc                
+   </select>
+   <select id="MemSelTable" parameterType="string" resultType="map">
+         SELECT m.mem_num, mem_name, mem_birth, mem_hp, ticp_num, ticket_name, ticp_payment, ticp_reg_date
+	       FROM tic_purchase tp, ticket t, member m           
+	      WHERE ticp_num IN ( SELECT max(ticp_num)
+	                             FROM Member m, tic_purchase tp
+	                            WHERE m.mem_num = tp.mem_num
+	                           GROUP BY m.mem_num)  
+	        AND t.ticket_num = tp.ticket_num      
+	        AND TP.MEM_NUM = m.mem_num 
+	        AND mem_name LIKE '%'||#{mem_name}||'%'
+	      UNION 
+	     SELECT m.mem_num, mem_name, mem_birth, mem_hp, ticp_num, prom_name, ticp_payment, ticp_reg_date
+	       FROM tic_purchase tp, promotion p, member m           
+	      WHERE ticp_num IN ( SELECT max(ticp_num)
+	                             FROM Member m, tic_purchase tp
+	                            WHERE m.mem_num = tp.mem_num
+	                           GROUP BY m.mem_num)  
+	        AND tp.prom_num = p.prom_num      
+	        AND TP.MEM_NUM = m.mem_num   
+	        AND mem_name LIKE '%'||#{mem_name}||'%'
+	   ORDER BY mem_num
+	   
    </select>
    <delete id="MemDEL" parameterType="map">
       delete from member where mem_num=#{mem_num}

@@ -166,7 +166,7 @@ body {
 	/*지출 insert*/
 	function spendInser() {
 		var formData = $("#spendingInsert").serialize();
-		alert(formData);
+		//alert(formData);
 		if ($("#t_card").val() != 0 && $("#nomoney").val() !=0) {
 			formData += "&ge_pay_method=카드&ge_state=결제요청"
 		
@@ -197,11 +197,11 @@ body {
 		});
 	}
 	function spending(exb_num) {
-		alert(exb_num);
+		//alert(exb_num);
 		$("#sexb_num").val(exb_num);
 	}
 	function staffsel(ge_biller){
-		alert(ge_biller);
+		//alert(ge_biller);
 		 data = ge_biller.split(",")
 		  $("#sge_biller").val(data[1]);
 	}

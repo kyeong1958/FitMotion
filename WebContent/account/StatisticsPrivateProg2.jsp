@@ -4,8 +4,6 @@
 <script src="//cdnjs.cloudflare.com/ajax/libs/numeral.js/2.0.6/numeral.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/paginationjs/2.1.4/pagination.css"/>
-
-
 <%-- <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%> --%>
 <!-- 여기가 easyui 관련
 <link rel="stylesheet" type="text/css" href="../themes/default/easyui.css">
@@ -20,7 +18,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/paginationjs/2.1.4/pagination.min.js"></script>    
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/paginationjs/2.1.4/pagination.css"/>  -->
 
- <%@ include file="/common/JEasyUICommon.jsp"%>    
+<%--  <%@ include file="/common/JEasyUICommon.jsp"%>     --%>
 
 <div id="mainboard2">
 

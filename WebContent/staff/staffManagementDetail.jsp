@@ -102,7 +102,14 @@
 			}
 		}); 
 	}
-
+	function staffSche(staff_id){
+		$.ajax({
+			url:"/schedule/staffSche.fm?staff_id="+staff_id
+			,success:function(data){
+				$("#section").html(data);
+			}
+		});
+	}
 </script>
 	<!-- ================================= [[ 화면전환 ]] =================================================== -->
 		<div class="bar_area">
@@ -154,7 +161,7 @@
 				<a  class="staff-management-tab" id="staff_menu" style="border-right:1px solid #BABBC2;">
 					<img src="../images/piechart.png" class="staff-management-tab-a">강사 정보
 				</a>
-				<a  class="staff-management-tab" id="staff_schedule_check">
+				<a  class="staff-management-tab" id="staff_schedule_check" onClick="staffSche('<%=rMap.get("STAFF_ID") %>')">
 					<img src="../images/calendar.png" class="staff-management-tab-a">스케줄 확인
 				</a>
 				<!-- <a class="staff-management-tab" id="staff_information" onClick="staffpage('./staffInfo.jsp')">

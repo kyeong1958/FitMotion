@@ -1,3 +1,4 @@
+<%@page import="java.text.DecimalFormat"%>
 <%@page import="java.util.Map"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -34,6 +35,7 @@
     
     
 <%
+		DecimalFormat df = new DecimalFormat("###,###,###");
 		List<Map<String,Object>> ProbuySel = (List<Map<String,Object>>)request.getAttribute("ProbuySel");
 		int size=0;
 		String status = null;
@@ -60,7 +62,7 @@
                                     <span><%=rMap.get("MEM_NAME") %></span>
                                     <i><%=rMap.get("PROM_NAME") %></i>
                                     <strong class="cost">
-                                              <%=rMap.get("PROM_DIS_PRICE") %>
+                                              <%=df.format(Integer.parseInt(rMap.get("PROM_DIS_PRICE").toString())) %>
                                     </strong>
                                 </p>
                             </div>
@@ -130,12 +132,12 @@
                                 <div class="use_itm">
                                     <p>
                                         <span>상품금액</span>
-                                        <i><%=rMap.get("PROM_DIS_PRICE") %>원</i>
+                                        <i><%=df.format(Integer.parseInt(rMap.get("PROM_DIS_PRICE").toString()))%>원</i>
                                     </p>
                                     <p>
                                         <span>결제금액</span>
                                         <i>          
-                                                    <%=rMap.get("TICP_PAYMENT") %> 원 
+                                                    <%=rMap.get("TICP_PAYMENT")%> 원 
                                         </i>
                                     </p>          
                                         <p>

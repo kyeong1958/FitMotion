@@ -5,10 +5,16 @@
 	<select id="test3">
 		SELECT 1 FROM dual
 	</select>
+	<!--=====================================================[[경애 시작]]======================================================  -->
+	<select id="ticketList" resultType="map">
+		SELECT ticket_num, ticket_name, ticket_price, ticket_class_time FROM ticket
+	</select>
+	
+	<!--=====================================================[[경애 끝]]======================================================  -->
 	<!--=====================================================[[주노시작]]======================================================  -->
-			<insert id="taINS" parameterType="map" >
-              insert into Ticket(ticket_modified_date,ticket_name,ticket_num,gym_num,ticket_class_time,ticket_price)
-              values(to_char(sysdate,'YYYY-MM-DD'),#{ticket_name},SEQ_TAINS.NEXTVAL,'1',#{ticket_class_time},#{ticket_price})
+	<insert id="taINS" parameterType="map" >
+         insert into Ticket(ticket_modified_date,ticket_name,ticket_num,gym_num,ticket_class_time,ticket_price)
+         values(to_char(sysdate,'YYYY-MM-DD'),#{ticket_name},SEQ_TAINS.NEXTVAL,'1',#{ticket_class_time},#{ticket_price})
 	</insert>
 	<select id="taSel" parameterType="map" resultType="map"> 
 			select ticket_modified_date,ticket_name,ticket_num,ticket_class_time,ticket_price
@@ -37,7 +43,7 @@
  	
  	<insert id="proIns" parameterType="map">
  	insert into promotion(PROM_NUM,PROM_NAME,PROM_DIS_PRICE,GYM_NUM,PROM_START_DATE,PROM_END_DATE)
-                            values(SEQ_PROINS.NEXTVAL,#{prom_name},#{prom_dis_price},1,#{prom_start_date},#{prom_end_date})
+                            values(SEQ_PROINS.NEXTVAL,#{prom_name},#{resultprice},1,#{prom_start_date},#{prom_end_date})
  	</insert>
  	<select id="prosel" parameterType="map" resultType="map"> 
 		select PROM_NUM,PROM_NAME,PROM_DIS_PRICE,GYM_NUM,PROM_START_DATE,PROM_END_DATE from PROMOTION 

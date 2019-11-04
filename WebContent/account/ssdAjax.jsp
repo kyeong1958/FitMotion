@@ -35,7 +35,7 @@
 			year += 1;
 		}
 	}
-	DecimalFormat df = new DecimalFormat("###,###");
+	DecimalFormat df = new DecimalFormat("###,###,###");
 	int plSum = 0;
 	int plSumcomm = 0;
 	int glSum = 0;

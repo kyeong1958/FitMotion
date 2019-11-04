@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.mail.Session;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -14,6 +15,7 @@ import org.apache.log4j.Logger;
 import com.gate.Controller;
 import com.gate.ModelAndView;
 import com.google.gson.Gson;
+import com.util.HangulConversion;
 import com.util.HashMapBinder;
 
 public class ScheduleController implements Controller {
@@ -142,20 +144,37 @@ public class ScheduleController implements Controller {
 			mav.setViewName("/schedule/staffList.jsp");
 			mav.addObject("staffList", staffList);
 		}
+		else if("reservation".equals(crud)) {
+			logger.info("예약컨트롤");
+			List<Map<String,Object>> reservation = new ArrayList<>();
+			Map<String,Object> pMap = new HashMap<>();
+			HashMapBinder hmb = new HashMapBinder(req);
+			hmb.bind(pMap);
+			String staff_id = null;
+			if(pMap.get("staff_id") == null) {
+				HttpSession session = req.getSession();
+				staff_id = session.getAttribute("login_id").toString();
+				pMap.put("staff_id",staff_id);
+			}
+			logger.info("스케줄컨트럴예약내역 ======= " +pMap);
+			logger.info("스케줄컨트럴예약내역 ======= " +pMap.get("keyword"));
+			reservation = scheduleLogic.reservation(pMap);
+			Gson gson = new Gson();
+			String reservationTable = gson.toJson(reservation);
+			pMap.put("reservationTable",reservationTable);
+			logger.info("reservation  "+reservation);
+			logger.info("예약컨트롤mav");
+			mav.addObject("reservation", pMap);
+			mav.pageMove("forward");
+		    mav.setViewName("/schedule/reservationTable.jsp");
+		}
 /////////////////////////////// [[ 경애 끝 ]] /////////////////////////////////////
 		return mav;
 	}
 
 	@Override
 	public String jsonexecute(HttpServletRequest req, HttpServletResponse res) throws Exception {
-
-	
-
 		String json = null;
-
 		return json;
-
 	}
-
-
 }

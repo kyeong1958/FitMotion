@@ -107,6 +107,58 @@
 		SELECT staff_id,staff_name
 		  FROM staff
 	</select>
+	<select id="reservation" parameterType="map" resultType="map">
+	SELECT  rownum rno,appli_date, appli_start_time, mem_name, mem_hp, staff_name,pro_name, att_check 
+	 FROM (
+	 SELECT appli_date, appli_start_time, mem_name, mem_hp, staff_name,pro_name, att_check  
+             FROM class_application cp, staff s, member m, program p, attendance a,TIC_PURCHASE tp,ticket t
+            WHERE CP.MEM_NUM = m.mem_num
+              AND cp.staff_id = s.staff_id
+              AND s.staff_id = p.staff_id
+              AND cp.att_num = a.att_num
+              AND s.staff_id= #{staff_id}
+              AND m.mem_num = tp.mem_num
+              AND tp.ticket_num = t.ticket_num
+              AND t.ticket_num = p.ticket_num
+  UNION
+   SELECT appli_date, appli_start_time, mem_name, mem_hp, staff_name,pro_name, att_check  
+             FROM class_application cp, staff s, member m, program p, attendance a,TIC_PURCHASE tp,promotion prom, promotion_prog pp
+            WHERE CP.MEM_NUM = m.mem_num
+              AND cp.staff_id = s.staff_id
+              AND s.staff_id = p.staff_id
+              AND cp.att_num = a.att_num
+              AND s.staff_id= #{staff_id}
+              AND m.mem_num = tp.mem_num
+              AND tp.prom_num = prom.prom_num
+              AND prom.prom_num = pp.pro_num
+              AND pp.pro_num = p.pro_num
+        <if test="period != null and period == year">
+			  AND substr(appli_date,0,4) = to_char(sysdate,'yyyy');  
+		</if>
+		 <if test="period != null and period == quarter">
+			  AND substr(appli_date,0,7) = to_char(sysdate,'yyyy/mm');  
+		</if>
+		 <if test="period != null and period == month">
+			  AND substr(appli_date,0,7) = to_char(sysdate,'yyyy/mm');  
+		</if>
+		 <if test="period != null and period == today">
+			  AND appli_date = to_char(sysdate,'yyyy/mm/dd');  
+		</if>
+      ORDER BY appli_date asc, appli_start_time asc
+              )
+	   WHERE 1=1
+	  <if test="keyword != null">
+		   OR rno LIKE '%'||#{keyword}||'%'
+		   OR appli_date  LIKE '%'||#{keyword}||'%'
+		   OR appli_start_time  LIKE '%'||#{keyword}||'%'
+		   OR mem_name  LIKE '%'||#{keyword}||'%'
+		   OR mem_hp  LIKE '%'||#{keyword}||'%'
+		   OR staff_name  LIKE '%'||#{keyword}||'%'
+		   OR pro_name  LIKE '%'||#{keyword}||'%'
+		   OR att_check  LIKE '%'||#{keyword}||'%'
+		</if>
+		ORDER BY rno desc 	 
+	</select>
 <!-- ======================================= [[ 경애  ]] ====================================== -->
 	
 </mapper> 

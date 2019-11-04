@@ -21,6 +21,12 @@ public class MemberLogic {
 		memInfoList = memberDao.memInfoList(mem_name);
 		return memInfoList;
 	}
+	  public List<Map<String, Object>> bhmSel(String mem_name) {
+		   logger.info("멤버등록조회로직");
+		   List<Map<String,Object>> bhSelList =null;
+		   bhSelList = memberDao.bhmSel(mem_name);
+		   return bhSelList;
+	   }
 	/////////////////////////////// [[ 경애  ]] /////////////////////////////////////
 	/*============================[[민지 시작 ]]====================================================*/
 	public int bhIns(Map<String, Object> pMap) {
@@ -54,6 +60,7 @@ public class MemberLogic {
 			bhSelList = memberDao.bhSel2();
 			return bhSelList;
 		}
+	 
 		  ///////////////////////////2019-10-30 추가//////////////////////////////////
 	   //이용권관리 
 	   public List<Map<String, Object>> probil(Map<String, Object> pMap) {

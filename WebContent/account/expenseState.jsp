@@ -147,7 +147,7 @@
 		<div class="section">
 			<div class="row">
 				<div id="data-container"></div>
-				<div id="pagination1"></div>
+				<div id="pagination1" ></div>
 			</div>
 		</div>
 

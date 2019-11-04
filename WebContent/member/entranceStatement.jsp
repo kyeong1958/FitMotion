@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <!-- ============================ [[ 입장내역 ]] ======================================== -->
-<%@ include file="/common/JEasyUICommon.jsp"%>
+<%-- <%@ include file="/common/JEasyUICommon.jsp"%> --%>
 <link rel="stylesheet" type="text/css" href="../NewCSS/main.css">
 <link rel="stylesheet" type="text/css" href="../NewCSS/table.css">
 <link rel="stylesheet" type="text/css" href="../NewCSS/entranceStatement.css">
@@ -44,10 +44,6 @@ body{
 	         ,pageList:[1, 2, 15, 20] //칸수
 
 		});
-		$(".sales").hide();
-		$(".member").hide();
-		$(".analysis").hide();
-		$(".service").hide();
 	    $('#reservation-table').DataTable({
 	    	"paging":"simple_numbers"
 	    });
@@ -88,25 +84,26 @@ body{
 <!-- ================================= [[ 홈 ]] =================================================== -->
 		<div class="tab-area">
 			<div id="period_btns">
-				<button class="btn blue small">당해</button>
-				<button class="btn blue small">당월</button>
-				<button class="btn blue small">전월</button>
+				<button class="btn blue small">당 해</button>
+				<button class="btn blue small">당 분기</button>
+				<button class="btn blue small">당 월</button>
 				<button class="btn blue small">오늘</button>
+<!-- 				<button class="btn blue small">오늘</button>
 				<button class="btn blue small">어제</button>
 				<button class="btn blue small">3일간</button>
 				<button class="btn blue small">7일간</button>
 				<button class="btn blue small">10일간</button>
 				<button class="btn blue small">20일간</button>
-				<button class="btn blue small">30일간</button>
+				<button class="btn blue small">30일간</button> -->
 				<span style="margin-left: 1%">
-					<input class="easyui-datebox historydatebox" id="datebox1"/>
+					<input class="easyui-datebox" id="datebox1"/>
 					<span>~</span>
-					<input class="easyui-datebox historydatebox" id="datebox2"/>
+					<input class="easyui-datebox" id="datebox2"/>
 					<button class="btn blue small">조회</button>
 				</span>
 			</div>
-			<div class="entrance-time" style="margin-top: 10px;">
-				<span style="margin-right:10px">방문 시간대</span>
+			<!--<div class="entrance-time" style="margin-top: 10px;">
+				 <span style="margin-right:10px">방문 시간대</span>
 				<select class="time-combobox">
 					<option value="">시</option>
 					<option value="">00</option>
@@ -135,12 +132,12 @@ body{
 					<option value="">15</option>
 					<option value="">30</option>
 					<option value="">45</option>
-				</select>
-			</div>
+				</select> 
+			</div>-->
 		</div>
 <!-- ================================= [[ combobox ]] =================================================== -->
 		<div class="section">
-			<div class="combobox-area">
+			<!-- <div class="combobox-area">
 				<select class="accounting-combobox">
 					<option value="">그룹</option>
 					<option value="">0000</option>
@@ -173,7 +170,7 @@ body{
 					<label id="reservationlabel">검색:</label>
 					<input type="search" class="reservation_searchbox">
 				</span>
-			</div>
+			</div> -->
 <!-- ================================= [[ combobox end ]] =================================================== -->
 			<div class="row">
 				<div class="entrance-table-top" style="padding-top:10px;">

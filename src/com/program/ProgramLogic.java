@@ -1,5 +1,6 @@
 package com.program;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -12,6 +13,13 @@ public class ProgramLogic {
 	public ProgramLogic () {
 		programDao = new ProgramDao();
 	}
+	/*====================================[[경애 시작 ]]=================================*/
+	public List<Map<String, Object>> ticketList() {
+		List<Map<String, Object>> ticketList = new ArrayList<>();
+		ticketList = programDao.ticketList();
+		return ticketList;
+	}
+	/*====================================[[경애 끝 ]]=================================*/
 	/*====================================[[주노 시작 ]]=================================*/
 	public int taINS(Map<String, Object> pMap) {
 		logger.info("이용권등록입력 Logic 호출 성공");
@@ -64,5 +72,6 @@ public class ProgramLogic {
 		logger.info(result);
 		return result;
 	}
+	
 }
 	/*====================================[[민지끝 ]]=================================*/

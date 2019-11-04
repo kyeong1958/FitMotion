@@ -431,7 +431,6 @@
                     from PROMOTION ,TIC_PURCHASE,MEMBER
                     where   TIC_PURCHASE.mem_num = MEMBER.mem_num
                     and  TIC_PURCHASE.PROM_NUM = PROMOTION.PROM_NUM 
-	
 	 </select>
 	 <!-- 양도  -->
 	 <update id="progive" parameterType="map">

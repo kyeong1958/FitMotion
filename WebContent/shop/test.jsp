@@ -14,15 +14,12 @@
 	    int rIndex = rnum.nextInt(3);
 	    switch (rIndex) {
 	    case 0:
-	        // a-z
 	        auth.append((char) ((int) (rnum.nextInt(26)) + 97));
 	        break;
 	    case 1:
-	        // A-Z
 	        auth.append((char) ((int) (rnum.nextInt(26)) + 65));
 	        break;
 	    case 2:
-	        // 0-9
 	        auth.append((rnum.nextInt(10)));
 	        break;
 	    }

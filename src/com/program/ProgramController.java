@@ -43,6 +43,7 @@ public class ProgramController implements Controller {
 			mav.setViewName("/program/example.jsp");
 			mav.addObject("제발", "잘됨??");
 		}
+
 /*=======================================[[민지 시작 ]]==============================================*/
 		else if("taDTL".equals(crud)) {
 			Map<String,Object> pMap = new HashMap<>();
@@ -199,6 +200,16 @@ public class ProgramController implements Controller {
 			gson = new Gson();
 			json = gson.toJson(list);
 		}
+/*=======================================[[경애 시작 ]]==============================================*/
+		else if("ticketList".equals(crud)) {
+			logger.info("ticketList=============================");
+			List<Map<String,Object>> ticketList = new ArrayList<>();
+			ticketList = programLogic.ticketList();
+			gson = new Gson();
+			json = gson.toJson(ticketList);
+			logger.info(json);
+		}
+/*=======================================[[경애 끝 ]]==============================================*/
 		return json;
 	}
 

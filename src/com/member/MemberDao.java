@@ -36,6 +36,25 @@ public class MemberDao {
 		}
 		return memInfoList;
 	}
+	
+	public List<Map<String, Object>> bhmSel(String mem_name) {
+		logger.info("회원목록 조회부분 Dao 호출성공");
+		List<Map<String,Object>> bhSelList = new ArrayList<>();
+	try {
+			
+			sqlSession = sqlSessionFactory.openSession();
+			bhSelList = sqlSession.selectList("MemSelTable",mem_name);
+			// Map<String,Object> rMap = bhSelList.get(0);
+			 logger.info(bhSelList.size());
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if(sqlSession!=null) {
+				sqlSession.close(); 
+			}
+		}
+		return bhSelList;
+	}
 	/////////////////////////////// [[ 경애  ]] /////////////////////////////////////	
 	/*===============================[[민지 시작 ]]===========================================*/
 	public int bfIns(Map<String, Object> pMap) {
@@ -43,6 +62,7 @@ public class MemberDao {
 		try {
 			logger.info("여기탐?");
 			sqlSession = sqlSessionFactory.openSession();
+			logger.info(pMap);
 			result = sqlSession.update("MemModal", pMap);	
 			sqlSession.commit();
 		} catch (Exception e) {
@@ -145,16 +165,13 @@ public class MemberDao {
 				bhSelList = sqlSession.selectList("MemSel");
 				 Map<String,Object> rMap = bhSelList.get(0);
 				 logger.info(bhSelList.size());
-				 
 			} catch (Exception e) {
 				e.printStackTrace();
 			} finally {
 				if(sqlSession!=null) {
 					sqlSession.close(); 
 				}
-				
 			}
-			
 			return bhSelList;
 		}
 		
@@ -263,6 +280,7 @@ public class MemberDao {
 	      return rMap;
 	}
 	/*===============================[[주노끝]]================================================*/
+
 
 
 

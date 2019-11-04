@@ -85,7 +85,6 @@ body{
 		});
 	}
 	function quarter(){
-		alert(<%=month%>);
 		$.ajax({
 			url:'/account/salesStatement.fm?year=<%=year%>&quarter=<%=quarter%>'
 			,success:function(data){

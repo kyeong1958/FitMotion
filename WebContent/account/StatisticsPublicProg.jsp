@@ -70,7 +70,7 @@ if( pageNumm == null){
 function searchClick(){
 	var search = $("#search2").val();
 	var searchText = $("#searchText").val();
-	alert("검색버튼클릭 "+search +", "+ searchText );
+	//alert("검색버튼클릭 "+search +", "+ searchText );
 	$.ajax({
 		method : 'get',
 		url : '/account/publicProg.fm?startDate=20190101&endDate=20191130&pageNumm='+pageNumm+'&search='+search+"&searchText="+searchText,
@@ -146,7 +146,7 @@ function myparser(s){
 function dateClicka(){
  	startD = aa('#datebox11a').datebox('getValue');
 	endD = aa('#datebox22a').datebox('getValue');
-	alert(startD+", "+endD);
+//	alert(startD+", "+endD);
 	
  	 $.ajax({
 			method : 'get',

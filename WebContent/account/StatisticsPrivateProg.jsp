@@ -23,7 +23,6 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/paginationjs/2.1.4/pagination.min.js"></script>    
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/paginationjs/2.1.4/pagination.css"/>  -->
-
 <%-- <%@ include file="/common/JEasyUICommon.jsp"%> --%>
 
 <%
@@ -80,7 +79,7 @@ if( pageNumm == null){
 function searchClick(){
 	var search = $("#search").val();
 	var searchText = $("#searchText").val();
-	alert("검색버튼클릭 "+search +", "+ searchText );
+	//alert("검색버튼클릭 "+search +", "+ searchText );
 	$.ajax({
 		method : 'get',
 		url : '/account/privateProg.fm?startDate=20190101&endDate=20191130&pageNumm='+pageNumm+'&search='+search+"&searchText="+searchText,
@@ -158,7 +157,7 @@ function dateClick(){
 
 	startD = $('#datebox11').datebox('getValue');
 	endD = $('#datebox22').datebox('getValue');
-	alert(startD+", "+endD);
+	//alert(startD+", "+endD);
 	
  	 $.ajax({
 			method : 'get',
@@ -448,7 +447,8 @@ function dateYClick(){
 	 <script>
 	 
 	    
-		jb('#pagination1').pagination({
+		//jb('#pagination1').pagination({
+		$('#pagination1').pagination({
 	        dataSource: testdata,
 	        pageSize:pageNumm,
 	        align:"center",
@@ -465,7 +465,8 @@ function dateYClick(){
 		             datahtml += '</tr></tbody>';    	
 		         }
 	            datahtml += '</table>';
-	            jb("#data-container").html(datahtml);
+	            //jb("#data-container").html(datahtml);
+	            $("#data-container").html(datahtml);
 	        }
 	    });
 	</script>  

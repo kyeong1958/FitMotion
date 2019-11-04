@@ -15,7 +15,7 @@
 	 	 $.ajax({
 			url:'/shop/email.jsp?email='+email
 			,success:function(data){
-				alert("|"+data+"|");
+			//	alert("|"+data+"|");
 				$("#rauth").val(data);
 				alert("인증번호 이메일이 발생되었습니다.");
 			}
@@ -31,7 +31,7 @@
 				,url:'/shop/idfind.fm'
 				,data:dataForm
 				,success:function(data){
-					alert(data);
+				//	alert(data);
 					if('아이디가 존재하지 않습니다.' != data){
 						$("#result").html("아이디는 <b style='font-size:15px'>"+data+"</b> 입니다.");
 					}else{

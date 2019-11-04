@@ -17,7 +17,7 @@ body{
 <script>
 /* ====================================================2019-10-30 추가 ============================================================================ */
 	  function memberdetail(mem_num){
-				alert(mem_num);
+			//	alert(mem_num);
 		 		var formData = $("#MDetail").serialize();
 				 $.ajax({
 					method:"POST"

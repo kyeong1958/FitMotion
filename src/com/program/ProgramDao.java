@@ -19,6 +19,22 @@ public class ProgramDao {
 	public ProgramDao() {
 		sqlSessionFactory = MyBatisCommonFactory.getSqlSessionFactory();
 	}
+	/*=============================[[경애 시작]]========================================================*/
+	public List<Map<String, Object>> ticketList() {
+		List<Map<String, Object>> ticketList = new ArrayList<>();
+		try {
+			sqlSession = sqlSessionFactory.openSession();
+			ticketList = sqlSession.selectList("ticketList");
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			 if(sqlSession!=null) {
+				 	sqlSession.close(); 
+			}
+		}
+		return ticketList;
+	}
+	/*=============================[[경애 끝]]========================================================*/
 	/*=============================[[주노 시작]]========================================================*/
 	public int taINS(Map<String, Object> pMap) {
 		logger.info("이용권등록입력 Dao 호출 성공");
@@ -169,4 +185,5 @@ public class ProgramDao {
 		return result;
 	}
 	/*=============================[[민지 끝]]========================================================*/
+
 }

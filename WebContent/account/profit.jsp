@@ -13,17 +13,16 @@ body{
 }
 </style>
 <script type="text/javascript">
-	$(document).ready(function(){
-	 //데이트박스 
-	   //datebox 날짜형식 YYYY-MM-DD로 설정
-	    $.fn.datebox.defaults.formatter = function(date){
-	       var y = date.getFullYear();
-	       var m = date.getMonth()+1;
-	       var d = date.getDate();
-	       return y+'-'+(m<10 ? "0"+m:m)+'-'+(d<10 ? "0"+d:d);
-	   } 
-	   //datebox parser설정
-	    $.fn.datebox.defaults.parser = function(s){
+	//데이트박스 
+	//datebox 날짜형식 YYYY-MM-DD로 설정
+	 $.fn.datebox.defaults.formatter = function(date){
+	    var y = date.getFullYear();
+	    var m = date.getMonth()+1;
+	    var d = date.getDate();
+	    return y+'/'+(m<10 ? "0"+m:m)+'/'+(d<10 ? "0"+d:d);
+	} 
+	//datebox parser설정
+	 $.fn.datebox.defaults.parser = function(s){
 		var t = Date.parse(s);
 			if (!isNaN(t)){
 				return new Date(t);
@@ -31,12 +30,15 @@ body{
 				return new Date();
 			}
 		}
-	   //datebox 한글화
-	   $.fn.datebox.defaults.currentText = '오늘'
-	   $.fn.datebox.defaults.closeText = '닫기'
-	   $.fn.calendar.defaults.weeks = ['일','월','화','수','목','금','토']
-	   $.fn.calendar.defaults.months = ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월']
-	  
+	//datebox 한글화
+	$.fn.datebox.defaults.currentText = '오늘'
+	$.fn.datebox.defaults.closeText = '닫기'
+	$.fn.calendar.defaults.weeks = ['일','월','화','수','목','금','토']
+	$.fn.calendar.defaults.months = ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월']
+
+
+	$(document).ready(function(){
+	
 	   $.ajax({
            method:"POST"
              ,url:"/account/PROSEL.fm"
@@ -67,7 +69,11 @@ body{
 	var g_dis ="";
 	var g_dismoney ="";
 	var alltotal ="";
-
+	//콤마넣는함수																									
+	function Comma(str) {
+		str = String(str);
+		return str.replace(/(\d)(?=(?:\d{3})+(?!\d))/g, "$1,");
+	}
 /* 키보드로 입력시 콤마  */
   function comma(obj){
 			  // 콤마( , )의 경우도 문자로 인식되기때문에 콤마를 따로 제거한다.
@@ -112,73 +118,111 @@ body{
         
 }
     
-function removeComma(str)
-	{
-		n = parseInt(str.replace(/,/g,""));
-		return n;
-	}
+	function removeComma(str)
+		{
+			n = parseInt(str.replace(/,/g,""));
+			return n;
+		}
 	
 	function card(){
-			g_card = $("#etextname").val(); 
-	
-			//alert(g_card);
-		if($("#t_card").text()==""){
- 			document.getElementById("t_card").value = g_card;
- 			if($("#total_buy").text()==""){
- 			document.getElementById("total_buy").value = g_card;
- 			}
- 			g_val="";
+		g_card = $("#etextname").val(); 
+		if($("#t_card").val()){
+			var card = $("#t_card").val();
+			var cardcom = removeComma(card);
+			var gcardcom = removeComma(g_card);
+			var cardprice = Number(cardcom)+Number(gcardcom);
+			$("#t_card").val(Comma(cardprice));
+		}else{
+			$("#t_card").val(g_card);
 		}
 		
-		if(g_money!=null){
-			
-		 document.getElementById("total_buy").value = 
-	 		 Number(removeComma(document.getElementById("total_buy").value)) + Number(removeComma(g_money)); 
+		if($("#total_buy").val()){
+			var btbuy = $("#total_buy").val();
+			var btotbuy = removeComma(btbuy);
+			var gcardcom = removeComma(g_card);
+			var cardprice = Number(btotbuy)+Number(gcardcom);
+			$("#total_buytot").val(Comma(cardprice));
+			$("#total_buy").val(cardprice);
+		}else{
+			$("#total_buytot").val(g_card);
+			$("#total_buy").val(removeComma(g_card));
+		}
+		
+		if($("#imsi_ghost").val()){
+			var productprice = removeComma($("#imsi_ghost").val());
+			var tot = removeComma($("#total_buy").val());
+			var discount = (1-(tot/productprice))*100;
+			$("#t_dis").val(Comma(discount.toFixed(2)));
 		}
 	 
 	}	
-
-  
- /* 현금 눌렀을때 */
- function money(){ 
-	 g_money = $("#etextname").val(); 
-		
-		//alert(g_card);
-	if($("#t_money").text()==""){
-		document.getElementById("t_money").value = g_money;
-		if($("#total_buy").text()==""){
-		document.getElementById("total_buy").value = g_money;
+	 /* 현금 눌렀을때 */
+	 function money(){ 
+		 g_money = $("#etextname").val(); 
+		 if($("#t_money").val()){
+			var card = $("#t_money").val();
+			var cardcom = removeComma(card);
+			var gcardcom = removeComma(g_money);
+			var cardprice = Number(cardcom)+Number(gcardcom);
+			$("#t_money").val(Comma(cardprice));
+		}else{
+			$("#t_money").val(g_money);
 		}
-		g_val="";
+		 
+		 if($("#total_buy").val()){
+			var btbuy = $("#total_buy").val();
+			var btotbuy = removeComma(btbuy);
+			var gcardcom = removeComma(g_money);
+			var cardprice = Number(btotbuy)+Number(gcardcom);
+			$("#total_buytot").val(Comma(cardprice));
+			$("#total_buy").val(cardprice);
+		}else{
+			$("#total_buytot").val(g_money);
+			$("#total_buy").val(removeComma(g_money));
+		}
+		 
+		if($("#imsi_ghost").val()){
+			var productprice = removeComma($("#imsi_ghost").val());
+			var tot = removeComma($("#total_buy").val());
+			var discount = (1-(tot/productprice))*100;
+			$("#t_dis").val(Comma(discount.toFixed(2)));
+		} 
 	}
-	
-	if(g_card!=null){
-		
-		 document.getElementById("total_buy").value = 
-	 		 Number(removeComma(document.getElementById("total_buy").value)) + Number(removeComma(g_card)); 
-		}
- }
-
 	 /* 이체 눌렀을때 */
 	function fund(){
 	 	g_Fund = $("#etextname").val(); 
 		
-	if($("#t_fund").text()==""){
-		document.getElementById("t_fund").value = g_Fund;
-		if($("#nomoney").text()==""){
-		document.getElementById("nomoney").value = g_Fund;
-	
+	 	 if($("#t_fund").val()){
+			var card = $("#t_fund").val();
+			var cardcom = removeComma(card);
+			var gcardcom = removeComma(g_Fund);
+			var cardprice = Number(cardcom)+Number(gcardcom);
+			$("#t_fund").val(Comma(cardprice));
+		}else{
+			$("#t_fund").val(g_Fund);
 		}
-		g_val="";
+	 	
+	 	 if($("#total_buy").val()){
+			var btbuy = $("#total_buy").val();
+			var btotbuy = removeComma(btbuy);
+			var gcardcom = removeComma(t_fund);
+			var cardprice = Number(btotbuy)+Number(gcardcom);
+			$("#total_buytot").val(Comma(cardprice));
+			$("#total_buy").val(cardprice);
+		}else{
+			$("#total_buytot").val(t_fund);
+			$("#total_buy").val(removeComma(t_fund));
+		}
+	 	if($("#imsi_ghost").val()){
+			var productprice = removeComma($("#imsi_ghost").val());
+			var tot = removeComma($("#total_buy").val());
+			var discount = (1-(tot/productprice))*100;
+			$("#t_dis").val(Comma(discount.toFixed(2)));
+		} 
 	}
-	 document.getElementById("total_buy").value = 
-	 	Number(removeComma(document.getElementById("total_buy").value)) - Number(removeComma(g_Fund)); 
-	}
-
  	/* 할인% */
 	function discount(){
 		g_dis = $("#etextname").val();
-		
 		if($("#t_dis").text()==""){
 			document.getElementById("t_dis").value = g_dis;
 			g_val="";
@@ -192,79 +236,76 @@ function removeComma(str)
  		document.getElementById("total_buy").value = 
 		 	Number(removeComma(document.getElementById("total_buy").value)) - Number(removeComma(g_dismoney)); 
  	}
-	
- 	function nomoney(){
- 		
- 	}
- 	
-
- function imsi_change(imsi){
-	 data = imsi.split(",")  
-	 $("#imsi_ghost").val(data[0]);
-	 if(data[2]=="promotion"){
-     $("#prom_num").val(data[1]);
-	 }
-	 else if(data[2]=="ticket"){
-     $("#ticket_num").val(data[1]);
-	 }
- }
- 
- function pfIns_buy(){
-		var formData = $(".f_insert").serialize();
-		if($("#t_card").val()!=0){
-		formData+="&ticp_pay_period=카드"
-		}
-		 else if($("#t_money").val()!=0){
-		formData+="&ticp_pay_period=현금"
-		}
-		 else if($("t_fund").val()!=0){
-		formData+="&ticp_pay_period=이체"
+ 	function nomoney(){ }
+ 	//콤마넣는함수																									
+	function changecomma(str) {
+		str = String(str);
+		return str.replace(/(\d)(?=(?:\d{3})+(?!\d))/g, "$1,");
+	}
+	 function proname_change(imsi){
+		// alert("상품명 변경");
+		 data = imsi.split(",")  
+		 $("#imsi_ghost").val(changecomma(data[0]));
+		 if(data[2]=="promotion"){
+	     	$("#prom_num").val(data[1]);
 		 }
-		console.log(formData);
-		alert(formData);
-		 $.ajax({
-			method:"POST"
-			,data:formData
-			,url:"/program/profitIns.fm"
-			,success:function(data){
-				document.getElementById("total_buy").value = "";
-				document.getElementById("t_card").value = "";
-				document.getElementById("t_money").value = "";
-				document.getElementById("t_dis").value = "";
-				document.getElementById("t_fund").value = "";
-				document.getElementById("datebox").value = "";
-				document.getElementById("imsi_ghost").value = "";
-				 $.ajax({
-			    		  method:"POST"
-			  				,data:formData
-			  				,url:"/account/PROSEL.fm"
-			  				,success:function(data){
-			  					//alert("성공");
-			  					$("#selectpro").html(data);
-	  			  				 $.ajax({
-	  		  			    		  method:"POST"
-	  		  			  				,data:formData
-	  		  			  				,url:"/account/PROSEL2.fm"
-	  		  			  				,success:function(data){
-	  		  			  					//alert("성공");
-	  		  			  					$("#selectpro2").html(data);
-	  		  			}
-	  		  		}); 
-			  	}
-			}); 
-		}
-	}); 
-}
- 
- 
+		 else if(data[2]=="ticket"){
+	     	$("#ticket_num").val(data[1]);
+		 }
+	 }
+	 function pfIns_buy(){
+			var formData = $(".f_insert").serialize();
+			if($("#t_card").val()!=0){
+			formData+="&ticp_pay_period=카드"
+			}
+			 else if($("#t_money").val()!=0){
+			formData+="&ticp_pay_period=현금"
+			}
+			 else if($("t_fund").val()!=0){
+			formData+="&ticp_pay_period=이체"
+			 }
+			console.log(formData);
+			//alert(formData);
+			 $.ajax({
+				method:"POST"
+				,data:formData
+				,url:"/program/profitIns.fm"
+				,success:function(data){
+					document.getElementById("total_buy").value = "";
+					document.getElementById("t_card").value = "";
+					document.getElementById("t_money").value = "";
+					document.getElementById("t_dis").value = "";
+					document.getElementById("t_fund").value = "";
+					document.getElementById("datebox").value = "";
+					document.getElementById("imsi_ghost").value = "";
+					 $.ajax({
+				    		  method:"POST"
+				  				,data:formData
+				  				,url:"/account/PROSEL.fm"
+				  				,success:function(data){
+				  					//alert("성공");
+				  					$("#selectpro").html(data);
+		  			  				 $.ajax({
+		  		  			    		  method:"POST"
+		  		  			  				,data:formData
+		  		  			  				,url:"/account/PROSEL2.fm"
+		  		  			  				,success:function(data){
+		  		  			  					alert("결제가 완료되었습니다.");
+		  		  			  					$("#selectpro2").html(data);
+		  		  			}
+		  		  		}); 
+				  	}
+				}); 
+			}
+		}); 
+	}
 
- 
- 
 </script> 
 
    <!-- ================================= [[ 화면전환 ]] =================================================== -->
       <div class="bar_area">
          <a class="bar_menu" href="#">홈</a>
+         <img src="../images/location_arrow.png">
          <a class="bar_menu" href="#">회원상세</a>
       </div>
    <!-- ================================= [[ 홈 끝 ]] =================================================== -->
@@ -287,22 +328,25 @@ function removeComma(str)
                         <span>
                            <button type="button" class="btn_cancle search_mem" style="margin-left:10px" data-toggle="modal" data-target="#search_member">회원찾기</button>
                         </span>
+                        <span>
+                           <button type="button" class="btn_cancle search_mem" style="margin-left:10px" data-toggle="modal" data-target="#MIns">회원등록</button>
+                        </span>
                      </div>
                      <div style="padding:0 0 5px">
                         <label class="spend-box-left-column">최근 결제 이력</label>
                         <span>
-                           <label></label>
+                           <label id="productname"></label>
                         </span>
                      </div>
                      <div align="right">
-                        <span style="color: #2196F3 !important;margin-right:20px;"></span>
-                        <span style="color: #2196F3 !important;"></span>
+                        <span style="color: #2196F3 !important;margin-right:20px;" id="productdate"></span>
+                        <span style="color: #2196F3 !important;" id="productprice"></span>
                      </div>
                      <h4 class="spending-box-left" style="margin-top:10px;">결제 상품 정보</h4>
                      <div style="padding:0 0 5px">
                         <label class="spend-box-left-column">상품명</label>
                         <span>
-                           <select class="spend-combobox" id="selectpro" onchange="imsi_change(this.value)">
+                           <select class="spend-combobox" id="selectpro" onchange="proname_change(this.value)">
                       		<!-- PROMOTION AJAX -->
                            </select>
                         </span>
@@ -342,7 +386,8 @@ function removeComma(str)
                               <td class="spend-table-content" style="color: #2196F3 !important;"> 
 	                              <div>
 	                              		<span >
-	                              			<input type="text" name="proticp_payment" id="total_buy" style="border: none;text-align: right;">원</span>
+	                              			<input type="text" name="proticp_paymenttot" id="total_buytot" style="border: none;text-align: right;">원</span>
+	                              			<input type="hidden" name="proticp_payment" id="total_buy"/>
 	                              	</div> 
                               </td>
                            </tr>
@@ -367,14 +412,13 @@ function removeComma(str)
                   <div style="padding:0 0 5px">
                      <label class="spend-box-right-column">이용 시작일</label>
                 
-                     <input  id="datebox" class="easyui-datebox" >
+                     <input  id="datebox" name="ticp_reg_date" class="easyui-datebox" >
                   </div>
                   <div style="padding:0 0 5px">
                      <label class="spend-box-right-column">결제일</label>
-                     <input  id="datebox"  name="ticp_reg_date" class="easyui-datebox">
+                     <input  id="datebox"  name="gs_dep_date" class="easyui-datebox">
                   </div>
                   <div style="padding:0 0 5px" >
-                 
                      <label class="spend-box-right-column"></label>
                      <span>
                       <input onkeyup="comma(this)"  id="etextname"  value="" type="text" class="spending-text" style="width:260px;"> 
@@ -429,34 +473,25 @@ function removeComma(str)
          </div>
         </form>
       </div>
-               
 	<!-- ================================= [[ 화면전환 ]] =================================================== -->
-	
 	<!--===============================[[회원찾기 모달 창 ]]=======================================================  -->
-													
-													
-	
-	
 	<script>
 			function memberSearch(){
 			//	alert("검색버튼 눌림?");
-				var formData = $("#MemSearch").serialize();
+			//	var formData = $("#MemSearch").serialize();
 			//	alert(formData);
+			var mem_name = $("#d_memname").val();
 				 $.ajax({
 					method:"POST"
-					,data:formData
-					,url:"/member/BHMSEL.fm"
+					//,data:formData
+					,url:"/member/BHMSEL.fm?mem_name="+mem_name
 					,success:function(data){
 						$("#memsearch").html(data);
-						
-						
 					}
 				}); 
 			}
-	
 	</script>
 <!--================================ [[ 회원검색 모달 시작 ]] ====================================== -->												
-												
 	<!--   The Modal -->												
 	<div class="modal fade" id="search_member">												
 		<div class="modal-dialog modal-sm-6">												
@@ -498,7 +533,5 @@ function removeComma(str)
 		</div>												
 	</div>												
 <!--  ================================ [[ 회원검색 모달 끝 ]] ====================================== -->												
-												
-												
-												
+<%@ include file="../member/memberListModal.jsp"%>					
 	

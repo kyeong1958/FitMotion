@@ -64,6 +64,16 @@ public class MemberController implements Controller {
 			mav.setViewName("/shop/lockMemSearchTable.jsp");
 			mav.addObject("memInfoList", memInfoList);
 		}
+		//매출등록 회원검색
+	      else if("BHMSEL".equals(crud)) {
+				logger.info("회원조회 창 ");
+				List<Map<String,Object>> bhSelList = null;
+				String mem_name = req.getParameter("mem_name").toString();
+				bhSelList = memberLogic.bhmSel(mem_name);
+				mav.addObject("bhSelList", bhSelList);
+				mav.pageMove("forward");
+				mav.setViewName("/account/profitMemSearch.jsp");
+	      }
 	/////////////////////////////// [[ 경애  ]] /////////////////////////////////////
 		/*================================[[민지 Mcontroller 시작 ]]=======================================*/
 		else if("BHINS".equals(crud)) {
@@ -72,8 +82,9 @@ public class MemberController implements Controller {
 			Map<String,Object> pMap = new HashMap<>();
 			HashMapBinder hmb = new HashMapBinder(req);
 			hmb.bindPost(pMap);
-			logger.info(result);
+			logger.info(pMap);
 			result = memberLogic.bhIns(pMap);
+			logger.info(result);
 			mav.pageMove("redirect");
 			mav.setViewName("/member/BHSEL.fm");
 		}
@@ -108,15 +119,7 @@ public class MemberController implements Controller {
 	         mav.pageMove("redirect");
 	         mav.setViewName("/member/BHSEL.fm");
 	      }
-		//매출등록 회원검색
-	      else if("BHMSEL".equals(crud)) {
-				logger.info("회원조회 창 ");
-				List<Map<String,Object>> bhSelList = null;
-				bhSelList = memberLogic.bhsel2();
-				mav.addObject("bhSelList", bhSelList);
-				mav.pageMove("forward");
-				mav.setViewName("/account/profitMemSearch.jsp");
-	      }
+		
 		//billing 회원 검색
 	      else if("BIMSEL".equals(crud)) {
 	    	  logger.info("회원조회 창 ");
